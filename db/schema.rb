@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527144539) do
+ActiveRecord::Schema.define(version: 20140527145737) do
+
+  create_table "fees", force: true do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "garages", force: true do |t|
     t.string   "name"
