@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527140351) do
+ActiveRecord::Schema.define(version: 20140527144539) do
 
   create_table "garages", force: true do |t|
     t.string   "name"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20140527140351) do
     t.string   "phone"
     t.string   "mobile"
     t.string   "fax"
-    t.integer  "latitude"
-    t.integer  "longitude"
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "tax_id"
     t.string   "website"
     t.string   "logo"
