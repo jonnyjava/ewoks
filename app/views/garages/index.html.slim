@@ -1,0 +1,47 @@
+h1 Listing garages
+
+table
+  thead
+    tr
+      th Name
+      th Owner
+      th Addres
+      th Zip
+      th City
+      th Email
+      th Phone
+      th Mobile
+      th Fax
+      th Latitude
+      th Longitude
+      th Tax
+      th Website
+      th Logo
+      th
+      th
+      th
+
+  tbody
+    - @garages.each do |garage|
+      tr
+        td = garage.name
+        td = garage.owner
+        td = garage.addres
+        td = garage.zip
+        td = garage.city
+        td = garage.email
+        td = garage.phone
+        td = garage.mobile
+        td = garage.fax
+        td = garage.latitude
+        td = garage.longitude
+        td = garage.tax_id
+        td = garage.website
+        td = garage.logo
+        td = link_to 'Show', garage
+        td = link_to 'Edit', edit_garage_path(garage)
+        td = link_to 'Destroy', garage, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Garage', new_garage_path

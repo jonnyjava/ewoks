@@ -11,6 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140527134454) do
 
+  create_table "garages", force: true do |t|
+    t.string   "name"
+    t.string   "owner"
+    t.string   "addres"
+    t.string   "zip"
+    t.string   "city"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "fax"
+    t.integer  "latitude"
+    t.integer  "longitude"
+    t.string   "tax_id"
+    t.string   "website"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 end
