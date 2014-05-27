@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :holidays
+
   resources :tyre_fees
 
   resources :properties

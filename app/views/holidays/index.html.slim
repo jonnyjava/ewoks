@@ -1,0 +1,27 @@
+h1 Listing holidays
+
+table
+  thead
+    tr
+      th Start date
+      th End date
+      th Start time
+      th End time
+      th
+      th
+      th
+
+  tbody
+    - @holidays.each do |holiday|
+      tr
+        td = holiday.start_date
+        td = holiday.end_date
+        td = holiday.start_time
+        td = holiday.end_time
+        td = link_to 'Show', holiday
+        td = link_to 'Edit', edit_holiday_path(holiday)
+        td = link_to 'Destroy', holiday, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Holiday', new_holiday_path
