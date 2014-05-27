@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :tyre_fees
+
   resources :properties
 
   resources :garages
