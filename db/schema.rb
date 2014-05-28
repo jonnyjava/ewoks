@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528154900) do
+ActiveRecord::Schema.define(version: 20140528160932) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 20140528154900) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "garages_properties", id: false, force: true do |t|
+    t.integer "garage_id",   null: false
+    t.integer "property_id", null: false
+  end
+
+  add_index "garages_properties", ["garage_id", "property_id"], name: "index_garages_properties_on_garage_id_and_property_id"
+  add_index "garages_properties", ["property_id", "garage_id"], name: "index_garages_properties_on_property_id_and_garage_id"
 
   create_table "holidays", force: true do |t|
     t.date     "start_date"
