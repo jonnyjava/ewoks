@@ -31,7 +31,7 @@ end
 
 group :development, :test do
   # Gem group for testing
-  gem 'factory_girl'
+  gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
