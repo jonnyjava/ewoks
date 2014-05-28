@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528153859) do
+ActiveRecord::Schema.define(version: 20140528154900) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "garage_id"
   end
+
+  add_index "fees", ["garage_id"], name: "index_fees_on_garage_id"
 
   create_table "garages", force: true do |t|
     t.string   "name"
