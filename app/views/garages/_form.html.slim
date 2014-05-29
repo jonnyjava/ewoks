@@ -1,4 +1,4 @@
-= form_for @garage do |f|
+= simple_form_for(@garage, html: {class: 'form-horizontal' }) do |f|
   - if @garage.errors.any?
     #error_explanation
       h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
