@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20140529143151) do
   create_table "garages", force: true do |t|
     t.string   "name"
     t.string   "owner"
-    t.string   "addres"
+    t.string   "address"
     t.string   "zip"
     t.string   "city"
     t.string   "email"

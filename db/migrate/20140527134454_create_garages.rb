@@ -3,7 +3,7 @@ class CreateGarages < ActiveRecord::Migration
     create_table :garages do |t|
       t.string :name
       t.string :owner
-      t.string :addres
+      t.string :address
       t.string :zip
       t.string :city
       t.string :email
