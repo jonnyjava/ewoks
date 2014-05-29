@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @property.name
+p
+  strong Type:
+  = @property.type
+p
+  strong Value:
+  = @property.value
+
+= link_to 'Edit', edit_property_path(@property)
+'|
+= link_to 'Back', properties_path

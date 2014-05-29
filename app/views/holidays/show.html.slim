@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Start date:
+  = @holiday.start_date
+p
+  strong End date:
+  = @holiday.end_date
+p
+  strong Start time:
+  = @holiday.start_time
+p
+  strong End time:
+  = @holiday.end_time
+
+= link_to 'Edit', edit_holiday_path(@holiday)
+'|
+= link_to 'Back', holidays_path
