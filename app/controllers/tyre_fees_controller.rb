@@ -69,6 +69,6 @@ class TyreFeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tyre_fee_params
-      params[:tyre_fee]
+      params.require(:tyre_fee).permit(:price)
     end
 end
