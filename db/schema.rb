@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528163943) do
+ActiveRecord::Schema.define(version: 20140529143151) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
-    t.decimal  "price"
+    t.decimal  "price",      precision: 2, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "garage_id"
