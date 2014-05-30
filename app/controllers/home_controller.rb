@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!, only: :already_registered
-  skip_authorization_check
-
   def index
     render  'home/index'
   end
