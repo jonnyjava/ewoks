@@ -1,0 +1,48 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @garage.name
+p
+  strong Owner:
+  = @garage.owner
+p
+  strong Address:
+  = @garage.address
+p
+  strong Zip:
+  = @garage.zip
+p
+  strong City:
+  = @garage.city
+p
+  strong Email:
+  = @garage.email
+p
+  strong Phone:
+  = @garage.phone
+p
+  strong Mobile:
+  = @garage.mobile
+p
+  strong Fax:
+  = @garage.fax
+p
+  strong Latitude:
+  = @garage.latitude
+p
+  strong Longitude:
+  = @garage.longitude
+p
+  strong Tax:
+  = @garage.tax_id
+p
+  strong Website:
+  = @garage.website
+p
+  strong Logo:
+  = @garage.logo
+
+= link_to 'Edit', edit_garage_path(@garage)
+'|
+= link_to 'Back', garages_path

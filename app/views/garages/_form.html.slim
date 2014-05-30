@@ -1,0 +1,51 @@
+= form_for @garage do |f|
+  - if @garage.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
+      ul
+        - @garage.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :owner
+    = f.text_field :owner
+  .field
+    = f.label :address
+    = f.text_field :address
+  .field
+    = f.label :zip
+    = f.text_field :zip
+  .field
+    = f.label :city
+    = f.text_field :city
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :phone
+    = f.text_field :phone
+  .field
+    = f.label :mobile
+    = f.text_field :mobile
+  .field
+    = f.label :fax
+    = f.text_field :fax
+  .field
+    = f.label :latitude
+    = f.number_field :latitude
+  .field
+    = f.label :longitude
+    = f.number_field :longitude
+  .field
+    = f.label :tax_id
+    = f.text_field :tax_id
+  .field
+    = f.label :website
+    = f.text_field :website
+  .field
+    = f.label :logo
+    = f.text_field :logo
+  .actions = f.submit 'Save'
