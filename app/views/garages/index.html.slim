@@ -4,7 +4,6 @@ table
   thead
     tr
       th Name
-      th Owner
       th Address
       th Zip
       th City
@@ -25,7 +24,6 @@ table
     - @garages.each do |garage|
       tr
         td = garage.name
-        td = garage.owner
         td = garage.address
         td = garage.zip
         td = garage.city
