@@ -1,0 +1,7 @@
+aside#secondary
+  .sidebar-header = image_tag "logo.png", class: "logo"
+
+  ul.menu-lateral
+    li.active = link_to content_tag(:i, 'Garages', class: "fa fa-home"), garages_path
+    li = link_to content_tag(:i, 'Users', class: "fa fa-users"), "#"
+    li = link_to content_tag(:i, 'Properties', class: "fa fa-cogs"), properties_path

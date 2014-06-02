@@ -1,4 +1,4 @@
-= simple_form_for(@garage, html: {class: 'form-horizontal' }) do |f|
+= simple_form_for(@garage) do |f|
   - if @garage.errors.any?
     #error_explanation
       h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
@@ -6,18 +6,20 @@
         - @garage.errors.full_messages.each do |message|
           li = message
 
-  = f.input :name
-  = f.input :owner
-  = f.input :address
-  = f.input :zip
-  = f.input :city
-  = f.input :email
-  = f.input :phone
-  = f.input :mobile
-  = f.input :fax
-  = f.input :latitude
-  = f.input :longitude
-  = f.input :tax_id
-  = f.input :website
-  = f.input :logo
-  = f.button :submit
+  .col-md-3 = f.input :name
+  .col-md-3 = f.input :owner
+  .col-md-3 = f.input :country
+  .col-md-3 = f.input :address
+  .col-md-3 = f.input :zip
+  .col-md-3 = f.input :city
+  .col-md-3 = f.input :email
+  .col-md-3 = f.input :phone
+  .col-md-3 = f.input :mobile
+  .col-md-3 = f.input :fax
+  .col-md-3 = f.input :latitude
+  .col-md-3 = f.input :longitude
+  .col-md-3 = f.input :tax_id
+  .col-md-3 = f.input :website
+  .col-md-3 = f.input :logo
+
+  .col-md-12 = f.button :submit, class: "btn-success"
