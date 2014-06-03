@@ -5,7 +5,6 @@ table
     tr
       th Name
       th Type
-      th Value
       th
       th
       th
@@ -14,8 +13,7 @@ table
     - @properties.each do |property|
       tr
         td = property.name
-        td = property.type
-        td = property.value
+        td = property.type_of
         td = link_to 'Show', property
         td = link_to 'Edit', edit_property_path(property)
         td = link_to 'Destroy', property, data: {:confirm => 'Are you sure?'}, :method => :delete
