@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :garage_properties
+
   root to: "garages#index"
 
   resources :holidays

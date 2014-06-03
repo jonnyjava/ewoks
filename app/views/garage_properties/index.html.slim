@@ -1,0 +1,25 @@
+h1 Listing garage_properties
+
+table
+  thead
+    tr
+      th Value
+      th Garage
+      th Property
+      th
+      th
+      th
+
+  tbody
+    - @garage_properties.each do |garage_property|
+      tr
+        td = garage_property.value
+        td = garage_property.garage
+        td = garage_property.property
+        td = link_to 'Show', garage_property
+        td = link_to 'Edit', edit_garage_property_path(garage_property)
+        td = link_to 'Destroy', garage_property, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Garage property', new_garage_property_path

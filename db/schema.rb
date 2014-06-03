@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603103731) do
+ActiveRecord::Schema.define(version: 20140603114311) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20140603103731) do
   end
 
   add_index "fees", ["garage_id"], name: "index_fees_on_garage_id"
+
+  create_table "garage_properties", force: true do |t|
+    t.string   "value"
+    t.integer  "garage_id"
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "garage_properties", ["garage_id"], name: "index_garage_properties_on_garage_id"
+  add_index "garage_properties", ["property_id"], name: "index_garage_properties_on_property_id"
 
   create_table "garages", force: true do |t|
     t.string   "name"
