@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: "garages#index"
+
   resources :holidays
 
   resources :tyre_fees

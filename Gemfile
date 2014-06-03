@@ -6,6 +6,9 @@ gem 'rails', '4.1.1'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'compass-rails'
+gem "font-awesome-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -21,6 +24,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
+# Use template engine for Ruby
+gem "slim-rails"
+# Use Simple Form for helping you with powerful components to create your forms.
+gem 'simple_form'
+gem 'country_select'
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -36,9 +44,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end
-
-# Use template engine for Ruby
-gem "slim-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

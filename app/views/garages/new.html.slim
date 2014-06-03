@@ -1,5 +1,9 @@
-h1 New garage
+.row
+  .col-xs-12
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title New garage
+      .panel-body
+        == render 'form'
 
-== render 'form'
-
-= link_to 'Back', garages_path
+    / = link_to 'Back', garages_path
