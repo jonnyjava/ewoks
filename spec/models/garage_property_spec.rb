@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe GarageProperty do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:garage) }
+  it { should belong_to(:property) }
 end
