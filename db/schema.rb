@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529143151) do
+ActiveRecord::Schema.define(version: 20140603143144) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20140529143151) do
   end
 
   add_index "fees", ["garage_id"], name: "index_fees_on_garage_id"
+
+  create_table "garage_properties", force: true do |t|
+    t.string   "value"
+    t.integer  "garage_id"
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "garage_properties", ["garage_id"], name: "index_garage_properties_on_garage_id"
+  add_index "garage_properties", ["property_id"], name: "index_garage_properties_on_property_id"
 
   create_table "garages", force: true do |t|
     t.string   "name"
@@ -43,14 +54,6 @@ ActiveRecord::Schema.define(version: 20140529143151) do
     t.string   "country"
   end
 
-  create_table "garages_properties", id: false, force: true do |t|
-    t.integer "garage_id",   null: false
-    t.integer "property_id", null: false
-  end
-
-  add_index "garages_properties", ["garage_id", "property_id"], name: "index_garages_properties_on_garage_id_and_property_id"
-  add_index "garages_properties", ["property_id", "garage_id"], name: "index_garages_properties_on_property_id_and_garage_id"
-
   create_table "holidays", force: true do |t|
     t.date     "start_date"
     t.date     "end_date"
@@ -65,8 +68,7 @@ ActiveRecord::Schema.define(version: 20140529143151) do
 
   create_table "properties", force: true do |t|
     t.string   "name"
-    t.string   "type"
-    t.string   "value"
+    t.string   "type_of"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

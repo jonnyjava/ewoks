@@ -1,3 +1,4 @@
 class Property < ActiveRecord::Base
-  has_and_belongs_to_many :garages
+  has_many :garage_properties
+  has_many :garages, through: :garage_properties
 end

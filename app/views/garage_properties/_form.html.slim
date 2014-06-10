@@ -1,0 +1,10 @@
+= simple_form_for(@garage_property) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :value
+    = f.association :garage
+    = f.association :property
+
+  .form-actions
+    = f.button :submit
