@@ -4,7 +4,7 @@ class GaragesController < ApplicationController
   # GET /garages
   # GET /garages.json
   def index
-    @garages = Garage.all
+    @garages = Garage.all.page(params[:page])
   end
 
   # GET /garages/1
