@@ -11,15 +11,11 @@ table
     - @users.each do |user|
       tr
         td
-          - if can? :show, user
-            = link_to 'Show', user
+          = link_to 'Show', user
         td
-          - if can? :edit, user
-            = link_to 'Edit', edit_user_path(user)
+          = link_to 'Edit', edit_user_path(user)
         td
-          - if can? :destroy, user
-            = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
+          = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-- if can? :create, User
-  = link_to 'New User', new_user_path
+= link_to 'New User', new_user_path

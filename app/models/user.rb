@@ -4,13 +4,4 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_one :garage, foreign_key: "owner_id"
-
-  ADMIN = 0
-  COUNTRY_MANAGER = 1
-  OWNER = 2
-  ROLES = {admin: ADMIN, country_manager: COUNTRY_MANAGER, owner: OWNER}
-
-  def is?( requested_role )
-    self.role == ROLES[requested_role]
-  end
 end
