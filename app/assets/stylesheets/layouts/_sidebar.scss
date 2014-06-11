@@ -1,6 +1,7 @@
 // Config
 $sidebar-bgcolor: $blue;
 $sidebar-width: $offset-left;
+$sidebarHeader-height: $offset-top;
 
 // Base
 .l-sidebar {
@@ -24,5 +25,51 @@ $sidebar-width: $offset-left;
 
   @media (max-width: $screen-sm-min) {
     left: -$sidebar-width;
+  }
+}
+
+.l-sidebar__header {
+  height: $sidebarHeader-height;
+  line-height: $sidebarHeader-height;
+  padding: 0 1.5em;
+  background-color: darken($sidebar-bgcolor, 3%);
+  color: $white;
+
+  .profile-img {
+    height: $sidebarHeader-height/1.5;
+    margin-right: 1em;
+    @include border-radius(50%);
+  }
+}
+
+.l-sidebar__body {
+  padding: 0;
+  @include leader(1);
+
+  li {
+    list-style: none;
+
+    > a {
+      width: 100%;
+      display: inline-block;
+      padding: 1em 1.5em;
+      color: #a7b1c2;
+
+      &:hover {
+        text-decoration: none;
+        background-color: darken($sidebar-bgcolor, 3%);
+      }
+    }
+
+    .fa {
+      margin-right: .5em;
+      display: inline-block;
+    }
+
+    &.active > a {
+      color: $white;
+      background-color: darken($sidebar-bgcolor, 3%);
+      border-left: 4px solid $green;
+    }
   }
 }
