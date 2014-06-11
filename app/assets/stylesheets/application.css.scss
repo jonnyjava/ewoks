@@ -1,81 +1,21 @@
+// Vendors
 @import "bootstrap";
-@import "font-awesome";
 @import "compass";
-@import "variables";
+@import "font-awesome";
 
-body {
-  background-color: $color-body;
-}
+// Tools
+@import "tools/functions";
+@import "tools/mixins";
+@import "tools/helpers";
 
-#primary {
-  @include single-transition(margin, .1s, ease-out);
-  @media (max-width: $screen-sm-min) { margin-left: 0; }
-  margin-left: $width-sidebar;
-}
+// Base
+@import "base/config";
 
-#secondary {
-  @include single-transition(left, .1s, ease-out);
-  @include single-box-shadow(darken($color-sidebar, 5%), -5px, 0, 10px, $inset: inset);
-  @media (max-width: $screen-sm-min) { left:-$width-sidebar; }
-  background: $color-sidebar;
-  left: 0;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  width: $width-sidebar;
+// Layouts
+@import "layouts/base";
+@import "layouts/header";
+@import "layouts/sidebar";
+@import "layouts/main";
 
-  .sidebar-header {
-    @include padding-leader(.15);
-    border-bottom: 1px solid darken($color-black, 15%);
-    height: $height-top-bar;
-    text-align: center;
-  }
-}
-
-.menu-lateral {
-  @extend .nav;
-  @extend .nav-pills;
-  @extend .nav-stacked;
-  border-top: 1px solid lighten($color-black, 15%);
-  padding-top: 1em;
-
-  > li {
-    a, &.active a {
-      @include border-radius(0);
-      background-color: $color-sidebar;
-      color: $color-sidebar-text;
-      padding: 10px 20px;
-
-      &:hover {
-        color: $color-white;
-        background-color: $color-sidebar;
-      }
-      &:active {
-        background-color: lighten($color-sidebar, 8%);
-      }
-    }
-
-    .fa::before {
-      font-size: 1.2em;
-      padding-right: .6em;
-    }
-
-    + li { margin-top: 0; }
-    &.active a { color: $color-white; }
-  }
-}
-
-.top-bar {
-  @include background-image(linear-gradient(to bottom, $brand-primary, darken($brand-primary, 5%)));
-  @include trailer(1);
-  min-height: $height-top-bar;
-  position: relative;
-}
-
-.btn-action {
-  @extend .btn;
-  @extend .btn-sm;
-  margin-left: 5px;
-  padding: 2px 5px;
-  min-width: 24px;
-}
+// Modules
+@import "modules/buttons"

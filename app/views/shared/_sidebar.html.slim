@@ -1,7 +1,6 @@
-aside#secondary
-  .sidebar-header = image_tag "logo.png", class: "logo"
+aside.l-sidebar.js-body-height
 
-  ul.menu-lateral
+    ul.menu-lateral
     li class=(current_page?(garages_path) ? "active" : nil)
       = link_to content_tag(:i, 'Garages', class: "fa fa-home"), garages_path
     li

@@ -1,0 +1,13 @@
+// Config
+$topbar-bgcolor: $white;
+$topbar-height: $offset-top;
+
+// Base
+.l-topbar {
+	height: $topbar-height;
+	background-color: $topbar-bgcolor;
+	border-bottom: 1px solid $border-bgcolor;
+
+	@extend .row;
+	@include trailer(2);
+}

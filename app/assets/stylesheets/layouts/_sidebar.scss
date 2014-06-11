@@ -1,0 +1,28 @@
+// Config
+$sidebar-bgcolor: $blue;
+$sidebar-width: $offset-left;
+
+// Base
+.l-sidebar {
+  left: 0;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  width: $sidebar-width;
+  background-color: $sidebar-bgcolor;
+
+  @include single-box-shadow(darken($sidebar-bgcolor, 5%), -5px, 0, 10px, $inset: inset);
+  @include single-transition(left, .1s, ease-out);
+
+  &.expand {
+    left: 0;
+  }
+
+  &.contract {
+    left: -$sidebar-width;
+  }
+
+  @media (max-width: $screen-sm-min) {
+    left: -$sidebar-width;
+  }
+}
