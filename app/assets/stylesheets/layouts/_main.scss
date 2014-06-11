@@ -19,5 +19,6 @@ $main-margin: $offset-left;
 
   @media (max-width: $screen-sm-min) {
     margin-left: 0;
+    min-width: 320px;
   }
 }
