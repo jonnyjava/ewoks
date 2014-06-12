@@ -9,7 +9,6 @@
           thead
             tr
               th Name
-              th Owner
               th Address
               th Phone
               th Actions
@@ -18,7 +17,6 @@
             - @garages.each do |garage|
               tr
                 td = garage.name
-                td = garage.owner
                 td = "#{garage.address} #{garage.city} #{garage.zip}"
                 td = garage.phone
                 td

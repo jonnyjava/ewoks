@@ -31,6 +31,7 @@ gem 'simple_form'
 gem 'country_select'
 
 gem 'kaminari', '~> 0.16.1'
+gem 'devise'
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

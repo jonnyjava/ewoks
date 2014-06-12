@@ -1,4 +1,5 @@
 class Garage < ActiveRecord::Base
+  belongs_to :user, foreign_key: "owner_id"
   has_many :holidays
   has_many :fees
   has_many :garage_properties
