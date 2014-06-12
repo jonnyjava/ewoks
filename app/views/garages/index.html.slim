@@ -9,7 +9,6 @@
           thead
             tr
               th Name
-              th Owner
               th Address
               th Phone
               th Actions
@@ -18,12 +17,10 @@
             - @garages.each do |garage|
               tr
                 td = garage.name
-                td = garage.owner
                 td = "#{garage.address} #{garage.city} #{garage.zip}"
                 td = garage.phone
                 td
                   = link_to content_tag(:i, nil, class: "fa fa-eye"), garage, class: "btn-action btn-primary"
                   = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_path(garage), class: "btn-action btn-primary"
                   = link_to content_tag(:i, nil, class: "fa fa-trash-o"),  garage, class: "btn-action btn-danger", data: {:confirm => 'Are you sure?'}, :method => :delete
-
     = link_to 'New Garage', new_garage_path, class: "btn btn-success"

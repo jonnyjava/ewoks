@@ -19,11 +19,12 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe TyreFeesController do
-
+  login_user
   # This should return the minimal set of attributes required to create a valid
   # TyreFee. As you add validations to TyreFee, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) { { "price" => Faker::Number.number(2) } }
+  let(:invalid_attributes) { { "wrong_param" => "wrong" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -82,17 +83,17 @@ describe TyreFeesController do
     end
 
     describe "with invalid params" do
-      xit "assigns a newly created but unsaved tyre_fee as @tyre_fee" do
+      it "assigns a newly created but unsaved tyre_fee as @tyre_fee" do
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        post :create, {:tyre_fee => {  }}, valid_session
+        post :create, {tyre_fee: invalid_attributes}, valid_session
         assigns(:tyre_fee).should be_a_new(TyreFee)
       end
 
-      xit "re-renders the 'new' template" do
+      it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        post :create, {:tyre_fee => {  }}, valid_session
+        post :create, {tyre_fee: invalid_attributes}, valid_session
         response.should render_template("new")
       end
     end
@@ -100,43 +101,43 @@ describe TyreFeesController do
 
   describe "PUT update" do
     describe "with valid params" do
-      xit "updates the requested tyre_fee" do
+      it "updates the requested tyre_fee" do
         tyre_fee = TyreFee.create! valid_attributes
         # Assuming there are no other tyre_fees in the database, this
         # specifies that the TyreFee created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        TyreFee.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => tyre_fee.to_param, :tyre_fee => { "these" => "params" }}, valid_session
+        TyreFee.any_instance.should_receive(:update).with( valid_attributes )
+        put :update, {:id => tyre_fee.to_param, tyre_fee: valid_attributes }, valid_session
       end
 
       it "assigns the requested tyre_fee as @tyre_fee" do
         tyre_fee = TyreFee.create! valid_attributes
-        put :update, {:id => tyre_fee.to_param, :tyre_fee => valid_attributes}, valid_session
+        put :update, {:id => tyre_fee.to_param, tyre_fee: valid_attributes}, valid_session
         assigns(:tyre_fee).should eq(tyre_fee)
       end
 
       it "redirects to the tyre_fee" do
         tyre_fee = TyreFee.create! valid_attributes
-        put :update, {:id => tyre_fee.to_param, :tyre_fee => valid_attributes}, valid_session
+        put :update, {:id => tyre_fee.to_param, tyre_fee: valid_attributes}, valid_session
         response.should redirect_to(tyre_fee)
       end
     end
 
     describe "with invalid params" do
-      xit "assigns the tyre_fee as @tyre_fee" do
+      it "assigns the tyre_fee as @tyre_fee" do
         tyre_fee = TyreFee.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        put :update, {:id => tyre_fee.to_param, :tyre_fee => {  }}, valid_session
+        put :update, {:id => tyre_fee.to_param, tyre_fee: invalid_attributes }, valid_session
         assigns(:tyre_fee).should eq(tyre_fee)
       end
 
-      xit "re-renders the 'edit' template" do
+      it "re-renders the 'edit' template" do
         tyre_fee = TyreFee.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        put :update, {:id => tyre_fee.to_param, :tyre_fee => {  }}, valid_session
+        put :update, {:id => tyre_fee.to_param, tyre_fee: invalid_attributes }, valid_session
         response.should render_template("edit")
       end
     end
