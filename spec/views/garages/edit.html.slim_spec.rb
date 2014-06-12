@@ -7,7 +7,6 @@ describe "garages/edit" do
 
   it "renders the edit garage form" do
     render
-
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", garage_path(@garage), "post" do
     end

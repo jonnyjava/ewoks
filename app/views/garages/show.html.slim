@@ -4,15 +4,11 @@
 .panel.panel-default
   .panel-heading
     h3.panel-title = "Garage: #{@garage.name}"
-
   .panel-body
     .row
       .col-sm-6
         img
       .col-sm-6
-        p
-          strong Owner:
-          = @garage.owner
         p
           strong Address:
           = "#{@garage.address} #{@garage.city} #{@garage.zip}"
