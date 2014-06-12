@@ -1,0 +1,22 @@
+// Config
+$button-bgcolor: $green;
+$button-fontcolor: $white;
+
+// Base
+.m-button {
+	@extend .btn;
+	@extend .btn-default;
+	@include border-radius(3px);
+}
+
+.m-button--menu {
+	padding: 4px 12px;
+	background-color: $button-bgcolor;
+	color: $button-fontcolor;
+	border: 1px solid $button-bgcolor;
+
+	@extend .m-button;
+}
+
+// States
+@import "../states/buttons";

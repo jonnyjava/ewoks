@@ -1,0 +1,23 @@
+// Config
+$button-bgcolor: $green;
+$button-fontcolor: $white;
+
+// Base
+.m-box {
+	@include border-radius(0);
+	@extend .panel;
+	@extend .panel-default;
+
+	> .m-box__header {
+		background-color: $white;
+		border-top: 4px solid $border-bgcolor;
+		@extend .panel-heading;
+	}
+}
+
+.box__title {
+	@extend .panel-title;
+}
+
+// States
+// @import "../states/panels";

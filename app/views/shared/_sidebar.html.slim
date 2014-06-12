@@ -1,10 +1,18 @@
-aside#secondary
-  .sidebar-header = image_tag "logo.png", class: "logo"
+aside.l-sidebar.js-body-height
+  .l-sidebar__header
+    = image_tag "no-profile-img.jpg", class: "profile-img"
+    ' User name
 
-  ul.menu-lateral
+  ul.l-sidebar__body
     li class=(current_page?(garages_path) ? "active" : nil)
-      = link_to content_tag(:i, 'Garages', class: "fa fa-home"), garages_path
+      a href="#{garages_path}"
+        i.fa.fa-th-large
+        ' Garages
     li
-      = link_to content_tag(:i, 'Users', class: "fa fa-users"), "#"
+      a href="#"
+        i.fa.fa-user
+        ' Users
     li class=(current_page?(properties_path) ? "active" : nil)
-      = link_to content_tag(:i, 'Properties', class: "fa fa-cogs"), properties_path
+      a href="#{properties_path}"
+        i.fa.fa-cog
+        ' Properties
