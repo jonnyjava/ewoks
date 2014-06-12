@@ -30,6 +30,7 @@ gem "slim-rails"
 gem 'simple_form'
 gem 'country_select'
 
+gem 'kaminari', '~> 0.16.1'
 gem 'devise'
 
 group :development do

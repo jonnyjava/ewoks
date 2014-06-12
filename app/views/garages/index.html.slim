@@ -5,7 +5,7 @@
         h3.box__title Listing garages
 
       .table-responsive
-        table.table
+        table.table.table-condensed.table-striped
           thead
             tr
               th Name
@@ -23,4 +23,6 @@
                   = link_to content_tag(:i, nil, class: "fa fa-eye"), garage, class: "btn-action btn-primary"
                   = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_path(garage), class: "btn-action btn-primary"
                   = link_to content_tag(:i, nil, class: "fa fa-trash-o"),  garage, class: "btn-action btn-danger", data: {:confirm => 'Are you sure?'}, :method => :delete
+
+        = paginate @garages
     = link_to 'New Garage', new_garage_path, class: "btn btn-success"

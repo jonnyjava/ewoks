@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe "garages/index" do
   before(:each) do
-    assign(:garages, [
+    assign(:garages, Kaminari.paginate_array([
       stub_model(Garage),
       stub_model(Garage)
-    ])
+    ]).page)
   end
 
   it "renders a list of garages" do
