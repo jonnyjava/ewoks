@@ -65,7 +65,7 @@ class GaragesController < ApplicationController
     @garage.update(enable: !@garage.enable)
 
     respond_to do |format|
-      format.html { redirect_to garages_url, notice: 'Garage status was successfully updated.' }
+      format.html { redirect_to garages_url }
     end
   end
 

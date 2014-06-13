@@ -18,5 +18,63 @@ $button-fontcolor: $white;
 	@extend .m-button;
 }
 
+.m-button-action {
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
+	text-align: center;
+	margin-right: 2px;
+	font-size: .9em;
+	display: inline-block;
+	padding: 0;
+
+	@extend .m-button;
+
+	&:before {
+		font-family: FontAwesome;
+	}
+}
+
+.m-button-action--view {
+	@extend .m-button-action;
+
+	&:before {
+		 content: "\f06e";
+	}
+}
+
+.m-button-action--edit {
+	@extend .m-button-action;
+
+	&:before {
+		content: "\f044";
+	}
+}
+
+.m-button-action--status {
+	@extend .m-button-action;
+
+	&:before {
+		content: "\f00d";
+	}
+
+	.is-garage-disable & {
+		color: #007C00;
+		&:before {
+			content: "\f00c";
+		}
+	}
+}
+
+.m-button-action--delete {
+	color: #a20000;
+	font-weight: bold;
+	@extend .m-button-action;
+
+	&:before {
+		content: "\f014";
+	}
+}
+
 // States
 @import "../states/buttons";
