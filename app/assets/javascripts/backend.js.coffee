@@ -1,14 +1,9 @@
 ready = ->
 
-  ###
-    Resizes the height of the sidebar according body
-  ###
   $(window).on "resize load", ->
     $(".js-body-height").height $("body").height()
 
-  ###
-    Hide or show the sidebar when you click on the menu button
-  ###
+
   $ ->
     $sidebar = $(".l-sidebar")
     $main = $(".l-main")
@@ -25,8 +20,9 @@ ready = ->
         $main.addClass("contract")
         $main.removeClass("expand")
 
+
   $ ->
-    $('.js-toggle-garage-status').closest('form').on 'ajax:success', (e, data, status, xhr) ->
+    $('.js-toggle-garage-status').closest('form').on 'ajax:success', ->
       $(this).closest('tr').toggleClass("is-garage-disable");
 
 $(document).ready(ready)

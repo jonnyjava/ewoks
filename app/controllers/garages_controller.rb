@@ -1,5 +1,5 @@
 class GaragesController < ApplicationController
-  before_action :set_garage, only: [:show, :edit, :update, :destroy]
+  before_action :set_garage, only: [:show, :edit, :update, :destroy, :toggle_status]
 
   # GET /garages
   # GET /garages.json
@@ -58,6 +58,14 @@ class GaragesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to garages_url, notice: 'Garage was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_status
+    @garage.update(enable: !@garage.enable)
+
+    respond_to do |format|
+      format.html { redirect_to garages_url, notice: 'Garage status was successfully updated.' }
     end
   end
 
