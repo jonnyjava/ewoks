@@ -25,5 +25,9 @@ ready = ->
         $main.addClass("contract")
         $main.removeClass("expand")
 
+  $ ->
+    $('.js-toggle-garage-status').closest('form').on 'ajax:success', (e, data, status, xhr) ->
+      $(this).closest('tr').toggleClass("is-garage-disable");
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
