@@ -62,7 +62,7 @@ class GaragesController < ApplicationController
   end
 
   def toggle_status
-    @garage.update(enable: !@garage.enable)
+    @garage.update(status: !@garage.status)
 
     respond_to do |format|
       format.html { redirect_to garages_url }
@@ -77,6 +77,6 @@ class GaragesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def garage_params
-      params.require(:garage).permit(:name, :owner, :country, :address, :zip, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo, :enable)
+      params.require(:garage).permit(:name, :owner, :country, :address, :zip, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo, :status)
     end
 end

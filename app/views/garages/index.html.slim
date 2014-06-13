@@ -15,7 +15,7 @@
 
           tbody
             - @garages.each do |garage|
-              tr class="#{'is-garage-disable' unless garage.enable?}"
+              tr class="#{'is-garage-disable' unless garage.status?}"
                 td = garage.name
                 td = "#{garage.address} #{garage.city} #{garage.zip}"
                 td = garage.phone
