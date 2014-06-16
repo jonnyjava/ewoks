@@ -4,15 +4,12 @@ aside.l-sidebar.js-body-height
     ' User name
 
   ul.l-sidebar__body
-    li class=(current_page?(garages_path) ? "active" : nil)
-      a href="#{garages_path}"
-        i.fa.fa-th-large
-        ' Garages
-    li
-      a href="#"
-        i.fa.fa-user
-        ' Users
-    li class=(current_page?(properties_path) ? "active" : nil)
-      a href="#{properties_path}"
-        i.fa.fa-cog
-        ' Properties
+    li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
+      i.fa.fa-th-large
+      ' Garages
+    li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
+      i.fa.fa-user
+      ' Users
+    li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
+      i.fa.fa-cog
+      ' Properties
