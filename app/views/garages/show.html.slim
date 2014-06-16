@@ -1,40 +1,45 @@
 - if notice
   .alert.alert-success = notice
 
-.panel.panel-default
-  .panel-heading
-    h3.panel-title = "Garage: #{@garage.name}"
-  .panel-body
-    .row
-      .col-sm-6
-        img
-      .col-sm-6
-        p
-          strong Address:
-          = "#{@garage.address} #{@garage.city} #{@garage.zip}"
-        p
-          strong Email:
-          = @garage.email
-        p
-          strong Phone:
-          = @garage.phone
-        p
-          strong Mobile:
-          = @garage.mobile
-        p
-          strong Fax:
-          = @garage.fax
-        p
-          strong Latitude:
-          = @garage.latitude
-        p
-          strong Longitude:
-          = @garage.longitude
-        p
-          strong Tax:
-          = @garage.tax_id
-        p
-          strong Website:
-          = @garage.website
-
-    = link_to 'Edit', edit_garage_path(@garage), class: "btn btn-success"
+.row
+  .col-xs-12
+    .m-box
+      .m-box__header
+        h3.box__title = "Garage: #{@garage.name}"
+      .panel-body
+        .col-sm-4
+          = image_tag "avatar_default.jpg", class: "avatar img-thumbnail"
+          = link_to 'Manage timetable', "#", class: "m-button--large"
+          = link_to 'Manage fees', "#", class: "m-button--large"
+          = link_to 'Edit information', edit_garage_path(@garage), class: "m-button--large"
+        .col-sm-8
+          .table-responsive
+            table.table.table-condensed
+              tbody
+                tr
+                  td Address:
+                  td = "#{@garage.address} #{@garage.city} #{@garage.zip}"
+                tr
+                  td Email:
+                  td = @garage.email
+                tr
+                  td Phone:
+                  td = @garage.phone
+                tr
+                  td Mobile:
+                  td = @garage.mobile
+                tr
+                  td Fax:
+                  td = @garage.fax
+                tr
+                  td Latitude:
+                  td = @garage.latitude
+                tr
+                  td Longitude:
+                  td = @garage.longitude
+                tr
+                  td Tax:
+                  td = @garage.tax_id
+                tr
+                  td Website:
+                  td = @garage.website

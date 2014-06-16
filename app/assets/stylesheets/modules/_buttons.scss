@@ -18,6 +18,11 @@ $button-fontcolor: $white;
 	@extend .m-button;
 }
 
+.m-button--large {
+	width: 100%;
+	@extend .m-button--menu;
+}
+
 .m-button-action {
 	height: 20px;
 	width: 20px;
