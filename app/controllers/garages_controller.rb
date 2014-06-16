@@ -1,5 +1,5 @@
 class GaragesController < ApplicationController
-  before_action :set_garage, only: [:show, :edit, :update, :destroy]
+  before_action :set_garage, only: [:show, :edit, :update, :destroy, :toggle_status]
 
   # GET /garages
   # GET /garages.json
@@ -61,6 +61,14 @@ class GaragesController < ApplicationController
     end
   end
 
+  def toggle_status
+    @garage.update(status: !@garage.status)
+
+    respond_to do |format|
+      format.html { redirect_to garages_url }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_garage
@@ -69,6 +77,6 @@ class GaragesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def garage_params
-      params.require(:garage).permit(:name, :owner, :country, :address, :zip, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo)
+      params.require(:garage).permit(:name, :owner, :country, :address, :zip, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo, :status)
     end
 end
