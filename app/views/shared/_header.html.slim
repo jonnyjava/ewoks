@@ -3,8 +3,8 @@ header.l-topbar
 		button.js-toggle-sidebar.m-button--menu
 			i.fa.fa-bars
 		= image_tag "logo.png", class: "norauto-logo"
-		
+
 	.l-topbar__footer
-		a href="#"
-			i.fa.fa-sign-out
-			' Log out
+		= link_to destroy_user_session_path, :method => :delete
+		  i.fa.fa-sign-out
+		  ' Logout
