@@ -6,4 +6,6 @@ class Garage < ActiveRecord::Base
   has_many :properties, through: :garage_properties
 
   validates :address, :zip, :city, :country, :phone, :tax_id, presence: true
+
+  has_attached_file :logo, default_url: "/images/avatar_default.jpg"
 end
