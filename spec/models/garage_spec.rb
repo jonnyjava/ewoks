@@ -7,7 +7,7 @@ describe Garage do
   it { should have_and_belong_to_many(:properties) }
   it { should have_attached_file(:logo) }
 
-  it { should validate_presence_of(:address) }
+  it { should validate_presence_of(:street) }
   it { should validate_presence_of(:zip) }
   it { should validate_presence_of(:city) }
   it { should validate_presence_of(:country) }
