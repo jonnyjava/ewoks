@@ -31,5 +31,9 @@ describe GaragesController do
       delete("/garages/1").should route_to("garages#destroy", :id => "1")
     end
 
+    it "routes to #destroy_logo" do
+      delete("/garages/1/destroy_logo").should route_to("garages#destroy_logo", :id => "1")
+    end
+
   end
 end

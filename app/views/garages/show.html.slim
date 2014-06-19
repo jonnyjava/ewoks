@@ -12,7 +12,7 @@
           = link_to 'Manage timetable', "#", class: "m-button--large"
           = link_to 'Manage fees', "#", class: "m-button--large"
           = link_to 'Edit information', edit_garage_path(@garage), class: "m-button--large"
-          = link_to "Delete image", destroy_logo_path, class: "m-button--large", data: {:confirm => 'Are you sure?'}, :method => :delete
+          = link_to "Delete image", destroy_logo_path(@garage), class: "m-button--large", data: {:confirm => 'Are you sure?'}, :method => :delete
         .col-sm-8
           .table-responsive
             table.table.table-condensed
