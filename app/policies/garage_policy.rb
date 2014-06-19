@@ -6,30 +6,38 @@ class GaragePolicy  < Struct.new(:user, :garage)
   end
 
   def index?
-    belongs_to_user_area?
+    @user.admin? || belongs_to_user_country?
+  end
+
+  def show?
+    @user.admin? || belongs_to_user_country? || belongs_to_user?
   end
 
   def new?
-    @user.admin?
+    @user.admin? || belongs_to_user_country?
   end
 
   def edit?
-    @user.admin?
+    @user.admin? || belongs_to_user_country? || belongs_to_user?
   end
 
   def create?
-    @user.admin?
+    @user.admin? || belongs_to_user_country?
   end
 
   def update?
-    @user.admin?
+    @user.admin? || belongs_to_user_country? || belongs_to_user?
   end
 
   def destroy?
     @user.admin?
   end
 
-  def belongs_to_user_area?
-    @user.admin? || (@user.country_manager? and @user.country == @garage.country)
+  def belongs_to_user_country?
+    @user.country_manager? and (@user.country == @garage.country)
+  end
+
+  def belongs_to_user?
+    @garage.owner_id == @user.id
   end
 end
