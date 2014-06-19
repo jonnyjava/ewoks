@@ -1,24 +1,24 @@
 // Config
-$main-margin: $offset-left;
+$main-offset: $offset-left;
 
 // Base
 .l-main {
-  margin-left: $main-margin;
   overflow-x: hidden;
 
   @extend .container-fluid;
-  @include single-transition(margin, .1s, ease-out);
+  @include single-transition(transform, .2s, ease-out);
+  @include translateX($main-offset);
 
   &.expand {
-    margin-left: 0;
+    @include translateX(0);
   }
 
   &.contract {
-    margin-left: $main-margin;
+    @include translateX($main-offset);
   }
 
   @media (max-width: $screen-sm-min) {
-    margin-left: 0;
+    @include translateX(0);
     min-width: 320px;
   }
 }
