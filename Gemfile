@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use template engine for Ruby
 gem "slim-rails"
 # Use Simple Form for helping you with powerful components to create your forms.
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0.rc1'
 gem 'country_select'
 
 gem 'kaminari', '~> 0.16.1'
@@ -54,10 +54,14 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'unicorn-rails'
+gem 'capistrano3-unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', group: :development
+gem 'capistrano-rvm', group: :development
 
+gem 'paperclip', github: 'thoughtbot/paperclip'
 # Use debugger
 # gem 'debugger', group: [:development, :test]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616100917) do
+ActiveRecord::Schema.define(version: 20140618134529) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -47,11 +47,15 @@ ActiveRecord::Schema.define(version: 20140616100917) do
     t.float    "longitude"
     t.string   "tax_id"
     t.string   "website"
-    t.string   "logo"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "country"
     t.integer  "owner_id"
+    t.boolean  "status"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "holidays", force: true do |t|

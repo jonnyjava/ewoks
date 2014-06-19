@@ -5,7 +5,7 @@
         h3.box__title Listing garages
 
       .table-responsive
-        table.table.table-condensed.table-striped
+        table.table.table-condensed
           thead
             tr
               th Name
@@ -15,14 +15,15 @@
 
           tbody
             - @garages.each do |garage|
-              tr
+              tr class="#{'is-garage-disable' unless garage.status?}"
                 td = garage.name
                 td = "#{garage.address} #{garage.city} #{garage.zip}"
                 td = garage.phone
                 td
-                  = link_to content_tag(:i, nil, class: "fa fa-eye"), garage, class: "btn-action btn-primary"
-                  = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_path(garage), class: "btn-action btn-primary"
-                  = link_to content_tag(:i, nil, class: "fa fa-trash-o"),  garage, class: "btn-action btn-danger", data: {:confirm => 'Are you sure?'}, :method => :delete
+                  = link_to "", garage_path(garage), class: "m-button-action--view"
+                  = link_to "", edit_garage_path(garage), class: "m-button-action--edit"
+                  = link_to "", toggle_status_path(garage), class: "m-button-action--status", method: :patch
+                  = link_to "", garage, class: "m-button-action--delete", data: {:confirm => 'Are you sure?'}, :method => :delete
 
         = paginate @garages
-    = link_to 'New Garage', new_garage_path, class: "btn btn-success"
+    = link_to 'New Garage', new_garage_path, class: "m-button"
