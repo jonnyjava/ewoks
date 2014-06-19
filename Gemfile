@@ -61,5 +61,6 @@ gem 'capistrano3-unicorn'
 gem 'capistrano-rails', group: :development
 gem 'capistrano-rvm', group: :development
 
+gem 'paperclip', github: 'thoughtbot/paperclip'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
