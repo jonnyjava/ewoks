@@ -1,29 +1,35 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /properties
   # GET /properties.json
   def index
     @properties = Property.all
+    authorize @properties
   end
 
   # GET /properties/1
   # GET /properties/1.json
   def show
+    authorize @property
   end
 
   # GET /properties/new
   def new
     @property = Property.new
+    authorize @property
   end
 
   # GET /properties/1/edit
   def edit
+    authorize @property
   end
 
   # POST /properties
   # POST /properties.json
   def create
+    authorize @property
     @property = Property.new(property_params)
 
     respond_to do |format|
@@ -40,6 +46,7 @@ class PropertiesController < ApplicationController
   # PATCH/PUT /properties/1
   # PATCH/PUT /properties/1.json
   def update
+    authorize @property
     respond_to do |format|
       if @property.update(property_params)
         format.html { redirect_to @property, notice: 'Property was successfully updated.' }
@@ -54,6 +61,7 @@ class PropertiesController < ApplicationController
   # DELETE /properties/1
   # DELETE /properties/1.json
   def destroy
+    authorize @property
     @property.destroy
     respond_to do |format|
       format.html { redirect_to properties_url, notice: 'Property was successfully destroyed.' }
