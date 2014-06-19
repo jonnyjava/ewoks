@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618134529) do
+ActiveRecord::Schema.define(version: 20140619075430) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140618134529) do
 
   create_table "garages", force: true do |t|
     t.string   "name"
-    t.string   "address"
+    t.string   "street"
     t.string   "zip"
     t.string   "city"
     t.string   "email"
