@@ -1,4 +1,4 @@
-class UserPolicy < Struct.new(:user, :user)
+class UserPolicy < ApplicationPolicy
 
   def initialize(logged_user, user)
     @logged_user = logged_user

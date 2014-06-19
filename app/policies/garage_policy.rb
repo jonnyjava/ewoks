@@ -1,4 +1,4 @@
-class GaragePolicy  < Struct.new(:user, :garage)
+class GaragePolicy < ApplicationPolicy
 
   def initialize(user, garage)
     @user = user
