@@ -1,29 +1,35 @@
 class HolidaysController < ApplicationController
   before_action :set_holiday, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /holidays
   # GET /holidays.json
   def index
     @holidays = Holiday.all
+    authorize @holidays
   end
 
   # GET /holidays/1
   # GET /holidays/1.json
   def show
+    authorize @holiday
   end
 
   # GET /holidays/new
   def new
+    authorize @holiday
     @holiday = Holiday.new
   end
 
   # GET /holidays/1/edit
   def edit
+    authorize @holiday
   end
 
   # POST /holidays
   # POST /holidays.json
   def create
+    authorize @holiday
     @holiday = Holiday.new(holiday_params)
 
     respond_to do |format|
@@ -40,6 +46,7 @@ class HolidaysController < ApplicationController
   # PATCH/PUT /holidays/1
   # PATCH/PUT /holidays/1.json
   def update
+    authorize @holiday
     respond_to do |format|
       if @holiday.update(holiday_params)
         format.html { redirect_to @holiday, notice: 'Holiday was successfully updated.' }
@@ -54,6 +61,7 @@ class HolidaysController < ApplicationController
   # DELETE /holidays/1
   # DELETE /holidays/1.json
   def destroy
+    authorize @holiday
     @holiday.destroy
     respond_to do |format|
       format.html { redirect_to holidays_url, notice: 'Holiday was successfully destroyed.' }
