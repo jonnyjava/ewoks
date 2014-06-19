@@ -1,9 +1,11 @@
 // Config
 $main-offset: $offset-left;
+$main-bgcolor: $gray;
 
 // Base
 .l-main {
-  background-color: red;
+  background-color: $main-bgcolor;
+  height: 100vh;
   @extend .container-fluid;
 
   @media (max-width: $screen-md-min) {

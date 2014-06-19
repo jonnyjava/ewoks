@@ -5,22 +5,12 @@ $sidebarHeader-height: $offset-top;
 
 // Base
 .l-sidebar {
+  background-color: $sidebar-bgcolor;
   min-height: 100%;
   position: absolute;
   width: $sidebar-width;
-  background-color: $sidebar-bgcolor;
 
   @include single-box-shadow(darken($sidebar-bgcolor, 5%), -5px, 0, 10px, $inset: inset);
-  // @media (min-width: $screen-md-min) { left: 0; }
-  //
-  // @media (max-width: $screen-md-min) {
-  //   @include single-transition(transform, .2s, ease-out);
-  //   @include translateX(0);
-  //
-  //   &.expand {
-  //     @include translateX($sidebar-width);
-  //   }
-  // }
 }
 
 .l-sidebar__header {
