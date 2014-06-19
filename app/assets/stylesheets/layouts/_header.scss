@@ -20,12 +20,15 @@ $topbar-height: $offset-top;
 	@extend .col-xs-8;
 
 	.m-button--menu {
+		margin-right: 1.5em;
 		position: relative;
 		top: .65em;
+
+		@extend .hidden-lg;
+		@extend .hidden-md;
 	}
 
 	.norauto-logo {
-		margin-left: 1.5em;
 		position: relative;
 		top: .375em;
 	}

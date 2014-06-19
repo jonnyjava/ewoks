@@ -11,19 +11,16 @@ $sidebarHeader-height: $offset-top;
   background-color: $sidebar-bgcolor;
 
   @include single-box-shadow(darken($sidebar-bgcolor, 5%), -5px, 0, 10px, $inset: inset);
-  @include single-transition(transform, .2s, ease-out);
-
-  &.expand {
-    @include translateX(0);
-  }
-
-  &.contract {
-    @include translateX(-$sidebar-width);
-  }
-
-  @media (max-width: $screen-sm-min) {
-    @include translateX(-$sidebar-width);
-  }
+  // @media (min-width: $screen-md-min) { left: 0; }
+  //
+  // @media (max-width: $screen-md-min) {
+  //   @include single-transition(transform, .2s, ease-out);
+  //   @include translateX(0);
+  //
+  //   &.expand {
+  //     @include translateX($sidebar-width);
+  //   }
+  // }
 }
 
 .l-sidebar__header {

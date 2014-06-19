@@ -8,9 +8,10 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    = render :partial => 'shared/sidebar'
+    .wrapper
+      = render :partial => 'shared/sidebar'
 
-    .l-main
-      = render :partial => 'shared/header'
-      = yield
-      = render :partial => 'shared/footer'
+      .l-main
+        = render :partial => 'shared/header'
+        = yield
+        = render :partial => 'shared/footer'

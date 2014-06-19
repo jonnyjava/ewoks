@@ -3,22 +3,20 @@ $main-offset: $offset-left;
 
 // Base
 .l-main {
-  overflow-x: hidden;
-
+  background-color: red;
   @extend .container-fluid;
-  @include single-transition(transform, .2s, ease-out);
-  @include translateX($main-offset);
 
-  &.expand {
-    @include translateX(0);
-  }
-
-  &.contract {
-    @include translateX($main-offset);
-  }
-
-  @media (max-width: $screen-sm-min) {
-    @include translateX(0);
+  @media (max-width: $screen-md-min) {
     min-width: 320px;
+    @include single-transition(transform, .2s, ease-out);
+    @include translateX(0);
+
+    &.contract {
+      @include translateX($main-offset);
+    }
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-left: $main-offset;
   }
 }
