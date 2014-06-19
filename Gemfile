@@ -62,5 +62,6 @@ gem 'capistrano-rails', group: :development
 gem 'capistrano-rvm', group: :development
 
 gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'geocoder', '~> 1.2.2'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
