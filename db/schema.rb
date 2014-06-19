@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619075430) do
+ActiveRecord::Schema.define(version: 20140619084737) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20140619075430) do
     t.string   "phone"
     t.string   "mobile"
     t.string   "fax"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.decimal  "latitude",          precision: 9, scale: 6
+    t.decimal  "longitude",         precision: 9, scale: 6
     t.string   "tax_id"
     t.string   "website"
     t.datetime "created_at"
