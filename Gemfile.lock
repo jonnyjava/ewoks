@@ -133,6 +133,8 @@ GEM
     net-ssh (2.9.1)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
+    pundit (0.2.3)
+      activesupport (>= 3.0.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -252,6 +254,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (~> 0.16.1)
   paperclip!
+  pundit
   quiet_assets
   rails (= 4.1.1)
   rspec-rails

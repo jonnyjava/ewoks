@@ -1,30 +1,36 @@
 class GaragesController < ApplicationController
   before_action :set_garage, only: [:show, :edit, :update, :destroy, :toggle_status, :destroy_logo]
+  after_action :verify_authorized
 
   # GET /garages
   # GET /garages.json
   def index
     @garages = Garage.all.page(params[:page])
+    authorize @garages
   end
 
   # GET /garages/1
   # GET /garages/1.json
   def show
+    authorize @garage
   end
 
   # GET /garages/new
   def new
     @garage = Garage.new
+    authorize @garage
   end
 
   # GET /garages/1/edit
   def edit
+    authorize @garage
   end
 
   # POST /garages
   # POST /garages.json
   def create
     @garage = Garage.new(garage_params)
+    authorize @garage
 
     respond_to do |format|
       if @garage.save
@@ -40,6 +46,7 @@ class GaragesController < ApplicationController
   # PATCH/PUT /garages/1
   # PATCH/PUT /garages/1.json
   def update
+    authorize @garage
     respond_to do |format|
       if @garage.update(garage_params)
         format.html { redirect_to @garage, notice: 'Garage was successfully updated.' }
@@ -54,6 +61,7 @@ class GaragesController < ApplicationController
   # DELETE /garages/1
   # DELETE /garages/1.json
   def destroy
+    authorize @garage
     @garage.destroy
     respond_to do |format|
       format.html { redirect_to garages_url, notice: 'Garage was successfully destroyed.' }
@@ -62,6 +70,7 @@ class GaragesController < ApplicationController
   end
 
   def destroy_logo
+    authorize @garage
     @garage.logo.destroy
     @garage.save
 
@@ -71,6 +80,7 @@ class GaragesController < ApplicationController
   end
 
   def toggle_status
+    authorize @garage
     @garage.update(status: !@garage.status)
 
     respond_to do |format|
