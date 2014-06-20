@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :garage do
-    address   Faker::Address.street_name
+    street   Faker::Address.street_name
     zip       Faker::Address.zip_code
     city      Faker::Address.city
     country   Faker::Address.country
