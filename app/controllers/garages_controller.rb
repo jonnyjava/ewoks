@@ -70,6 +70,7 @@ class GaragesController < ApplicationController
   end
 
   def destroy_logo
+    authorize @garage
     @garage.logo.destroy
     @garage.save
 
@@ -79,6 +80,7 @@ class GaragesController < ApplicationController
   end
 
   def toggle_status
+    authorize @garage
     @garage.update(status: !@garage.status)
 
     respond_to do |format|

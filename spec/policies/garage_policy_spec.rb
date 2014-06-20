@@ -15,6 +15,7 @@ describe GaragePolicy do
     it { should allow_action(:create) }
     it { should allow_action(:edit) }
     it { should allow_action(:update) }
+    it { should allow_action(:toggle_status) }
     it { should allow_action(:destroy) }
   end
 
@@ -27,6 +28,7 @@ describe GaragePolicy do
       it { should allow_action(:create) }
       it { should allow_action(:edit) }
       it { should allow_action(:update) }
+      it { should_not allow_action(:toggle_status) }
       it { should_not allow_action(:destroy) }
     end
 
@@ -38,6 +40,7 @@ describe GaragePolicy do
       it { should_not allow_action(:create) }
       it { should_not allow_action(:edit) }
       it { should_not allow_action(:update) }
+      it { should_not allow_action(:toggle_status) }
       it { should_not allow_action(:destroy) }
     end
   end
@@ -49,6 +52,7 @@ describe GaragePolicy do
       it { should_not allow_action(:index) }
       it { should allow_action(:edit) }
       it { should allow_action(:update) }
+      it { should_not allow_action(:toggle_status) }
       it { should_not allow_action(:new) }
       it { should_not allow_action(:create) }
       it { should_not allow_action(:destroy) }
@@ -62,6 +66,7 @@ describe GaragePolicy do
       it { should_not allow_action(:create) }
       it { should_not allow_action(:edit) }
       it { should_not allow_action(:update) }
+      it { should_not allow_action(:toggle_status) }
       it { should_not allow_action(:destroy) }
     end
   end
