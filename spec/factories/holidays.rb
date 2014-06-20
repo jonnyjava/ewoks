@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :holiday do
-    garage      FactoryGirl.create(:garage)
+    garage      { FactoryGirl.create(:garage) }
     start_date  "2014-05-28"
     end_date    "2014-05-28"
     start_time  "2014-05-28 17:09:50"
