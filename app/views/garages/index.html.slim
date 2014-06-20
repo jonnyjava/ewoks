@@ -23,7 +23,7 @@
                   .btn-group
                     button.btn.btn-default = link_to "view", garage_path(garage), class: "m-button-action--view"
                     button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
-                     span.caret
+                      span.caret
                     ul.dropdown-menu
                       li = link_to "edit", edit_garage_path(garage), class: "m-button-action--edit"
                       li = link_to "#{garage.status? ? 'disable' : 'active'}", toggle_status_path(garage), class: "m-button-action--status", method: :patch

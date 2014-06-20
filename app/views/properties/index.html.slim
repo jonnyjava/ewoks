@@ -21,7 +21,7 @@
                   .btn-group
                     button.btn.btn-default = link_to 'Edit', edit_property_path(property), class: "m-button-action--view"
                     button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
-                     span.caret
+                      span.caret
                     ul.dropdown-menu
                       li =  link_to 'delete', property, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "m-button-action--delete"
 
