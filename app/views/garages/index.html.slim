@@ -17,7 +17,7 @@
             - @garages.each do |garage|
               tr class="#{'is-garage-disable' unless garage.status?}"
                 td = garage.name
-                td = "#{garage.address} #{garage.city} #{garage.zip}"
+                td = garage.address
                 td = garage.phone
                 td
                   = link_to "", garage_path(garage), class: "m-button-action--view"
