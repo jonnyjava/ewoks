@@ -1,24 +1,24 @@
 // Config
-$main-margin: $offset-left;
+$main-offset: $offset-left;
+$main-bgcolor: $gray;
 
 // Base
 .l-main {
-  margin-left: $main-margin;
-  overflow-x: hidden;
-
+  background-color: $main-bgcolor;
+  height: 100vh;
   @extend .container-fluid;
-  @include single-transition(margin, .1s, ease-out);
 
-  &.expand {
-    margin-left: 0;
-  }
-
-  &.contract {
-    margin-left: $main-margin;
-  }
-
-  @media (max-width: $screen-sm-min) {
-    margin-left: 0;
+  @media (max-width: $screen-md-min) {
     min-width: 320px;
+    @include single-transition(transform, .2s, ease-out);
+    @include translateX(0);
+
+    &.contract {
+      @include translateX($main-offset);
+    }
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-left: $main-offset;
   }
 }

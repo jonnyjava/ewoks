@@ -1,4 +1,4 @@
-= form_for @property do |f|
+= simple_form_for(@property) do |f|
   - if @property.errors.any?
     #error_explanation
       h2 = "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
@@ -7,9 +7,7 @@
           li = message
 
   .field
-    = f.label :name
-    = f.text_field :name
+    = f.input :name
   .field
-    = f.label :type_of
-    = f.text_field :type_of
-  .actions = f.submit 'Save'
+    = f.input :type_of
+  .actions = f.button :submit, class: "m-button"

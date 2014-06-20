@@ -4,5 +4,8 @@ $body-bgcolor: $gray;
 // Base
 body {
   background-color: $body-bgcolor;
+}
+
+.wrapper {
   overflow-x: hidden;
 }
