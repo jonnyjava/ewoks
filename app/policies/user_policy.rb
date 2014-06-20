@@ -34,7 +34,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def belongs_to_logged_user_country?
-    @logged_user.country_manager? and (@logged_user.country == @user.country)
+    @logged_user.country_manager? and (@user.blank? || (@logged_user.country == @user.country))
   end
 
   def is_himself?

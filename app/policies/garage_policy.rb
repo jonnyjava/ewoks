@@ -38,7 +38,7 @@ class GaragePolicy < ApplicationPolicy
   end
 
   def belongs_to_user_country?
-    @user.country_manager? and (@user.country == @garage.country)
+    @user.country_manager? and (@garage.blank? || (@user.country == @garage.country))
   end
 
   def belongs_to_user?
