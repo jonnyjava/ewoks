@@ -33,6 +33,10 @@ class GaragePolicy < ApplicationPolicy
     @user.admin? || belongs_to_user_country? || belongs_to_user?
   end
 
+  def destroy_logo?
+    @user.admin? || belongs_to_user_country? || belongs_to_user?
+  end
+
   def destroy?
     @user.admin?
   end
