@@ -44,10 +44,13 @@ describe UserPolicy do
       it { should_not allow_action(:create) }
       it { should_not allow_action(:new) }
       it { should_not allow_action(:destroy) }
-      it { should_not allow_action(:index) }
       it { should_not allow_action(:show) }
       it { should_not allow_action(:edit) }
       it { should_not allow_action(:update) }
+
+      it "contains users of the same country of country_manager" do
+        expect(Pundit.policy_scope(country_manager, User).all).to match_array User.where(country: country_manager.country)
+      end
     end
   end
 

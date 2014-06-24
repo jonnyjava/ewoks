@@ -38,6 +38,18 @@ describe UsersController do
       get :index, {}
       assigns(:users).should eq(User.all)
     end
+
+    context "for a country manager" do
+      login_country_manager
+      it "should list only user with the same country of the country manager" do
+        spanish_owner = FactoryGirl.create(:user, email: "#{Faker::Internet::email}")
+        another_owner = FactoryGirl.create(:user, country: 'Albania', email: "#{Faker::Internet::email}")
+        get :index, {}
+        filtered_users = assigns(:users)
+        filtered_users.should include(spanish_owner)
+        filtered_users.should_not include(another_owner)
+      end
+    end
   end
 
   describe "GET show" do
