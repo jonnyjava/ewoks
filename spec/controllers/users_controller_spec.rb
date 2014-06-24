@@ -39,9 +39,9 @@ describe UsersController do
       assigns(:users).should eq(User.all)
     end
 
-    context "for a country manager" do
+    context 'for a country manager' do
       login_country_manager
-      it "should list only user with the same country of the country manager" do
+      it 'should list only user with the same country of the country manager' do
         spanish_owner = FactoryGirl.create(:user, email: "#{Faker::Internet::email}")
         another_owner = FactoryGirl.create(:user, country: 'Albania', email: "#{Faker::Internet::email}")
         get :index, {}
