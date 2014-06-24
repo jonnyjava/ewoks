@@ -64,5 +64,6 @@ gem 'capistrano-rvm', group: :development
 
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'geocoder', '~> 1.2.2'
+gem 'newrelic_rpm'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
