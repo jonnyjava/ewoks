@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe PropertyPolicy do
-  let(:admin) { FactoryGirl.create(:admin, email: "#{Faker::Internet::email}") }
-  let(:country_manager) { FactoryGirl.create(:country_manager, country: 'Spain', email: "#{Faker::Internet::email}") }
-  let(:owner) { FactoryGirl.create(:user, country: 'Spain', email: "#{Faker::Internet::email}") }
+  let(:admin) { FactoryGirl.create(:admin) }
+  let(:country_manager) { FactoryGirl.create(:country_manager) }
+  let(:owner) { FactoryGirl.create(:user) }
   let(:property) { FactoryGirl.create(:property) }
 
   context "for an admin" do
