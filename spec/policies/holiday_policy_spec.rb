@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe HolidayPolicy do
-  let(:admin) { FactoryGirl.create(:admin, email: "#{Faker::Internet::email}") }
-  let(:country_manager) { FactoryGirl.create(:country_manager, country: 'Spain', email: "#{Faker::Internet::email}") }
-  let(:spanish_owner) { FactoryGirl.create(:user, country: 'Spain', email: "#{Faker::Internet::email}") }
+  let(:admin) { FactoryGirl.create(:admin) }
+  let(:country_manager) { FactoryGirl.create(:country_manager) }
+  let(:spanish_owner) { FactoryGirl.create(:user) }
   let(:spanish_garage) { FactoryGirl.create(:garage, country: 'Spain', owner_id: spanish_owner.id) }
   let(:holiday) { FactoryGirl.create(:holiday, garage: spanish_garage) }
   let(:someone_else_holiday) { FactoryGirl.create(:holiday) }

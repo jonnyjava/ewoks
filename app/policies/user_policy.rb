@@ -5,8 +5,25 @@ class UserPolicy < ApplicationPolicy
     @user = user
   end
 
+  class Scope
+    attr_reader :logged_user, :scope
+
+    def initialize(logged_user, scope)
+      @logged_user = logged_user
+      @scope = scope
+    end
+
+    def resolve
+      if logged_user.admin?
+        scope.all
+      elsif logged_user.country_manager?
+        scope.where(country: logged_user.country)
+      end
+    end
+  end
+
   def index?
-    @logged_user.admin? || belongs_to_logged_user_country?
+    @logged_user.admin? || @logged_user.country_manager?
   end
 
   def show?
