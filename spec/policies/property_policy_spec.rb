@@ -9,6 +9,7 @@ describe PropertyPolicy do
   context "for an admin" do
     subject { PropertyPolicy.new(admin, property) }
     it { should allow_action(:index) }
+    it { should allow_action(:show) }
     it { should allow_action(:create) }
     it { should allow_action(:new) }
     it { should allow_action(:update) }
@@ -19,6 +20,7 @@ describe PropertyPolicy do
   context "for a country_manager" do
     subject { PropertyPolicy.new(country_manager, property) }
     it { should_not allow_action(:index) }
+    it { should_not allow_action(:show) }
     it { should_not allow_action(:create) }
     it { should_not allow_action(:new) }
     it { should_not allow_action(:update) }
@@ -29,6 +31,7 @@ describe PropertyPolicy do
   context "for an owner" do
     subject { PropertyPolicy.new(owner, property) }
     it { should_not allow_action(:index) }
+    it { should_not allow_action(:show) }
     it { should_not allow_action(:create) }
     it { should_not allow_action(:new) }
     it { should_not allow_action(:update) }

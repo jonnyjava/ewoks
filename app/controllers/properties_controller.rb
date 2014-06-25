@@ -29,8 +29,8 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
-    authorize @property
     @property = Property.new(property_params)
+    authorize @property
 
     respond_to do |format|
       if @property.save
