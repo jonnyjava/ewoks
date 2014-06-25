@@ -4,31 +4,31 @@ describe TyreFeesController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/tyre_fees").should route_to("tyre_fees#index")
+      get("/garages/1/tyre_fees").should route_to("tyre_fees#index", garage_id: "1")
     end
 
     it "routes to #new" do
-      get("/tyre_fees/new").should route_to("tyre_fees#new")
+      get("/garages/1/tyre_fees/new").should route_to("tyre_fees#new", garage_id: "1")
     end
 
     it "routes to #show" do
-      get("/tyre_fees/1").should route_to("tyre_fees#show", :id => "1")
+      get("/garages/1/tyre_fees/1").should route_to("tyre_fees#show", garage_id: "1" , id: "1")
     end
 
     it "routes to #edit" do
-      get("/tyre_fees/1/edit").should route_to("tyre_fees#edit", :id => "1")
+      get("/garages/1/tyre_fees/1/edit").should route_to("tyre_fees#edit", garage_id: "1", id: "1")
     end
 
     it "routes to #create" do
-      post("/tyre_fees").should route_to("tyre_fees#create")
+      post("/garages/1/tyre_fees").should route_to("tyre_fees#create", garage_id: "1")
     end
 
     it "routes to #update" do
-      put("/tyre_fees/1").should route_to("tyre_fees#update", :id => "1")
+      put("/garages/1/tyre_fees/1").should route_to("tyre_fees#update", garage_id: "1", id: "1")
     end
 
     it "routes to #destroy" do
-      delete("/tyre_fees/1").should route_to("tyre_fees#destroy", :id => "1")
+      delete("/garages/1/tyre_fees/1").should route_to("tyre_fees#destroy", garage_id: "1", id: "1")
     end
 
   end

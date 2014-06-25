@@ -3,9 +3,13 @@ Rails.application.routes.draw do
 
   resources :users
   resources :holidays
-  resources :tyre_fees
   resources :properties
-  resources :garages
+  resources :garages do
+    resources :fees
+    resources :tyre_fees
+  end
+
+
   resources :garage_properties
 
   devise_for :users, path: '', path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }
