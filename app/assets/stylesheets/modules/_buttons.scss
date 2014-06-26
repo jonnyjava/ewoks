@@ -77,5 +77,13 @@ $button-fontcolor: $white;
 	}
 }
 
+.m-button-action--fees {
+	@extend .m-button-action;
+
+	&:before {
+		content: "\f153";
+	}
+}
+
 // States
 @import "../states/buttons";

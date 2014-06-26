@@ -1,19 +1,38 @@
-h1 Listing tyre_fees
+.row
+  .col-xs-12
+    .m-box
+      .m-box__header
+        h3.box__title Listing tyre fees
 
-table
-  thead
-    tr
-      th
-      th
-      th
+      .table-responsive
+        table.table.table-condensed
+          thead
+            tr
+              th name
+              th price
+              th vehicle type
+              th diameter_min
+              th diameter_max
+              th rim_type
+              th Actions
 
-  tbody
-    - @tyre_fees.each do |tyre_fee|
-      tr
-        td = link_to 'Show', tyre_fee
-        td = link_to 'Edit', edit_tyre_fee_path(tyre_fee)
-        td = link_to 'Destroy', tyre_fee, data: {:confirm => 'Are you sure?'}, :method => :delete
+          tbody
+            - @tyre_fees.each do |tyre_fee|
+              tr
+                td = tyre_fee.fee.try(:name)
+                td = tyre_fee.fee.try(:price)
+                td = TyreFee::VEHICLE_TYPE[tyre_fee.vehicle_type]
+                td = tyre_fee.diameter_min
+                td = tyre_fee.diameter_max
+                td = TyreFee::RIM_TYPE[tyre_fee.rim_type]
+                td
+                  .btn-group
+                    button.btn.btn-default = link_to "view", garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--view"
+                    button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
+                      span.caret
+                    ul.dropdown-menu
+                      li = link_to "edit", edit_garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--edit"
+                      li = link_to "Destroy", garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--delete", data: {confirm: 'Are you sure?'}, method: :delete
 
-br
-
-= link_to 'New Tyre fee', new_tyre_fee_path
+        = paginate @tyre_fees
+    = link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "m-button"
