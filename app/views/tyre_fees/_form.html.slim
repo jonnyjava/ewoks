@@ -16,6 +16,7 @@
     .col-md-3 = f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
   .container-fluid
     .col-md-12
+      = link_to 'Back to garage sheet', garage_path(@garage), class: "m-button"
       = link_to 'Back to list', garage_tyre_fees_path(@garage), class: "m-button"
       - if @tyre_fee.id
         = link_to 'Show', garage_tyre_fee_path(@garage, @tyre_fee), class: "m-button"

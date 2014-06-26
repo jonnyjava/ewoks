@@ -28,4 +28,5 @@
                   td = link_to "Edit", edit_garage_tyre_fee_path(@garage, @tyre_fee), class: "m-button"
                   td = link_to "Destroy", garage_tyre_fee_path(@garage, @tyre_fee), class: "m-button", data: {confirm: 'Are you sure?'}, method: :delete
 
-= link_to 'Back', garage_tyre_fees_path(@garage), class: "m-button"
+= link_to 'Back to garage sheet', garage_path(@garage), class: "m-button"
+= link_to 'Back to the list', garage_tyre_fees_path(@garage), class: "m-button"

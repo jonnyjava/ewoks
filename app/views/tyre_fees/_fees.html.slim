@@ -1,0 +1,29 @@
+.row
+  .col-xs-12
+    .m-box
+      .m-box__header
+        h3.box__title Listing fees
+
+      .table-responsive
+        table.table.table-condensed
+          thead
+            tr
+              th name
+              th price
+              th actions
+          tbody
+            - @fees.each do |fee|
+              - tyre_fee = fee.tyre_fee
+              tr
+                td = fee.name
+                td = fee.price
+                td
+                  .btn-group
+                    button.btn.btn-default = link_to "view", garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--view"
+                    button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
+                      span.caret
+                    ul.dropdown-menu
+                      li = link_to "edit", edit_garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--edit"
+                      li = link_to "Destroy", garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--delete", data: {confirm: 'Are you sure?'}, method: :delete
+
+
