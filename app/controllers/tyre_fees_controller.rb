@@ -5,7 +5,7 @@ class TyreFeesController < ApplicationController
   # GET /tyre_fees
   # GET /tyre_fees.json
   def index
-    @tyre_fees = TyreFee.all
+    @tyre_fees = TyreFee.all.page(params[:page])
   end
 
   # GET /tyre_fees/1
