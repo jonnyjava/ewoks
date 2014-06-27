@@ -18,3 +18,16 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
+
+sqlite: &sqlite
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *sqlite
+  database: db/development.sqlite3
+
+test:
+  <<: *sqlite
+  database: db/test.sqlite3
