@@ -59,11 +59,6 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 gem 'unicorn-rails'
-gem 'capistrano3-unicorn'
-
-# Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
-gem 'capistrano-rvm', group: :development
 
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'geocoder', '~> 1.2.2'
