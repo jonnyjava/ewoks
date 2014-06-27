@@ -3,7 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
+# Use postgresql as the database for Active Record
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
@@ -65,5 +67,7 @@ gem 'capistrano-rvm', group: :development
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
+gem 'rails_12factor', group: :production
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
