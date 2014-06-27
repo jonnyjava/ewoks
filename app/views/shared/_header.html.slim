@@ -1,0 +1,10 @@
+header.l-topbar
+	.l-topbar__header
+		button.js-toggle-sidebar.m-button--menu
+			i.fa.fa-bars
+		= image_tag "logo.png", class: "norauto-logo"
+
+	.l-topbar__footer
+		= link_to destroy_user_session_path, :method => :delete
+		  i.fa.fa-sign-out
+		  ' Logout

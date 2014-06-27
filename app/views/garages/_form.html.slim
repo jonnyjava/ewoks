@@ -1,0 +1,22 @@
+= simple_form_for(@garage) do |f|
+  - if @garage.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
+      ul
+        - @garage.errors.full_messages.each do |message|
+          li = message
+
+  .col-md-3 = f.input :name
+  .col-md-3 = f.input :country
+  .col-md-3 = f.input :street
+  .col-md-3 = f.input :zip
+  .col-md-3 = f.input :city
+  .col-md-3 = f.input :email
+  .col-md-3 = f.input :phone
+  .col-md-3 = f.input :mobile
+  .col-md-3 = f.input :fax
+  .col-md-3 = f.input :tax_id
+  .col-md-3 = f.input :website
+  .col-md-3 = f.input :logo
+
+  .col-md-12 = f.button :submit, class: "m-button"

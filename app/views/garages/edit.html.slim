@@ -1,0 +1,10 @@
+.row
+  .col-xs-12
+    .m-box
+      .m-box__header
+        h3.box__title Editing garage
+
+      .panel-body
+        == render 'form'
+  .col-sm-12
+    = link_to 'Back', garages_path(), class: "m-button"

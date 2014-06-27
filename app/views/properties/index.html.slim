@@ -1,0 +1,28 @@
+.row
+  .col-xs-12
+    .m-box
+      .m-box__header
+        h3.box__title Listing properties
+
+      .table-responsive
+        table.table.table-condensed
+          thead
+            tr
+              th Name
+              th Type
+              th Actions
+
+          tbody
+            - @properties.each do |property|
+              tr
+                td = property.name
+                td = property.type_of
+                td
+                  .btn-group
+                    button.btn.btn-default = link_to 'Edit', edit_property_path(property), class: "m-button-action--view"
+                    button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
+                      span.caret
+                    ul.dropdown-menu
+                      li =  link_to 'delete', property, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "m-button-action--delete"
+
+    = link_to 'New Property', new_property_path, class: "m-button"

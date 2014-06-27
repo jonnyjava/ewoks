@@ -1,0 +1,10 @@
+.row
+	.col-xs-12
+		.m-box
+			.m-box__header
+				h3.box__title Editing user
+
+			.panel-body
+				== render 'form'
+	.col-sm-12
+		= link_to 'Back', users_path, class: "m-button"

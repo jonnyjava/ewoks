@@ -1,0 +1,19 @@
+h1 Listing tyre_fees
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @tyre_fees.each do |tyre_fee|
+      tr
+        td = link_to 'Show', tyre_fee
+        td = link_to 'Edit', edit_tyre_fee_path(tyre_fee)
+        td = link_to 'Destroy', tyre_fee, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Tyre fee', new_tyre_fee_path
