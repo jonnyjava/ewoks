@@ -7,6 +7,7 @@ table
       th End date
       th Start time
       th End time
+      th Garage
       th
       th
       th
@@ -18,10 +19,11 @@ table
         td = holiday.end_date
         td = holiday.start_time
         td = holiday.end_time
-        td = link_to 'Show', holiday
-        td = link_to 'Edit', edit_holiday_path(holiday)
-        td = link_to 'Destroy', holiday, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = holiday.garage
+        td = link_to 'Show', garage_holiday_path(@garage, holiday)
+        td = link_to 'Edit', edit_garage_holiday_path(@garage, holiday)
+        td = link_to 'Destroy', garage_holiday_path(@garage, holiday), data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Holiday', new_holiday_path
+= link_to 'New Holiday', new_garage_holiday_path(@garage)

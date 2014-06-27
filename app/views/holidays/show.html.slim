@@ -1,6 +1,9 @@
 p#notice = notice
 
 p
+  strong Garage:
+  = @holiday.garage
+p
   strong Start date:
   = @holiday.start_date
 p
@@ -12,7 +15,6 @@ p
 p
   strong End time:
   = @holiday.end_time
-
-= link_to 'Edit', edit_holiday_path(@holiday)
+= link_to 'Edit', edit_garage_holiday_path(@garage, @holiday)
 '|
-= link_to 'Back', holidays_path
+= link_to 'Back', garage_holidays_path(@garage)

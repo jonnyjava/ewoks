@@ -1,21 +1,16 @@
-= form_for @holiday do |f|
-  - if @holiday.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@holiday.errors.count, "error")} prohibited this holiday from being saved:"
-      ul
-        - @holiday.errors.full_messages.each do |message|
-          li = message
+= simple_form_for([@garage, @holiday]) do |f|
+  = f.error_notification
 
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .field
-    = f.label :start_time
-    = f.time_select :start_time
-  .field
-    = f.label :end_time
-    = f.time_select :end_time
-  .actions = f.submit 'Save'
+  .form-inputs
+    = f.input :start_date
+  .form-inputs
+    = f.input :end_date
+  .form-inputs
+    = f.input :start_time
+  .form-inputs
+    = f.input :end_time
+
+  = f.association :garage, :as => :hidden
+
+  .form-actions
+    = f.button :submit
