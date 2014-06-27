@@ -69,5 +69,7 @@ gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
 gem 'rails_12factor', group: :production
 
+ruby "2.1.2"
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
