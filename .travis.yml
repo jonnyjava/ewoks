@@ -10,7 +10,6 @@ script:
 - RAILS_ENV=test bundle exec rake --trace db:migrate test
 deploy:
   provider: heroku
-  # strategy: git
   api_key:
     secure: j9UTj6i3X61G8OsxuAGAy1KaARAYKqC6jc9LarYw2ipd4hXh2TQ2V/Glo1b0sIfvMAnAeOjEV851lyJ4Fl9S2W9rvhCYskNNOMavpeTr3Mreyfw2//y9ZpNKcShSwoxVfBcJBk49+GVqDeIMZ8Yv22xwJmc4ebiMgzOlTaDWBY8=
   app: lit-everglades-6352
