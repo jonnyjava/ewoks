@@ -1,15 +1,16 @@
 = simple_form_for([@garage, @holiday]) do |f|
   = f.error_notification
-
-  = f.input :start_date, wrapper: :vertical_input_group do
-    = f.input_field :start_date, as: :string, class: 'form-control js-datepicker-start'
-    span.input-group-addon
-      i.fa.fa-calendar
-
-  = f.input :end_date, wrapper: :vertical_input_group do
-    = f.input_field :end_date, as: :string, class: 'form-control js-datepicker-end'
-    span.input-group-addon.add-on
-      i.fa.fa-calendar
+  .row
+    .col-xs-6
+      = f.input :start_date, wrapper: :vertical_input_group do
+        = f.input_field :start_date, as: :string, class: 'form-control js-datepicker-start'
+        span.input-group-addon
+          i.fa.fa-calendar
+    .col-xs-6
+      = f.input :end_date, wrapper: :vertical_input_group do
+        = f.input_field :end_date, as: :string, class: 'form-control js-datepicker-end'
+        span.input-group-addon.add-on
+          i.fa.fa-calendar
 
   = f.association :garage, as: :hidden
 

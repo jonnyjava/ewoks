@@ -1,7 +1,10 @@
-h1 Editing holiday
+.row
+  .col-xs-12
+    .m-box
+      .m-box__header
+        h3.box__title Editing holiday
 
-== render 'form'
-
-= link_to 'Show', garage_holiday_path(@holiday, @garage)
-'|
-= link_to 'Back', garage_holidays_path(@garage)
+      .panel-body
+        == render 'form'
+  .col-sm-12
+    = link_to 'Back', garage_holidays_path(@garage), class: "m-button"

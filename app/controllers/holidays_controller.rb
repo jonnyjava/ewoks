@@ -34,7 +34,7 @@ class HolidaysController < ApplicationController
     authorize @holiday
     respond_to do |format|
       if @holiday.save
-        format.html { redirect_to garage_holiday_url(@garage, @holiday), notice: 'Holiday was successfully created.' }
+        format.html { redirect_to garage_holidays_url(@garage), notice: 'Holiday was successfully created.' }
         format.json { render :show, status: :created, location: @holiday }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class HolidaysController < ApplicationController
     authorize @holiday
     respond_to do |format|
       if @holiday.update(holiday_params)
-        format.html { redirect_to garage_holiday_url(@garage, @holiday), notice: 'Holiday was successfully updated.' }
+        format.html { redirect_to garage_holidays_url(@garage), notice: 'Holiday was successfully updated.' }
         format.json { render :show, status: :ok, location: @holiday }
       else
         format.html { render :edit }
