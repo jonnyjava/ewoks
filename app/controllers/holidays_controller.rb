@@ -81,6 +81,6 @@ class HolidaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def holiday_params
-      params.require(:holiday).permit(:start_date, :end_date, :start_time, :end_time, :garage_id)
+      params.require(:holiday).permit(:start_date, :end_date, :name, :start_time, :end_time, :garage_id)
     end
 end

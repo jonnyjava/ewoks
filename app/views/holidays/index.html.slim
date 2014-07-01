@@ -16,7 +16,7 @@
           tbody
             - @holidays.each do |holiday|
               tr
-                td
+                td = holiday.name
                 td = holiday.start_date
                 td = holiday.end_date
                 td
