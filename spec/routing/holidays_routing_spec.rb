@@ -4,31 +4,31 @@ describe HolidaysController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/holidays").should route_to("holidays#index")
+      get("/garages/1/holidays").should route_to("holidays#index", garage_id: '1')
     end
 
     it "routes to #new" do
-      get("/holidays/new").should route_to("holidays#new")
+      get("/garages/1/holidays/new").should route_to("holidays#new", garage_id: '1')
     end
 
     it "routes to #show" do
-      get("/holidays/1").should route_to("holidays#show", :id => "1")
+      get("/garages/1/holidays/1").should route_to("holidays#show", garage_id: '1', id: '1')
     end
 
     it "routes to #edit" do
-      get("/holidays/1/edit").should route_to("holidays#edit", :id => "1")
+      get("/garages/1/holidays/1/edit").should route_to("holidays#edit", garage_id: '1', id: '1')
     end
 
     it "routes to #create" do
-      post("/holidays").should route_to("holidays#create")
+      post("/garages/1/holidays").should route_to("holidays#create", garage_id: '1')
     end
 
     it "routes to #update" do
-      put("/holidays/1").should route_to("holidays#update", :id => "1")
+      put("/garages/1/holidays/1").should route_to("holidays#update", garage_id: '1', id: '1')
     end
 
     it "routes to #destroy" do
-      delete("/holidays/1").should route_to("holidays#destroy", :id => "1")
+      delete("/garages/1/holidays/1").should route_to("holidays#destroy", garage_id: '1', id: '1')
     end
 
   end

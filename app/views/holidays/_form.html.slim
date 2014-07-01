@@ -1,21 +1,36 @@
-= form_for @holiday do |f|
-  - if @holiday.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@holiday.errors.count, "error")} prohibited this holiday from being saved:"
-      ul
-        - @holiday.errors.full_messages.each do |message|
-          li = message
+= simple_form_for([@garage, @holiday]) do |f|
+  = f.error_notification
+  .row
+    .col-xs-6
+      = f.input :name
+    .col-xs-3
+      = f.input :start_date, wrapper: :vertical_input_group do
+        = f.input_field :start_date, as: :string, class: 'form-control js-datepicker-start'
+        span.input-group-addon
+          i.fa.fa-calendar
+    .col-xs-3
+      = f.input :end_date, wrapper: :vertical_input_group do
+        = f.input_field :end_date, as: :string, class: 'form-control js-datepicker-end'
+        span.input-group-addon.add-on
+          i.fa.fa-calendar
 
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .field
-    = f.label :start_time
-    = f.time_select :start_time
-  .field
-    = f.label :end_time
-    = f.time_select :end_time
-  .actions = f.submit 'Save'
+  = f.association :garage, as: :hidden
+
+  .form-actions
+    = f.button :submit
+
+coffee:
+  $ ->
+    $(".js-datepicker-start").datepicker
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "yy-mm-dd",
+      onClose: (selectedDate) ->
+        $(".js-datepicker-end").datepicker("option", "minDate", selectedDate)
+
+    $(".js-datepicker-end").datepicker
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "yy-mm-dd",
+      onClose: (selectedDate) ->
+        $(".js-datepicker-start").datepicker("option", "maxDate", selectedDate)
