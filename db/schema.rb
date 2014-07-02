@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140701095229) do
     t.integer  "rim_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "fee_id"
   end
 
   create_table "users", force: true do |t|
