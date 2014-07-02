@@ -11,6 +11,7 @@
           = image_tag @garage.logo.url, class: 'img-responsive'
           = link_to 'Edit information', edit_garage_path(@garage), class: "m-button--large"
           = link_to 'List holidays', garage_holidays_path(@garage), class: "m-button--large"
+          = link_to 'List timetables', garage_timetables_path(@garage), class: "m-button--large"
           = link_to "Delete image", destroy_logo_path(@garage), class: "m-button--large", data: {:confirm => 'Are you sure?'}, :method => :delete
         .col-sm-8
           .table-responsive

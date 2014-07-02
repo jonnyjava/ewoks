@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :properties
   resources :garages do
     resources :holidays
+    resources :timetables
     resources :garage_properties, path: 'properties', as: 'properties'
   end
 
