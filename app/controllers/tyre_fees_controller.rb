@@ -22,6 +22,7 @@ class TyreFeesController < ApplicationController
   # GET /tyre_fees/1/edit
   def edit
     @tyre_fee = TyreFee.find(params[:id])
+    @fee = Fee.find(@tyre_fee.fee)
   end
 
   # POST /tyre_fees
@@ -30,16 +31,19 @@ class TyreFeesController < ApplicationController
     @fee = Fee.new(fee_params)
     @tyre_fee = TyreFee.new(tyre_fee_params)
     @fee.garage = @garage
-    @fee.save
     @tyre_fee.fee = @fee
     respond_to do |format|
-      if @tyre_fee.save
-        @tyre_fee.save
-        format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: 'Tyre fee was successfully created.' }
-        format.json { render :show, status: :created, location: @tyre_fee }
+      if @fee.save
+        if @tyre_fee.save
+          format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: 'Tyre fee was successfully created.' }
+          format.json { render :show, status: :created, location: @tyre_fee }
+        else
+          format.html { render :new }
+          format.json { render json: @tyre_fee.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
-        format.json { render json: @tyre_fee.errors, status: :unprocessable_entity }
+        format.json { render json: @fee.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -48,12 +52,17 @@ class TyreFeesController < ApplicationController
   # PATCH/PUT /tyre_fees/1.json
   def update
     respond_to do |format|
-      if @tyre_fee.update(tyre_fee_params)
-        format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: 'Tyre fee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tyre_fee }
+      if @fee.update(fee_params)
+        if @tyre_fee.update(tyre_fee_params)
+          format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: 'Tyre fee was successfully updated.' }
+          format.json { render :show, status: :ok, location: @tyre_fee }
+        else
+          format.html { render :edit }
+          format.json { render json: @tyre_fee.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit }
-        format.json { render json: @tyre_fee.errors, status: :unprocessable_entity }
+        format.json { render json: @fee.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,6 +81,7 @@ class TyreFeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tyre_fee
       @tyre_fee = TyreFee.find(params[:id])
+      @fee = Fee.find(@tyre_fee.fee)
     end
 
     def set_garage

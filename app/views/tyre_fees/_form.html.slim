@@ -1,4 +1,11 @@
 = simple_form_for([@garage, @tyre_fee]) do |f|
+  - if @fee.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@fee.errors.count, "error")} prohibited this fee from being saved:"
+      ul
+        - @fee.errors.full_messages.each do |message|
+          li = message
+
   - if @tyre_fee.errors.any?
     #error_explanation
       h2 = "#{pluralize(@tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"
@@ -17,7 +24,7 @@
   .container-fluid
     .col-md-12
       = link_to 'Back to garage sheet', garage_path(@garage), class: "m-button"
-      = link_to 'Back to list', garage_tyre_fees_path(@garage), class: "m-button"
+      = link_to 'Back to tyre fee list', garage_tyre_fees_path(@garage), class: "m-button"
       - if @tyre_fee.id
         = link_to 'Show', garage_tyre_fee_path(@garage, @tyre_fee), class: "m-button"
       = f.button :submit, class: "m-button"
