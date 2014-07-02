@@ -110,18 +110,18 @@ describe TyreFeesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         TyreFee.any_instance.should_receive(:update).with( "vehicle_type" => "1" )
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, }, valid_session
+        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: { name: fee.name, price: fee.price} }, valid_session
       end
 
       it "assigns the requested tyre_fee as @tyre_fee" do
         tyre_fee = TyreFee.create! valid_attributes
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes}, valid_session
+        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: { name: fee.name, price: fee.price}}, valid_session
         assigns(:tyre_fee).should eq(tyre_fee)
       end
 
       it "redirects to the tyre_fee" do
         tyre_fee = TyreFee.create! valid_attributes
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes}, valid_session
+        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: { name: fee.name, price: fee.price}}, valid_session
         response.should redirect_to garage_tyre_fee_url(garage, tyre_fee)
       end
     end
@@ -131,7 +131,7 @@ describe TyreFeesController do
         tyre_fee = TyreFee.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes }, valid_session
+        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes, fee: { name: fee.name, price: fee.price} }, valid_session
         assigns(:tyre_fee).should eq(tyre_fee)
       end
 
@@ -139,7 +139,7 @@ describe TyreFeesController do
         tyre_fee = TyreFee.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes }, valid_session
+        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes, fee: { name: fee.name, price: fee.price} }, valid_session
         response.should render_template("edit")
       end
     end

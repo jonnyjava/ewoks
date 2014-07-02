@@ -71,6 +71,7 @@ class TyreFeesController < ApplicationController
   # DELETE /tyre_fees/1.json
   def destroy
     @tyre_fee.destroy
+    @fee.destroy
     respond_to do |format|
       format.html { redirect_to garage_tyre_fees_url, notice: 'Tyre fee was successfully destroyed.' }
       format.json { head :no_content }
