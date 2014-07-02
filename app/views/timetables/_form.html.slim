@@ -1,0 +1,14 @@
+= simple_form_for([@garage, @timetable]) do |f|
+  = f.error_notification
+  = f.association :garage, as: :hidden
+
+  .row
+    .col-xs-12
+      = f.input :day
+      = f.input :morning_opening
+      = f.input :morning_closing
+      = f.input :afternoon_opening
+      = f.input :afternoon_closing
+
+  .form-actions
+    = f.button :submit
