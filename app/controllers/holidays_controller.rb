@@ -1,11 +1,12 @@
 class HolidaysController < ApplicationController
+  before_action :set_garage
   before_action :set_holiday, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
 
   # GET /holidays
   # GET /holidays.json
   def index
-    @holidays = Holiday.all
+    @holidays = @garage.holidays
     authorize @holidays
   end
 
@@ -17,8 +18,8 @@ class HolidaysController < ApplicationController
 
   # GET /holidays/new
   def new
+    @holiday = @garage.holidays.build
     authorize @holiday
-    @holiday = Holiday.new
   end
 
   # GET /holidays/1/edit
@@ -29,12 +30,11 @@ class HolidaysController < ApplicationController
   # POST /holidays
   # POST /holidays.json
   def create
+    @holiday = Holiday.create(holiday_params)
     authorize @holiday
-    @holiday = Holiday.new(holiday_params)
-
     respond_to do |format|
       if @holiday.save
-        format.html { redirect_to @holiday, notice: 'Holiday was successfully created.' }
+        format.html { redirect_to garage_holidays_url(@garage), notice: 'Holiday was successfully created.' }
         format.json { render :show, status: :created, location: @holiday }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class HolidaysController < ApplicationController
     authorize @holiday
     respond_to do |format|
       if @holiday.update(holiday_params)
-        format.html { redirect_to @holiday, notice: 'Holiday was successfully updated.' }
+        format.html { redirect_to garage_holidays_url(@garage), notice: 'Holiday was successfully updated.' }
         format.json { render :show, status: :ok, location: @holiday }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class HolidaysController < ApplicationController
     authorize @holiday
     @holiday.destroy
     respond_to do |format|
-      format.html { redirect_to holidays_url, notice: 'Holiday was successfully destroyed.' }
+      format.html { redirect_to garage_holidays_url(@garage), notice: 'Holiday was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,11 +72,15 @@ class HolidaysController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_holiday
-      @holiday = Holiday.find(params[:id])
+      @holiday = @garage.holidays.find(params[:id])
+    end
+
+    def set_garage
+      @garage = Garage.find(params[:garage_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def holiday_params
-      params.require(:holiday).permit(:start_date, :end_date, :start_time, :end_time)
+      params.require(:holiday).permit(:name, :start_date, :end_date, :garage_id)
     end
 end

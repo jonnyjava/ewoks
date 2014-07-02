@@ -24,8 +24,8 @@ describe UsersController do
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "email" => "#{Faker::Internet::email}", "password" => "#{Faker::Internet::password}" } }
-  let(:invalid_attributes) { { "wrong_param" => "wrong" } }
+  let(:valid_attributes) { { 'email' => "#{Faker::Internet::email}", "password" => "#{Faker::Internet::password(10)}" } }
+  let(:invalid_attributes) { { 'wrong_param' => 'wrong' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -37,6 +37,18 @@ describe UsersController do
       user = User.create! valid_attributes
       get :index, {}
       assigns(:users).should eq(User.all)
+    end
+
+    context 'for a country manager' do
+      login_country_manager
+      it 'should list only user with the same country of the country manager' do
+        spanish_owner = FactoryGirl.create(:user)
+        another_owner = FactoryGirl.create(:user, country: 'Albania')
+        get :index, {}
+        filtered_users = assigns(:users)
+        filtered_users.should include(spanish_owner)
+        filtered_users.should_not include(another_owner)
+      end
     end
   end
 

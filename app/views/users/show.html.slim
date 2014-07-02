@@ -1,6 +1,27 @@
-p#notice = notice
+.row
+	.col-xs-12
+		.m-box
+			.m-box__header
+				h3.box__title = "User: #{@user.name} #{@user.surname}"
+			.panel-body
+				.col-sm-3.col-lg-2
+					= image_tag "no-profile-img.jpg", class: "img-responsive"
+					= link_to 'Edit information', edit_user_path(@user), class: "m-button--large"
+				.col-sm-9.col-lg-10
+					.table-responsive
+						table.table.table-condensed
+							tbody
+								tr
+									td Email:
+									td = @user.email
+								tr
+									td Phone:
+									td = @user.phone
+								tr
+									td Country:
+									td = @user.country
+								tr
+									td Last sign in:
+									td = @user.last_sign_in_at
 
-
-= link_to 'Edit', edit_user_path(@user)
-'|
-= link_to 'Back', users_path
+		= link_to 'Back', users_path, class: "m-button"

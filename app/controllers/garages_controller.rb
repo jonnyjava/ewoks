@@ -32,7 +32,6 @@ class GaragesController < ApplicationController
   def create
     @garage = Garage.new(garage_params)
     authorize @garage
-
     respond_to do |format|
       if @garage.save
         format.html { redirect_to @garage, notice: 'Garage was successfully created.' }

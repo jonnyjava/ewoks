@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   resources :garages do
     resources :fees
     resources :tyre_fees
+    resources :holidays
   end
 
-
+  resources :properties
   resources :garage_properties
 
   devise_for :users, path: '', path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }

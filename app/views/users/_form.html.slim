@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= simple_form_for(@user) do |f|
   - if @user.errors.any?
     #error_explanation
       h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -6,4 +6,11 @@
         - @user.errors.full_messages.each do |message|
           li = message
 
-  .actions = f.submit 'Save'
+  .col-md-3 = f.input :name
+  .col-md-3 = f.input :surname
+  .col-md-3 = f.input :password
+  .col-md-3 = f.input :email
+  .col-md-3 = f.input :country
+  .col-md-3 = f.input :phone
+
+  .col-md-12 = f.button :submit, class: "m-button"

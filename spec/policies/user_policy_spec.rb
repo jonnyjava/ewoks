@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe UserPolicy do
-  let(:admin) { FactoryGirl.create(:admin, email: "#{Faker::Internet::email}") }
-  let(:country_manager) { FactoryGirl.create(:country_manager, country: 'Spain', email: "#{Faker::Internet::email}") }
-  let(:spanish_owner) { FactoryGirl.create(:user, country: 'Spain', email: "#{Faker::Internet::email}") }
-  let(:another_owner) { FactoryGirl.create(:user, country: 'Albania', email: "#{Faker::Internet::email}") }
+  let(:admin) { FactoryGirl.create(:admin) }
+  let(:country_manager) { FactoryGirl.create(:country_manager) }
+  let(:spanish_owner) { FactoryGirl.create(:user) }
+  let(:another_owner) { FactoryGirl.create(:user, country: 'Albania') }
 
   context "for an admin" do
     context "over a country manager" do
@@ -29,6 +29,9 @@ describe UserPolicy do
   end
 
   context "for a country_manager" do
+    it 'contains users of the same country of country_manager' do
+      expect(Pundit.policy_scope(country_manager, User).all).to match_array User.where(country: country_manager.country)
+    end
     context "and an user of his country" do
       subject { UserPolicy.new(country_manager, spanish_owner) }
       it { should_not allow_action(:create) }
@@ -44,7 +47,6 @@ describe UserPolicy do
       it { should_not allow_action(:create) }
       it { should_not allow_action(:new) }
       it { should_not allow_action(:destroy) }
-      it { should_not allow_action(:index) }
       it { should_not allow_action(:show) }
       it { should_not allow_action(:edit) }
       it { should_not allow_action(:update) }
