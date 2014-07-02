@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701095229) do
+ActiveRecord::Schema.define(version: 20140702094701) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -75,6 +75,19 @@ ActiveRecord::Schema.define(version: 20140701095229) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "timetables", force: true do |t|
+    t.integer  "day"
+    t.time     "morning_opening"
+    t.time     "morning_closing"
+    t.time     "afternoon_opening"
+    t.time     "afternoon_closing"
+    t.integer  "garage_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timetables", ["garage_id"], name: "index_timetables_on_garage_id"
 
   create_table "tyre_fees", force: true do |t|
     t.integer  "vehicle_type"
