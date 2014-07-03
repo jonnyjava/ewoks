@@ -5,8 +5,25 @@ class GaragePolicy < ApplicationPolicy
     @garage = garage
   end
 
+  class Scope
+    attr_reader :logged_user, :scope
+
+    def initialize(logged_user, scope)
+      @logged_user = logged_user
+      @scope = scope
+    end
+
+    def resolve
+      if logged_user.admin?
+        scope.all
+      elsif logged_user.country_manager?
+        scope.where(country: logged_user.country)
+      end
+    end
+  end
+
   def index?
-    @user.admin? || belongs_to_user_country?
+    @user.admin? || @user.country_manager?
   end
 
   def show?
