@@ -49,7 +49,7 @@ describe GaragePolicy do
   end
 
   context "for an owner" do
-    context "over       his own garage" do
+    context "over his own garage" do
       subject { GaragePolicy.new(spanish_owner, spanish_garage) }
       it { should allow_action(:show) }
       it { should_not allow_action(:index) }
