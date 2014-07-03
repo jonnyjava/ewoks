@@ -35,7 +35,7 @@ describe HolidayPolicy do
     context "and an holiday of a garage in another country" do
       subject { HolidayPolicy.new(country_manager, someone_else_holiday) }
       it { should_not allow_action(:show) }
-      it { should_not allow_action(:index) }
+      it { should allow_action(:index) }
       it { should_not allow_action(:new) }
       it { should_not allow_action(:create) }
       it { should_not allow_action(:edit) }
