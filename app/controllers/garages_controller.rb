@@ -18,7 +18,9 @@ class GaragesController < ApplicationController
 
   # GET /garages/new
   def new
-    @garage = Garage.new
+    country = nil
+    country = current_user.country if current_user.country_manager?
+    @garage = Garage.new(country: country)
     authorize @garage
   end
 
