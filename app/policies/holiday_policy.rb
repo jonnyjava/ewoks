@@ -6,7 +6,7 @@ class HolidayPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.admin? || belongs_to_user_country?
+    @user.admin? || @user.country_manager?
   end
 
   def show?

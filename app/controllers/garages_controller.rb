@@ -5,7 +5,7 @@ class GaragesController < ApplicationController
   # GET /garages
   # GET /garages.json
   def index
-    @garages = Garage.all.page(params[:page])
+    @garages = policy_scope(Garage.all).page(params[:page])
     authorize @garages
   end
 
@@ -13,11 +13,14 @@ class GaragesController < ApplicationController
   # GET /garages/1.json
   def show
     authorize @garage
+    @fees = @garage.fees.all
   end
 
   # GET /garages/new
   def new
-    @garage = Garage.new
+    country = nil
+    country = current_user.country if current_user.country_manager?
+    @garage = Garage.new(country: country)
     authorize @garage
   end
 

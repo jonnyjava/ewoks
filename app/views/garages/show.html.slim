@@ -44,4 +44,7 @@
                 tr
                   td Website:
 
-    = link_to 'Back', garages_path(), class: "m-button"
+    = link_to 'Back to garages list', garages_path(), class: "m-button"
+
+== render 'tyre_fees/fees', garage: @garage, fees: @fees
+= link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "m-button"

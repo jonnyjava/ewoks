@@ -37,7 +37,7 @@ describe GaragePolicy do
     context "over a garage of another country" do
       subject { GaragePolicy.new(country_manager, another_garage) }
       it { should_not allow_action(:show) }
-      it { should_not allow_action(:index) }
+      it { should allow_action(:index) }
       it { should_not allow_action(:new) }
       it { should_not allow_action(:create) }
       it { should_not allow_action(:edit) }

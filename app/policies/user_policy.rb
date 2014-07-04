@@ -18,6 +18,8 @@ class UserPolicy < ApplicationPolicy
         scope.all
       elsif logged_user.country_manager?
         scope.where(country: logged_user.country)
+      else
+        logged_user
       end
     end
   end
