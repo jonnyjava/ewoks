@@ -33,7 +33,7 @@ class GaragesController < ApplicationController
   def create
     @garage = Garage.new(garage_params)
     @garage.timetable = Timetable.new
-    
+
     authorize @garage
     respond_to do |format|
       if @garage.save
