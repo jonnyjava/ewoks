@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702094701) do
+ActiveRecord::Schema.define(version: 20140703090841) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -77,14 +77,37 @@ ActiveRecord::Schema.define(version: 20140702094701) do
   end
 
   create_table "timetables", force: true do |t|
-    t.integer  "day"
-    t.time     "morning_opening"
-    t.time     "morning_closing"
-    t.time     "afternoon_opening"
-    t.time     "afternoon_closing"
     t.integer  "garage_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.time     "mon_morning_open"
+    t.time     "mon_morning_close"
+    t.time     "mon_afternoon_open"
+    t.time     "mon_afternoon_close"
+    t.time     "tue_morning_open"
+    t.time     "tue_morning_close"
+    t.time     "tue_afternoon_open"
+    t.time     "tue_afternoon_close"
+    t.time     "wed_morning_open"
+    t.time     "wed_morning_close"
+    t.time     "wed_afternoon_open"
+    t.time     "wed_afternoon_close"
+    t.time     "thu_morning_open"
+    t.time     "thu_morning_close"
+    t.time     "thu_afternoon_open"
+    t.time     "thu_afternoon_close"
+    t.time     "fri_morning_open"
+    t.time     "fri_morning_close"
+    t.time     "fri_afternoon_open"
+    t.time     "fri_afternoon_close"
+    t.time     "sat_morning_open"
+    t.time     "sat_morning_close"
+    t.time     "sat_afternoon_open"
+    t.time     "sat_afternoon_close"
+    t.time     "sun_morning_open"
+    t.time     "sun_morning_close"
+    t.time     "sun_afternoon_open"
+    t.time     "sun_afternoon_close"
   end
 
   add_index "timetables", ["garage_id"], name: "index_timetables_on_garage_id"
