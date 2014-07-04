@@ -4,6 +4,7 @@ describe Garage do
   it { should belong_to(:user) }
   it { should have_many(:holidays) }
   it { should have_many(:fees) }
+  it { should have_one(:timetable) }
   it { should have_and_belong_to_many(:properties) }
   it { should have_attached_file(:logo) }
 

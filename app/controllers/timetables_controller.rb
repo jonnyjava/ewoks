@@ -50,6 +50,7 @@ class TimetablesController < ApplicationController
     end
   end
 
+
   private
 
   def set_garage

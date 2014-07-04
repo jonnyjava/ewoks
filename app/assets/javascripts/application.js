@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.timepicker.js
-//= require jquery.datepair.js
 //= require backend
 //= require turbolinks
 //= require_tree .
