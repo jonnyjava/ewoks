@@ -7,7 +7,7 @@ env:
   global:
     secure: A1HqAHXQe8UvKbHJxa7OR1RARDj/ZMFNy1snqW4Ow0E95bQqgee5DGDiQurtsYk2XX79B0fxvI1/YnjLyIg0foQoksMmPp4hrW6idFtRCYasFB7YLZmuavNG+M/VSdXhi2IN2s/lk8tVclu4ip4xGq0mEbP8geUJ02YBh324lcc=
 script:
-- RAILS_ENV=test bundle exec rake --trace db:migrate test
+- RAILS_ENV=test bundle exec rake --trace db:reset test
 deploy:
   provider: heroku
   api_key:
