@@ -4,31 +4,31 @@ describe GaragePropertiesController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/garage_properties").should route_to("garage_properties#index")
+      get("/garages/1/properties").should route_to("garage_properties#index", garage_id: '1')
     end
 
     it "routes to #new" do
-      get("/garage_properties/new").should route_to("garage_properties#new")
+      get("/garages/1/properties/new").should route_to("garage_properties#new", garage_id: '1')
     end
 
     it "routes to #show" do
-      get("/garage_properties/1").should route_to("garage_properties#show", :id => "1")
+      get("/garages/1/properties/1").should route_to("garage_properties#show", garage_id: '1', :id => "1")
     end
 
     it "routes to #edit" do
-      get("/garage_properties/1/edit").should route_to("garage_properties#edit", :id => "1")
+      get("/garages/1/properties/1/edit").should route_to("garage_properties#edit", garage_id: '1', :id => "1")
     end
 
     it "routes to #create" do
-      post("/garage_properties").should route_to("garage_properties#create")
+      post("/garages/1/properties").should route_to("garage_properties#create", garage_id: '1')
     end
 
     it "routes to #update" do
-      put("/garage_properties/1").should route_to("garage_properties#update", :id => "1")
+      put("/garages/1/properties/1").should route_to("garage_properties#update", garage_id: '1', :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/garage_properties/1").should route_to("garage_properties#destroy", :id => "1")
+      delete("/garages/1/properties/1").should route_to("garage_properties#destroy", garage_id: '1', :id => "1")
     end
 
   end

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :fees
     resources :tyre_fees
     resources :holidays
+    resources :timetables
+    resources :garage_properties, path: 'properties', as: 'properties'
   end
 
   resources :properties

@@ -18,8 +18,7 @@ class GaragesController < ApplicationController
 
   # GET /garages/new
   def new
-    country = nil
-    country = current_user.country if current_user.country_manager?
+    country = current_user.country_manager? ? current_user.country : nil
     @garage = Garage.new(country: country)
     authorize @garage
   end
@@ -33,6 +32,8 @@ class GaragesController < ApplicationController
   # POST /garages.json
   def create
     @garage = Garage.new(garage_params)
+    @garage.timetable = Timetable.new
+
     authorize @garage
     respond_to do |format|
       if @garage.save

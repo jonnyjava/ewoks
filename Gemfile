@@ -67,6 +67,8 @@ gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
 gem 'rails_12factor', group: :production
 
+gem 'jquery-timepicker-rails'
+
 ruby "2.1.2"
 
 # Use debugger
