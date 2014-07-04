@@ -35,7 +35,7 @@ class TyreFeesController < ApplicationController
     respond_to do |format|
       if @fee.save
         if @tyre_fee.save
-          format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: 'Tyre fee was successfully created.' }
+          format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: "Tyre fee was successfully created." }
           format.json { render :show, status: :created, location: @tyre_fee }
         else
           format.html { render :new }
@@ -54,7 +54,7 @@ class TyreFeesController < ApplicationController
     respond_to do |format|
       if @fee.update(fee_params)
         if @tyre_fee.update(tyre_fee_params)
-          format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: 'Tyre fee was successfully updated.' }
+          format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: "Tyre fee was successfully updated." }
           format.json { render :show, status: :ok, location: @tyre_fee }
         else
           format.html { render :edit }
@@ -73,28 +73,27 @@ class TyreFeesController < ApplicationController
     @tyre_fee.destroy
     @fee.destroy
     respond_to do |format|
-      format.html { redirect_to garage_tyre_fees_url, notice: 'Tyre fee was successfully destroyed.' }
+      format.html { redirect_to garage_tyre_fees_url, notice: "Tyre fee was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tyre_fee
-      @tyre_fee = TyreFee.find(params[:id])
-      @fee = Fee.find(@tyre_fee.fee)
-    end
 
-    def set_garage
-      @garage = Garage.find(params[:garage_id])
-    end
+  def set_tyre_fee
+    @tyre_fee = TyreFee.find(params[:id])
+    @fee = Fee.find(@tyre_fee.fee)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tyre_fee_params
-      params.require(:tyre_fee).permit(:vehicle_type, :diameter_min, :diameter_max, :rim_type)
-    end
+  def set_garage
+    @garage = Garage.find(params[:garage_id])
+  end
 
-    def fee_params
-      params.require(:fee).permit(:name, :price)
-    end
+  def tyre_fee_params
+    params.require(:tyre_fee).permit(:vehicle_type, :diameter_min, :diameter_max, :rim_type)
+  end
+
+  def fee_params
+    params.require(:fee).permit(:name, :price)
+  end
 end
