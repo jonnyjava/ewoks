@@ -10,4 +10,6 @@ class TyreFee < ActiveRecord::Base
 
   RIM_TYPE = Hash[RIMS.map.with_index { |obj, i| [i, obj] }]
   VEHICLE_TYPE = Hash[VEHICLES.map.with_index { |obj, i| [i, obj] }]
+
+  scope :by_garage, ->(garage) { joins(:fee).where('garage_id = ?', garage.id) }
 end
