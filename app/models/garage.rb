@@ -14,6 +14,8 @@ class Garage < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  scope :by_country, ->(country) { where(country: country) }
+
   def address
     [street, city, zip, country].compact.join(', ')
   end
