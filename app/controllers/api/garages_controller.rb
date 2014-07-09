@@ -6,6 +6,9 @@ module API
       if country = params[:country]
         garages = garages.by_country(country)
       end
+      if zip = params[:zip]
+        garages = garages.by_zip(zip)
+      end
       render json: garages, status: 200
     end
   end
