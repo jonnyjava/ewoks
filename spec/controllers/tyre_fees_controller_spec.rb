@@ -20,146 +20,131 @@ require 'spec_helper'
 
 describe TyreFeesController do
   login_user
-  # This should return the minimal set of attributes required to create a valid
-  # TyreFee. As you add validations to TyreFee, be sure to
-  # adjust the attributes here as well.
-  let!(:fee) { FactoryGirl.create(:fee) }
-  let(:garage) { FactoryGirl.create(:garage) }
+
   let(:valid_attributes) { { "vehicle_type" => 1, "fee" => fee } }
   let(:invalid_attributes) { { "wrong_param" => "wrong" } }
   let(:fee_params) { { name: fee.name, price: fee.price } }
   let(:garage_params) { { garage_id: garage, tyre_fee: valid_attributes, fee: fee_params } }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # TyreFeesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all tyre_fees as @tyre_fees" do
-      tyre_fee = TyreFee.create! valid_attributes
-      get :index, {garage_id: garage}, valid_session
-      assigns(:tyre_fees).should eq([tyre_fee])
+  let(:garage) { FactoryGirl.create(:garage) }
+  let(:fee) { FactoryGirl.create(:fee, garage: garage) }
+  let!(:tyre_fee) { FactoryGirl.create(:tyre_fee, fee: fee, "vehicle_type" => 1) }
+
+  describe 'GET index' do
+    let(:garage2) { FactoryGirl.create(:garage) }
+    let(:fee2) { FactoryGirl.create(:fee, garage: garage2) }
+    let!(:tyre_fee2) { FactoryGirl.create(:tyre_fee, fee: fee2) }
+    it 'should show only the tyre fees of a given garage' do
+      get :index, { garage_id: garage }, valid_session
+      assigns(:tyre_fees).count.should eq(1)
+      assigns(:tyre_fees).first.should eq(tyre_fee)
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested tyre_fee as @tyre_fee" do
-      tyre_fee = TyreFee.create! valid_attributes
-      get :show, {garage_id: garage, :id => tyre_fee.to_param}, valid_session
+  describe 'GET show' do
+    it 'assigns the requested tyre_fee as @tyre_fee' do
+      get :show, { garage_id: garage, id: tyre_fee.to_param }, valid_session
       assigns(:tyre_fee).should eq(tyre_fee)
     end
   end
 
-  describe "GET new" do
-    it "assigns a new tyre_fee as @tyre_fee" do
-      get :new, {garage_id: garage}, valid_session
+  describe 'GET new' do
+    it 'assigns a new tyre_fee as @tyre_fee' do
+      get :new, { garage_id: garage }, valid_session
       assigns(:tyre_fee).should be_a_new(TyreFee)
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested tyre_fee as @tyre_fee" do
-      tyre_fee = TyreFee.create! valid_attributes
-      get :edit, {garage_id: garage, :id => tyre_fee.to_param}, valid_session
+  describe 'GET edit' do
+    it 'assigns the requested tyre_fee as @tyre_fee' do
+      get :edit, { garage_id: garage, id: tyre_fee.to_param }, valid_session
       assigns(:tyre_fee).should eq(tyre_fee)
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new TyreFee" do
+  describe 'POST create' do
+    describe 'with valid params' do
+      it 'creates a new TyreFee' do
         expect {
           post :create, garage_params, valid_session
         }.to change(TyreFee, :count).by(1)
       end
 
-      it "assigns a newly created tyre_fee as @tyre_fee" do
-        post :create, {garage_id: garage, tyre_fee: valid_attributes, fee: fee_params }, valid_session
+      it 'assigns a newly created tyre_fee as @tyre_fee' do
+        post :create, { garage_id: garage, tyre_fee: valid_attributes, fee: fee_params }, valid_session
         assigns(:tyre_fee).should be_a(TyreFee)
         assigns(:tyre_fee).should be_persisted
       end
 
-      it "redirects to the created tyre_fee" do
-        post :create, {garage_id: garage, tyre_fee: valid_attributes, fee: fee_params }, valid_session
+      it 'redirects to the created tyre_fee' do
+        post :create, { garage_id: garage, tyre_fee: valid_attributes, fee: fee_params }, valid_session
         response.should redirect_to garage_tyre_fee_url(garage, TyreFee.last)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved tyre_fee as @tyre_fee" do
+    describe 'with invalid params' do
+      it 'assigns a newly created but unsaved tyre_fee as @tyre_fee' do
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        post :create, {garage_id: garage, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
+        post :create, { garage_id: garage, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
         assigns(:tyre_fee).should be_a_new(TyreFee)
       end
 
-      it "re-renders the 'new' template" do
+      it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        post :create, {garage_id: garage, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
-        response.should render_template("new")
+        post :create, { garage_id: garage, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
+        response.should render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested tyre_fee" do
-        tyre_fee = TyreFee.create! valid_attributes
-        # Assuming there are no other tyre_fees in the database, this
-        # specifies that the TyreFee created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
+  describe 'PUT update' do
+    describe 'with valid params' do
+      it 'updates the requested tyre_fee' do
         TyreFee.any_instance.should_receive(:update).with( "vehicle_type" => "1" )
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: fee_params }, valid_session
+        put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: fee_params }, valid_session
       end
 
-      it "assigns the requested tyre_fee as @tyre_fee" do
-        tyre_fee = TyreFee.create! valid_attributes
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: fee_params}, valid_session
+      it 'assigns the requested tyre_fee as @tyre_fee' do
+        put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: fee_params }, valid_session
         assigns(:tyre_fee).should eq(tyre_fee)
       end
 
-      it "redirects to the tyre_fee" do
-        tyre_fee = TyreFee.create! valid_attributes
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: fee_params}, valid_session
+      it 'redirects to the tyre_fee' do
+        put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes, fee: fee_params }, valid_session
         response.should redirect_to garage_tyre_fee_url(garage, tyre_fee)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the tyre_fee as @tyre_fee" do
-        tyre_fee = TyreFee.create! valid_attributes
+    describe 'with invalid params' do
+      it 'assigns the tyre_fee as @tyre_fee' do
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
+        put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
         assigns(:tyre_fee).should eq(tyre_fee)
       end
 
-      it "re-renders the 'edit' template" do
-        tyre_fee = TyreFee.create! valid_attributes
+      it 're-renders the edit template' do
         # Trigger the behavior that occurs when invalid params are submitted
         TyreFee.any_instance.stub(:save).and_return(false)
-        put :update, {garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
-        response.should render_template("edit")
+        put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes, fee: fee_params }, valid_session
+        response.should render_template('edit')
       end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested tyre_fee" do
-      tyre_fee = TyreFee.create! valid_attributes
+  describe 'DELETE destroy' do
+    it 'destroys the requested tyre_fee' do
       expect {
-        delete :destroy, {garage_id: garage, id: tyre_fee.to_param}, valid_session
+        delete :destroy, { garage_id: garage, id: tyre_fee.to_param }, valid_session
       }.to change(TyreFee, :count).by(-1)
     end
 
-    it "redirects to the tyre_fees list" do
-      tyre_fee = TyreFee.create! valid_attributes
-      delete :destroy, {garage_id: garage, id: tyre_fee.to_param}, valid_session
+    it 'redirects to the tyre_fees list' do
+      delete :destroy, { garage_id: garage, id: tyre_fee.to_param }, valid_session
       response.should redirect_to garage_tyre_fees_url(garage)
     end
   end
-
 end
