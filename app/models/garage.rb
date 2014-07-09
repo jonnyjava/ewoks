@@ -7,7 +7,6 @@ class Garage < ActiveRecord::Base
   has_many :properties, through: :garage_properties
 
   validates :street, :zip, :city, :country, :phone, :tax_id, presence: true
-
   has_attached_file :logo, default_url: "/assets/avatar_default.jpg"
   validates_attachment_content_type :logo, content_type: ['image/png', 'image/jpg']
 
@@ -16,6 +15,7 @@ class Garage < ActiveRecord::Base
 
   scope :by_country, ->(country) { where(country: country) }
   scope :by_zip, ->(zip) { where(zip: zip) }
+  scope :with_tyre_fee_less_than, ->(price) { includes(:fees).where('fees.price <= ?', price).references(:fees) }
 
   def address
     [street, city, zip, country].compact.join(', ')
