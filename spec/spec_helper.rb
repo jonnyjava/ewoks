@@ -41,3 +41,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+def json(body)
+  JSON.parse(body, symbolize_names: true)
+end
