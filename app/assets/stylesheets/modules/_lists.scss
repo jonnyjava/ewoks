@@ -1,0 +1,14 @@
+// Config
+
+// Blocks
+@include block(m-list) { }
+
+@include modifier(m-list, btn) {
+  > * {
+    margin-left: 1rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
