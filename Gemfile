@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.1.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -11,6 +12,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'compass-rails'
 gem "font-awesome-rails"
+gem 'draper', '~> 1.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -68,8 +70,6 @@ gem 'newrelic_rpm'
 gem 'rails_12factor', group: :production
 
 gem 'jquery-timepicker-rails'
-
-ruby "2.1.2"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
