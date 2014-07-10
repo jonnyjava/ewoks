@@ -1,6 +1,4 @@
-class GarageDecorator < Draper::Decorator
-  delegate_all
-
+class GarageDecorator < ApplicationDecorator
   def status
     object.status? ? 'active' : 'disable'
   end
