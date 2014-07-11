@@ -13,9 +13,16 @@ class Garage < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  ACTIVE = true
+  INACTIVE = false
+
+  scope :active, -> { where(status: ACTIVE) }
   scope :by_country, ->(country) { where(country: country) }
+  scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
   scope :with_tyre_fee_less_than, ->(price) { includes(:fees).where('fees.price <= ?', price).references(:fees) }
+
+
 
   def address
     [street, city, zip, country].compact.join(', ')
