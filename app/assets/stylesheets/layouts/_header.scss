@@ -12,14 +12,14 @@ $topbar-height: $offset-top;
 	@extend .row;
 	@extend .navbar;
 	@extend .navbar-default;
-	@include trailer(2);
+	@include trailer(1);
 }
 
 .l-topbar__header {
 	height: 100%;
 	@extend .col-xs-8;
 
-	.m-button--menu {
+	.m-btn--menu {
 		margin-right: 1.5em;
 		position: relative;
 		top: .65em;

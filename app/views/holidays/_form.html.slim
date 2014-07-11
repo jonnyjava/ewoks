@@ -16,8 +16,9 @@
 
   = f.association :garage, as: :hidden
 
-  .form-actions
-    = f.button :submit
+  .m-list--btn
+    = link_to 'Go back', garage_holidays_path(@garage), class: "m-btn--back"
+    = f.button :submit, class: "m-btn"
 
 coffee:
   $ ->

@@ -6,8 +6,9 @@ class HolidaysController < ApplicationController
   # GET /holidays
   # GET /holidays.json
   def index
-    @holidays = @garage.holidays
-    authorize @holidays
+    holidays = @garage.holidays.page(params[:page])
+    authorize holidays
+    @holidays = HolidayDecorator.decorate_collection(holidays)
   end
 
   # GET /holidays/1

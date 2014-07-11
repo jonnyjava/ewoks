@@ -5,8 +5,9 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
-    authorize @properties
+    properties = Property.all.page(params[:page])
+    authorize properties
+    @properties = PropertyDecorator.decorate_collection(properties)
   end
 
   # GET /properties/1

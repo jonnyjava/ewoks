@@ -1,34 +1,23 @@
-.row
-  .col-xs-12
-    .m-box
-      .m-box__header
-        h3.box__title Listing garages
+- content_for :content
 
-      .table-responsive
-        table.table.table-condensed
-          thead
-            tr
-              th Name
-              th Address
-              th Phone
-              th Actions
+  .table-responsive
+    table.table.table-condensed
+      thead
+        tr
+          th Name
+          th Address
+          th Phone
+          th Actions
 
-          tbody
-            - @garages.each do |garage|
-              tr class="#{'is-garage-disable' unless garage.status?}"
-                td = garage.name
-                td = garage.address
-                td = garage.phone
-                td
-                  .btn-group
-                    button.btn.btn-default = link_to "view", garage_path(garage), class: "m-button-action--view"
-                    button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
-                      span.caret
-                    ul.dropdown-menu
-                      li = link_to "Fees", garage_tyre_fees_path(garage), class: "m-button-action--fees"
-                      li = link_to "edit", edit_garage_path(garage), class: "m-button-action--edit"
-                      li = link_to "#{garage.status? ? 'disable' : 'active'}", toggle_status_path(garage), class: "m-button-action--status", method: :patch
-                      li = link_to "delete", garage, class: "m-button-action--delete", data: {:confirm => 'Are you sure?'}, :method => :delete
+      tbody
+        - @garages.each do |garage|
+          tr class="#{garage.status}"
+            td = link_to garage.name, garage_path(garage)
+            td = garage.address
+            td = garage.phone
+            td = render 'shared/crudbar', entity: garage
 
-        = paginate @garages
-    = link_to 'New Garage', new_garage_path, class: "m-button"
+  = paginate @garages
+  = link_to 'New Garage', new_garage_path, class: "m-button"
+
+= render template: "layouts/box", locals: { title: 'Listing garages' }

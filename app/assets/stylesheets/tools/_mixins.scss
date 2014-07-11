@@ -37,3 +37,14 @@
     }
   }
 }
+
+@mixin iconize($icon, $position: before) {
+  $side: if($position == before, right, left);
+
+  &:#{$position} {
+    content: $icon;
+    display: inline-block;
+    font-family: FontAwesome;
+    margin-#{$side}: 1rem;
+  }
+}

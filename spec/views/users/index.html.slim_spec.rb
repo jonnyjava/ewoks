@@ -1,10 +1,10 @@
 require 'spec_helper'
 describe "users/index" do
   before(:each) do
-    assign(:users, [
-      stub_model(User),
-      stub_model(User)
-    ])
+    assign(:users, Kaminari.paginate_array([
+      stub_model(User).decorate,
+      stub_model(User).decorate
+    ]).page)
   end
 
   it "renders a list of users" do

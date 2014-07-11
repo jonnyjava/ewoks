@@ -1,8 +1,3 @@
-.row
-  .col-xs-12
-    .m-box
-      .m-box__header
-        h3.box__title Editing tyre_fee
-
-      .panel-body
-        == render 'form'
+- content_for :content
+  - render 'form'
+= render template: "layouts/box", locals: { title: 'Editing tyre fees' }
