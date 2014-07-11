@@ -45,3 +45,7 @@ end
 def json(body)
   JSON.parse(body, symbolize_names: true)
 end
+
+def api_get path, *args
+  get "http://api.localhost.dev/#{path}", *args
+end
