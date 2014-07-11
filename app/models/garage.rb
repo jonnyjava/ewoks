@@ -25,4 +25,9 @@ class Garage < ActiveRecord::Base
     attrs = %w(street city zip country)
     attrs.any?{|a| send "#{a}_changed?"}
   end
+
+  def self.find_by_radius_from_somewhere(location, radius)
+    coords = Geocoder.coordinates(location)
+    Garage.near(coords, radius)
+  end
 end

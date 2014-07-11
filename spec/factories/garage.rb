@@ -9,5 +9,7 @@ FactoryGirl.define do
     country   Faker::Address.country
     phone     Faker::PhoneNumber.phone_number
     tax_id    Faker::Code.isbn
+    latitude  Faker::Address.latitude
+    longitude Faker::Address.longitude
   end
 end
