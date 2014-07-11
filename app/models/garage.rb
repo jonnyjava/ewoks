@@ -26,8 +26,8 @@ class Garage < ActiveRecord::Base
     attrs.any?{|a| send "#{a}_changed?"}
   end
 
-  def self.find_by_radius_from_somewhere(location, radius)
+  def self.find_by_radius_from_location(location, radius=10)
     coords = Geocoder.coordinates(location)
-    Garage.near(coords, radius)
+    Garage.near(coords, radius, units: :km)
   end
 end

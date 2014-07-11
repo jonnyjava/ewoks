@@ -16,13 +16,22 @@ describe Garage do
   it { should validate_presence_of(:tax_id) }
   it { should validate_attachment_content_type(:logo).allowing('image/png', 'image/jpg') }
 
-  describe 'find_by_radius_from_somewhere' do
-    let!(:garage_inside_radius) { FactoryGirl.create(:garage, zip: '10141', city: 'Torino', country: 'Italy', street: 'Via Monginevro 162') }
-    let!(:garage_outside_radius) { FactoryGirl.create(:garage, zip: '00054', city: 'Roma', country: 'Italy', street: 'Via G. Ferraris 2/4') }
+  describe 'find_by_radius_from_location' do
+    let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }
+    let!(:garage_outside_radius) { FactoryGirl.create(:rome_garage) }
 
     context 'given a city' do
       it 'should return one garage' do
-        garages = Garage.find_by_radius_from_somewhere('Torino', 10)
+        garages = Garage.find_by_radius_from_location('Torino', 10)
+        garages.first.should eq(garage_inside_radius)
+        ids = garages.collect { |g| g[:id] }
+        ids.count.should be(1)
+      end
+    end
+
+    context 'given a zip code' do
+      it 'should return one garage' do
+        garages = Garage.find_by_radius_from_location('10135, Italy', 10)
         garages.first.should eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
         ids.count.should be(1)
@@ -31,7 +40,16 @@ describe Garage do
 
     context 'given a city and a zip code' do
       it 'should return one garage' do
-        garages = Garage.find_by_radius_from_somewhere('10135, Italy', 10)
+        garages = Garage.find_by_radius_from_location('Torino, 10135, Italy', 10)
+        garages.first.should eq(garage_inside_radius)
+        ids = garages.collect { |g| g[:id] }
+        ids.count.should be(1)
+      end
+    end
+
+    context 'without radius' do
+      it 'should return one garage' do
+        garages = Garage.find_by_radius_from_location('Torino, 10141, Italy')
         garages.first.should eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
         ids.count.should be(1)

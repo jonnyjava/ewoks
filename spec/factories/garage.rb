@@ -11,5 +11,19 @@ FactoryGirl.define do
     tax_id    Faker::Code.isbn
     latitude  Faker::Address.latitude
     longitude Faker::Address.longitude
+
+    factory :turin_garage, class: Garage do
+      zip     '10141'
+      city    'Torino'
+      country 'Italy'
+      street  'Via Monginevro 162'
+    end
+
+    factory :rome_garage, class: Garage do
+      zip     '00054'
+      city    'Roma'
+      country 'Italy'
+      street  'Via G. Ferraris 2/4'
+    end
   end
 end
