@@ -1,0 +1,12 @@
+ul.m-navbar
+  li class=(current_page?(garage_path(@garage)) ? 'active m-navbar__tab' : 'm-navbar__tab')
+    = link_to 'Garage information', garage_path(@garage)
+
+  li class=(current_page?(garage_tyre_fees_path(@garage)) ? 'active m-navbar__tab' : 'm-navbar__tab')
+    = link_to 'Tyre fees', garage_tyre_fees_path(@garage)
+
+  li class=(current_page?(edit_garage_timetable_path(@garage, @garage.timetable)) ? 'active m-navbar__tab' : 'm-navbar__tab')
+    = link_to 'Timetable', edit_garage_timetable_path(@garage, @garage.timetable)
+
+  li class=(current_page?(garage_holidays_path(@garage)) ? 'active m-navbar__tab' : 'm-navbar__tab')
+    = link_to 'Holidays', garage_holidays_path(@garage)

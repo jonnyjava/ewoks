@@ -6,5 +6,7 @@
     = f.association :garage
     = f.association :property
 
-  .form-actions
-    = f.button :submit
+  .col-xs-12
+    .m-list--btn
+      = link_to 'Go back', garages_path(), class: "m-btn--back"
+      = f.button :submit, class: "m-btn"

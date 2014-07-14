@@ -5,7 +5,8 @@ class TyreFeesController < ApplicationController
   # GET /tyre_fees
   # GET /tyre_fees.json
   def index
-    @tyre_fees = TyreFee.all.page(params[:page])
+    tyre_fees = TyreFee.by_garage(@garage).page(params[:page])
+    @tyre_fees = TyreFeeDecorator.decorate_collection(tyre_fees)
   end
 
   # GET /tyre_fees/1

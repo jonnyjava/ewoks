@@ -26,5 +26,9 @@ FactoryGirl.define do
       country 'Italy'
       street  'Via G. Ferraris 2/4'
     end
+
+    factory :garage_with_timetable, class: Garage do
+      timetable { FactoryGirl.create(:timetable) }
+    end
   end
 end

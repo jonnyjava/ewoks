@@ -1,50 +1,45 @@
-- if notice
-  .alert.alert-success = notice
+- content_for :subheader
+  = render 'shared/tablist'
 
-.row
-  .col-xs-12
-    .m-box
-      .m-box__header
-        h3.box__title = "Garage: #{@garage.name}"
-      .panel-body
-        .col-sm-4
-          = image_tag @garage.logo.url, class: 'img-responsive'
-          = link_to 'Edit information', edit_garage_path(@garage), class: "m-button--large"
-          = link_to 'List holidays', garage_holidays_path(@garage), class: "m-button--large"
-          = link_to 'List timetables', edit_garage_timetable_path(@garage, @garage.timetable), class: "m-button--large"
-          = link_to "Delete image", destroy_logo_path(@garage), class: "m-button--large", data: {:confirm => 'Are you sure?'}, :method => :delete
-        .col-sm-8
-          .table-responsive
-            table.table.table-condensed
-              tbody
-                tr
-                  td Address:
-                  td = @garage.address
-                tr
-                  td Email:
-                  td = @garage.email
-                tr
-                  td Phone:
-                  td = @garage.phone
-                tr
-                  td Mobile:
-                  td = @garage.mobile
-                tr
-                  td Fax:
-                  td = @garage.fax
-                tr
-                  td Latitude:
-                  td = @garage.latitude
-                tr
-                  td Longitude:
-                  td = @garage.longitude
-                tr
-                  td Tax:
-                  td = @garage.tax_id
-                tr
-                  td Website:
+- content_for :content
 
-    = link_to 'Back to garages list', garages_path(), class: "m-button"
+  .col-sm-4
+    = image_tag @garage.logo.url, class: 'img-responsive'
+    = link_to "Delete image", destroy_logo_path(@garage), class: "m-btn--large", data: {:confirm => 'Are you sure?'}, :method => :delete
 
-== render 'tyre_fees/fees', garage: @garage, fees: @fees
-= link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "m-button"
+  .col-sm-8
+    .table-responsive
+      table.table.table-condensed
+        tbody
+          tr
+            td Address:
+            td = @garage.address
+          tr
+            td Email:
+            td = @garage.email
+          tr
+            td Phone:
+            td = @garage.phone
+          tr
+            td Mobile:
+            td = @garage.mobile
+          tr
+            td Fax:
+            td = @garage.fax
+          tr
+            td Latitude:
+            td = @garage.latitude
+          tr
+            td Longitude:
+            td = @garage.longitude
+          tr
+            td Tax:
+            td = @garage.tax_id
+          tr
+            td Website:
+
+  .m-list--btn
+    = link_to 'Go back', garages_path(), class: "m-btn--back"
+    = link_to 'Edit information', edit_garage_path(@garage), class: "m-btn"
+
+= render template: "layouts/box", locals: { title: "Garage - #{@garage.name}" }

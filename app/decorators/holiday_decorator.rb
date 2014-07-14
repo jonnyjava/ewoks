@@ -1,0 +1,2 @@
+class HolidayDecorator < ApplicationDecorator
+end

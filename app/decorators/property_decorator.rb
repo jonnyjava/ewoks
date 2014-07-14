@@ -1,0 +1,2 @@
+class PropertyDecorator < ApplicationDecorator
+end
