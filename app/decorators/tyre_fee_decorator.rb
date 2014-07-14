@@ -1,0 +1,2 @@
+class TyreFeeDecorator < ApplicationDecorator
+end

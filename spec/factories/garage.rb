@@ -9,5 +9,9 @@ FactoryGirl.define do
     country   Faker::Address.country
     phone     Faker::PhoneNumber.phone_number
     tax_id    Faker::Code.isbn
+
+    factory :garage_with_timetable, class: Garage do
+      timetable { FactoryGirl.create(:timetable) }
+    end
   end
 end

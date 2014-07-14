@@ -1,0 +1,5 @@
+%button {
+  @extend .btn;
+  @extend .btn-default;
+  @include border-radius(.25rem);
+}

@@ -24,6 +24,6 @@
 									td Last sign in:
 									td = @user.last_sign_in_at
 		- unless @user.owner?
-			= link_to 'Back', users_path, class: "m-button"
+			= link_to 'Back', users_path, class: "m-btn--back"
 		- if @user.garage
 			= link_to 'Back to garage sheet', garage_path(@user.garage), class: "m-button"

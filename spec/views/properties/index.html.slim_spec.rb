@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe "properties/index" do
   before(:each) do
-    assign(:properties, [
-      stub_model(Property),
-      stub_model(Property)
-    ])
+    assign(:properties, Kaminari.paginate_array([
+      stub_model(Property).decorate,
+      stub_model(Property).decorate
+    ]).page)
   end
 
   it "renders a list of properties" do

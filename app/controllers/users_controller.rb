@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = policy_scope(User.all)
-    authorize @users
+    users = policy_scope(User.all.page(params[:page]))
+    authorize users
+    @users = UserDecorator.decorate_collection(users)
   end
 
   # GET /users/1

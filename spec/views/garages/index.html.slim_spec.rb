@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "garages/index" do
   before(:each) do
     assign(:garages, Kaminari.paginate_array([
-      stub_model(Garage),
-      stub_model(Garage)
+      stub_model(Garage).decorate,
+      stub_model(Garage).decorate
     ]).page)
   end
 

@@ -1,5 +1,3 @@
-h1 New timetable
-
-== render 'form'
-
-= link_to 'Back', garage_timetables_path(@garage)
+- content_for :content
+  - render 'form'
+= render template: "layouts/box", locals: { title: 'New timetable' }

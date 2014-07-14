@@ -1,14 +1,3 @@
-.m-button--menu {
-	&:hover, &:focus {
-		background-color: $button-bgcolor;
-		color: $button-fontcolor;
-		border: 1px solid $button-bgcolor;
-	}
-
-	&:hover {
-		background-color: darken($button-bgcolor, 5%);
-	}
-}
 
 .is-garage-disable {
 	background-color: #eee;

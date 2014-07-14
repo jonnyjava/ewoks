@@ -1,30 +1,26 @@
-.row
-  .col-xs-12
-    .m-box
-      .m-box__header
-        h3.box__title Listing holidays
+- content_for :subheader
+  = render 'shared/tablist'
 
-      .table-responsive
-        table.table.table-condensed
-          thead
-            tr
-              th Name
-              th Start date
-              th End date
-              th Actions
+- content_for :content
 
-          tbody
-            - @holidays.each do |holiday|
-              tr
-                td = holiday.name
-                td = holiday.start_date
-                td = holiday.end_date
-                td
-                  .btn-group
-                    button.btn.btn-default = link_to "edit", edit_garage_holiday_path(@garage, holiday), class: "m-button-action--edit"
-                    button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
-                      span.caret
-                    ul.dropdown-menu
-                      li = link_to "delete",  garage_holiday_path(@garage, holiday), class: "m-button-action--delete", data: {:confirm => 'Are you sure?'}, :method => :delete
+  .table-responsive
+    table.table.table-condensed
+      thead
+        tr
+          th Name
+          th Start date
+          th End date
+          th Actions
 
-    = link_to 'New Holiday', new_garage_holiday_path(@garage), class: "m-button"
+      tbody
+        - @holidays.each do |holiday|
+          tr
+            td = holiday.name
+            td = holiday.start_date
+            td = holiday.end_date
+            td = render 'shared/crudbar', { entity: holiday, garage: @garage }
+
+  = paginate @holidays
+  = link_to 'New Holiday', new_garage_holiday_path(@garage), class: "m-btn"
+
+= render template: "layouts/box", locals: { title: 'Listing holidays' }
