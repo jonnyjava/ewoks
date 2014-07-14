@@ -1,14 +1,14 @@
 - if local_assigns.has_key? :garage
-  = link_to 'edit', send(entity.pathify('edit', garage), garage, entity), class: 'm-button-action--edit'
+  = link_to 'edit ', send(entity.pathify('edit', garage), garage, entity), class: 'm-button-action--edit'
 
-  = link_to 'delete', send(entity.pathify('', garage), garage, entity),
+  = link_to 'delete ', send(entity.pathify('', garage), garage, entity),
     method: :delete, data: {confirm: 'Are you sure?'}, class: 'm-button-action--delete'
 
 - else
-  = link_to 'edit', send(entity.pathify('edit'), entity), class: 'm-button-action--edit'
+  = link_to 'edit ', send(entity.pathify('edit'), entity), class: 'm-button-action--edit'
 
   = link_to entity.status, toggle_status_path(entity),
     method: :patch, class: 'm-button-action--status' if entity.respond_to?(:status)
 
-  = link_to 'delete', entity,
+  = link_to ' delete ', entity,
     method: :delete, data: {confirm: 'Are you sure?'}, class: 'm-button-action--delete'
