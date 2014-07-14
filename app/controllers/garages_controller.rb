@@ -39,10 +39,8 @@ class GaragesController < ApplicationController
     respond_to do |format|
       if @garage.save
         format.html { redirect_to @garage, notice: 'Garage was successfully created.' }
-        format.json { render :show, status: :created, location: @garage }
       else
         format.html { render :new }
-        format.json { render json: @garage.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,10 +52,8 @@ class GaragesController < ApplicationController
     respond_to do |format|
       if @garage.update(garage_params)
         format.html { redirect_to @garage, notice: 'Garage was successfully updated.' }
-        format.json { render :show, status: :ok, location: @garage }
       else
         format.html { render :edit }
-        format.json { render json: @garage.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,7 +65,6 @@ class GaragesController < ApplicationController
     @garage.destroy
     respond_to do |format|
       format.html { redirect_to garages_url, notice: 'Garage was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

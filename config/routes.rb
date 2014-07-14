@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: "garages#index"
 
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
+    resources :garages, only: [:index, :show]
+  end
+
   resources :garages do
     resources :fees
     resources :tyre_fees
@@ -14,4 +18,5 @@ Rails.application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }
   patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
   delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
+
 end
