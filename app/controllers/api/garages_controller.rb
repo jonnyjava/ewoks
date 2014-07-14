@@ -19,8 +19,12 @@ module API
         garages = garages.by_zip(zip) if zip
       end
       garages = garages.with_tyre_fee_less_than(price) if price
+      @garages = garages
+    end
 
-      render json: garages, status: 200
+    def show
+      @garage = Garage.find(params[:id])
+      @holidays = @garage.holidays.all
     end
   end
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "garages#index"
 
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
-    resources :garages, only: :index
+    resources :garages, only: [:index, :show]
   end
 
   resources :users

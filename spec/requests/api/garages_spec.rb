@@ -4,7 +4,7 @@ describe 'Garages' do
 
   describe 'index' do
     it 'should return status 200' do
-      api_get 'garages'
+      api_get 'garages.json'
       response.status.should be(200)
       response.body.should_not be_empty
     end
@@ -15,7 +15,7 @@ describe 'Garages' do
       let(:french_fee) { FactoryGirl.create(:fee, garage: french_garage, price: 50) }
 
       it 'should filter by country' do
-        api_get 'garages?country=Spain'
+        api_get 'garages.json?country=Spain'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -24,7 +24,7 @@ describe 'Garages' do
       end
 
       it 'should filter by zip' do
-        api_get 'garages?zip=00000'
+        api_get 'garages.json?zip=00000'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -33,7 +33,7 @@ describe 'Garages' do
       end
 
       it 'should filter by city' do
-        api_get 'garages?city=Valencia'
+        api_get 'garages.json?city=Valencia'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -44,7 +44,7 @@ describe 'Garages' do
       it 'should filter by tyre_fee' do
         spanish_fee
         french_fee
-        api_get 'garages?tyre_fee=25'
+        api_get 'garages.json?tyre_fee=25'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -59,7 +59,7 @@ describe 'Garages' do
         spanish_fee
         french_fee
 
-        api_get 'garages?country=Spain&zip=00000&tyre_fee=25'
+        api_get 'garages.json?country=Spain&zip=00000&tyre_fee=25'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -73,7 +73,7 @@ describe 'Garages' do
       let!(:garage_outside_radius) { FactoryGirl.create(:rome_garage) }
 
       it 'should return one garage searching by city' do
-        api_get 'garages?country=Italy&city=Torino&radius=20'
+        api_get 'garages.json?country=Italy&city=Torino&radius=20'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -82,7 +82,7 @@ describe 'Garages' do
       end
 
       it 'should return one garage searching by zip' do
-        api_get 'garages?country=Italy&city=10139&radius=20'
+        api_get 'garages.json?country=Italy&city=10139&radius=20'
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
