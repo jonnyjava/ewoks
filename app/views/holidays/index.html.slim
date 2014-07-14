@@ -21,6 +21,6 @@
             td = render 'shared/crudbar', { entity: holiday, garage: @garage }
 
   = paginate @holidays
-  = link_to 'New Holiday', new_garage_holiday_path(@garage), class: "m-button"
+  = link_to 'New Holiday', new_garage_holiday_path(@garage), class: "m-btn"
 
 = render template: "layouts/box", locals: { title: 'Listing holidays' }

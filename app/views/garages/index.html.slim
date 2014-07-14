@@ -18,6 +18,6 @@
             td = render 'shared/crudbar', entity: garage
 
   = paginate @garages
-  = link_to 'New Garage', new_garage_path, class: "m-button"
+  = link_to 'New Garage', new_garage_path, class: "m-btn"
 
 = render template: "layouts/box", locals: { title: 'Listing garages' }

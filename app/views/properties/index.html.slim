@@ -17,6 +17,6 @@
             td = render 'shared/crudbar', { entity: property }
 
   = paginate @properties
-  = link_to 'New Property', new_property_path, class: "m-button"
+  = link_to 'New Property', new_property_path, class: "m-btn"
 
 = render template: "layouts/box", locals: { title: 'Listing properties' }
