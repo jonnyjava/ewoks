@@ -2,5 +2,7 @@
   .m-box__header
     h3.m-box__header__title = title
 
+  = yield :subheader
+
   .m-box__body
     = yield :content

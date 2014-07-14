@@ -1,12 +1,12 @@
+- content_for :subheader
+  = render 'shared/tablist'
+
 - content_for :content
 
   .col-sm-4
     = image_tag @garage.logo.url, class: 'img-responsive'
-    = link_to 'Edit information', edit_garage_path(@garage), class: "m-button--large"
-    = link_to 'List holidays', garage_holidays_path(@garage), class: "m-button--large"
-    = link_to 'List fees', garage_tyre_fees_path(@garage), class: "m-button--large"
-    = link_to 'List timetables', edit_garage_timetable_path(@garage, @garage.timetable), class: "m-button--large"
-    = link_to "Delete image", destroy_logo_path(@garage), class: "m-button--large", data: {:confirm => 'Are you sure?'}, :method => :delete
+    = link_to "Delete image", destroy_logo_path(@garage), class: "m-btn--large", data: {:confirm => 'Are you sure?'}, :method => :delete
+
   .col-sm-8
     .table-responsive
       table.table.table-condensed
@@ -38,6 +38,8 @@
           tr
             td Website:
 
-  = link_to 'Go back', garages_path(), class: "m-btn--back"
+  .m-list--btn
+    = link_to 'Go back', garages_path(), class: "m-btn--back"
+    = link_to 'Edit information', edit_garage_path(@garage), class: "m-btn"
 
 = render template: "layouts/box", locals: { title: "Garage - #{@garage.name}" }
