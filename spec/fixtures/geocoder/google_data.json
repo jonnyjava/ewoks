@@ -1,0 +1,26 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "street_address" ],
+    "formatted_address": "Via Monginevro 162, Torino, Italy",
+    "address_components": [ {
+      "long_name": "Via Monginevro 162",
+      "short_name": "Via Monginevro 162",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Torino",
+      "short_name": "Torino",
+      "types": [ "city", "political" ]
+    }, {
+      "long_name": "Italy",
+      "short_name": "IT",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 45.0647,
+        "lng": 7.63015
+      }
+    }
+  } ]
+}
