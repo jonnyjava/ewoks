@@ -22,8 +22,6 @@ class Garage < ActiveRecord::Base
   scope :by_zip, ->(zip) { where(zip: zip) }
   scope :with_tyre_fee_less_than, ->(price) { includes(:fees).where('fees.price <= ?', price).references(:fees) }
 
-
-
   def address
     [street, city, zip, country].compact.join(', ')
   end

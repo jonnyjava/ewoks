@@ -18,6 +18,8 @@ FactoryGirl.define do
       city    'Torino'
       country 'Italy'
       street  'Via Monginevro 162'
+      latitude 45.0647
+      longitude 7.63015
     end
 
     factory :rome_garage, class: Garage do
@@ -25,6 +27,8 @@ FactoryGirl.define do
       city    'Roma'
       country 'Italy'
       street  'Via G. Ferraris 2/4'
+      latitude 41.8084
+      longitude 12.3015
     end
 
     factory :garage_with_timetable, class: Garage do
