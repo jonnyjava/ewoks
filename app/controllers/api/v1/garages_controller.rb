@@ -30,6 +30,7 @@ module API
       end
 
     protected
+
       def authenticate
         authenticate_token || render_unauthorized
       end
