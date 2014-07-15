@@ -12,11 +12,13 @@ module API
         radius = params[:radius]
         price = params[:tyre_fee]
 
+        country = @current_user.country unless country
+
         if radius
           location = [city, zip, country].compact.join(', ')
           garages = garages.find_by_radius_from_location(location, radius)
         else
-          garages = garages.by_country(country) if country
+          garages = garages.by_country(country)
           garages = garages.by_city(city) if city
           garages = garages.by_zip(zip) if zip
         end
@@ -37,7 +39,7 @@ module API
 
       def authenticate_token
         authenticate_with_http_token do |token, options|
-          User.find_by_auth_token(token).present?
+          @current_user = User.find_by_auth_token(token)
         end
       end
 
