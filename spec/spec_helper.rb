@@ -47,5 +47,5 @@ def json(body)
 end
 
 def api_get path, *args
-  get "http://api.localhost.dev/#{path}", *args
+  get "api/v1/#{path}", *args
 end
