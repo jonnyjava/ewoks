@@ -19,6 +19,10 @@ describe Garage do
   describe 'find_by_radius_from_location' do
     let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }
     let!(:garage_outside_radius) { FactoryGirl.create(:rome_garage) }
+    let(:outside_coords) { { latitude: 41.8084, longitude: 12.3015 } }
+    before(:each) do
+      garage_outside_radius.update_attributes(outside_coords)
+    end
 
     context 'given a city' do
       it 'should return one garage' do
@@ -57,6 +61,3 @@ describe Garage do
     end
   end
 end
-
-
-

@@ -52,7 +52,6 @@ describe 'Garages' do
         ids.should_not include(french_garage.id)
       end
 
-
       it 'should filter by country, zip and tyre_fee' do
         another_garage = FactoryGirl.create(:garage, country: 'Spain', zip: '00000')
         FactoryGirl.create(:fee, garage: another_garage, price: 40)
@@ -71,6 +70,10 @@ describe 'Garages' do
     context 'with radius search' do
       let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }
       let!(:garage_outside_radius) { FactoryGirl.create(:rome_garage) }
+      let(:outside_coords) { { latitude: 41.8084, longitude: 12.3015 } }
+      before(:each) do
+        garage_outside_radius.update_attributes(outside_coords)
+      end
 
       it 'should return one garage searching by city' do
         api_get 'garages.json?country=Italy&city=Torino&radius=20'
