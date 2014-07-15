@@ -1,15 +1,33 @@
-aside.l-sidebar.js-body-height
-  .l-sidebar__header
-    = image_tag "no-profile-img.jpg", class: "profile-img"
-    ' User name
+aside.left-side.sidebar-offcanvas
+  section.sidebar
 
-  ul.l-sidebar__body
-    li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
-      i.fa.fa-th-large
-      ' Garages
-    li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
-      i.fa.fa-user
-      ' Users
-    li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
-      i.fa.fa-cog
-      ' Properties
+    <!-- Sidebar user panel -->
+    .user-panel
+      .pull-left.image
+        = image_tag "profile_default.jpg", class: "img-circle", alt: "User Image"
+      .pull-left.info
+        p = "Hello, #{@current_user.try(:name)}"
+        a href="#"
+          i.fa.fa-circle.text-success
+          'Online
+
+    <!-- search form -->
+    = form_tag("#",  method: :get, class: "sidebar-form")
+      .input-group
+        = text_field_tag "search", nil, placeholder: "Search...", class: "form-control"
+        span.input-group-btn
+          button#search-btn.btn.btn-flat type="submit" name="seach"
+            i.fa.fa-search
+
+    <!-- sidebar menu -->
+    ul.sidebar-menu
+      li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
+        i.fa.fa-th-large
+        span Garages
+        small.badge.pull-right.bg-red 3
+      li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
+        i.fa.fa-user
+        span Users
+      li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
+        i.fa.fa-cog
+        span Properties

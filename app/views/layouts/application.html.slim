@@ -7,11 +7,17 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body
-    .wrapper
-      = render :partial => 'shared/sidebar'
 
-      .l-main
-        = render :partial => 'shared/header'
-        = yield
-        = render :partial => 'shared/footer'
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+  body.skin-blue
+    = render :partial => 'shared/header'
+
+    .wrapper.row-offcanvas.row-offcanvas-left
+      = render :partial => 'shared/sidebar'
+      aside.right-side
+        = render :partial => 'shared/breadcrumb'
+        section.content
+          = yield
