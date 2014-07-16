@@ -6,14 +6,13 @@
         - @user.errors.full_messages.each do |message|
           li = message
 
-  .col-md-3 = f.input :name
-  .col-md-3 = f.input :surname
-  .col-md-3 = f.input :password
-  .col-md-3 = f.input :email
-  .col-md-3 = f.input :country
-  .col-md-3 = f.input :phone
+  = f.input :name
+  = f.input :surname
+  = f.input :password
+  = f.input :email
+  = f.input :country
+  = f.input :phone
 
-  .col-xs-12
-    .m-list--btn
-      = link_to 'Go back', users_path(), class: "m-btn--back"
-      = f.button :submit, class: "m-btn"
+  .btn-group-theme
+    = link_to 'Cancel', users_path, class: "btn btn-default btn-flat"
+    = f.button :submit, class: "btn btn-success btn-flat"

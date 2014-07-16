@@ -12,17 +12,17 @@
       ul
         - @tyre_fee.errors.full_messages.each do |message|
           li = message
-  .container-fluid = simple_fields_for :fee do |c|
-    .col-md-3 = c.input :name
-    .col-md-3 = c.input :price
-  end
-  .container-fluid
-    .col-md-3 = f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
-    .col-md-3 = f.input :diameter_min, collection: TyreFee::DIAMETER
-    .col-md-3 = f.input :diameter_max, collection: TyreFee::DIAMETER
-    .col-md-3 = f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
 
-  .col-xs-12
-    .m-list--btn
-      = link_to 'Go back', garage_tyre_fees_path(@garage), class: "m-btn--back"
-      = f.button :submit, class: "m-btn"
+  = simple_fields_for :fee do |c|
+    = c.input :name
+    = c.input :price
+  end
+
+  = f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
+  = f.input :diameter_min, collection: TyreFee::DIAMETER
+  = f.input :diameter_max, collection: TyreFee::DIAMETER
+  = f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
+
+  .btn-group-theme
+    = link_to 'Cancel', garage_tyre_fees_path(@garage), class: "btn btn-default btn-flat"
+    = f.button :submit, class: "btn btn-success btn-flat"

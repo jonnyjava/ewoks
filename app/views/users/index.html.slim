@@ -18,6 +18,8 @@
             td = render 'shared/crudbar', entity: user
 
   = paginate @users
-  = link_to 'New user', new_user_path, class: "m-btn"
+
+  .btn-group-theme
+    = link_to 'New user', new_user_path, class: "btn btn-success btn-flat"
 
 = render template: "layouts/box", locals: { title: 'Listing users' }

@@ -27,6 +27,8 @@
             td = render 'shared/crudbar', { entity: tyre_fee, garage: @garage }
 
   = paginate @tyre_fees
-  = link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "m-btn"
+
+  .btn-group-theme
+    = link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "btn btn-success btn-flat"
 
 = render template: "layouts/box", locals: { title: 'Listing tyre fees' }
