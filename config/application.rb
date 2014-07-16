@@ -24,6 +24,6 @@ module Ewoks
       Devise::PasswordsController.layout "devise"
     end
 
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
   end
 end
