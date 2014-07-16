@@ -1,20 +1,17 @@
-h2 Login
+.header Sign In
 
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .input-group
-    span.input-group-addon
-      i.fa.fa-envelope-o.fa-fw
-    = f.input :email, required: false, autofocus: true, label: false, placeholder: "Email"
-  .input-group
-    span.input-group-addon
-      i.fa.fa-key.fa-fw
-    = f.input :password, required: false, label: false,  placeholder: "Password"
 
-  .form-actions
-    .col-sm-8
+  .body.bg-gray
+    = f.error_notification
+
+    .form-group
+      = f.input :email, required: false, autofocus: true, label: false, placeholder: "Email"
+    .form-group
+      = f.input :password, required: false, label: false,  placeholder: "Password"
+
+    .form-group
       = f.input :remember_me, as: :boolean, wrapper: 'vertical_boolean' if devise_mapping.rememberable?
-
-    .col-sm-4
-      = f.button :submit, "Login", class: "m-button--large"
-
-= render "devise/shared/links"
+  .footer
+    = f.button :button, "Sign me in", class: "btn bg-olive btn-block"
+    = render "devise/shared/links"
