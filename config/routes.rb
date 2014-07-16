@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
   delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
 
+  match '/404' => 'errors#error_404', via: :all
+  match '/422' => 'errors#error_422', via: :all
+  match '/500' => 'errors#error_500', via: :all
+  match "*path", to: "errors#error_404", via: :all
 end

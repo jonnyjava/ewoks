@@ -8,6 +8,14 @@ describe 'Garages' do
       response.status.should be(200)
       response.body.should_not be_empty
     end
+
+    it 'should return status 404' do
+      api_get 'alderaan.json'
+      response.status.should be(404)
+      response.body.should_not be_empty
+      response.content_type.should == Mime::JSON
+    end
+
     context 'with querystring' do
       let!(:spanish_garage) { FactoryGirl.create(:garage, country: 'Spain', zip: '00000', city: 'Valencia') }
       let!(:french_garage) { FactoryGirl.create(:garage, country: 'France', zip: '111111', city: 'Marseille') }
