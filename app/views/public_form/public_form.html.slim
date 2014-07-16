@@ -1,0 +1,120 @@
+= simple_form_for(@garage, url: public_form_create_url) do |f|
+  - if @garage.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
+      ul
+        - @garage.errors.full_messages.each do |message|
+          li = message
+
+  = f.input :name
+  = f.input :country
+  = f.input :street
+  = f.input :zip
+  = f.input :city
+  = f.input :email
+  = f.input :phone
+  = f.input :mobile
+  = f.input :fax
+  = f.input :tax_id
+  = f.input :website
+
+  h3 Timetable
+  = simple_fields_for @timetable do |ftt|
+    = ftt.error_notification
+
+    - Date::DAYNAMES.each do |day|
+      .row
+        .col-sm-1
+          label = day
+
+        - field_params = { day: day, f: ftt, horary: 'morning_open', disabled: false }
+        = render 'timetables/shared/time_field', field_params
+
+        - field_params = { day: day, f: ftt, horary: 'morning_close', disabled: @timetable.closes_at_noon(day) }
+        = render 'timetables/shared/time_field', field_params
+
+        - field_params = { day: day, f: ftt, horary: 'afternoon_open', disabled: @timetable.closes_at_noon(day) }
+        = render 'timetables/shared/time_field', field_params
+
+        - field_params = { day: day, f: ftt, horary: 'afternoon_close', disabled: false }
+        = render 'timetables/shared/time_field', field_params
+
+        .col-sm-3
+          .checkbox
+            label
+              - does_break = @timetable.closes_at_noon(day)
+              input class="js_break" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
+              | Unchecked if closes at noon
+
+  h3 Holidays
+  = simple_fields_for @holiday do |fh|
+    = fh.error_notification
+    .row
+      .col-xs-6
+        = fh.input :name
+      .col-xs-3
+        = fh.input :start_date, wrapper: :vertical_input_group do
+          = fh.input_field :start_date, as: :string, class: 'form-control js-datepicker-start'
+          span.input-group-addon
+            i.fa.fa-calendar
+      .col-xs-3
+        = fh.input :end_date, wrapper: :vertical_input_group do
+          = fh.input_field :end_date, as: :string, class: 'form-control js-datepicker-end'
+          span.input-group-addon.add-on
+            i.fa.fa-calendar
+
+  h3 Tyre fees
+  = simple_fields_for @tyre_fee do |ftf|
+    - if @fee.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@fee.errors.count, "error")} prohibited this fee from being saved:"
+        ul
+          - @fee.errors.full_messages.each do |message|
+            li = message
+
+    - if @tyre_fee.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"
+        ul
+          - @tyre_fee.errors.full_messages.each do |message|
+            li = message
+    .container-fluid = simple_fields_for :fee do |cf|
+      .col-md-3 = cf.input :name
+      .col-md-3 = cf.input :price
+    end
+    .container-fluid
+      .col-md-3 = ftf.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
+      .col-md-3 = ftf.input :diameter_min, collection: TyreFee::DIAMETER
+      .col-md-3 = ftf.input :diameter_max, collection: TyreFee::DIAMETER
+      .col-md-3 = ftf.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
+
+  = f.button :submit
+
+
+
+coffee:
+  $ ->
+    $(".js_break").click ->
+      day = $(this).attr('data-day')
+      checked = $(this).is(":checked")
+      $("#timetable_"+day+"_morning_close").val('').prop('disabled', checked)
+      $("#timetable_"+day+"_afternoon_open").val('').prop('disabled', checked)
+
+    $('.js_timetable_field').timepicker
+      'timeFormat': 'h:i A',
+      'step': 15
+
+  $ ->
+    $(".js-datepicker-start").datepicker
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "yy-mm-dd",
+      onClose: (selectedDate) ->
+        $(".js-datepicker-end").datepicker("option", "minDate", selectedDate)
+
+    $(".js-datepicker-end").datepicker
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "yy-mm-dd",
+      onClose: (selectedDate) ->
+        $(".js-datepicker-start").datepicker("option", "maxDate", selectedDate)

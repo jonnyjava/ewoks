@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PublicFormControllerController do
+describe PublicFormController do
 
   describe "GET 'public_form'" do
     it "returns http success" do
