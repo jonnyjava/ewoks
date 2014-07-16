@@ -1,13 +1,16 @@
 .crudbar-theme {
   > .btn {
-    margin-right: .5em;
+    margin-right: .25em;
+    padding: 2px 8px;
   }
 }
 
 .btn-group-theme {
   margin-top: 2em;
 
-  @extend .crudbar-theme;
+  > .btn {
+    margin-right: .5em;
+  }
 }
 
 .simple_form {

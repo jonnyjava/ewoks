@@ -1,19 +1,19 @@
 .crudbar-theme
   - if local_assigns.has_key? :garage
-    = link_to content_tag(:i,nil, :class=>"fa fa-edit"), send(entity.pathify('edit', garage), garage, entity), class: 'btn btn-success btn-sm btn-flat'
+    = link_to content_tag(:i, nil, class: "fa fa-edit"), send(entity.pathify('edit', garage), garage, entity), class: 'btn btn-default btn-sm btn-flat'
 
-    = link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), send(entity.pathify('', garage), garage, entity),
+    = link_to content_tag(:i, nil, class: "fa fa-trash-o"), send(entity.pathify('', garage), garage, entity),
       method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm btn-flat'
 
   - else
-    = link_to content_tag(:i,nil, :class=>"fa fa-edit"), send(entity.pathify('edit'), entity), class: 'btn btn-success btn-sm btn-flat'
+    = link_to content_tag(:i, nil, class: "fa fa-edit"), send(entity.pathify('edit'), entity), class: 'btn btn-default btn-sm btn-flat'
 
-    - if entity.try(:status) === 'disable'
-      = link_to content_tag(:i,nil, :class=>"fa fa-square"), toggle_status_path(entity),
-        method: :patch, class: 'btn btn-danger btn-sm btn-flat' if entity.respond_to?(:status)
+    - if entity.try(:status) === 'enabled'
+      = link_to content_tag(:i, nil, class: "ion-close"), toggle_status_path(entity),
+        method: :patch, class: 'btn btn-default btn-sm btn-flat' if entity.respond_to?(:status)
     - else
-      = link_to content_tag(:i,nil, :class=>"fa fa-check-square"), toggle_status_path(entity),
-        method: :patch, class: 'btn btn-success btn-sm btn-flat' if entity.respond_to?(:status)
+      = link_to content_tag(:i, nil, class: "ion-checkmark"), toggle_status_path(entity),
+        method: :patch, class: 'btn btn-default btn-sm btn-flat' if entity.respond_to?(:status)
 
-    = link_to content_tag(:i,nil, :class=>"fa fa-trash-o"), entity,
+    = link_to content_tag(:i, nil, class: "fa fa-trash-o"), entity,
       method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm btn-flat'
