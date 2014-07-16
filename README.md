@@ -9,7 +9,7 @@ This project uses Rails 4.1.1 and Ruby 2.1.2
 
 To get a list of partner the base URL is this one:
 
-`http://api.localhost.dev:3000/garages.json`
+`http://localhost:3000/api/v1/garages.json`
 
 Is possible to add some parameters to the querystring to refine the search.
 Accepted parameters are:
@@ -26,14 +26,18 @@ In this case, if you are searching by a city which doesn't belong to your countr
 
 You can test your connection using `curl` here some examples
 
-`curl http://api.localhost.dev:3000/garages.json?country=Spain`
+`curl http://localhost:3000/api/v1/garages.json?country=Spain`
 
-`curl http://api.localhost.dev:3000/garages.json?zip=00000`
+`curl http://localhost:3000/api/v1/garages.json?zip=00000`
 
-`curl http://api.localhost.dev:3000/garages.json?city=Valencia`
+`curl http://localhost:3000/api/v1/garages.json?city=Valencia`
 
-`curl http://api.localhost.dev:3000/garages.json?tyre_fee=25`
+`curl http://localhost:3000/api/v1/garages.json?tyre_fee=25`
 
-`curl http://api.localhost.dev:3000/garages.json?city=Torino&radius=20`
+`curl http://localhost:3000/api/v1/garages.json?city=Torino&radius=20`
 
-`curl http://api.localhost.dev:3000/garages.json?country=Italy&city=10139&radius=20`
+`curl http://localhost:3000/api/v1/garages.json?country=Italy&city=10139&radius=20`
+
+Of course it works for a unique garage too.
+
+`curl http://localhost:3000/api/v1/garages/1.json`
