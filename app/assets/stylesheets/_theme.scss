@@ -1,7 +1,17 @@
+.crudbar-theme {
+  > .btn {
+    margin-right: .5em;
+  }
+}
+
 .btn-group-theme {
   margin-top: 2em;
 
-  > .btn {
+  @extend .crudbar-theme;
+}
+
+.simple_form {
+  .icheckbox_minimal {
     margin-right: .5em;
   }
 }
