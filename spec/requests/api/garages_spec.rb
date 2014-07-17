@@ -2,18 +2,30 @@ require 'spec_helper'
 
 describe 'Garages' do
 
+  def token_header(token)
+    ActionController::HttpAuthentication::Token.encode_credentials(token)
+  end
+
+
+  let!(:user) { FactoryGirl.create(:user) }
   describe 'index' do
     it 'should return status 200' do
-      api_get 'garages.json'
+      api_get 'garages.json', {}, { 'Authorization' => token_header(user.auth_token) }
       response.status.should be(200)
       response.body.should_not be_empty
+      response.content_type.should == Mime::JSON
     end
 
     it 'should return status 404' do
-      api_get 'alderaan.json'
+      api_get 'alderaan.json', {}, { 'Authorization' => token_header(user.auth_token) }
       response.status.should be(404)
       response.body.should_not be_empty
       response.content_type.should == Mime::JSON
+    end
+
+    it 'should return status 401' do
+      api_get 'garages.json', {}, { 'Authorization' => "Token token=wrongtoken"}
+      response.status.should be(401)
     end
 
     context 'with querystring' do
@@ -23,7 +35,7 @@ describe 'Garages' do
       let(:french_fee) { FactoryGirl.create(:fee, garage: french_garage, price: 50) }
 
       it 'should filter by country' do
-        api_get 'garages.json?country=Spain'
+        api_get 'garages.json?country=Spain', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -32,7 +44,7 @@ describe 'Garages' do
       end
 
       it 'should filter by zip' do
-        api_get 'garages.json?zip=00000'
+        api_get 'garages.json?zip=00000', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -41,7 +53,7 @@ describe 'Garages' do
       end
 
       it 'should filter by city' do
-        api_get 'garages.json?city=Valencia'
+        api_get 'garages.json?city=Valencia', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -52,7 +64,7 @@ describe 'Garages' do
       it 'should filter by tyre_fee' do
         spanish_fee
         french_fee
-        api_get 'garages.json?tyre_fee=25'
+        api_get 'garages.json?tyre_fee=25', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -66,7 +78,7 @@ describe 'Garages' do
         spanish_fee
         french_fee
 
-        api_get 'garages.json?country=Spain&zip=00000&tyre_fee=25'
+        api_get 'garages.json?country=Spain&zip=00000&tyre_fee=25', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -84,7 +96,7 @@ describe 'Garages' do
       end
 
       it 'should return one garage searching by city' do
-        api_get 'garages.json?country=Italy&city=Torino&radius=20'
+        api_get 'garages.json?country=Italy&city=Torino&radius=20', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -93,7 +105,7 @@ describe 'Garages' do
       end
 
       it 'should return one garage searching by zip' do
-        api_get 'garages.json?country=Italy&city=10139&radius=20'
+        api_get 'garages.json?country=Italy&city=10139&radius=20', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
