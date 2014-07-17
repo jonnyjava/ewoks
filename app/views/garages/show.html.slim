@@ -1,6 +1,3 @@
-- content_for :subheader
-  = render 'shared/tablist'
-
 - content_for :content
 
   .col-sm-4
@@ -42,4 +39,4 @@
     = link_to 'Go back', garages_path(), class: "m-btn--back"
     = link_to 'Edit information', edit_garage_path(@garage), class: "m-btn"
 
-= render template: "layouts/box", locals: { title: "Garage - #{@garage.name}" }
+= render template: "layouts/box_tabs", locals: { title: "Garage - #{@garage.name}" }
