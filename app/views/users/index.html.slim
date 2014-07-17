@@ -19,7 +19,7 @@
 
   = paginate @users
 
-  .btn-group-theme
-    = link_to 'New user', new_user_path, class: "btn btn-success btn-flat"
+  .b-keypad
+    = link_to 'New user', new_user_path, class: "b-keypad__btn--success"
 
 = render template: "layouts/box", locals: { title: 'Listing users' }

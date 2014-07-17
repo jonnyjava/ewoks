@@ -16,9 +16,9 @@
 
   = f.association :garage, as: :hidden
 
-  .btn-group-theme
-    = link_to 'Cancel', garage_holidays_path(@garage), class: "btn btn-default btn-flat"
-    = f.button :submit, class: "btn btn-success btn-flat"
+  .b-keypad
+    = link_to 'Cancel', garage_holidays_path(@garage), class: "b-keypad__btn--default"
+    = f.button :submit, class: "b-keypad__btn--success"
 
 coffee:
   $ ->

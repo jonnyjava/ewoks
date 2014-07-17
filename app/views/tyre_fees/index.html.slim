@@ -25,7 +25,7 @@
 
   = paginate @tyre_fees
 
-  .btn-group-theme
-    = link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "btn btn-success btn-flat"
+  .b-keypad
+    = link_to 'New tyre fee', new_garage_tyre_fee_path(@garage), class: "b-keypad__btn--success"
 
 = render template: "layouts/box_tabs", locals: { title: 'Listing tyre fees' }

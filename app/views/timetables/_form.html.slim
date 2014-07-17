@@ -27,8 +27,8 @@
             input class="js_break" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
             | Unchecked if closes at noon
 
-  .btn-group-theme
-    = f.button :submit, class: "btn btn-success btn-flat"
+  .b-keypad
+    = f.button :submit, class: "b-keypad__btn--success"
 
 coffee:
   $ ->

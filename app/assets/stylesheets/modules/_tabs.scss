@@ -1,0 +1,48 @@
+// Blocks
+@include block(navtabs) {
+  @extend .nav;
+  @extend .nav-tabs;
+}
+
+@include modifier(navtabs, right) {
+  @extend .pull-right;
+
+  @media (max-width: $mobile) {
+    position: relative;
+    margin-bottom: 3em !important;
+  }
+}
+
+@include element(navtabs, tab) {
+  &.active a { color: #333; }
+  a { color: #999; }
+
+  .icon {
+    padding-right: .5em;
+
+    @media (max-width: $mobile) {
+      font-size: 1em;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    margin: 0 !important;
+    text-align: center;
+    width: 25%;
+    span { display: none; }
+  }
+}
+
+@include element(navtabs, header) {
+  @extend .header;
+
+  @media (max-width: $mobile) {
+    display: inline-block;
+    float: none;
+    position: absolute !important;
+    text-align: center;
+    top: 2.5em;
+    width: 100%;
+  }
+}
