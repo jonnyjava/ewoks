@@ -27,9 +27,8 @@
             input class="js_break" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
             | Unchecked if closes at noon
 
-  .m-list--btn
-    = link_to 'Go back', garage_path(@garage), class: "m-btn--back"
-    = f.button :submit, class: "m-btn"
+  .b-keypad
+    = f.button :submit, class: "b-keypad__btn--success"
 
 coffee:
   $ ->

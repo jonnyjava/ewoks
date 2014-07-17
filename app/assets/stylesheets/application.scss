@@ -1,0 +1,21 @@
+// Vendors
+@import "bootstrap";
+@import "font-awesome";
+@import "ionicons";
+@import "AdminLTE";
+
+// Base
+@import "base/config";
+@import "base/mixins";
+
+// Config
+@import "modules/crudbar";
+@import "modules/keypad";
+@import "modules/tabs";
+
+
+// Little fixes
+.simple_form .icheckbox_minimal {
+  margin-right: .5em;
+  top: -2px;
+}

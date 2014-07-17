@@ -1,0 +1,28 @@
+.nav-tabs-custom
+  ul.b-navtabs--right
+    li.b-navtabs__tab class=(current_page?(garage_holidays_path(@garage)) ? 'active' : '')
+      a href="#{garage_holidays_path(@garage)}"
+        i.icon.ion-calendar
+        span Holidays
+
+    li.b-navtabs__tab class=(current_page?(edit_garage_timetable_path(@garage, @garage.timetable)) ? 'active' : '')
+      a href="#{edit_garage_timetable_path(@garage, @garage.timetable)}"
+        i.icon.ion-clock
+        span Timetable
+
+    li.b-navtabs__tab class=(current_page?(garage_tyre_fees_path(@garage)) ? 'active' : '')
+      a href="#{garage_tyre_fees_path(@garage)}"
+        i.icon.ion-pricetags
+        span Tyre fees
+
+    li.b-navtabs__tab class=(current_page?(garage_path(@garage)) ? 'active' : '')
+      a href="#{garage_path(@garage)}"
+        i.icon.ion-information-circled
+        span Information
+
+    li.pull-left.b-navtabs__header
+      'Garage profile
+
+  .tab-content
+    .tab-pane.active
+      = yield :content

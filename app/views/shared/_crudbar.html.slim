@@ -1,14 +1,19 @@
-- if local_assigns.has_key? :garage
-  = link_to 'edit ', send(entity.pathify('edit', garage), garage, entity), class: 'm-button-action--edit'
+.b-crudbar
+  - if local_assigns.has_key? :garage
+    = link_to content_tag(:i, nil, class: "fa fa-edit"), send(entity.pathify('edit', garage), garage, entity), class: 'b-crudbar__btn--default'
 
-  = link_to 'delete ', send(entity.pathify('', garage), garage, entity),
-    method: :delete, data: {confirm: 'Are you sure?'}, class: 'm-button-action--delete'
+    = link_to content_tag(:i, nil, class: "fa fa-trash-o"), send(entity.pathify('', garage), garage, entity),
+      method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'
 
-- else
-  = link_to 'edit ', send(entity.pathify('edit'), entity), class: 'm-button-action--edit'
+  - else
+    = link_to content_tag(:i, nil, class: "fa fa-edit"), send(entity.pathify('edit'), entity), class: 'b-crudbar__btn--default'
 
-  = link_to entity.status, toggle_status_path(entity),
-    method: :patch, class: 'm-button-action--status' if entity.respond_to?(:status)
+    - if entity.try(:status) === 'enabled'
+      = link_to content_tag(:i, nil, class: "ion-close"), toggle_status_path(entity),
+        method: :patch, class: 'b-crudbar__btn--default' if entity.respond_to?(:status)
+    - else
+      = link_to content_tag(:i, nil, class: "ion-checkmark"), toggle_status_path(entity),
+        method: :patch, class: 'b-crudbar__btn--default' if entity.respond_to?(:status)
 
-  = link_to ' delete ', entity,
-    method: :delete, data: {confirm: 'Are you sure?'}, class: 'm-button-action--delete'
+    = link_to content_tag(:i, nil, class: "fa fa-trash-o"), entity,
+      method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'

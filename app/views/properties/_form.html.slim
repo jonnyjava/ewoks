@@ -11,6 +11,6 @@
   .field
     = f.input :type_of
 
-  .m-list--btn
-    = link_to 'Go back', properties_path(), class: "m-btn--back"
-    = f.button :submit, class: "m-btn"
+  .b-keypad
+    = link_to 'Cancel', properties_path, class: "b-keypad__btn--default"
+    = f.button :submit, class: "b-keypad__btn--success"

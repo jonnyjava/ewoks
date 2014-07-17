@@ -1,0 +1,21 @@
+// Config
+
+// Blocks
+@include block(keypad) {
+  margin-top: 2em;
+}
+
+@include element(keypad, btn) {
+  margin-right: .5em;
+
+  @extend .btn;
+  @extend .btn-flat;
+}
+
+@include modifier(keypad__btn, default) {
+  @extend .btn-default;
+}
+
+@include modifier(keypad__btn, success) {
+  @extend .btn-success;
+}

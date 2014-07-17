@@ -6,20 +6,19 @@
         - @garage.errors.full_messages.each do |message|
           li = message
 
-  .col-md-3 = f.input :name
-  .col-md-3 = f.input :country
-  .col-md-3 = f.input :street
-  .col-md-3 = f.input :zip
-  .col-md-3 = f.input :city
-  .col-md-3 = f.input :email
-  .col-md-3 = f.input :phone
-  .col-md-3 = f.input :mobile
-  .col-md-3 = f.input :fax
-  .col-md-3 = f.input :tax_id
-  .col-md-3 = f.input :website
-  .col-md-3 = f.input :logo
+  = f.input :name
+  = f.input :country
+  = f.input :street
+  = f.input :zip
+  = f.input :city
+  = f.input :email
+  = f.input :phone
+  = f.input :mobile
+  = f.input :fax
+  = f.input :tax_id
+  = f.input :website
+  = f.input :logo
 
-  .col-xs-12
-    .m-list--btn
-      = link_to 'Go back', @garage, class: "m-btn--back"
-      = f.button :submit, class: "m-btn"
+  .b-keypad
+    = link_to 'Cancel', @garage, class: "b-keypad__btn--default"
+    = f.button :submit, class: "b-keypad__btn--success"

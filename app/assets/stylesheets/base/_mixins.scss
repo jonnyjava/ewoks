@@ -1,0 +1,18 @@
+@mixin block($block) {
+  .b-#{$block} {
+    @content;
+  }
+}
+
+@mixin element($block, $element) {
+  .b-#{$block}__#{$element} {
+    @content;
+  }
+}
+
+@mixin modifier($block, $modifier) {
+  .b-#{$block}--#{$modifier} {
+    @content;
+    @extend .b-#{$block};
+  }
+}
