@@ -16,6 +16,13 @@ describe 'Garages' do
       response.content_type.should == Mime::JSON
     end
 
+    it 'should return status 404' do
+      api_get 'alderaan.json', {}, { 'Authorization' => token_header(user.auth_token) }
+      response.status.should be(404)
+      response.body.should_not be_empty
+      response.content_type.should == Mime::JSON
+    end
+
     it 'should return status 401' do
       api_get 'garages.json', {}, { 'Authorization' => "Token token=wrongtoken"}
       response.status.should be(401)
