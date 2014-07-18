@@ -1,24 +1,26 @@
-= simple_form_for(@garage) do |f|
-  - if @garage.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
-      ul
-        - @garage.errors.full_messages.each do |message|
-          li = message
+.row
+  = simple_form_for(@garage) do |f|
+    - if @garage.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
+        ul
+          - @garage.errors.full_messages.each do |message|
+            li = message
 
-  = f.input :name
-  = f.input :country
-  = f.input :street
-  = f.input :zip
-  = f.input :city
-  = f.input :email
-  = f.input :phone
-  = f.input :mobile
-  = f.input :fax
-  = f.input :tax_id
-  = f.input :website
-  = f.input :logo
+    .col-sm-6 = f.input :name
+    .col-sm-6 = f.input :email
+    .col-sm-3 = f.input :street
+    .col-sm-3 = f.input :zip
+    .col-sm-3 = f.input :city
+    .col-sm-3 = f.input :country
+    .col-sm-6 = f.input :phone
+    .col-sm-6 = f.input :mobile
+    .col-sm-6 = f.input :fax
+    .col-sm-6 = f.input :tax_id
+    .col-sm-6 = f.input :logo, wrapper: :vertical_file_input, hint: "Click to assign an image to your garage."
+    .col-sm-6 = f.input :website
 
-  .b-keypad
-    = link_to 'Cancel', @garage, class: "b-keypad__btn--default"
-    = f.button :submit, class: "b-keypad__btn--success"
+    .col-xs-12
+      .b-keypad
+        = link_to 'Cancel', @garage, class: "b-keypad__btn--default"
+        = f.button :submit, class: "b-keypad__btn--success"
