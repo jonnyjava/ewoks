@@ -25,6 +25,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
 gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'pg'
