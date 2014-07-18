@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap.min
+//= require bootstrap-timepicker
 //= require adminlte
 //= require turbolinks
 //= require_tree .

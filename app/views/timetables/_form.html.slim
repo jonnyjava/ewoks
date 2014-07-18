@@ -21,23 +21,27 @@
       = render 'timetables/shared/time_field', field_params
 
       .col-sm-3
-        .checkbox
+        .checkbox.js_break
           label
             - does_break = @timetable.closes_at_noon(day)
-            input class="js_break" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
+            input data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
             | Unchecked if closes at noon
 
   .b-keypad
     = f.button :submit, class: "b-keypad__btn--success"
 
+
 coffee:
   $ ->
-    $(".js_break").click ->
+    $('input:checkbox').on 'ifClicked', event, ->
       day = $(this).attr('data-day')
       checked = $(this).is(":checked")
-      $("#timetable_"+day+"_morning_close").val('').prop('disabled', checked)
-      $("#timetable_"+day+"_afternoon_open").val('').prop('disabled', checked)
 
-    $('.js_timetable_field').timepicker
-      'timeFormat': 'h:i A',
-      'step': 15
+      $("#timetable_"+day+"_morning_close").val('').prop('disabled', !checked)
+      $("#timetable_"+day+"_afternoon_open").val('').prop('disabled', !checked)
+
+    $(".timepicker").timepicker
+      showInputs: false,
+      defaultTime: '00:00',
+      showMeridian: false,
+      minuteStep: 15
