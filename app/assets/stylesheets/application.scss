@@ -21,3 +21,45 @@
   margin-right: .5em;
   top: -2px;
 }
+
+.garage-map {
+  margin-bottom: 2em;
+  @extend .img-responsive;
+  @extend .img-thumbnail;
+}
+
+.garage-avatar {
+  margin-top: 1em;
+  @extend .garage-map;
+}
+
+.map-info {
+  margin-top: 1em;
+
+  &:before {
+    content: "";
+    display: block;
+    border-left: 1px solid #f4f4f4;
+    height: 100%;
+    width: .25em;
+    left: -7.5%;
+    position: absolute;
+  }
+
+  .icon {
+    margin-right: .5em;
+    color: #1c7ebb;
+  }
+
+  li {
+    margin-bottom: .5em;
+    border-bottom: 1px solid #f4f4f4;
+    margin-left: .5em;
+
+    label {
+      font-size: 1.1em;
+      color: #666;
+      width: 5em;
+    }
+  }
+}

@@ -1,42 +1,38 @@
 - content_for :content
+  .row
+    .col-sm-4
+      = image_tag @garage.logo.url, class: 'garage-avatar'
 
-  .col-sm-4
-    = image_tag @garage.logo.url, class: 'img-responsive'
-    = link_to "Delete image", destroy_logo_path(@garage), class: "m-btn--large", data: {:confirm => 'Are you sure?'}, :method => :delete
+      = link_to "Delete image", destroy_logo_path(@garage), class: "btn btn-danger btn-block btn-flat", data: {:confirm => 'Are you sure?'}, :method => :delete
+      = link_to 'Edit information', edit_garage_path(@garage), class: "btn btn-success btn-block btn-flat"
+      = link_to 'List all garages', garages_path(), class: "btn btn-default btn-block btn-flat"
 
-  .col-sm-8
-    .table-responsive
-      table.table.table-condensed
-        tbody
-          tr
-            td Address:
-            td = @garage.address
-          tr
-            td Email:
-            td = @garage.email
-          tr
-            td Phone:
-            td = @garage.phone
-          tr
-            td Mobile:
-            td = @garage.mobile
-          tr
-            td Fax:
-            td = @garage.fax
-          tr
-            td Latitude:
-            td = @garage.latitude
-          tr
-            td Longitude:
-            td = @garage.longitude
-          tr
-            td Tax:
-            td = @garage.tax_id
-          tr
-            td Website:
+    .col-sm-7.col-sm-push-1
+      .map-info
+        .media
+          = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@garage.latitude},#{@garage.longitude}&zoom=16&size=768x150&sensor=true&markers=color:red%7C#{@garage.latitude},#{@garage.longitude}", class: 'garage-map'
 
-  .m-list--btn
-    = link_to 'Go back', garages_path(), class: "m-btn--back"
-    = link_to 'Edit information', edit_garage_path(@garage), class: "m-btn"
+          .media-body
+            ul.list-unstyled.list-info
+              li
+                span.icon.glyphicon.glyphicon-home
+                label Garage
+                = "#{@garage.name}, #{@garage.tax_id}"
+              li
+                span.icon.glyphicon.glyphicon-map-marker
+                label Address
+                = "#{@garage.address}. (#{@garage.latitude}, #{@garage.longitude})"
+              li
+                span.icon.glyphicon.glyphicon-envelope
+                label Email
+                = @garage.email
+              li
+                span.icon.glyphicon.glyphicon-earphone
+                label Contact
+                = "Phone: #{@garage.phone}, Mobile: #{@garage.mobile}, Fax: #{@garage.fax}"
+              li
+                span.icon.glyphicon.glyphicon-globe
+                label Website
+                = @garage.website
 
-= render template: "layouts/box_tabs", locals: { title: "Garage - #{@garage.name}" }
+= render template: "layouts/box_tabs"
