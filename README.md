@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/Norauto/Ewoks.png)](https://codeclimate.com/github/Norauto/Ewoks)
+
 Ewoks
 =====
 
