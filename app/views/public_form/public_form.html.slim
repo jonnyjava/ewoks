@@ -1,3 +1,8 @@
+- timetable = @timetable || Timetable.new
+- holiday = @holiday || Holiday.new
+- fee = @fee || Fee.new
+- tyre_fee =fee.try(:tyre_fee) || TyreFee.new
+
 = simple_form_for(@garage, url: public_form_create_url) do |f|
   - if @garage.errors.any?
     #error_explanation
@@ -19,7 +24,7 @@
   = f.input :website
 
   h3 Timetable
-  = simple_fields_for @timetable do |ftt|
+  = simple_fields_for timetable do |ftt|
     = ftt.error_notification
 
     - Date::DAYNAMES.each do |day|
@@ -30,10 +35,10 @@
         - field_params = { day: day, f: ftt, horary: 'morning_open', disabled: false }
         = render 'timetables/shared/time_field', field_params
 
-        - field_params = { day: day, f: ftt, horary: 'morning_close', disabled: @timetable.closes_at_noon(day) }
+        - field_params = { day: day, f: ftt, horary: 'morning_close', disabled: timetable.closes_at_noon(day) }
         = render 'timetables/shared/time_field', field_params
 
-        - field_params = { day: day, f: ftt, horary: 'afternoon_open', disabled: @timetable.closes_at_noon(day) }
+        - field_params = { day: day, f: ftt, horary: 'afternoon_open', disabled: timetable.closes_at_noon(day) }
         = render 'timetables/shared/time_field', field_params
 
         - field_params = { day: day, f: ftt, horary: 'afternoon_close', disabled: false }
@@ -42,13 +47,18 @@
         .col-sm-3
           .checkbox
             label
-              - does_break = @timetable.closes_at_noon(day)
+              - does_break = timetable.closes_at_noon(day)
               input class="js_break" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
               | Unchecked if closes at noon
 
   h3 Holidays
-  = simple_fields_for @holiday do |fh|
-    = fh.error_notification
+  = simple_fields_for holiday do |fh|
+    - if holiday.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(holiday.errors.count, "error")} prohibited this holiday from being saved:"
+        ul
+          - holiday.errors.full_messages.each do |message|
+            li = message
     .row
       .col-xs-6
         = fh.input :name
@@ -64,23 +74,23 @@
             i.fa.fa-calendar
 
   h3 Tyre fees
-  = simple_fields_for @tyre_fee do |ftf|
-    - if @fee.errors.any?
+  = simple_fields_for tyre_fee do |ftf|
+    - if fee.errors.any?
       #error_explanation
-        h2 = "#{pluralize(@fee.errors.count, "error")} prohibited this fee from being saved:"
+        h2 = "#{pluralize(fee.errors.count, "error")} prohibited this fee from being saved:"
         ul
-          - @fee.errors.full_messages.each do |message|
+          - fee.errors.full_messages.each do |message|
             li = message
 
-    - if @tyre_fee.errors.any?
+    - if tyre_fee.errors.any?
       #error_explanation
-        h2 = "#{pluralize(@tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"
+        h2 = "#{pluralize(tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"
         ul
-          - @tyre_fee.errors.full_messages.each do |message|
+          - tyre_fee.errors.full_messages.each do |message|
             li = message
     .container-fluid = simple_fields_for :fee do |cf|
-      .col-md-3 = cf.input :name
-      .col-md-3 = cf.input :price
+      .col-md-3 = cf.input :name, required: false
+      .col-md-3 = cf.input :price, required: false
     end
     .container-fluid
       .col-md-3 = ftf.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"

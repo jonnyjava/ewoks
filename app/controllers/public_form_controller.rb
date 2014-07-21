@@ -3,35 +3,41 @@ class PublicFormController < ApplicationController
 
   def public_form
     @garage = Garage.new(country: nil)
-    @timetable = Timetable.new
-    @holiday = Holiday.new
-    @fee = Fee.new
-    @tyre_fee = TyreFee.new
     render :public_form, layout: false
   end
 
   def create
     @garage = Garage.new(garage_params)
     @garage.status = Garage::INACTIVE
-    @garage.timetable = Timetable.new(timetable_params)
-    @holiday = Holiday.create(holiday_params)
+    @timetable = Timetable.new(timetable_params)
+    @holiday = Holiday.new(holiday_params)
     @fee = Fee.new(fee_params)
     @tyre_fee = TyreFee.new(tyre_fee_params)
 
+    allok = @garage.valid?
+    allok = @holiday.valid? && allok
+    allok = @timetable.valid? && allok
+    allok = @fee.valid? && allok
+    allok = @tyre_fee.valid? && allok
+
     respond_to do |format|
-      if @garage.save
-
-        @holiday.garage = @garage
-        @fee.garage = @garage
-        @tyre_fee.fee = @fee
-
-        @garage.timetable.save
-        @holiday.save
-        @fee.save
-        @tyre_fee.save
-        format.html { redirect_to :success, notice: 'Garage was successfully created.'}
-      else
+      if !allok
         format.html { render :public_form, layout: false }
+      else
+        if @garage.save
+          @holiday.garage = @garage
+          @timetable.garage = @garage
+          @fee.garage = @garage
+          @tyre_fee.fee = @fee
+
+          if (@timetable.save && @holiday.save && @fee.save && @tyre_fee.save)
+            format.html { redirect_to :success, notice: 'Garage was successfully created.'}
+          else
+            format.html { render :public_form, layout: false }
+          end
+        else
+          format.html { render :public_form, layout: false }
+        end
       end
     end
   end
@@ -51,13 +57,16 @@ class PublicFormController < ApplicationController
     end
 
     def holiday_params
+      # params.require(:holiday).permit()
       params.require(:holiday).permit(:name, :start_date, :end_date, :garage_id)
     end
+
     def tyre_fee_params
       params.require(:tyre_fee).permit(:vehicle_type, :diameter_min, :diameter_max, :rim_type)
     end
 
     def fee_params
+      # params.require(:fee).permit()
       params.require(:fee).permit(:name, :price)
     end
 end

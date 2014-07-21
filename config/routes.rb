@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/public_form', to:'public_form#public_form', as: 'public_form'
   get '/success', to:'public_form#success', as: 'success'
+  get '/public_form', to:'public_form#public_form', as: 'public_form'
   post '/public_form', to:'public_form#create', as: 'public_form_create'
 
   resources :garages do
