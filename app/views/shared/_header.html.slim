@@ -14,16 +14,16 @@ header.header
           a href="#" class="dropdown-toggle" data-toggle="dropdown"
             i.glyphicon.glyphicon-user
             span
-              = "#{@current_user.try(:name)} #{@current_user.try(:surname)}"
+              = "#{current_user.try(:name)} #{current_user.try(:surname)}"
               i.caret
 
           ul.dropdown-menu
             li.user-header.bg-light-blue
               = image_tag "profile_default.jpg", class: "img-circle", alt: "User Image"
               p
-                = "#{@current_user.try(:name)} #{@current_user.try(:surname)}"
+                = "#{current_user.try(:name)} #{current_user.try(:surname)}"
                 small
-                  = @current_user.try(:email)
+                  = current_user.try(:email)
 
             li.user-body
               .col-xs-4.text-center
