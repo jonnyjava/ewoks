@@ -12,6 +12,7 @@ class Garage < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+  after_create :send_signup_confirmation
 
   ACTIVE = true
   INACTIVE = false
@@ -34,5 +35,9 @@ class Garage < ActiveRecord::Base
   def self.find_by_radius_from_location(location, radius=10)
     coords = Geocoder.coordinates(location)
     Garage.near(coords, radius, units: :km)
+  end
+
+  def send_signup_confirmation
+    PublicFormMailer.sing_up_confirmation(email).deliver
   end
 end

@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :garage do
     status    Garage::ACTIVE
     name      Faker::Name.name
+    email     Faker::Internet::email
     street    Faker::Address.street_name
     zip       Faker::Address.zip_code
     city      Faker::Address.city
