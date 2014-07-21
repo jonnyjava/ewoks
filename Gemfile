@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'sqlite3'
+  gem 'email_spec'
 end
 
 # Use ActiveModel has_secure_password
