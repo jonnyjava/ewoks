@@ -60,4 +60,19 @@ describe Garage do
       end
     end
   end
+
+  describe 'get countries' do
+    let!(:admin) { FactoryGirl.create(:admin) }
+    let!(:country_manager) { FactoryGirl.create(:country_manager) }
+
+    context 'user is admin' do
+      it 'should return all countries' do
+        Garage.countries(admin).should eq(Garage::COUNTRIES)
+      end
+
+      it "should return only the country's country manager" do
+        Garage.countries(country_manager).should eq([country_manager.country])
+      end
+    end
+  end
 end
