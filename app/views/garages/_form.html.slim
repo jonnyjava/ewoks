@@ -12,7 +12,7 @@
     .col-sm-3 = f.input :street
     .col-sm-3 = f.input :zip
     .col-sm-3 = f.input :city
-    .col-sm-3 = f.input :country
+    .col-sm-3 = f.input :country, collection: Garage.countries(@current_user)
     .col-sm-6 = f.input :phone
     .col-sm-6 = f.input :mobile
     .col-sm-6 = f.input :fax
