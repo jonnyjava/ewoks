@@ -7,6 +7,7 @@ class Garage < ActiveRecord::Base
   has_many :properties, through: :garage_properties
 
   validates :street, :zip, :city, :country, :phone, :tax_id, presence: true
+  validates :email, uniqueness: true
   has_attached_file :logo, default_url: "/assets/avatar_default.jpg"
   validates_attachment_content_type :logo, content_type: ['image/png', 'image/jpg']
 
@@ -17,6 +18,7 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
+  COUNTRIES = ["Italy", "Poland", "Portugal", "Argentina"]
 
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
@@ -66,5 +68,10 @@ class Garage < ActiveRecord::Base
       end
     end
     garage
+  end
+
+  def self.countries(user)
+    return [user.country] unless user.admin?
+    COUNTRIES
   end
 end

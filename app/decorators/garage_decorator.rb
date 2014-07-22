@@ -1,5 +1,5 @@
 class GarageDecorator < ApplicationDecorator
   def status
-    object.status? ? 'active' : 'disable'
+    object.status? ? 'enabled' : 'disabled'
   end
 end

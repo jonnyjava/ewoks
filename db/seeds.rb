@@ -21,3 +21,11 @@ user.password_confirmation  = "Igotnopower"
 user.role = User::OWNER
 user.country = "Spain"
 user.save!
+
+user = User.new
+user.email = 'api@norauto.com'
+user.password  = "Igotthetoken"
+user.password_confirmation  = "Igotthetoken"
+user.role = User::API
+user.country = "Spain"
+user.save!

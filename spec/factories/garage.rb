@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :garage do
     status    Garage::ACTIVE
     name      Faker::Name.name
-    email     Faker::Internet::email
     street    Faker::Address.street_name
     zip       Faker::Address.zip_code
     city      Faker::Address.city
@@ -13,6 +12,7 @@ FactoryGirl.define do
     tax_id    Faker::Code.isbn
     latitude  Faker::Address.latitude
     longitude Faker::Address.longitude
+    sequence(:email) { |n| Faker::Internet.safe_email(n) }
 
     factory :turin_garage, class: Garage do
       zip     '10141'

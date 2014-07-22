@@ -11,10 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.ui.all
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap
-//= require jquery.timepicker.js
-//= require backend
+//= require bootstrap.min
+//= require bootstrap-timepicker
+//= require jquery-ui/datepicker
+//= require adminlte
 //= require turbolinks
 //= require_tree .

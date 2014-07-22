@@ -1,6 +1,6 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  config.button_class = 'btn btn-default'
+  config.button_class = 'btn'
   config.boolean_label_class = nil
 
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
@@ -15,7 +15,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :vertical_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :vertical_file_input, tag: 'div', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label, class: 'control-label'
@@ -59,7 +59,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :horizontal_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :horizontal_file_input, tag: 'div', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label, class: 'col-sm-3 control-label'
@@ -125,7 +125,7 @@ SimpleForm.setup do |config|
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
   end
-  
+
   # Wrappers for forms and inputs using the Bootstrap toolkit.
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,

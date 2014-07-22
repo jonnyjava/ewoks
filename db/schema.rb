@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20140722080157) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
-    t.decimal  "price",      precision: 2, scale: 0
+    t.decimal  "price",      precision: 4, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "garage_id"

@@ -15,6 +15,7 @@ describe Garage do
   it { should validate_presence_of(:phone) }
   it { should validate_presence_of(:tax_id) }
   it { should validate_attachment_content_type(:logo).allowing('image/png', 'image/jpg') }
+  it { should validate_uniqueness_of(:email) }
 
   describe 'callbacks' do
     let(:garage) { FactoryGirl.create(:garage) }
@@ -89,6 +90,21 @@ describe Garage do
         garages.first.should eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
         ids.count.should be(1)
+      end
+    end
+  end
+
+  describe 'get countries' do
+    let!(:admin) { FactoryGirl.create(:admin) }
+    let!(:country_manager) { FactoryGirl.create(:country_manager) }
+
+    context 'user is admin' do
+      it 'should return all countries' do
+        Garage.countries(admin).should eq(Garage::COUNTRIES)
+      end
+
+      it "should return only the country's country manager" do
+        Garage.countries(country_manager).should eq([country_manager.country])
       end
     end
   end

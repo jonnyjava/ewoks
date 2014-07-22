@@ -1,10 +1,7 @@
-- content_for :subheader
-  = render 'shared/tablist'
-
 - content_for :content
 
   .table-responsive
-    table.table.table-condensed
+    table.table.table-condensed.table-striped.table-bordered
       thead
         tr
           th Name
@@ -27,6 +24,8 @@
             td = render 'shared/crudbar', { entity: tyre_fee, garage: @garage }
 
   = paginate @tyre_fees
-  = link_to 'New Tyre fee', new_garage_tyre_fee_path(@garage), class: "m-btn"
 
-= render template: "layouts/box", locals: { title: 'Listing tyre fees' }
+  .b-keypad
+    = link_to 'New tyre fee', new_garage_tyre_fee_path(@garage), class: "b-keypad__btn--success"
+
+= render template: "layouts/box_tabs", locals: { title: 'Listing tyre fees' }

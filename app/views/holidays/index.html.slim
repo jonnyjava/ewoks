@@ -1,10 +1,7 @@
-- content_for :subheader
-  = render 'shared/tablist'
-
 - content_for :content
 
   .table-responsive
-    table.table.table-condensed
+    table.table.table-condensed.table-striped.table-bordered
       thead
         tr
           th Name
@@ -21,6 +18,8 @@
             td = render 'shared/crudbar', { entity: holiday, garage: @garage }
 
   = paginate @holidays
-  = link_to 'New Holiday', new_garage_holiday_path(@garage), class: "m-btn"
 
-= render template: "layouts/box", locals: { title: 'Listing holidays' }
+  .b-keypad
+    = link_to 'New Holiday', new_garage_holiday_path(@garage), class: "b-keypad__btn--success"
+
+= render template: "layouts/box_tabs", locals: { title: 'Listing holidays' }

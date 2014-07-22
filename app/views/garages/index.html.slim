@@ -1,23 +1,28 @@
 - content_for :content
 
   .table-responsive
-    table.table.table-condensed
+    table.table.table-condensed.table-striped.table-bordered
       thead
         tr
           th Name
           th Address
           th Phone
+          th Status
           th Actions
 
       tbody
         - @garages.each do |garage|
-          tr class="#{garage.status}"
+          tr
             td = link_to garage.name, garage_path(garage)
             td = garage.address
             td = garage.phone
+            td
+              span class="label label-#{garage.object.status ? 'success' : 'danger'}" = garage.status
             td = render 'shared/crudbar', entity: garage
 
   = paginate @garages
-  = link_to 'New Garage', new_garage_path, class: "m-btn"
+
+  .b-keypad
+    = link_to 'New Garage', new_garage_path, class: "b-keypad__btn--success"
 
 = render template: "layouts/box", locals: { title: 'Listing garages' }

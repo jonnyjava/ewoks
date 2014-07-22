@@ -1,7 +1,7 @@
 - content_for :content
 
   .table-responsive
-    table.table.table-condensed
+    table.table.table-condensed.table-striped.table-bordered
       thead
         tr
           th Name
@@ -13,10 +13,11 @@
           tr
             td = property.name
             td = property.type_of
-            td
             td = render 'shared/crudbar', { entity: property }
 
   = paginate @properties
-  = link_to 'New Property', new_property_path, class: "m-btn"
+
+  .b-keypad
+    = link_to 'New Property', new_property_path, class: "b-keypad__btn--success"
 
 = render template: "layouts/box", locals: { title: 'Listing properties' }

@@ -1,7 +1,7 @@
 - content_for :content
 
   .table-responsive
-    table.table.table-condensed
+    table.table.table-condensed.table-striped.table-bordered
       thead
         tr
           th User
@@ -18,6 +18,8 @@
             td = render 'shared/crudbar', entity: user
 
   = paginate @users
-  = link_to 'New user', new_user_path, class: "m-btn"
+
+  .b-keypad
+    = link_to 'New user', new_user_path, class: "b-keypad__btn--success"
 
 = render template: "layouts/box", locals: { title: 'Listing users' }

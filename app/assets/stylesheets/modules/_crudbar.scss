@@ -1,0 +1,21 @@
+// Config
+
+// Blocks
+@include block(crudbar) { }
+
+@include element(crudbar, btn) {
+  margin-right: .25em;
+  padding: 2px 8px;
+
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-flat;
+}
+
+@include modifier(crudbar__btn, default) {
+  @extend .btn-default;
+}
+
+@include modifier(crudbar__btn, danger) {
+  @extend .btn-danger;
+}

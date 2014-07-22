@@ -1,25 +1,26 @@
-= simple_form_for(@garage) do |f|
-  - if @garage.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
-      ul
-        - @garage.errors.full_messages.each do |message|
-          li = message
+.row
+  = simple_form_for(@garage) do |f|
+    - if @garage.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
+        ul
+          - @garage.errors.full_messages.each do |message|
+            li = message
 
-  .col-md-3 = f.input :name
-  .col-md-3 = f.input :country
-  .col-md-3 = f.input :street
-  .col-md-3 = f.input :zip
-  .col-md-3 = f.input :city
-  .col-md-3 = f.input :email
-  .col-md-3 = f.input :phone
-  .col-md-3 = f.input :mobile
-  .col-md-3 = f.input :fax
-  .col-md-3 = f.input :tax_id
-  .col-md-3 = f.input :website
-  .col-md-3 = f.input :logo
+    .col-sm-6 = f.input :name
+    .col-sm-6 = f.input :email
+    .col-sm-3 = f.input :street
+    .col-sm-3 = f.input :zip
+    .col-sm-3 = f.input :city
+    .col-sm-3 = f.input :country, collection: Garage.countries(current_user)
+    .col-sm-6 = f.input :phone
+    .col-sm-6 = f.input :mobile
+    .col-sm-6 = f.input :fax
+    .col-sm-6 = f.input :tax_id
+    .col-sm-6 = f.input :logo, wrapper: :vertical_file_input, hint: "Click to assign an image to your garage."
+    .col-sm-6 = f.input :website
 
-  .col-xs-12
-    .m-list--btn
-      = link_to 'Go back', @garage, class: "m-btn--back"
-      = f.button :submit, class: "m-btn"
+    .col-xs-12
+      .b-keypad
+        = link_to 'Cancel', @garage, class: "b-keypad__btn--default"
+        = f.button :submit, class: "b-keypad__btn--success"
