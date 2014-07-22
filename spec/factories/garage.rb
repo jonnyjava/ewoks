@@ -12,6 +12,7 @@ FactoryGirl.define do
     tax_id    Faker::Code.isbn
     latitude  Faker::Address.latitude
     longitude Faker::Address.longitude
+    sequence(:email) {|n| Faker::Internet.safe_email(n) }
 
     factory :turin_garage, class: Garage do
       zip     '10141'
