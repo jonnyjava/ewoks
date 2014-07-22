@@ -41,7 +41,7 @@ class Garage < ActiveRecord::Base
   end
 
   def to_be_confirmed?
-    garage.status == TO_BE_CONFIRMED
+    status == TO_BE_CONFIRMED
   end
 
   def create_my_owner
