@@ -32,6 +32,13 @@ describe Garage do
       result.should_not eq(garage2)
     end
   end
+  describe 'disable!' do
+    it 'should make the garage inactive' do
+      garage = FactoryGirl.create(:garage)
+      garage.disable!
+      garage.status.should be(Garage::INACTIVE)
+    end
+  end
 
   describe 'find_by_radius_from_location' do
     let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }

@@ -43,6 +43,10 @@ class Garage < ActiveRecord::Base
     PublicFormMailer.sing_up_confirmation(self).deliver
   end
 
+  def disable!
+    self.update_attribute(:status, INACTIVE)
+  end
+
   def signup_verification_token
       Digest::SHA1.hexdigest([email, status, 'endor is full of ewoks'].join)
   end
