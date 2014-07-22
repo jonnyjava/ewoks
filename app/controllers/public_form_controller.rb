@@ -57,7 +57,6 @@ class PublicFormController < ApplicationController
     end
 
     def holiday_params
-      # params.require(:holiday).permit()
       params.require(:holiday).permit(:name, :start_date, :end_date, :garage_id)
     end
 
@@ -66,7 +65,6 @@ class PublicFormController < ApplicationController
     end
 
     def fee_params
-      # params.require(:fee).permit()
       params.require(:fee).permit(:name, :price)
     end
 end

@@ -40,6 +40,10 @@ class Garage < ActiveRecord::Base
     self.update_attribute(:status, INACTIVE)
   end
 
+  def to_be_confirmed?
+    garage.status == TO_BE_CONFIRMED
+  end
+
   def create_my_owner
     owner = User.create(email: email, password: Faker::Internet::password(10))
     self.update_attribute(:owner_id, owner.id)
@@ -47,11 +51,11 @@ class Garage < ActiveRecord::Base
   end
 
   def send_signup_confirmation
-    PublicFormMailer.sing_up_confirmation(self).deliver
+    PublicFormMailer.signup_confirmation(self).deliver
   end
 
   def signup_verification_token
-      Digest::SHA1.hexdigest([email, status, 'endor is full of ewoks'].join)
+      Digest::SHA1.hexdigest([email, status, created_at, 'endor is full of ewoks'].join)
   end
 
   def self.find_by_radius_from_location(location, radius=10)
