@@ -14,10 +14,12 @@ class Garage < ActiveRecord::Base
   after_validation :geocode, if: :address_changed?
   after_create :send_signup_confirmation
 
-  ACTIVE = true
-  INACTIVE = false
+  ACTIVE = 1
+  INACTIVE = 0
+  TO_BE_CONFIRMED = -1
 
   scope :active, -> { where(status: ACTIVE) }
+  scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
   scope :by_country, ->(country) { where(country: country) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
@@ -38,6 +40,20 @@ class Garage < ActiveRecord::Base
   end
 
   def send_signup_confirmation
-    PublicFormMailer.sing_up_confirmation(email).deliver
+    PublicFormMailer.sing_up_confirmation(self).deliver
+  end
+
+  def signup_verification_token
+      Digest::SHA1.hexdigest([email, status, 'endor is full of ewoks'].join)
+  end
+
+  def self.find_by_signup_verification_token(token)
+    garage = nil
+    garages = Garage.to_confirm
+    garages.each do |g|
+      garage = g if g.signup_verification_token == token
+      break
+    end
+    garage
   end
 end
