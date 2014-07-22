@@ -19,8 +19,17 @@ describe Garage do
 
   describe 'callbacks' do
     let(:garage) { FactoryGirl.create(:garage) }
-
     it { Garage.any_instance.should_receive(:send_signup_confirmation).with(garage.email) }
+  end
+
+  describe 'signup_verification_token' do
+    it 'should generate an unique token' do
+      garage1 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
+      garage2 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
+      token1 = garage1.signup_verification_token
+      token2 = garage2.signup_verification_token
+      token1.should_not eq(token2)
+    end
   end
 
   describe 'find_by_token' do
@@ -33,6 +42,7 @@ describe Garage do
       result.should_not eq(garage2)
     end
   end
+
   describe 'disable!' do
     it 'should make the garage inactive' do
       garage = FactoryGirl.create(:garage)

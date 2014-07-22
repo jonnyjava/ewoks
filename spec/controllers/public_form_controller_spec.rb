@@ -28,7 +28,7 @@ describe PublicFormController do
         n = Garage.count
         post :create, valid_params, valid_session
         response.should redirect_to success_path
-        Garage.count.should == n+1
+        Garage.count.should be(n+1)
       end
     end
 
@@ -45,7 +45,7 @@ describe PublicFormController do
         n = Garage.count
         post :create, invalid_params, valid_session
         response.should render_template 'public_form'
-        Garage.count.should == n
+        Garage.count.should be(n)
       end
     end
   end
