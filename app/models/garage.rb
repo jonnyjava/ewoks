@@ -15,6 +15,7 @@ class Garage < ActiveRecord::Base
 
   ACTIVE = true
   INACTIVE = false
+  COUNTRIES = ["Italy", "Poland", "Portugal", "Argentina"]
 
   scope :active, -> { where(status: ACTIVE) }
   scope :by_country, ->(country) { where(country: country) }
@@ -34,5 +35,10 @@ class Garage < ActiveRecord::Base
   def self.find_by_radius_from_location(location, radius=10)
     coords = Geocoder.coordinates(location)
     Garage.near(coords, radius, units: :km)
+  end
+
+  def self.countries(user)
+    return [user.country] unless user.admin?
+    COUNTRIES
   end
 end

@@ -6,7 +6,7 @@ aside.left-side.sidebar-offcanvas
       .pull-left.image
         = image_tag "profile_default.jpg", class: "img-circle", alt: "User Image"
       .pull-left.info
-        p = "Hello, #{@current_user.try(:name)}"
+        p = "Hello, #{current_user.try(:name)}"
         a href="#"
           i.fa.fa-circle.text-success
           'Online
