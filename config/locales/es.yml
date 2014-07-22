@@ -20,8 +20,49 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
-  holidays: "vacaciones"
-  timetable: "horarios"
-  tyre fees: "tarifas de neumaticos"
-  information: "información"
-  garage profile: "ficha de garage"
+  holidays: 'vacaciones'
+  timetable: 'horarios'
+  tyre fees: 'tarifas de neumaticos'
+  information: 'información'
+  garage profile: 'ficha de garage'
+  delete image: 'eliminar imagen'
+  edit information: 'editar información'
+  list all garages: 'ver todos los garages'
+  garage:   'garage'
+  address:  'dirección'
+  email:  'correo'
+  contact:  'contacto'
+  website:  'sitio web'
+  new garage: 'nuevo garage'
+  edit garage: 'editar garage'
+  name: 'nombre'
+  phone: 'teléfono'
+  status: 'estado'
+  actions: 'acciones'
+  disabled: 'desactivado'
+  enabled: 'activado'
+  garages list: 'listado de garages'
+  cancel: 'cancelar'
+  click to assign an image to your garage: 'Pulsa para asignar una imagen de tu garage'
+
+  simple_form:
+    labels:
+      defaults:
+        name: 'Nombre'
+        email: 'Correo electrónico'
+        street: 'Dirección'
+        zip: 'Código postal'
+        city: 'Ciudad'
+        country: 'País'
+        phone: 'Teléfono'
+        mobile: 'Móvil'
+        fax: 'Fax'
+        tax_id: 'C.I.F'
+        logo: 'Subir imágen'
+        website: 'Sitio web'
+
+  helpers:
+    submit:
+      garage:
+        create: "Añadir garage"
+        update: "Actualizar garage"

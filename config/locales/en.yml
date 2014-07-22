@@ -25,3 +25,43 @@ en:
   tyre fees: "tyre fees"
   information: "information"
   garage profile: "garage profile"
+  delete image: 'delete image'
+  edit information: 'edit information'
+  list all garages: 'list all garages'
+  garage: 'garage'
+  address: 'address'
+  email: 'email'
+  contact: 'contact'
+  website: 'website'
+
+  new garage: 'new garage'
+  edit garage: 'edit garage'
+  name: 'name'
+  phone: 'phone'
+  status: 'status'
+  actions: 'actions'
+  disabled: 'disabled'
+  enabled: 'enabled'
+  garages list: 'garages lists'
+  cancel: 'cancel'
+  click to assign an image to your garage: 'click to assign an image to your garage'
+  simple_form:
+    labels:
+      defaults:
+        name: 'Name'
+        email: 'Email'
+        street: 'Street'
+        zip: 'Zip'
+        city: 'City'
+        country: 'Country'
+        phone: 'Phone'
+        mobile: 'Mobile'
+        fax: 'Fax'
+        tax_id: 'Tax'
+        logo: 'Upload image'
+        website: 'website'
+  helpers:
+    submit:
+      garage:
+        create: "Add garage"
+        update: "Update garage"
