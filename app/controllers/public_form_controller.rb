@@ -8,7 +8,7 @@ class PublicFormController < ApplicationController
 
   def create
     @garage = Garage.new(garage_params)
-    @garage.status = Garage::INACTIVE
+    @garage.status = Garage::TO_BE_CONFIRMED
     @timetable = Timetable.new(timetable_params)
     @holiday = Holiday.new(holiday_params)
     @fee = Fee.new(fee_params)
