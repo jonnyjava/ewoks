@@ -19,9 +19,9 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  holidays: "holidays"
-  timetable: "timetable"
-  tyre fees: "tyre fees"
-  information: "information"
-  garage profile: "garage profile"
+es:
+  holidays: "vacaciones"
+  timetable: "horarios"
+  tyre fees: "tarifas de neumaticos"
+  information: "información"
+  garage profile: "ficha de garage"
