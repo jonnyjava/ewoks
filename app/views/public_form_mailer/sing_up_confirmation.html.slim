@@ -3,7 +3,5 @@ html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
   body
-    h1
-      | Welcome to EWOKS!
-    p
-      click here to confirm your registration
+    h1 Welcome to EWOKS!
+    = link_to 'click here to confirm your registration', signup_verification_url(@garage.signup_verification_token)

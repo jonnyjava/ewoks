@@ -53,10 +53,11 @@ class Garage < ActiveRecord::Base
 
   def self.find_by_signup_verification_token(token)
     garage = nil
-    garages = Garage.to_confirm
-    garages.each do |g|
-      garage = g if g.signup_verification_token == token
-      break
+    Garage.to_confirm.each do |g|
+      if g.signup_verification_token == token
+        garage = g
+        break
+      end
     end
     garage
   end
