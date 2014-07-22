@@ -1,6 +1,7 @@
 class GaragesController < ApplicationController
   before_action :set_garage, only: [:show, :edit, :update, :destroy, :toggle_status, :destroy_logo]
-  after_action :verify_authorized
+  skip_before_filter :authenticate_user!, only: :signup_verification
+  after_action :verify_authorized, except: :signup_verification
 
   # GET /garages
   # GET /garages.json
@@ -84,6 +85,16 @@ class GaragesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to garages_url }
+    end
+  end
+
+  def signup_verification
+    if @garage = Garage.find_by_signup_verification_token(params[:token])
+      @garage.disable!
+      @garage.create_my_owner
+      render :welcome_page, layout: false
+    else
+      redirect_to signup_failed
     end
   end
 
