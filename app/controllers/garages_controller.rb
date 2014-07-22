@@ -94,7 +94,7 @@ class GaragesController < ApplicationController
       @garage.create_my_owner
       render :welcome_page, layout: false
     else
-      redirect_to error_404
+      redirect_to error_404_path
     end
   end
 

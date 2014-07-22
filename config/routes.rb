@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
   get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
 
-  match '/404' => 'errors#error_404', via: :all
-  match '/422' => 'errors#error_422', via: :all
-  match '/500' => 'errors#error_500', via: :all
+  match '/404' => 'errors#error_404', via: :all, as: 'error_404'
+  match '/422' => 'errors#error_422', via: :all, as: 'error_422'
+  match '/500' => 'errors#error_500', via: :all, as: 'error_500'
   match '*path', to: 'errors#error_404', via: :all
 end
