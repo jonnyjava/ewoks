@@ -34,21 +34,26 @@ class Garage < ActiveRecord::Base
     attrs.any?{|a| send "#{a}_changed?"}
   end
 
-  def self.find_by_radius_from_location(location, radius=10)
-    coords = Geocoder.coordinates(location)
-    Garage.near(coords, radius, units: :km)
+  def disable!
+    self.update_attribute(:status, INACTIVE)
+  end
+
+  def create_my_owner
+    owner = User.create(email: email, password: Faker::Internet::password(10))
+    self.update_attribute(:owner_id, owner.id)
   end
 
   def send_signup_confirmation
     PublicFormMailer.sing_up_confirmation(self).deliver
   end
 
-  def disable!
-    self.update_attribute(:status, INACTIVE)
-  end
-
   def signup_verification_token
       Digest::SHA1.hexdigest([email, status, 'endor is full of ewoks'].join)
+  end
+
+  def self.find_by_radius_from_location(location, radius=10)
+    coords = Geocoder.coordinates(location)
+    Garage.near(coords, radius, units: :km)
   end
 
   def self.find_by_signup_verification_token(token)

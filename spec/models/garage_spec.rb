@@ -40,6 +40,14 @@ describe Garage do
     end
   end
 
+  describe 'create_my_owner' do
+    it 'should create a new owner who owns the garage' do
+      garage = FactoryGirl.create(:garage)
+      garage.create_my_owner
+      User.find(garage.owner_id).should_not be_nil
+    end
+  end
+
   describe 'find_by_radius_from_location' do
     let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }
     let!(:garage_outside_radius) { FactoryGirl.create(:rome_garage) }
