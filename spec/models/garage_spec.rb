@@ -15,6 +15,7 @@ describe Garage do
   it { should validate_presence_of(:phone) }
   it { should validate_presence_of(:tax_id) }
   it { should validate_attachment_content_type(:logo).allowing('image/png', 'image/jpg') }
+  it { should validate_uniqueness_of(:email) }
 
   describe 'find_by_radius_from_location' do
     let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }
