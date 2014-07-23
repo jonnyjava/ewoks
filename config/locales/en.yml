@@ -76,6 +76,14 @@ en:
   new noliday: 'new noliday'
   holidays list: 'holidays list'
   new holiday: 'new holiday'
+  edit tyre fees: 'edit tyre fees'
+  price: 'price'
+  vehicle type: 'vehicle type'
+  minimal diameter: 'minimal diamete'
+  maximal diameter: 'maximal diameter'
+  rim type: 'rim type'
+  new tyre fee: 'new tyre fee'
+  tyre fees list: 'tyre fees list'
 
   simple_form:
     labels:
@@ -95,8 +103,13 @@ en:
         logo: 'Upload image'
         website: 'website'
         type_of: 'Type of'
-        start_date: 'start_date'
-        end_date: 'end_date'
+        start_date: 'Start date'
+        end_date: 'End date'
+        price: 'Price'
+        vehicle_type: 'Vehicle type'
+        diameter_min: 'Minimal diameter'
+        diameter_max: 'Maximal diameter'
+        rim_type: 'Rim type'
 
   helpers:
     submit:
@@ -112,3 +125,6 @@ en:
       holiday:
         create: 'Add holiday'
         update: 'Update holiday'
+      tyre_fee:
+        create: 'Add tyre fee'
+        update: 'Update tyre fee'

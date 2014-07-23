@@ -76,6 +76,14 @@ es:
   new noliday: 'nuevas vacaciones'
   holidays list: 'listado de vacaciones'
   new holiday: 'nuevas vacaciones'
+  edit tyre fees: 'editar tarifa de neumaticos'
+  price: 'precio'
+  vehicle type: 'tipo de vehículo'
+  minimal diameter: 'diametro mínimo'
+  maximal diameter: 'diametro máximo'
+  rim type: 'tipo de llanta'
+  new tyre fee: 'nueva tarifa de neumáticos'
+  tyre fees list: 'listado de tarifas de neumáticos'
 
   simple_form:
     labels:
@@ -97,6 +105,11 @@ es:
         type_of: 'Tipo de dato'
         start_date: 'Fecha de inicio'
         end_date: 'Fecha de fin'
+        price: 'Precio'
+        vehicle_type: 'Tipo de vehículo'
+        diameter_min: 'Diametro mínimo'
+        diameter_max: 'Diametro máximo'
+        rim_type: 'Tipo de llanta'
 
   helpers:
     submit:
@@ -112,3 +125,6 @@ es:
       holiday:
         create: 'Añadir vacaciones'
         update: 'Actualizar vacaciones'
+      tyre_fee:
+        create: 'Añadir tarifa'
+        update: 'Actualizar tarifa'

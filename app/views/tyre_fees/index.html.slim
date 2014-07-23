@@ -4,13 +4,13 @@
     table.table.table-condensed.table-striped.table-bordered
       thead
         tr
-          th Name
-          th Price
-          th Vehicle type
-          th Minimal diameter
-          th Maximal diameter
-          th Rim type
-          th Actions
+          th = t('name').humanize
+          th = t('price').humanize
+          th = t('vehicle type').humanize
+          th = t('minimal diameter').humanize
+          th = t('maximal diameter').humanize
+          th = t('rim type').humanize
+          th = t('actions').humanize
 
       tbody
         - @tyre_fees.each do |tyre_fee|
@@ -26,6 +26,6 @@
   = paginate @tyre_fees
 
   .b-keypad
-    = link_to 'New tyre fee', new_garage_tyre_fee_path(@garage), class: "b-keypad__btn--success"
+    = link_to t('new tyre fee').humanize, new_garage_tyre_fee_path(@garage), class: "b-keypad__btn--success"
 
-= render template: "layouts/box_tabs", locals: { title: 'Listing tyre fees' }
+= render template: "layouts/box_tabs", locals: { title: t('tyre fees list').humanize }
