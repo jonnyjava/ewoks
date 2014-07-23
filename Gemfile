@@ -9,6 +9,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'spring', group: :development
+gem 'sqlite3', groups: [:development, :test]
 
 gem 'draper', '~> 1.3'
 gem "slim-rails"
@@ -31,7 +33,6 @@ group :production do
 end
 
 group :development do
-  gem 'spring'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'quiet_assets'
@@ -42,6 +43,5 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'sqlite3'
   gem 'email_spec'
 end
