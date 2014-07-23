@@ -55,6 +55,11 @@ es:
   Argentina: 'Argentina'
   France: 'Francia'
   edit user: 'editar usuario'
+  edit property: 'editar propiedad'
+  type: 'tipo'
+  new property: 'nueva propiedad'
+  properties list: 'listado de propiedades'
+  new property: 'nueva propiedad'
 
   simple_form:
     labels:
@@ -73,12 +78,16 @@ es:
         tax_id: 'C.I.F'
         logo: 'Subir imágen'
         website: 'Sitio web'
+        type_of: 'Tipo de dato'
 
   helpers:
     submit:
       garage:
-        create: "Añadir garage"
-        update: "Actualizar garage"
+        create: 'Añadir garage'
+        update: 'Actualizar garage'
       user:
-        create: "Añadir usuario"
-        update: "Actualizar usuario"
+        create: 'Añadir usuario'
+        update: 'Actualizar usuario'
+      property:
+        create: 'Añadir propiedad'
+        update: 'Actualizar propiedad'

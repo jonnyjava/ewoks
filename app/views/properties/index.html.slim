@@ -4,9 +4,9 @@
     table.table.table-condensed.table-striped.table-bordered
       thead
         tr
-          th Name
-          th Type
-          th Actions
+          th = t('name').humanize
+          th = t('type').humanize
+          th = t('actions').humanize
 
       tbody
         - @properties.each do |property|
@@ -18,6 +18,6 @@
   = paginate @properties
 
   .b-keypad
-    = link_to 'New Property', new_property_path, class: "b-keypad__btn--success"
+    = link_to t('new property').humanize, new_property_path, class: "b-keypad__btn--success"
 
-= render template: "layouts/box", locals: { title: 'Listing properties' }
+= render template: "layouts/box", locals: { title: t('properties list').humanize }

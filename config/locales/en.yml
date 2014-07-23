@@ -55,6 +55,11 @@ en:
   Argentina: 'Argentina'
   France: 'Francia'
   edit user: 'editar usuario'
+  edit property: 'edit property'
+  type: 'type'
+  new property: 'new property'
+  properties list: 'properties list'
+  new property: 'new property'
 
   simple_form:
     labels:
@@ -73,6 +78,7 @@ en:
         tax_id: 'Tax'
         logo: 'Upload image'
         website: 'website'
+        type_of: 'Type of'
 
   helpers:
     submit:
@@ -82,3 +88,6 @@ en:
       user:
         create: "Add user"
         update: "Update user"
+      property:
+        create: 'Add property'
+        update: 'Update property'
