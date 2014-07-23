@@ -44,11 +44,24 @@ es:
   garages list: 'listado de garages'
   cancel: 'cancelar'
   click to assign an image to your garage: 'Pulsa para asignar una imagen de tu garage'
+  new user: 'nuevo usuario'
+  users list: 'listado de usuarios'
+  user: 'usuario'
+  country: 'país'
+  Spain: 'España'
+  Italy: 'Italia'
+  Poland: 'Polonia'
+  Portugal: 'Portugal'
+  Argentina: 'Argentina'
+  France: 'Francia'
+  edit user: 'editar usuario'
 
   simple_form:
     labels:
       defaults:
         name: 'Nombre'
+        surname : 'Apellido'
+        password: 'Contraseña'
         email: 'Correo electrónico'
         street: 'Dirección'
         zip: 'Código postal'
@@ -66,3 +79,6 @@ es:
       garage:
         create: "Añadir garage"
         update: "Actualizar garage"
+      user:
+        create: "Añadir usuario"
+        update: "Actualizar usuario"

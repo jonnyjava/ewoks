@@ -14,5 +14,5 @@
   = f.input :phone
 
   .b-keypad
-    = link_to 'Cancel', users_path, class: "b-keypad__btn--default"
+    = link_to t('cancel').humanize, users_path, class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"

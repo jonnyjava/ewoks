@@ -4,22 +4,22 @@
     table.table.table-condensed.table-striped.table-bordered
       thead
         tr
-          th User
-          th Email
-          th Country
-          th Actions
+          th = t('user').humanize
+          th = t('email').humanize
+          th = t('country').humanize
+          th = t('actions').humanize
 
       tbody
         - @users.each do |user|
           tr
             td = "#{user.name} #{user.surname}"
             td = user.email
-            td = user.country
+            td = t('"#{user.country}"')
             td = render 'shared/crudbar', entity: user
 
   = paginate @users
 
   .b-keypad
-    = link_to 'New user', new_user_path, class: "b-keypad__btn--success"
+    = link_to t('new user').humanize, new_user_path, class: "b-keypad__btn--success"
 
-= render template: "layouts/box", locals: { title: 'Listing users' }
+= render template: "layouts/box", locals: { title: t('users list').humanize }

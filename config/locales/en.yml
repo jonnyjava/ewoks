@@ -33,7 +33,6 @@ en:
   email: 'email'
   contact: 'contact'
   website: 'website'
-
   new garage: 'new garage'
   edit garage: 'edit garage'
   name: 'name'
@@ -45,10 +44,24 @@ en:
   garages list: 'garages lists'
   cancel: 'cancel'
   click to assign an image to your garage: 'click to assign an image to your garage'
+  new user: 'nuevo usuario'
+  users list: 'listado de usuarios'
+  user: 'usuario'
+  country: 'país'
+  Spain: 'España'
+  Italy: 'Italia'
+  Poland: 'Polonia'
+  Portugal: 'Portugal'
+  Argentina: 'Argentina'
+  France: 'Francia'
+  edit user: 'editar usuario'
+
   simple_form:
     labels:
       defaults:
         name: 'Name'
+        surname : 'Surname'
+        password: 'Password'
         email: 'Email'
         street: 'Street'
         zip: 'Zip'
@@ -60,8 +73,12 @@ en:
         tax_id: 'Tax'
         logo: 'Upload image'
         website: 'website'
+
   helpers:
     submit:
       garage:
         create: "Add garage"
         update: "Update garage"
+      user:
+        create: "Add user"
+        update: "Update user"

@@ -1,29 +1,21 @@
-.row
-	.col-xs-12
-		.m-box
-			.m-box__header
-				h3.box__title = "User: #{@user.name} #{@user.surname}"
-			.panel-body
-				.col-sm-3.col-lg-2
-					= image_tag "no-profile-img.jpg", class: "img-responsive"
-					= link_to 'Edit information', edit_user_path(@user), class: "m-button--large"
-				.col-sm-9.col-lg-10
-					.table-responsive
-						table.table.table-condensed
-							tbody
-								tr
-									td Email:
-									td = @user.email
-								tr
-									td Phone:
-									td = @user.phone
-								tr
-									td Country:
-									td = @user.country
-								tr
-									td Last sign in:
-									td = @user.last_sign_in_at
-		- unless @user.owner?
-			= link_to 'Back', users_path, class: "m-btn--back"
-		- if @user.garage
-			= link_to 'Back to garage sheet', garage_path(@user.garage), class: "m-button"
+- content_for :content
+	.row
+		.col-sm-3.col-lg-2
+			= image_tag "no-profile-img.jpg", class: "img-responsive"
+			= link_to t('edit information').humanize, edit_user_path(@user), class: "btn btn-success btn-block btn-flat"
+
+		.col-sm-9.col-lg-10
+			.table-responsive
+				table.table.table-condensed
+					tbody
+						tr
+							td = t('email').humanize
+							td = @user.email
+						tr
+							td = t('phone').humanize
+							td = @user.phone
+						tr
+							td = t('country').humanize
+							td = @user.country
+
+= render template: "layouts/box", locals: { title: "#{t('user').humanize}: #{@user.name} #{@user.surname}" }
