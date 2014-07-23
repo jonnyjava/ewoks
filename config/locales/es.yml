@@ -84,6 +84,14 @@ es:
   rim type: 'tipo de llanta'
   new tyre fee: 'nueva tarifa de neumáticos'
   tyre fees list: 'listado de tarifas de neumáticos'
+  Unchecked if closes at noon: 'Desmarcar si cierra a mediodia'
+  Sunday: 'Domingo'
+  Monday: 'Lunes'
+  Tuesday: 'Martes'
+  Wednesday: 'Miercoles'
+  Thursday: 'Jueves'
+  Friday: 'Viernes'
+  Saturday: 'Sábado'
 
   simple_form:
     labels:
@@ -128,3 +136,6 @@ es:
       tyre_fee:
         create: 'Añadir tarifa'
         update: 'Actualizar tarifa'
+      timetable:
+        create: 'Añadir horario'
+        update: 'Actualizar horario'

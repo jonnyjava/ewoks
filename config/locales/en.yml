@@ -110,6 +110,14 @@ en:
         diameter_min: 'Minimal diameter'
         diameter_max: 'Maximal diameter'
         rim_type: 'Rim type'
+        Unchecked if closes at noon: 'Unchecked if closes at noon'
+        Sunday: 'Sunday'
+        Monday: 'Monday'
+        Tuesday: 'Tuesday'
+        Wednesday: 'Wednesday'
+        Thursday: 'Thursday'
+        Friday: 'Friday'
+        Saturday: 'Saturday'
 
   helpers:
     submit:
@@ -128,3 +136,6 @@ en:
       tyre_fee:
         create: 'Add tyre fee'
         update: 'Update tyre fee'
+      timetable:
+        create: 'Add timetable'
+        update: 'Update timetable'
