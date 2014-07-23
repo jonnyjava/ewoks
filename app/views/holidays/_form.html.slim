@@ -17,7 +17,7 @@
   = f.association :garage, as: :hidden
 
   .b-keypad
-    = link_to 'Cancel', garage_holidays_path(@garage), class: "b-keypad__btn--default"
+    = link_to t('cancel').humanize, garage_holidays_path(@garage), class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"
 
 coffee:

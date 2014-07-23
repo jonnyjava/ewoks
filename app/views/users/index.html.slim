@@ -14,7 +14,7 @@
           tr
             td = "#{user.name} #{user.surname}"
             td = user.email
-            td = t("#{user.country}")
+            td = t("#{user.country}") unless user.country.blank?
             td = render 'shared/crudbar', entity: user
 
   = paginate @users

@@ -60,6 +60,22 @@ en:
   new property: 'new property'
   properties list: 'properties list'
   new property: 'new property'
+  garage partners: 'garage partners'
+  control panel: 'control panel'
+  sign out: 'sign out'
+  profile: 'profile'
+  online: 'online'
+  search: 'search'
+  garages: 'garages'
+  users: 'users'
+  properties: 'properties'
+  hello: 'hello'
+  holiday edit: 'holiday edit'
+  start date: 'start date'
+  end date: 'end date'
+  new noliday: 'new noliday'
+  holidays list: 'holidays list'
+  new holiday: 'new holiday'
 
   simple_form:
     labels:
@@ -79,6 +95,8 @@ en:
         logo: 'Upload image'
         website: 'website'
         type_of: 'Type of'
+        start_date: 'start_date'
+        end_date: 'end_date'
 
   helpers:
     submit:
@@ -91,3 +109,6 @@ en:
       property:
         create: 'Add property'
         update: 'Update property'
+      holiday:
+        create: 'Add holiday'
+        update: 'Update holiday'

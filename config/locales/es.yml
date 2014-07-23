@@ -60,6 +60,22 @@ es:
   new property: 'nueva propiedad'
   properties list: 'listado de propiedades'
   new property: 'nueva propiedad'
+  garage partners: 'socios de garaje'
+  control panel: 'panel de control'
+  sign out: 'desconectar'
+  profile: 'perfil'
+  online: 'conectado'
+  search: 'buscar'
+  garages: 'garages'
+  users: 'usuarios'
+  properties: 'propiedades'
+  hello: 'hola'
+  holiday edit: 'editar vacaciones'
+  start date: 'fecha de inicio'
+  end date: 'fecha de fin'
+  new noliday: 'nuevas vacaciones'
+  holidays list: 'listado de vacaciones'
+  new holiday: 'nuevas vacaciones'
 
   simple_form:
     labels:
@@ -79,6 +95,8 @@ es:
         logo: 'Subir imágen'
         website: 'Sitio web'
         type_of: 'Tipo de dato'
+        start_date: 'Fecha de inicio'
+        end_date: 'Fecha de fin'
 
   helpers:
     submit:
@@ -91,3 +109,6 @@ es:
       property:
         create: 'Añadir propiedad'
         update: 'Actualizar propiedad'
+      holiday:
+        create: 'Añadir vacaciones'
+        update: 'Actualizar vacaciones'

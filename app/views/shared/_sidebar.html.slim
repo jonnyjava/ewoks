@@ -1,33 +1,30 @@
 aside.left-side.sidebar-offcanvas
   section.sidebar
 
-    <!-- Sidebar user panel -->
     .user-panel
       .pull-left.image
         = image_tag "profile_default.jpg", class: "img-circle", alt: "User Image"
       .pull-left.info
-        p = "Hello, #{current_user.try(:name)}"
+        p = "#{t('hello').humanize}, #{current_user.try(:name)}"
         a href="#"
           i.fa.fa-circle.text-success
-          'Online
+          = t('online').humanize
 
-    <!-- search form -->
     = form_tag("#",  method: :get, class: "sidebar-form")
       .input-group
-        = text_field_tag "search", nil, placeholder: "Search...", class: "form-control"
+        = text_field_tag "search", nil, placeholder: "#{t('search').humanize}...", class: "form-control"
         span.input-group-btn
           button#search-btn.btn.btn-flat type="submit" name="seach"
             i.fa.fa-search
 
-    <!-- sidebar menu -->
     ul.sidebar-menu
       li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
         i.fa.fa-th-large
-        span Garages
+        span = t('garages').humanize
         small.badge.pull-right.bg-red 3
       li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
         i.fa.fa-user
-        span Users
+        span = t('users').humanize
       li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
         i.fa.fa-cog
-        span Properties
+        span = t('properties').humanize
