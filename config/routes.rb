@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/success', to:'public_form#success', as: 'success'
+  get '/public_form', to:'public_form#public_form', as: 'public_form'
+  post '/public_form', to:'public_form#create', as: 'public_form_create'
+
   resources :garages do
     resources :fees
     resources :tyre_fees
@@ -20,9 +24,10 @@ Rails.application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
   patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
   delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
+  get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
 
-  match '/404' => 'errors#error_404', via: :all
-  match '/422' => 'errors#error_422', via: :all
-  match '/500' => 'errors#error_500', via: :all
+  match '/404' => 'errors#error_404', via: :all, as: 'error_404'
+  match '/422' => 'errors#error_422', via: :all, as: 'error_422'
+  match '/500' => 'errors#error_500', via: :all, as: 'error_500'
   match '*path', to: 'errors#error_404', via: :all
 end

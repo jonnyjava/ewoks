@@ -13,12 +13,15 @@ class Garage < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+  after_create :send_signup_confirmation
 
-  ACTIVE = true
-  INACTIVE = false
+  ACTIVE = 1
+  INACTIVE = 0
+  TO_BE_CONFIRMED = -1
   COUNTRIES = ["Italy", "Poland", "Portugal", "Argentina"]
 
   scope :active, -> { where(status: ACTIVE) }
+  scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
   scope :by_country, ->(country) { where(country: country) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
@@ -33,9 +36,42 @@ class Garage < ActiveRecord::Base
     attrs.any?{|a| send "#{a}_changed?"}
   end
 
+  def disable!
+    self.update_attribute(:status, INACTIVE)
+  end
+
+  def to_be_confirmed?
+    status == TO_BE_CONFIRMED
+  end
+
+  def create_my_owner
+    owner = User.create(email: email, password: Faker::Internet::password(10))
+    self.update_attribute(:owner_id, owner.id)
+    owner.send_generated_password
+  end
+
+  def send_signup_confirmation
+    PublicFormMailer.signup_confirmation(self).deliver
+  end
+
+  def signup_verification_token
+      Digest::SHA1.hexdigest([email, status, created_at, 'endor is full of ewoks'].join)
+  end
+
   def self.find_by_radius_from_location(location, radius=10)
     coords = Geocoder.coordinates(location)
     Garage.near(coords, radius, units: :km)
+  end
+
+  def self.find_by_signup_verification_token(token)
+    garage = nil
+    Garage.to_confirm.each do |g|
+      if g.signup_verification_token == token
+        garage = g
+        break
+      end
+    end
+    garage
   end
 
   def self.countries(user)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721095230) do
+ActiveRecord::Schema.define(version: 20140722080157) do
 
   create_table "fees", force: true do |t|
     t.string   "name"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140721095230) do
     t.datetime "updated_at"
     t.string   "country"
     t.integer  "owner_id"
-    t.boolean  "status"
+    t.integer  "status",                                    default: -1
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
