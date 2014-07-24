@@ -19,6 +19,8 @@ describe GaragesController do
       get("/garages/1/edit").should route_to("garages#edit", :id => "1")
     end
 
+    it{ get("/garages/signup_verification/1").should route_to("garages#signup_verification", :token => "1") }
+
     it "routes to #create" do
       post("/garages").should route_to("garages#create")
     end
