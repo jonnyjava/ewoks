@@ -12,5 +12,5 @@
     = f.input :type_of
 
   .b-keypad
-    = link_to 'Cancel', properties_path, class: "b-keypad__btn--default"
+    = link_to t('cancel').humanize, properties_path, class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"

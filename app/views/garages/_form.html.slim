@@ -17,10 +17,10 @@
     .col-sm-6 = f.input :mobile
     .col-sm-6 = f.input :fax
     .col-sm-6 = f.input :tax_id
-    .col-sm-6 = f.input :logo, wrapper: :vertical_file_input, hint: "Click to assign an image to your garage."
+    .col-sm-6 = f.input :logo, wrapper: :vertical_file_input, hint: t('click to assign an image to your garage')
     .col-sm-6 = f.input :website
 
     .col-xs-12
       .b-keypad
-        = link_to 'Cancel', @garage, class: "b-keypad__btn--default"
+        = link_to t('cancel').humanize, @garage, class: "b-keypad__btn--default"
         = f.button :submit, class: "b-keypad__btn--success"

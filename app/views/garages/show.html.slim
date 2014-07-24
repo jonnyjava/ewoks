@@ -3,9 +3,9 @@
     .col-sm-4
       = image_tag @garage.logo.url, class: 'garage-avatar'
 
-      = link_to "Delete image", destroy_logo_path(@garage), class: "btn btn-danger btn-block btn-flat", data: {:confirm => 'Are you sure?'}, :method => :delete
-      = link_to 'Edit information', edit_garage_path(@garage), class: "btn btn-success btn-block btn-flat"
-      = link_to 'List all garages', garages_path(), class: "btn btn-default btn-block btn-flat"
+      = link_to t('delete image').humanize, destroy_logo_path(@garage), class: "btn btn-danger btn-block btn-flat", data: {:confirm => 'Are you sure?'}, :method => :delete
+      = link_to t('edit information').humanize, edit_garage_path(@garage), class: "btn btn-success btn-block btn-flat"
+      = link_to t('list all garages').humanize, garages_path(), class: "btn btn-default btn-block btn-flat"
 
     .col-sm-7.col-sm-push-1
       .map-info
@@ -16,23 +16,23 @@
             ul.list-unstyled.list-info
               li
                 span.icon.glyphicon.glyphicon-home
-                label Garage
+                label = t('garage').humanize
                 = "#{@garage.name}, #{@garage.tax_id}"
               li
                 span.icon.glyphicon.glyphicon-map-marker
-                label Address
+                label = t('address').humanize
                 = "#{@garage.address}. (#{@garage.latitude}, #{@garage.longitude})"
               li
                 span.icon.glyphicon.glyphicon-envelope
-                label Email
+                label = t('email').humanize
                 = @garage.email
               li
                 span.icon.glyphicon.glyphicon-earphone
-                label Contact
+                label = t('contact').humanize
                 = "Phone: #{@garage.phone}, Mobile: #{@garage.mobile}, Fax: #{@garage.fax}"
               li
                 span.icon.glyphicon.glyphicon-globe
-                label Website
+                label = t('website').humanize
                 = @garage.website
 
 = render template: "layouts/box_tabs"

@@ -1,0 +1,141 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  holidays: 'vacaciones'
+  timetable: 'horarios'
+  tyre fees: 'tarifas de neumaticos'
+  information: 'información'
+  garage profile: 'ficha de garage'
+  delete image: 'eliminar imagen'
+  edit information: 'editar información'
+  list all garages: 'ver todos los garages'
+  garage:   'garage'
+  address:  'dirección'
+  email:  'correo'
+  contact:  'contacto'
+  website:  'sitio web'
+  new garage: 'nuevo garage'
+  edit garage: 'editar garage'
+  name: 'nombre'
+  phone: 'teléfono'
+  status: 'estado'
+  actions: 'acciones'
+  disabled: 'desactivado'
+  enabled: 'activado'
+  garages list: 'listado de garages'
+  cancel: 'cancelar'
+  click to assign an image to your garage: 'Pulsa para asignar una imagen de tu garage'
+  new user: 'nuevo usuario'
+  users list: 'listado de usuarios'
+  user: 'usuario'
+  country: 'país'
+  Spain: 'España'
+  Italy: 'Italia'
+  Poland: 'Polonia'
+  Portugal: 'Portugal'
+  Argentina: 'Argentina'
+  France: 'Francia'
+  edit user: 'editar usuario'
+  edit property: 'editar propiedad'
+  type: 'tipo'
+  new property: 'nueva propiedad'
+  properties list: 'listado de propiedades'
+  new property: 'nueva propiedad'
+  garage partners: 'socios de garaje'
+  control panel: 'panel de control'
+  sign out: 'desconectar'
+  profile: 'perfil'
+  online: 'conectado'
+  search: 'buscar'
+  garages: 'garages'
+  users: 'usuarios'
+  properties: 'propiedades'
+  hello: 'hola'
+  holiday edit: 'editar vacaciones'
+  start date: 'fecha de inicio'
+  end date: 'fecha de fin'
+  new noliday: 'nuevas vacaciones'
+  holidays list: 'listado de vacaciones'
+  new holiday: 'nuevas vacaciones'
+  edit tyre fees: 'editar tarifa de neumaticos'
+  price: 'precio'
+  vehicle type: 'tipo de vehículo'
+  minimal diameter: 'diametro mínimo'
+  maximal diameter: 'diametro máximo'
+  rim type: 'tipo de llanta'
+  new tyre fee: 'nueva tarifa de neumáticos'
+  tyre fees list: 'listado de tarifas de neumáticos'
+  Uncheck if closes at noon: 'Desmarcar si cierra a mediodia'
+  Sunday: 'Domingo'
+  Monday: 'Lunes'
+  Tuesday: 'Martes'
+  Wednesday: 'Miercoles'
+  Thursday: 'Jueves'
+  Friday: 'Viernes'
+  Saturday: 'Sábado'
+
+  simple_form:
+    labels:
+      defaults:
+        name: 'Nombre'
+        surname : 'Apellido'
+        password: 'Contraseña'
+        email: 'Correo electrónico'
+        street: 'Dirección'
+        zip: 'Código postal'
+        city: 'Ciudad'
+        country: 'País'
+        phone: 'Teléfono'
+        mobile: 'Móvil'
+        fax: 'Fax'
+        tax_id: 'C.I.F'
+        logo: 'Subir imágen'
+        website: 'Sitio web'
+        type_of: 'Tipo de dato'
+        start_date: 'Fecha de inicio'
+        end_date: 'Fecha de fin'
+        price: 'Precio'
+        vehicle_type: 'Tipo de vehículo'
+        diameter_min: 'Diametro mínimo'
+        diameter_max: 'Diametro máximo'
+        rim_type: 'Tipo de llanta'
+
+  helpers:
+    submit:
+      garage:
+        create: 'Añadir garage'
+        update: 'Actualizar garage'
+      user:
+        create: 'Añadir usuario'
+        update: 'Actualizar usuario'
+      property:
+        create: 'Añadir propiedad'
+        update: 'Actualizar propiedad'
+      holiday:
+        create: 'Añadir vacaciones'
+        update: 'Actualizar vacaciones'
+      tyre_fee:
+        create: 'Añadir tarifa'
+        update: 'Actualizar tarifa'
+      timetable:
+        create: 'Añadir horario'
+        update: 'Actualizar horario'

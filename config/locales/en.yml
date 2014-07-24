@@ -20,4 +20,122 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  holidays: "holidays"
+  timetable: "timetable"
+  tyre fees: "tyre fees"
+  information: "information"
+  garage profile: "garage profile"
+  delete image: 'delete image'
+  edit information: 'edit information'
+  list all garages: 'list all garages'
+  garage: 'garage'
+  address: 'address'
+  email: 'email'
+  contact: 'contact'
+  website: 'website'
+  new garage: 'new garage'
+  edit garage: 'edit garage'
+  name: 'name'
+  phone: 'phone'
+  status: 'status'
+  actions: 'actions'
+  disabled: 'disabled'
+  enabled: 'enabled'
+  garages list: 'garages lists'
+  cancel: 'cancel'
+  click to assign an image to your garage: 'click to assign an image to your garage'
+  new user: 'nuevo usuario'
+  users list: 'listado de usuarios'
+  user: 'usuario'
+  country: 'país'
+  Spain: 'España'
+  Italy: 'Italia'
+  Poland: 'Polonia'
+  Portugal: 'Portugal'
+  Argentina: 'Argentina'
+  France: 'Francia'
+  edit user: 'edit user'
+  edit property: 'edit property'
+  type: 'type'
+  new property: 'new property'
+  properties list: 'properties list'
+  new property: 'new property'
+  garage partners: 'garage partners'
+  control panel: 'control panel'
+  sign out: 'sign out'
+  profile: 'profile'
+  online: 'online'
+  search: 'search'
+  garages: 'garages'
+  users: 'users'
+  properties: 'properties'
+  hello: 'hello'
+  holiday edit: 'holiday edit'
+  start date: 'start date'
+  end date: 'end date'
+  new noliday: 'new noliday'
+  holidays list: 'holidays list'
+  new holiday: 'new holiday'
+  edit tyre fees: 'edit tyre fees'
+  price: 'price'
+  vehicle type: 'vehicle type'
+  minimal diameter: 'minimal diameter'
+  maximal diameter: 'maximal diameter'
+  rim type: 'rim type'
+  new tyre fee: 'new tyre fee'
+  tyre fees list: 'tyre fees list'
+
+  simple_form:
+    labels:
+      defaults:
+        name: 'Name'
+        surname : 'Surname'
+        password: 'Password'
+        email: 'Email'
+        street: 'Street'
+        zip: 'Zip'
+        city: 'City'
+        country: 'Country'
+        phone: 'Phone'
+        mobile: 'Mobile'
+        fax: 'Fax'
+        tax_id: 'Tax'
+        logo: 'Upload image'
+        website: 'website'
+        type_of: 'Type of'
+        start_date: 'Start date'
+        end_date: 'End date'
+        price: 'Price'
+        vehicle_type: 'Vehicle type'
+        diameter_min: 'Minimal diameter'
+        diameter_max: 'Maximal diameter'
+        rim_type: 'Rim type'
+        Uncheck if closes at noon: 'Uncheck if closes at noon'
+        Sunday: 'Sunday'
+        Monday: 'Monday'
+        Tuesday: 'Tuesday'
+        Wednesday: 'Wednesday'
+        Thursday: 'Thursday'
+        Friday: 'Friday'
+        Saturday: 'Saturday'
+
+  helpers:
+    submit:
+      garage:
+        create: "Add garage"
+        update: "Update garage"
+      user:
+        create: "Add user"
+        update: "Update user"
+      property:
+        create: 'Add property'
+        update: 'Update property'
+      holiday:
+        create: 'Add holiday'
+        update: 'Update holiday'
+      tyre_fee:
+        create: 'Add tyre fee'
+        update: 'Update tyre fee'
+      timetable:
+        create: 'Add timetable'
+        update: 'Update timetable'

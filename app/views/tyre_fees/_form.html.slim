@@ -24,5 +24,5 @@
   = f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
 
   .b-keypad
-    = link_to 'Cancel', garage_tyre_fees_path(@garage), class: "b-keypad__btn--default"
+    = link_to t('cancel').humanize, garage_tyre_fees_path(@garage), class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"
