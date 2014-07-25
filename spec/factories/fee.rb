@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :fee do
     garage { FactoryGirl.create(:garage) }
     name   Faker::Commerce.department
-    price  Faker::Number.number(3)
+    price  Faker::Commerce.price
   end
 end
