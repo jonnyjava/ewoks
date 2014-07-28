@@ -5,8 +5,27 @@ class HolidayPolicy < ApplicationPolicy
     @holiday = holiday
   end
 
+  class Scope
+    attr_reader :logged_user, :scope
+
+    def initialize(logged_user, scope)
+      @logged_user = logged_user
+      @scope = scope
+    end
+
+    def resolve
+      if logged_user.admin?
+        scope.all
+      elsif logged_user.country_manager?
+        scope.includes(:garage).where('garages.country = ?', logged_user.country).references(:garage)
+      else
+        scope.where(garage_id: logged_user.garage.id)
+      end
+    end
+  end
+
   def index?
-    @user.admin? || @user.country_manager?
+    @user.admin? || @user.country_manager? || @user.owner?
   end
 
   def show?
