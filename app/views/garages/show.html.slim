@@ -5,7 +5,7 @@
 
       = link_to t('delete image').humanize, destroy_logo_path(@garage), class: "btn btn-danger btn-block btn-flat", data: {:confirm => 'Are you sure?'}, :method => :delete
       = link_to t('edit information').humanize, edit_garage_path(@garage), class: "btn btn-success btn-block btn-flat"
-      = link_to t('list all garages').humanize, garages_path(), class: "btn btn-default btn-block btn-flat"
+      = link_to t('list all garages').humanize, garages_path(), class: "btn btn-default btn-block btn-flat" unless current_user.owner?
 
     .col-sm-7.col-sm-push-1
       .map-info
