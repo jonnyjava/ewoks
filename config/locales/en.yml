@@ -84,6 +84,7 @@ en:
   rim type: 'rim type'
   new tyre fee: 'new tyre fee'
   tyre fees list: 'tyre fees list'
+  change password: 'change password'
 
   simple_form:
     labels:

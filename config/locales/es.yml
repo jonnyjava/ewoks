@@ -92,6 +92,7 @@ es:
   Thursday: 'Jueves'
   Friday: 'Viernes'
   Saturday: 'Sábado'
+  change password: 'cambiar la contraseña'
 
   simple_form:
     labels:
@@ -118,6 +119,8 @@ es:
         diameter_min: 'Diametro mínimo'
         diameter_max: 'Diametro máximo'
         rim_type: 'Tipo de llanta'
+        current_password: 'Contraseña anterior'
+        password_confirmation: 'Repetir contraseña'
 
   helpers:
     submit:
