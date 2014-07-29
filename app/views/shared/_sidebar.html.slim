@@ -18,13 +18,25 @@ aside.left-side.sidebar-offcanvas
             i.fa.fa-search
 
     ul.sidebar-menu
-      li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
-        i.fa.fa-th-large
-        span = t('garages').humanize
-        small.badge.pull-right.bg-red 3
-      li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
-        i.fa.fa-user
-        span = t('users').humanize
-      li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
-        i.fa.fa-cog
-        span = t('properties').humanize
+      li class=(current_page?(users_path) ? "active" : nil) = link_to user_path(current_user)
+        i.fa.fa-tachometer
+        span = t('profile').humanize
+
+      - unless current_user.owner?
+        li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
+          i.fa.fa-home
+          span = t('garages').humanize
+
+        li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
+          i.fa.fa-user
+          span = t('users').humanize
+
+      - if current_user.owner?
+        li class=(current_page?(garages_path) ? "active" : nil) = link_to garage_path(current_user.garage)
+          i.fa.fa-home
+          span = t('garage').humanize
+
+      - if current_user.admin?
+        li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
+          i.fa.fa-cog
+          span = t('properties').humanize
