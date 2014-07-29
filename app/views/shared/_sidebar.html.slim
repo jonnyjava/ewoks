@@ -27,15 +27,14 @@ aside.left-side.sidebar-offcanvas
           i.fa.fa-home
           span = t('garages').humanize
 
+        li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
+          i.fa.fa-user
+          span = t('users').humanize
+
       - if current_user.owner?
         li class=(current_page?(garages_path) ? "active" : nil) = link_to garage_path(current_user.garage)
           i.fa.fa-home
           span = t('garage').humanize
-
-      - unless current_user.owner?
-        li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
-          i.fa.fa-user
-          span = t('users').humanize
 
       - if current_user.admin?
         li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
