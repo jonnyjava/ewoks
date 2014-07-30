@@ -10,7 +10,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
-gem 'sqlite3', groups: [:development, :test]
 
 gem 'draper', '~> 1.3'
 gem "slim-rails"
@@ -26,11 +25,8 @@ gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
-
-group :production do
-  gem 'pg'
-  gem 'rails_12factor'
-end
+gem 'pg'
+gem 'rails_12factor', group: :production
 
 group :development do
   gem "better_errors"
