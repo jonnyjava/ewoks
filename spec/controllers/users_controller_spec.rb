@@ -27,7 +27,7 @@ describe UsersController do
   let(:valid_update_attributes_with_password) { { 'password' => '87654321', 'password_confirmation' => '87654321', 'current_password' => '12345678', 'name' => "#{Faker::Name.name}" } }
   let(:valid_session) { {} }
 
-  user = FactoryGirl.create(:user)
+  let(:user) { FactoryGirl.create(:user) }
 
   describe 'GET index' do
     it 'assigns all users as @users' do
@@ -139,6 +139,7 @@ describe UsersController do
 
   describe 'DELETE destroy' do
     it 'destroys the requested user' do
+      user
       expect {
         delete :destroy, { id: user.to_param }, valid_session
       }.to change(User, :count).by(-1)
