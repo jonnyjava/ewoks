@@ -1,3 +1,5 @@
+[ ![Codeship Status for norauto/Ewoks](https://www.codeship.io/projects/f3bdb640-fa05-0131-d9a6-263e5952f3ef/status)](https://www.codeship.io/projects/28984)
+
 Ewoks
 =====
 
