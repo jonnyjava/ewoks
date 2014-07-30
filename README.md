@@ -1,6 +1,3 @@
-[![Code Climate](https://codeclimate.com/github/Norauto/Ewoks.png)](https://codeclimate.com/github/Norauto/Ewoks)
-[ ![Codeship Status for Norauto/Ewoks](https://www.codeship.io/projects/5f7ecbb0-f61c-0131-6385-5a8cb4cbccff/status)](https://www.codeship.io/projects/28443)
-
 Ewoks
 =====
 
