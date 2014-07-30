@@ -8,11 +8,13 @@
 
   = f.input :name
   = f.input :surname
-  = f.input :password
   = f.input :email
   = f.input :country
   = f.input :phone
-
+  h4.change_password = t('change password').humanize
+  = f.input :current_password
+  = f.input :password
+  = f.input :password_confirmation
   .b-keypad
     = link_to t('cancel').humanize, users_path, class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"

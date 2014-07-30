@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :user do
     name      { Faker::Name.name }
     email     { "#{Faker::Internet::email}" }
-    password  "#{Faker::Internet::password(10)}"
+    password  '12345678'
     country   'Spain'
 
     factory :admin, class: User do

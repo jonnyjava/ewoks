@@ -49,8 +49,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     authorize @user
+
     respond_to do |format|
-      if @user.update(user_params)
+      if successfully_updated(params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -80,13 +81,25 @@ class UsersController < ApplicationController
     end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :name, :surname, :country)
+      params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :name, :surname, :country)
+    end
+
+    def needs_password?(params)
+      params[:user][:password].present? ||
+      params[:user][:password_confirmation].present?
+    end
+
+    def successfully_updated(params)
+      if needs_password?(params)
+        @user.update_with_password(user_params)
+      else
+        @user.update_without_password(user_params)
+      end
     end
 end
