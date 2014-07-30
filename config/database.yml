@@ -17,17 +17,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
-
-sqlite: &sqlite
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+  host: localhost
+  pool: 10
 
 development:
-  <<: *sqlite
-  database: db/development.sqlite3
+  <<: *default
+  username: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
+  template: template1
+  database: development
+  port: 5432
 
 test:
-  <<: *sqlite
-  database: db/test.sqlite3
+  <<: *default
+  username: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
+  template: template1
+  database: test
+  port: 5432
