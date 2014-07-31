@@ -61,15 +61,21 @@ Rails.application.configure do
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
 
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "localhost",
-    :port                 => 1025
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'norauto.pl',
+    :user_name            => 'opony@norauto.pl',
+    :password             => 'norauto2013',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
   }
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'lit-everglades-6352.herokuapp.com' }
   EMAIL_ADMIN = "admin@ewoks.com"
-# Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
 
