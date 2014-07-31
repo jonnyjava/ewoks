@@ -91,7 +91,7 @@ class GaragesController < ApplicationController
     if @garage = Garage.find_by_signup_verification_token(params[:token])
       @garage.disable!
       @garage.create_my_owner
-      render :welcome_page, layout: false
+      render :welcome_page, layout: "devise"
     else
       redirect_to error_404_path
     end
