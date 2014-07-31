@@ -65,9 +65,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => 'norauto.pl',
-    :user_name            => 'opony@norauto.pl',
-    :password             => 'norauto2013',
+    :domain               => 'norauto.com',
+    :user_name            => 'fittingpartners@norauto.com',
+    :password             => '9Dn8P<=U',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }
