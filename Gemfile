@@ -27,6 +27,7 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'faker'
 
 group :development do
   gem "better_errors"
@@ -36,7 +37,6 @@ end
 
 group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
-  gem 'faker'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'email_spec'
