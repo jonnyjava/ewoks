@@ -7,18 +7,18 @@
           - @garage.errors.full_messages.each do |message|
             li = message
 
-    .col-sm-6 = f.input :name
-    .col-sm-6 = f.input :email
-    .col-sm-3 = f.input :street
-    .col-sm-3 = f.input :zip
-    .col-sm-3 = f.input :city
+    .col-sm-6 = f.input :name, as: :string
+    .col-sm-6 = f.input :email, as: :email
+    .col-sm-3 = f.input :street, as: :string
+    .col-sm-3 = f.input :zip, as: :string
+    .col-sm-3 = f.input :city, as: :string
     .col-sm-3 = f.input :country, collection: Garage.countries(current_user)
-    .col-sm-6 = f.input :phone
-    .col-sm-6 = f.input :mobile
-    .col-sm-6 = f.input :fax
-    .col-sm-6 = f.input :tax_id
+    .col-sm-6 = f.input :phone, as: :tel
+    .col-sm-6 = f.input :mobile, as: :tel
+    .col-sm-6 = f.input :fax, as: :tel
+    .col-sm-6 = f.input :tax_id, as: :string
     .col-sm-6 = f.input :logo, wrapper: :vertical_file_input, hint: t('click to assign an image to your garage')
-    .col-sm-6 = f.input :website
+    .col-sm-6 = f.input :website, as: :string
 
     .col-xs-12
       .b-keypad
