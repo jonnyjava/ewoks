@@ -85,6 +85,13 @@ en:
   new tyre fee: 'new tyre fee'
   tyre fees list: 'tyre fees list'
   change password: 'change password'
+  Sunday: 'Sunday'
+  Monday: 'Monday'
+  Tuesday: 'Tuesday'
+  Wednesday: 'Wednesday'
+  Thursday: 'Thursday'
+  Friday: 'Friday'
+  Saturday: 'Saturday'
 
   simple_form:
     labels:

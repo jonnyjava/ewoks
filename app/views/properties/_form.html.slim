@@ -7,9 +7,9 @@
           li = message
 
   .field
-    = f.input :name
+    = f.input :name, as: :string
   .field
-    = f.input :type_of
+    = f.input :type_of, as: :string
 
   .b-keypad
     = link_to t('cancel').humanize, properties_path, class: "b-keypad__btn--default"

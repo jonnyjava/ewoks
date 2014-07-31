@@ -99,6 +99,7 @@ class UsersController < ApplicationController
       if needs_password?(params)
         @user.update_with_password(user_params)
       else
+        params[:user].delete(:current_password)
         @user.update_without_password(user_params)
       end
     end
