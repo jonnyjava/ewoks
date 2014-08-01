@@ -1,6 +1,11 @@
-p welcome to ewoks!! Here are your data
-= @garage.name
-br
-= @garage.email
-p You should have received an email with username and password.
-= link_to 'please sign in here', new_user_session_path
+.header Welcome to ewoks!!
+
+.body.bg-gray
+
+  h4 Here are your data:
+  p = @garage.name
+  p = @garage.email
+  p You should have received an email with username and password.
+
+.footer
+  = link_to 'please sign in here', new_user_session_path, class: "btn bg-olive btn-block"
