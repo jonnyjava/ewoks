@@ -7,8 +7,8 @@ h2 Change your password
   = f.full_error :reset_password_token
 
   .form-inputs
-    = f.input :password, label: "New password", required: true, autofocus: true
-    = f.input :password_confirmation, label: "Confirm your new password", required: true
+    = f.input :password, label: "New password", required: true, autofocus: true, as: :password
+    = f.input :password_confirmation, label: "Confirm your new password", required: true, as: :password
 
   .form-actions
     = f.button :submit, "Change my password"

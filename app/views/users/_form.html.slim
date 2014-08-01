@@ -6,15 +6,19 @@
         - @user.errors.full_messages.each do |message|
           li = message
 
-  = f.input :name
-  = f.input :surname
-  = f.input :email
-  = f.input :country
-  = f.input :phone
-  h4.change_password = t('change password').humanize
-  = f.input :current_password
-  = f.input :password
-  = f.input :password_confirmation
+  = f.input :name, as: :string
+  = f.input :surname, as: :string
+  = f.input :email, as: :email
+  = f.input :password, as: :password if @user.id.blank?
+  = f.input :country, collection: Garage::COUNTRIES
+  = f.input :phone, as: :tel
+
+  - if @user.id.present?
+    h4.change_password = t('change password').humanize
+    = f.input :current_password, as: :password
+    = f.input :password, as: :password
+    = f.input :password_confirmation, as: :password
+
   .b-keypad
     = link_to t('cancel').humanize, users_path, class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"

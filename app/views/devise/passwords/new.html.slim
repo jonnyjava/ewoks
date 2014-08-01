@@ -6,7 +6,7 @@
     = f.error_notification
 
     .form-group
-      = f.input :email, required: true, autofocus: true, label: false, placeholder: "Email"
+      = f.input :email, required: true, autofocus: true, label: false, placeholder: "Email", as: :email
 
   .footer
     = f.button :submit, "Send me reset password instructions", class: "btn bg-olive btn-block"
