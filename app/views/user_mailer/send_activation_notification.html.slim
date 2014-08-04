@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+  body
+    h1 Your account has been activate!
+    p here you can find your login
+    = @user.email
+    br
+    = @user.password
+    br
+    = link_to 'you can login here', new_user_session_url
