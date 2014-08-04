@@ -91,7 +91,7 @@ class GaragesController < ApplicationController
 
   def signup_verification
     if @garage = Garage.find_by_signup_verification_token(params[:token])
-      @garage.disable!
+      @garage.inactive!
       @garage.create_my_owner
       render :welcome_page, layout: "devise"
     else

@@ -36,8 +36,12 @@ class Garage < ActiveRecord::Base
     attrs.any?{|a| send "#{a}_changed?"}
   end
 
-  def disable!
+  def inactive!
     self.update_attribute(:status, INACTIVE)
+  end
+
+  def active!
+    self.update_attribute(:status, ACTIVE)
   end
 
   def to_be_confirmed?
