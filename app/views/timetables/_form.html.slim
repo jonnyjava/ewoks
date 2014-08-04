@@ -25,7 +25,7 @@
           label
             - does_break = @timetable.closes_at_noon(day)
             input data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
-            = t('Uncheck if closes at noon')
+            = t('Check if closes at noon')
 
   .b-keypad
     = f.button :submit, class: "b-keypad__btn--success"

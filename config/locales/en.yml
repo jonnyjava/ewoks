@@ -124,7 +124,7 @@ en:
         diameter_min: 'Minimal diameter'
         diameter_max: 'Maximal diameter'
         rim_type: 'Rim type'
-        Uncheck if closes at noon: 'Uncheck if closes at noon'
+        Check if closes at noon: 'Check if closes at noon'
         Sunday: 'Sunday'
         Monday: 'Monday'
         Tuesday: 'Tuesday'
