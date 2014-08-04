@@ -44,6 +44,14 @@ class Garage < ActiveRecord::Base
     self.update_attribute(:status, ACTIVE)
   end
 
+  def active?
+    status == ACTIVE
+  end
+
+  def inactive?
+    status == INACTIVE
+  end
+
   def to_be_confirmed?
     status == TO_BE_CONFIRMED
   end
