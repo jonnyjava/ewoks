@@ -6,7 +6,7 @@ class GaragesController < ApplicationController
   # GET /garages
   # GET /garages.json
   def index
-    garages = policy_scope(Garage.all.page(params[:page]))
+    garages = policy_scope(Garage.all.order(:name).page(params[:page]))
     authorize garages
     @garages = GarageDecorator.decorate_collection(garages)
   end

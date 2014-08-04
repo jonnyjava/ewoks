@@ -13,6 +13,7 @@ class Garage < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+  after_save :activation_notification, if: :status_changed?
   after_create :send_signup_confirmation
 
   ACTIVE = 1
@@ -60,6 +61,11 @@ class Garage < ActiveRecord::Base
     owner = User.create(email: email, password: Faker::Internet::password(10))
     self.update_attribute(:owner_id, owner.id)
     UserMailer.send_generated_password(owner).deliver
+  end
+
+  def activation_notification
+    return unless owner = self.user
+    UserMailer.send_activation_notification(owner).deliver if active?
   end
 
   def send_signup_confirmation
