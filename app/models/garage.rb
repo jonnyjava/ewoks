@@ -59,7 +59,7 @@ class Garage < ActiveRecord::Base
   def create_my_owner
     owner = User.create(email: email, password: Faker::Internet::password(10))
     self.update_attribute(:owner_id, owner.id)
-    owner.send_generated_password
+    UserMailer.send_generated_password(owner).deliver
   end
 
   def send_signup_confirmation
