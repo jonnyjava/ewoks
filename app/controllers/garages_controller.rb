@@ -82,6 +82,8 @@ class GaragesController < ApplicationController
   def toggle_status
     authorize @garage
     @garage.update(status: !@garage.status) unless @garage.to_be_confirmed?
+    UserMailer::send_activation_notification(@garage.user).deliver if @garage.status
+
     respond_to do |format|
       format.html { redirect_to garages_url }
     end
