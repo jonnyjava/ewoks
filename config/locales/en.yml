@@ -92,6 +92,12 @@ en:
   Thursday: 'Thursday'
   Friday: 'Friday'
   Saturday: 'Saturday'
+  Your login for Ewoks: 'Your login for Ewoks'
+  Your account has been activated: 'Your account has been activated'
+  Welcome to Ewoks: 'Welcome to Ewoks'
+  Your account has been confirmed!: 'Your account has been confirmed!'
+  here you can find your login: 'here you can find your login'
+  you can login here: 'you can login here'
 
   simple_form:
     labels:
@@ -118,7 +124,7 @@ en:
         diameter_min: 'Minimal diameter'
         diameter_max: 'Maximal diameter'
         rim_type: 'Rim type'
-        Uncheck if closes at noon: 'Uncheck if closes at noon'
+        Check if closes at noon: 'Check if closes at noon'
         Sunday: 'Sunday'
         Monday: 'Monday'
         Tuesday: 'Tuesday'

@@ -9,7 +9,7 @@ describe PublicFormMailer do
       sent_email.should deliver_to(garage.email)
       sent_email.should have_body_text(/Welcome to EWOKS!/)
       sent_email.should have_body_text(/#{garage.signup_verification_token}/)
-      sent_email.should have_subject('Welcome to Ewoks')
+      sent_email.should have_subject( I18n.t('Welcome to Ewoks') )
     end
   end
 end
