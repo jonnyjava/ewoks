@@ -46,7 +46,7 @@ describe Garage do
   describe 'disable!' do
     it 'should make the garage inactive' do
       garage = FactoryGirl.create(:garage)
-      garage.disable!
+      garage.inactive!
       garage.status.should be(Garage::INACTIVE)
     end
   end

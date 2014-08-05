@@ -6,7 +6,7 @@ class GaragesController < ApplicationController
   # GET /garages
   # GET /garages.json
   def index
-    garages = policy_scope(Garage.all.page(params[:page]))
+    garages = policy_scope(Garage.all.order(:name).page(params[:page]))
     authorize garages
     @garages = GarageDecorator.decorate_collection(garages)
   end
@@ -81,7 +81,8 @@ class GaragesController < ApplicationController
 
   def toggle_status
     authorize @garage
-    @garage.update(status: !@garage.status) unless @garage.to_be_confirmed?
+    @garage.active? ? @garage.inactive! : @garage.active! unless @garage.to_be_confirmed?
+
     respond_to do |format|
       format.html { redirect_to garages_url }
     end
@@ -89,7 +90,7 @@ class GaragesController < ApplicationController
 
   def signup_verification
     if @garage = Garage.find_by_signup_verification_token(params[:token])
-      @garage.disable!
+      @garage.inactive!
       @garage.create_my_owner
       render :welcome_page, layout: "devise"
     else

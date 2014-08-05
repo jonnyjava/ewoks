@@ -19,9 +19,7 @@ class User < ActiveRecord::Base
     self.role ||= :owner
   end
 
-  def send_generated_password
-    UserMailer.send_generated_password(self).deliver
-  end
+
 private
 
   def set_auth_token
