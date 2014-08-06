@@ -1,27 +1,6 @@
 = simple_form_for([@garage, @tyre_fee]) do |f|
-  - if @fee.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@fee.errors.count, "error")} prohibited this fee from being saved:"
-      ul
-        - @fee.errors.full_messages.each do |message|
-          li = message
-
-  - if @tyre_fee.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"
-      ul
-        - @tyre_fee.errors.full_messages.each do |message|
-          li = message
-
-  = simple_fields_for :fee do |c|
-    = c.input :name
-    = c.input :price
-  end
-
-  = f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
-  = f.input :diameter_min, collection: TyreFee::DIAMETER
-  = f.input :diameter_max, collection: TyreFee::DIAMETER
-  = f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
+  = render 'tyre_fees/shared/errors', fee: @fee, tyre_fee: @tyre_fee
+  = render 'tyre_fees/shared/fields', f: f
 
   .b-keypad
     = link_to t('cancel').humanize, garage_tyre_fees_path(@garage), class: "b-keypad__btn--default"

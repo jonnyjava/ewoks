@@ -1,0 +1,9 @@
+= simple_fields_for :fee do |c|
+  = c.input :name
+  = c.input :price
+end
+
+= f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
+= f.input :diameter_min, collection: TyreFee::DIAMETER
+= f.input :diameter_max, collection: TyreFee::DIAMETER
+= f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
