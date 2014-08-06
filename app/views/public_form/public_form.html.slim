@@ -20,19 +20,20 @@ html
   body
     - content_for :content
       = simple_form_for(@garage, url: public_form_create_url) do |f|
+        h3 = t('new garage').humanize
         = render 'garages/shared/errors', garage: @garage
         = render 'garages/shared/fields', f: f
-        h3 Timetable
+        h3 = t('timetable').humanize
         = simple_fields_for timetable do |ftt|
           = ftt.error_notification
           = render 'timetables/shared/fields', f: ftt, timetable: timetable
-        h3 Holidays
+        h3 = t('holidays').humanize
         = simple_fields_for holiday do |fh|
           = render 'holidays/shared/errors', holiday: holiday
-          = render 'holidays/shared/fields', f: fh, holiday: holiday
-        h3 Tyre fees
+          = render 'holidays/shared/fields', f: fh
+        h3 = t('tyre fees').humanize
         = simple_fields_for tyre_fee do |ftf|
           = render 'tyre_fees/shared/errors', fee: fee, tyre_fee: tyre_fee
           = render 'tyre_fees/shared/fields', f: ftf
         = f.button :submit 
-    = render template: "layouts/box", locals: { title: t('new garage').humanize }
+    = render template: "layouts/box", locals: { title: t('public form title').humanize }

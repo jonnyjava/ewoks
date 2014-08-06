@@ -98,7 +98,8 @@ en:
   Your account has been confirmed!: 'Your account has been confirmed!'
   here you can find your login: 'here you can find your login'
   you can login here: 'you can login here'
-
+  public form title: 'public form title'
+  
   simple_form:
     labels:
       defaults:

@@ -99,6 +99,7 @@ es:
   Your account has been confirmed!: 'Su cuenta ha sido confirmada!'
   here you can find your login: 'aquí puede encontrar su nombre de usuario'
   you can login here: 'puede ingresar aquí'
+  public form title: 'Titulo del formulario publico'
 
   simple_form:
     labels:
