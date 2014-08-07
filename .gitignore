@@ -28,6 +28,7 @@ config/local_env.yml
 config/deploy/
 config/deploy.rb
 Capfile
+.rubocop.yml
 
 # Sublime Text Editor
 *.sublime-*
