@@ -15,42 +15,49 @@ class PublicFormController < ApplicationController
     holidays
   end
 
-  def validate_extra_holidays(holidays)
+  def validate_all(garage_properties)
     valid = true
-    holidays.each do |holiday|
-      valid = holiday.valid? && valid
+    garage_properties.each do |property|
+      valid = property.valid? && valid
     end
     valid
   end
 
+  def assign_garage_to_his_related(garage, garage_properties)
+    garage_properties.each do |property|
+      property.garage = garage if property.respond_to?(:garage_id)
+    end
+  end
+
   def create
+    rows = params[:holiday][:rows_counter].to_i
+
     @garage = Garage.new(garage_params)
     @garage.status = Garage::TO_BE_CONFIRMED
     @timetable = Timetable.new(timetable_params)
-    rows = params[:holiday][:rows_counter].to_i
     @holiday = Holiday.new(holiday_params)
     @extra_holidays = create_extra_holidays(rows)
     @fee = Fee.new(fee_params)
     @tyre_fee = TyreFee.new(tyre_fee_params)
 
-    allok = @garage.valid?
-    allok = @holiday.valid? && allok
-    allok = validate_extra_holidays(@extra_holidays) && allok
-    allok = @timetable.valid? && allok
-    allok = @fee.valid? && allok
-    allok = @tyre_fee.valid? && allok
+    garage_properties = []
+    garage_properties <<  @holiday
+    garage_properties <<  @extra_holidays if @extra_holidays.present?
+    garage_properties <<  @timetable
+    garage_properties <<  @fee
+    garage_properties <<  @tyre_fee
+    garage_properties = garage_properties.flatten
+
+    valid_submission = @garage.valid? && validate_all(garage_properties)
 
     respond_to do |format|
-      if !allok
+      if !valid_submission
         format.html { render :public_form, layout: false }
       else
         if @garage.save
-          @holiday.garage = @garage
-          @timetable.garage = @garage
-          @fee.garage = @garage
+          assign_garage_to_his_related(@garage, garage_properties)
           @tyre_fee.fee = @fee
-          @extra_holidays.each { |h| h.garage = @garage }
-          if (@timetable.save && @holiday.save && @extra_holidays.each(&:save) && @fee.save && @tyre_fee.save)
+          if garage_properties.each(&:save)
             format.html { redirect_to :success, notice: 'Garage was successfully created.'}
           else
             format.html { render :public_form, layout: false }
