@@ -32,7 +32,7 @@ html
 
         h3 = t('holidays').humanize
         = render 'holidays/shared/errors', holiday: holiday
-        .js_holidays
+        .js_holiday
           = simple_fields_for holiday do |fh|
             = render 'holidays/shared/fields', f: fh
         - if @extra_holidays
@@ -41,10 +41,12 @@ html
               = simple_fields_for extra_holiday do |feh|
                 = render 'holidays/shared/errors', holiday: extra_holiday
                 = render 'holidays/shared/fields', f: feh
-              input type='button' value="delete holidays#{i+1}" onclick="remove_row('holiday', #{i+1});"
+              button onclick="remove_row('holiday', #{i+1});" class='btn-delete-row'
+                '-
 
         input type='hidden' name='holiday[rows_counter]' id='holiday_rows_counter' value="#{holiday_rowcounter}"
-        input type='button' value='add holidays' onclick='add_holidays();'
+        div onclick='add_holidays();' class='btn btn-success'
+          '+
 
         h3 = t('tyre fees').humanize
         = simple_fields_for tyre_fee do |ftf|
@@ -55,19 +57,22 @@ html
 
 javascript:
 
-  var holiday_template = $('.js_holidays').html();
 
   function add_holidays() {
     row_id = increment_row_counter("holiday");
-    content = wrap_row(holiday_template, "holiday", row_id)
-    $('.js_holidays').append(content);
+    content = wrap_row("holiday", row_id)
+    $(content).insertAfter($('.js_holiday'));
     prepare_input_names_for_strong_parameters("holiday", row_id);
     clean_inputs("holiday",row_id);
   };
 
-  function wrap_row(template, obj_name, row_id){
-    delete_button = "<input type='button' value='delete"+obj_name+row_id+"' onclick=\"remove_row('"+obj_name+"', "+row_id+");\" />"
-    wrapped_content = "<div class='js_"+obj_name+"_row_"+row_id+"'>"+template+delete_button+"</div>"
+  function wrap_row(obj_name, row_id){
+    delete_button = "<button onclick=\"remove_row('"+obj_name+"', "+row_id+");\"  class='btn-delete-row'>-</button>";
+    wrapper_button = "<div class='col-xs-1'>"+delete_button+"</div>";
+
+    template = $('.js_'+obj_name).clone();
+    template.find('.row').append(wrapper_button);
+    wrapped_content = "<div class='js_"+obj_name+"_row_"+row_id+"'>"+template.html()+"</div>";
     return wrapped_content
   }
 

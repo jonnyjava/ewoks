@@ -10,10 +10,13 @@
 @import "base/config";
 @import "base/mixins";
 
-// Config
+// Modules
 @import "modules/crudbar";
 @import "modules/keypad";
 @import "modules/tabs";
+
+// Layout
+@import "modules/public_form";
 
 
 // Little fixes
