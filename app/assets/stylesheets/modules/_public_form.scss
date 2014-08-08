@@ -1,0 +1,6 @@
+.btn-delete-row{
+  margin-top: 1.75em;
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-danger;
+}

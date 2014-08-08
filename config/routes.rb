@@ -7,12 +7,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/success', to:'public_form#success', as: 'success'
-  get '/public_form', to:'public_form#public_form', as: 'public_form'
-  post '/public_form', to:'public_form#create', as: 'public_form_create'
   get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
 
-  scope "(:locale)", locale: /en|es|pt|pl/ do
+  scope '(:locale)', locale: /en|es|pt|pl/ do
+    get '/success', to: 'public_form#success', as: 'success'
+    get '/public_form', to: 'public_form#public_form', as: 'public_form'
+    post '/public_form', to: 'public_form#create', as: 'public_form_create'
     resources :garages do
       resources :fees
       resources :tyre_fees

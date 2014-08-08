@@ -2,31 +2,7 @@
   = f.error_notification
   = f.association :garage, as: :hidden
 
-
-  - Date::DAYNAMES.each do |day|
-    .row
-      .col-sm-1
-        label = I18n.t(day)
-
-      - field_params = { day: day, f: f, horary: 'morning_open', disabled: false }
-      = render 'timetables/shared/time_field', field_params
-
-      - field_params = { day: day, f: f, horary: 'morning_close', disabled: @timetable.closes_at_noon(day) }
-      = render 'timetables/shared/time_field', field_params
-
-      - field_params = { day: day, f: f, horary: 'afternoon_open', disabled: @timetable.closes_at_noon(day) }
-      = render 'timetables/shared/time_field', field_params
-
-      - field_params = { day: day, f: f, horary: 'afternoon_close', disabled: false }
-      = render 'timetables/shared/time_field', field_params
-
-      .col-sm-3
-        .checkbox.js_break
-          label
-            - does_break = @timetable.closes_at_noon(day)
-            input data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
-            = t('Check if closes at noon')
-
+  = render 'timetables/shared/fields', f: f, timetable: @timetable
   .b-keypad
     = f.button :submit, class: "b-keypad__btn--success"
 

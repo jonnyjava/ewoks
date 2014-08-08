@@ -1,130 +1,99 @@
 - timetable = @timetable || Timetable.new
 - holiday = @holiday || Holiday.new
+- extra_holidays = @extra_holidays || []
+- holiday_rowcounter = extra_holidays.count
 - fee = @fee || Fee.new
 - tyre_fee =fee.try(:tyre_fee) || TyreFee.new
 
-= simple_form_for(@garage, url: public_form_create_url) do |f|
-  - if @garage.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@garage.errors.count, "error")} prohibited this garage from being saved:"
-      ul
-        - @garage.errors.full_messages.each do |message|
-          li = message
+- content_for :content
+  = simple_form_for(@garage, url: public_form_create_url) do |f|
+    h3 = t('new garage').humanize
+    = render 'garages/shared/errors', garage: @garage
+    = render 'garages/shared/fields', f: f
 
-  = f.input :name
-  = f.input :country
-  = f.input :street
-  = f.input :zip
-  = f.input :city
-  = f.input :email
-  = f.input :phone
-  = f.input :mobile
-  = f.input :fax
-  = f.input :tax_id
-  = f.input :website
+    h3 = t('timetable').humanize
+    = simple_fields_for timetable do |ftt|
+      = ftt.error_notification
+      = render 'timetables/shared/fields', f: ftt, timetable: timetable
 
-  h3 Timetable
-  = simple_fields_for timetable do |ftt|
-    = ftt.error_notification
+    h3 = t('holidays').humanize
+    = render 'holidays/shared/errors', holiday: holiday
+    .js_holiday
+      = simple_fields_for holiday do |fh|
+        = render 'holidays/shared/fields', f: fh
+    - if @extra_holidays
+      - @extra_holidays.each_with_index do |extra_holiday, i|
+        div class="js_holiday_row_#{i+1}"
+          = simple_fields_for extra_holiday do |feh|
+            = render 'holidays/shared/errors', holiday: extra_holiday
+            = render 'holidays/shared/fields', f: feh
+          button onclick="remove_row('holiday', #{i+1});" class='btn-delete-row'
+            '-
 
-    - Date::DAYNAMES.each do |day|
-      .row
-        .col-sm-1
-          label = day
+    input type='hidden' name='holiday[rows_counter]' id='holiday_rows_counter' value="#{holiday_rowcounter}"
+    div onclick='add_holidays();' class='btn btn-success'
+      '+
 
-        - field_params = { day: day, f: ftt, horary: 'morning_open', disabled: false }
-        = render 'timetables/shared/time_field', field_params
+    h3 = t('tyre fees').humanize
+    = simple_fields_for tyre_fee do |ftf|
+      = render 'tyre_fees/shared/errors', fee: fee, tyre_fee: tyre_fee
+      = render 'tyre_fees/shared/fields', f: ftf
+    = f.button :submit
+= render template: "layouts/box", locals: { title: t('public form title').humanize }
 
-        - field_params = { day: day, f: ftt, horary: 'morning_close', disabled: timetable.closes_at_noon(day) }
-        = render 'timetables/shared/time_field', field_params
-
-        - field_params = { day: day, f: ftt, horary: 'afternoon_open', disabled: timetable.closes_at_noon(day) }
-        = render 'timetables/shared/time_field', field_params
-
-        - field_params = { day: day, f: ftt, horary: 'afternoon_close', disabled: false }
-        = render 'timetables/shared/time_field', field_params
-
-        .col-sm-3
-          .checkbox
-            label
-              - does_break = timetable.closes_at_noon(day)
-              input class="js_break" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(does_break)
-              | Unchecked if closes at noon
-
-  h3 Holidays
-  = simple_fields_for holiday do |fh|
-    - if holiday.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(holiday.errors.count, "error")} prohibited this holiday from being saved:"
-        ul
-          - holiday.errors.full_messages.each do |message|
-            li = message
-    .row
-      .col-xs-6
-        = fh.input :name
-      .col-xs-3
-        = fh.input :start_date, wrapper: :vertical_input_group do
-          = fh.input_field :start_date, as: :string, class: 'form-control js-datepicker-start'
-          span.input-group-addon
-            i.fa.fa-calendar
-      .col-xs-3
-        = fh.input :end_date, wrapper: :vertical_input_group do
-          = fh.input_field :end_date, as: :string, class: 'form-control js-datepicker-end'
-          span.input-group-addon.add-on
-            i.fa.fa-calendar
-
-  h3 Tyre fees
-  = simple_fields_for tyre_fee do |ftf|
-    - if fee.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(fee.errors.count, "error")} prohibited this fee from being saved:"
-        ul
-          - fee.errors.full_messages.each do |message|
-            li = message
-
-    - if tyre_fee.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"
-        ul
-          - tyre_fee.errors.full_messages.each do |message|
-            li = message
-    .container-fluid = simple_fields_for :fee do |cf|
-      .col-md-3 = cf.input :name, required: false
-      .col-md-3 = cf.input :price, required: false
-    end
-    .container-fluid
-      .col-md-3 = ftf.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
-      .col-md-3 = ftf.input :diameter_min, collection: TyreFee::DIAMETER
-      .col-md-3 = ftf.input :diameter_max, collection: TyreFee::DIAMETER
-      .col-md-3 = ftf.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
-
-  = f.button :submit
+javascript:
 
 
+  function add_holidays() {
+    row_id = increment_row_counter("holiday");
+    content = wrap_row("holiday", row_id)
+    $(content).insertAfter($('.js_holiday'));
+    prepare_input_names_for_strong_parameters("holiday", row_id);
+    clean_inputs("holiday",row_id);
+  };
 
-coffee:
-  $ ->
-    $(".js_break").click ->
-      day = $(this).attr('data-day')
-      checked = $(this).is(":checked")
-      $("#timetable_"+day+"_morning_close").val('').prop('disabled', checked)
-      $("#timetable_"+day+"_afternoon_open").val('').prop('disabled', checked)
+  function wrap_row(obj_name, row_id){
+    delete_button = "<button onclick=\"remove_row('"+obj_name+"', "+row_id+");\"  class='btn-delete-row'>-</button>";
+    wrapper_button = "<div class='col-xs-1'>"+delete_button+"</div>";
 
-    $('.js_timetable_field').timepicker
-      'timeFormat': 'h:i A',
-      'step': 15
+    template = $('.js_'+obj_name).clone();
+    template.find('.row').append(wrapper_button);
+    wrapped_content = "<div class='js_"+obj_name+"_row_"+row_id+"'>"+template.html()+"</div>";
+    return wrapped_content
+  }
 
-  $ ->
-    $(".js-datepicker-start").datepicker
-      defaultDate: "+1w",
-      changeMonth: true,
-      dateFormat: "yy-mm-dd",
-      onClose: (selectedDate) ->
-        $(".js-datepicker-end").datepicker("option", "minDate", selectedDate)
+  function increment_row_counter(obj_name){
+    counter = $('#'+obj_name+'_rows_counter').val();
+    counter++;
+    $('#'+obj_name+'_rows_counter').val(counter);
+    return counter;
+  }
 
-    $(".js-datepicker-end").datepicker
-      defaultDate: "+1w",
-      changeMonth: true,
-      dateFormat: "yy-mm-dd",
-      onClose: (selectedDate) ->
-        $(".js-datepicker-start").datepicker("option", "maxDate", selectedDate)
+  function remove_row(obj_name, i){
+    $(".js_"+obj_name+"_row_"+i).remove();
+  }
+
+  function clean_inputs(obj_name, row_id){
+    $(".js_"+obj_name+"_row_"+row_id+"  input[type='text']").each(function( index ) {
+      $( this ).val(null);
+    });
+  }
+
+  function prepare_input_names_for_strong_parameters(obj_name, i){
+    $(".js_"+obj_name+"_row_"+i+"  input[type='text']").each(function( index ) {
+      oldname = $( this ).attr('name') ;
+      newname = oldname.replace(obj_name, obj_name+"_"+i);
+      $( this ).attr('name', newname);
+    });
+  }
+
+  function prepare_form_for_strong_parameters(obj_name){
+    rows = $('#'+obj_name+'_rows_counter').val();
+    for (i=1; i<=rows; i++){
+      prepare_input_names_for_strong_parameters(obj_name, i);
+    }
+  }
+
+  $(document).ready(function(){
+    prepare_form_for_strong_parameters('holiday');
+  });
