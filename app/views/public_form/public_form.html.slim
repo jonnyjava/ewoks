@@ -5,55 +5,41 @@
 - fee = @fee || Fee.new
 - tyre_fee =fee.try(:tyre_fee) || TyreFee.new
 
-doctype html
-html
-  head
-    meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    title Ewoks
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
+- content_for :content
+  = simple_form_for(@garage, url: public_form_create_url) do |f|
+    h3 = t('new garage').humanize
+    = render 'garages/shared/errors', garage: @garage
+    = render 'garages/shared/fields', f: f
 
-    /[if lt IE 9]
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-  body
-    - content_for :content
-      = simple_form_for(@garage, url: public_form_create_url) do |f|
-        h3 = t('new garage').humanize
-        = render 'garages/shared/errors', garage: @garage
-        = render 'garages/shared/fields', f: f
+    h3 = t('timetable').humanize
+    = simple_fields_for timetable do |ftt|
+      = ftt.error_notification
+      = render 'timetables/shared/fields', f: ftt, timetable: timetable
 
-        h3 = t('timetable').humanize
-        = simple_fields_for timetable do |ftt|
-          = ftt.error_notification
-          = render 'timetables/shared/fields', f: ftt, timetable: timetable
+    h3 = t('holidays').humanize
+    = render 'holidays/shared/errors', holiday: holiday
+    .js_holiday
+      = simple_fields_for holiday do |fh|
+        = render 'holidays/shared/fields', f: fh
+    - if @extra_holidays
+      - @extra_holidays.each_with_index do |extra_holiday, i|
+        div class="js_holiday_row_#{i+1}"
+          = simple_fields_for extra_holiday do |feh|
+            = render 'holidays/shared/errors', holiday: extra_holiday
+            = render 'holidays/shared/fields', f: feh
+          button onclick="remove_row('holiday', #{i+1});" class='btn-delete-row'
+            '-
 
-        h3 = t('holidays').humanize
-        = render 'holidays/shared/errors', holiday: holiday
-        .js_holiday
-          = simple_fields_for holiday do |fh|
-            = render 'holidays/shared/fields', f: fh
-        - if @extra_holidays
-          - @extra_holidays.each_with_index do |extra_holiday, i|
-            div class="js_holiday_row_#{i+1}"
-              = simple_fields_for extra_holiday do |feh|
-                = render 'holidays/shared/errors', holiday: extra_holiday
-                = render 'holidays/shared/fields', f: feh
-              button onclick="remove_row('holiday', #{i+1});" class='btn-delete-row'
-                '-
+    input type='hidden' name='holiday[rows_counter]' id='holiday_rows_counter' value="#{holiday_rowcounter}"
+    div onclick='add_holidays();' class='btn btn-success'
+      '+
 
-        input type='hidden' name='holiday[rows_counter]' id='holiday_rows_counter' value="#{holiday_rowcounter}"
-        div onclick='add_holidays();' class='btn btn-success'
-          '+
-
-        h3 = t('tyre fees').humanize
-        = simple_fields_for tyre_fee do |ftf|
-          = render 'tyre_fees/shared/errors', fee: fee, tyre_fee: tyre_fee
-          = render 'tyre_fees/shared/fields', f: ftf
-        = f.button :submit
-    = render template: "layouts/box", locals: { title: t('public form title').humanize }
+    h3 = t('tyre fees').humanize
+    = simple_fields_for tyre_fee do |ftf|
+      = render 'tyre_fees/shared/errors', fee: fee, tyre_fee: tyre_fee
+      = render 'tyre_fees/shared/fields', f: ftf
+    = f.button :submit
+= render template: "layouts/box", locals: { title: t('public form title').humanize }
 
 javascript:
 

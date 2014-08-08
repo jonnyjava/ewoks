@@ -3,7 +3,7 @@ class PublicFormController < ApplicationController
 
   def public_form
     @garage = Garage.new(country: nil)
-    render :public_form, layout: false
+    render :public_form
   end
 
   def create_extra_holidays(rows)
@@ -52,18 +52,18 @@ class PublicFormController < ApplicationController
 
     respond_to do |format|
       if !valid_submission
-        format.html { render :public_form, layout: false }
+        format.html { render :public_form }
       else
         if @garage.save
           assign_garage_to_his_related(@garage, garage_properties)
           @tyre_fee.fee = @fee
           if garage_properties.each(&:save)
-            format.html { redirect_to :success, notice: 'Garage was successfully created.'}
+            format.html { redirect_to :success }
           else
-            format.html { render :public_form, layout: false }
+            format.html { render :public_form }
           end
         else
-          format.html { render :public_form, layout: false }
+          format.html { render :public_form }
         end
       end
     end
