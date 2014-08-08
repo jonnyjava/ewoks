@@ -1,8 +1,9 @@
 - timetable = @timetable || Timetable.new
 - holiday = @holiday || Holiday.new
+- extra_holidays = @extra_holidays || []
+- holiday_rowcounter = extra_holidays.count
 - fee = @fee || Fee.new
 - tyre_fee =fee.try(:tyre_fee) || TyreFee.new
-
 
 doctype html
 html
@@ -23,17 +24,85 @@ html
         h3 = t('new garage').humanize
         = render 'garages/shared/errors', garage: @garage
         = render 'garages/shared/fields', f: f
+
         h3 = t('timetable').humanize
         = simple_fields_for timetable do |ftt|
           = ftt.error_notification
           = render 'timetables/shared/fields', f: ftt, timetable: timetable
+
         h3 = t('holidays').humanize
-        = simple_fields_for holiday do |fh|
-          = render 'holidays/shared/errors', holiday: holiday
-          = render 'holidays/shared/fields', f: fh
+        = render 'holidays/shared/errors', holiday: holiday
+        .js_holidays
+          = simple_fields_for holiday do |fh|
+            = render 'holidays/shared/fields', f: fh
+        - if @extra_holidays
+          - @extra_holidays.each_with_index do |extra_holiday, i|
+            div class="js_holiday_row_#{i+1}"
+              = simple_fields_for extra_holiday do |feh|
+                = render 'holidays/shared/errors', holiday: extra_holiday
+                = render 'holidays/shared/fields', f: feh
+              input type='button' value="delete holidays#{i+1}" onclick="remove_row('holiday', #{i+1});"
+
+        input type='hidden' name='holiday[rows_counter]' id='holiday_rows_counter' value="#{holiday_rowcounter}"
+        input type='button' value='add holidays' onclick='add_holidays();'
+
         h3 = t('tyre fees').humanize
         = simple_fields_for tyre_fee do |ftf|
           = render 'tyre_fees/shared/errors', fee: fee, tyre_fee: tyre_fee
           = render 'tyre_fees/shared/fields', f: ftf
-        = f.button :submit 
+        = f.button :submit
     = render template: "layouts/box", locals: { title: t('public form title').humanize }
+
+javascript:
+
+  var holiday_template = $('.js_holidays').html();
+
+  function add_holidays() {
+    row_id = increment_row_counter("holiday");
+    content = wrap_row(holiday_template, "holiday", row_id)
+    $('.js_holidays').append(content);
+    prepare_input_names_for_strong_parameters("holiday", row_id);
+    clean_inputs("holiday",row_id);
+  };
+
+  function wrap_row(template, obj_name, row_id){
+    delete_button = "<input type='button' value='delete"+obj_name+row_id+"' onclick=\"remove_row('"+obj_name+"', "+row_id+");\" />"
+    wrapped_content = "<div class='js_"+obj_name+"_row_"+row_id+"'>"+template+delete_button+"</div>"
+    return wrapped_content
+  }
+
+  function increment_row_counter(obj_name){
+    counter = $('#'+obj_name+'_rows_counter').val();
+    counter++;
+    $('#'+obj_name+'_rows_counter').val(counter);
+    return counter;
+  }
+
+  function remove_row(obj_name, i){
+    $(".js_"+obj_name+"_row_"+i).remove();
+  }
+
+  function clean_inputs(obj_name, row_id){
+    $(".js_"+obj_name+"_row_"+row_id+"  input[type='text']").each(function( index ) {
+      $( this ).val(null);
+    });
+  }
+
+  function prepare_input_names_for_strong_parameters(obj_name, i){
+    $(".js_"+obj_name+"_row_"+i+"  input[type='text']").each(function( index ) {
+      oldname = $( this ).attr('name') ;
+      newname = oldname.replace(obj_name, obj_name+"_"+i);
+      $( this ).attr('name', newname);
+    });
+  }
+
+  function prepare_form_for_strong_parameters(obj_name){
+    rows = $('#'+obj_name+'_rows_counter').val();
+    for (i=1; i<=rows; i++){
+      prepare_input_names_for_strong_parameters(obj_name, i);
+    }
+  }
+
+  $(document).ready(function(){
+    prepare_form_for_strong_parameters('holiday');
+  });
