@@ -1,5 +1,5 @@
 class Garage < ActiveRecord::Base
-  belongs_to :user, foreign_key: "owner_id"
+  belongs_to :user, foreign_key: 'owner_id'
   has_many :holidays
   has_one :timetable
   has_many :fees
@@ -8,8 +8,8 @@ class Garage < ActiveRecord::Base
 
   validates :street, :zip, :city, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
-  has_attached_file :logo, default_url: "/assets/avatar_default.jpg"
-  validates_attachment_content_type :logo, content_type: ['image/png', 'image/jpg']
+  has_attached_file :logo, default_url: '/assets/avatar_default.jpg'
+  validates_attachment_content_type :logo, content_type: %w(image/png image/jpg)
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
@@ -19,14 +19,16 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
-  COUNTRIES = ["Italy", "Poland", "Portugal", "Argentina"]
+  COUNTRIES = %w(Italy Poland Portugal Argentina France Spain Belgium)
 
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
   scope :by_country, ->(country) { where(country: country) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
-  scope :with_tyre_fee_less_than, ->(price) { includes(:fees).where('fees.price <= ?', price).references(:fees) }
+  scope(:with_tyre_fee_less_than, lambda do |price|
+    includes(:fees).where('fees.price <= ?', price).references(:fees)
+  end)
 
   def address
     [street, city, zip, country].compact.join(', ')
@@ -34,15 +36,15 @@ class Garage < ActiveRecord::Base
 
   def address_changed?
     attrs = %w(street city zip country)
-    attrs.any?{|a| send "#{a}_changed?"}
+    attrs.any? { |a| send "#{a}_changed?" }
   end
 
   def inactive!
-    self.update_attribute(:status, INACTIVE)
+    update_attribute(:status, INACTIVE)
   end
 
   def active!
-    self.update_attribute(:status, ACTIVE)
+    update_attribute(:status, ACTIVE)
   end
 
   def active?
@@ -58,14 +60,14 @@ class Garage < ActiveRecord::Base
   end
 
   def create_my_owner
-    owner = User.create(email: email, password: Faker::Internet::password(10))
-    self.update_attribute(:owner_id, owner.id)
+    owner = User.create(email: email, password: Faker::Internet.password(10))
+    update_attribute(:owner_id, owner.id)
     UserMailer.send_generated_password(owner).deliver
   end
 
   def notify_my_owner
-    return unless owner = self.user
-    UserMailer.send_activation_notification(owner).deliver if active?
+    return unless user
+    UserMailer.send_activation_notification(user).deliver if active?
   end
 
   def send_signup_confirmation
@@ -73,10 +75,11 @@ class Garage < ActiveRecord::Base
   end
 
   def signup_verification_token
-      Digest::SHA1.hexdigest([email, status, created_at, 'endor is full of ewoks'].join)
+    token = [email, status, created_at, 'endor is full of ewoks'].join
+    Digest::SHA1.hexdigest(token)
   end
 
-  def self.find_by_radius_from_location(location, radius=10)
+  def self.find_by_radius_from_location(location, radius = 10)
     coords = Geocoder.coordinates(location)
     Garage.near(coords, radius, units: :km)
   end
@@ -84,10 +87,9 @@ class Garage < ActiveRecord::Base
   def self.find_by_signup_verification_token(token)
     garage = nil
     Garage.to_confirm.each do |g|
-      if g.signup_verification_token == token
-        garage = g
-        break
-      end
+      next unless g.signup_verification_token == token
+      garage = g
+      break
     end
     garage
   end
