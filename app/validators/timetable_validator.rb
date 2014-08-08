@@ -1,7 +1,7 @@
 class TimetableValidator < ActiveModel::Validator
   def validate(record)
     %w(mon tue wed thu fri sat sun).each do |day|
-      message = 'The closing time should be before the opening'
+      message = I18n.t('The closing time should be later the opening')
       return record.errors[:base] << message unless interval_valid?(day, record)
     end
   end

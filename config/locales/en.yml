@@ -98,6 +98,7 @@ en:
   Your account has been confirmed!: 'Your account has been confirmed!'
   here you can find your login: 'here you can find your login'
   you can login here: 'you can login here'
+  The closing time should be later the opening: 'The closing time should be later the opening'
 
   simple_form:
     labels:
