@@ -1,5 +1,5 @@
 AllCops:
-  Excludes:
-    - db/**
+  Exclude:
+    - db/schema.rb
 Documentation:
   Enabled: false
