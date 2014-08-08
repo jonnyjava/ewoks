@@ -99,6 +99,7 @@ es:
   Your account has been confirmed!: 'Su cuenta ha sido confirmada!'
   here you can find your login: 'aquí puede encontrar su nombre de usuario'
   you can login here: 'puede ingresar aquí'
+  The closing time should be later the opening: 'La hora de cierre debe ser posterior a la apertura'
 
   simple_form:
     labels:
