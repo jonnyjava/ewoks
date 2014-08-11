@@ -52,6 +52,10 @@ class UserPolicy < ApplicationPolicy
     @logged_user.admin?
   end
 
+  def regenerate_auth_token?
+    @logged_user.admin? || belongs_to_logged_user_country? || is_himself?
+  end
+
   def belongs_to_logged_user_country?
     @logged_user.country_manager? and (@user.blank? || (@logged_user.country == @user.try(:country)))
   end
