@@ -11,15 +11,21 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = "Access denied."
+    flash[:alert] = 'Access denied.'
     redirect_to user_path(current_user)
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = extract_locale_from_accept_language_header ||
+    params[:locale] || I18n.default_locale
   end
 
   def default_url_options(options = {})
     { locale: I18n.locale }.merge options
+  end
+
+  def extract_locale_from_accept_language_header
+    language = request.env['HTTP_ACCEPT_LANGUAGE']
+    language.scan(/^[a-z]{2}/).first if language
   end
 end
