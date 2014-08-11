@@ -95,7 +95,7 @@ class Garage < ActiveRecord::Base
   end
 
   def self.countries(user)
-    return [user.country] unless user.admin?
+    return [user.country] if user && !user.admin?
     COUNTRIES
   end
 end
