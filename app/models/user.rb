@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_one :garage, foreign_key: "owner_id"
+  has_one :garage, foreign_key: 'owner_id'
   enum role: [:admin, :country_manager, :owner, :api]
 
   ADMIN = roles[:admin]
@@ -13,20 +13,18 @@ class User < ActiveRecord::Base
   OWNER = roles[:owner]
   API = roles[:api]
 
-  after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :owner
   end
 
-
-private
+  private
 
   def set_auth_token
     return if auth_token.present?
     self.auth_token = generate_auth_token
   end
-
 
   def generate_auth_token
     loop do
