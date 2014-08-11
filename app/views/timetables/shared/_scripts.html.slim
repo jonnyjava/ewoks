@@ -1,0 +1,16 @@
+coffee:
+  $ ->
+    $(".timepicker").timepicker
+      showInputs: false,
+      defaultTime: '00:00',
+      showMeridian: false,
+      minuteStep: 15
+
+javascript:
+  $('input:checkbox').on('ifClicked', function(event){
+    day = $(this).attr('data-day');
+    checked = $(this).is(":checked");
+
+    $("#timetable_"+day+"_morning_close").val('').prop('disabled', !checked);
+    $("#timetable_"+day+"_afternoon_open").val('').prop('disabled', !checked);
+  });

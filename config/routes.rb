@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
     get '/public_wizard', to: 'public_wizard#public_wizard', as: 'public_wizard'
     post '/public_wizard_create_garage', to: 'public_wizard#create_garage', as: 'public_wizard_create_garage'
+    get '/public_wizard_show_timetable/:garage_id', to: 'public_wizard#show_timetable', as: 'public_wizard_show_timetable'
+    post '/public_wizard_create_timetable/:garage_id', to: 'public_wizard#create_timetable', as: 'public_wizard_create_timetable'
 
     resources :garages do
       resources :fees

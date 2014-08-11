@@ -1,0 +1,10 @@
+- content_for :content
+	= simple_form_for([@garage, @timetable], url: public_wizard_create_timetable_url) do |f|
+	  = f.error_notification
+	  = f.association :garage, as: :hidden
+
+	  = render 'timetables/shared/fields', f: f, timetable: @timetable
+	  .b-keypad
+	    = f.button :submit, class: "b-keypad__btn--success"
+= render template: "layouts/box", locals: { title: 'New timetable' }
+= render 'timetables/shared/scripts'
