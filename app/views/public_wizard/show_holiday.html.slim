@@ -1,0 +1,12 @@
+h3 = t('holidays').humanize
+= simple_form_for([@garage, @holiday], url: public_wizard_create_holiday_url) do |f|
+  = f.error_notification
+  = f.association :garage, as: :hidden
+  = render 'holidays/shared/fields', f: f, holiday: @holiday
+
+  .b-keypad
+    = link_to t('cancel').humanize, garage_holidays_path(@garage), class: "b-keypad__btn--default"
+    = f.button :submit, class: "b-keypad__btn--success", value: 'add holiday'
+    = f.button :submit, class: "b-keypad__btn--success", value: 'next'
+
+= render 'holidays/shared/scripts'

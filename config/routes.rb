@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     post '/public_wizard_create_garage', to: 'public_wizard#create_garage', as: 'public_wizard_create_garage'
     get '/public_wizard_show_timetable/:garage_id', to: 'public_wizard#show_timetable', as: 'public_wizard_show_timetable'
     post '/public_wizard_create_timetable/:garage_id', to: 'public_wizard#create_timetable', as: 'public_wizard_create_timetable'
+    get '/public_wizard_show_holiday/:garage_id', to: 'public_wizard#show_holiday', as: 'public_wizard_show_holiday'
+    post '/public_wizard_create_holiday/:garage_id', to: 'public_wizard#create_holiday', as: 'public_wizard_create_holiday'
 
     resources :garages do
       resources :fees
