@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     self.role ||= :owner
   end
 
+  def update_auth_token
+    self.auth_token = generate_auth_token
+  end
+
   private
 
   def set_auth_token
