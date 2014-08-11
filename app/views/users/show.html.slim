@@ -20,6 +20,6 @@
 						tr
 							td = t('token').humanize
 							td = @user.auth_token
-							td = link_to t('regenerate').humanize, nil, class: "btn btn-default btn-sm"
+							td = link_to t('regenerate').humanize, regenerate_auth_token_path(@user), class: "btn btn-default btn-sm", method: :patch
 
 = render template: "layouts/box", locals: { title: "#{t('user').humanize}: #{@user.name} #{@user.surname}" }
