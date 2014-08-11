@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
     devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
     patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
+    patch 'users/:id/regenerate_auth_token', to: 'users#regenerate_auth_token', as: 'regenerate_auth_token'
     delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
 
     match '/404' => 'errors#error_404', via: :all, as: 'error_404'
