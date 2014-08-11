@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     get '/success', to: 'public_form#success', as: 'success'
     get '/public_form', to: 'public_form#public_form', as: 'public_form'
     post '/public_form', to: 'public_form#create', as: 'public_form_create'
+
+    get '/public_wizard', to: 'public_wizard#public_wizard', as: 'public_wizard'
+    post '/public_wizard_create_garage', to: 'public_wizard#create_garage', as: 'public_wizard_create_garage'
+
     resources :garages do
       resources :fees
       resources :tyre_fees
