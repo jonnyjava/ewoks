@@ -17,5 +17,9 @@
 						tr
 							td = t('country').humanize
 							td = @user.country
+						tr
+							td = t('token').humanize
+							td = @user.auth_token
+							td = link_to t('regenerate').humanize, nil, class: "btn btn-default btn-sm"
 
 = render template: "layouts/box", locals: { title: "#{t('user').humanize}: #{@user.name} #{@user.surname}" }
