@@ -14,7 +14,7 @@ class PublicWizardController < ApplicationController
     respond_to do |format|
       if @garage.save
         format.html do
-          redirect_to public_wizard_show_timetable_url(@garage), notice: t('successfully created', class_name: t('garage'))
+          redirect_to public_wizard_show_timetable_url(@garage), notice: notice_message('garage')
         end
       else
         format.html { render :public_wizard }
@@ -31,7 +31,9 @@ class PublicWizardController < ApplicationController
 
     respond_to do |format|
       if @timetable.save
-        format.html { redirect_to public_wizard_show_holiday_url(@garage), notice: t('successfully created', class_name: t('timetable')) }
+        format.html do
+          redirect_to public_wizard_show_holiday_url(@garage), notice: notice_message('timetable')
+        end
       else
         format.html { render :show_timetable }
       end
@@ -48,7 +50,9 @@ class PublicWizardController < ApplicationController
     respond_to do |format|
       if @holiday.save
         redirect = params[:commit] == 'next' ? public_wizard_show_fee_url(@garage) : public_wizard_show_holiday_url(@garage)
-        format.html { redirect_to redirect, notice: t('successfully created', class_name: t('holiday')) }
+        format.html do
+          redirect_to redirect, notice: notice_message('holiday')
+        end
       else
         format.html { render :show_holiday }
       end
@@ -69,7 +73,9 @@ class PublicWizardController < ApplicationController
       if @fee.save
         if @tyre_fee.save
           redirect = params[:commit] == 'finish' ? :success : public_wizard_show_fee_url(@garage)
-          format.html { redirect_to redirect, notice: t('successfully created', class_name: t('fee')) }
+          format.html do
+            redirect_to redirect, notice: notice_message('fee')
+          end
         else
           format.html { render :create_fee }
         end
@@ -83,5 +89,9 @@ class PublicWizardController < ApplicationController
 
   def set_garage
     @garage = Garage.find(params[:garage_id])
+  end
+
+  def notice_message(class_name)
+    t('successfully created', class_name: t(class_name))
   end
 end
