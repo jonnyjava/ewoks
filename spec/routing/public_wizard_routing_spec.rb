@@ -10,5 +10,8 @@ describe PublicWizardController do
 
     it { get('/public_wizard_show_holiday/1').should route_to('public_wizard#show_holiday', garage_id: '1') }
     it { post('/public_wizard_create_holiday/1').should route_to('public_wizard#create_holiday', garage_id: '1') }
+
+    it { get('/public_wizard_show_fee/1').should route_to('public_wizard#show_fee', garage_id: '1') }
+    it { post('/public_wizard_create_fee/1').should route_to('public_wizard#create_fee', garage_id: '1') }
   end
 end

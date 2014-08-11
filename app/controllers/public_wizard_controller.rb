@@ -53,6 +53,30 @@ class PublicWizardController < ApplicationController
     end
   end
 
+  def show_fee
+    @fee = Fee.new
+    @tyre_fee = TyreFee.new
+  end
+
+  def create_fee
+    @fee = Fee.new(fee_params)
+    @tyre_fee = TyreFee.new(tyre_fee_params)
+    @fee.garage = @garage
+    @tyre_fee.fee = @fee
+    respond_to do |format|
+      if @fee.save
+        if @tyre_fee.save
+          redirect = params[:commit] == 'finish' ? :success : public_wizard_show_fee_url(@garage)
+          format.html { redirect_to redirect, notice: "Tyre fee was successfully created." }
+        else
+          format.html { render :create_fee }
+        end
+      else
+        format.html { render :create_fee }
+      end
+    end
+  end
+
   private
 
   def set_garage
@@ -69,5 +93,13 @@ class PublicWizardController < ApplicationController
 
   def holiday_params
     params.require(:holiday).permit(:garage_id, :name, :start_date, :end_date)
+  end
+
+  def tyre_fee_params
+    params.require(:tyre_fee).permit(:vehicle_type, :diameter_min, :diameter_max, :rim_type)
+  end
+
+  def fee_params
+    params.require(:fee).permit(:name, :price)
   end
 end

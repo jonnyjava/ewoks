@@ -1,0 +1,10 @@
+- content_for :content
+  = simple_form_for([@garage, @tyre_fee], url: public_wizard_create_fee_url) do |f|
+    = render 'tyre_fees/shared/errors', fee: @fee, tyre_fee: @tyre_fee
+    = render 'tyre_fees/shared/fields', f: f
+
+    .b-keypad
+      = link_to t('cancel').humanize, garage_tyre_fees_path(@garage), class: "b-keypad__btn--default"
+      = f.button :submit, class: "b-keypad__btn--success"
+      = f.button :submit, class: "b-keypad__btn--success", value: 'finish'
+= render template: "layouts/box", locals: { title: t('tyre fees').humanize }
