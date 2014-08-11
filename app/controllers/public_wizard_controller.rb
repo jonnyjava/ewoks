@@ -13,7 +13,9 @@ class PublicWizardController < ApplicationController
     @garage = Garage.new(garage_params)
     respond_to do |format|
       if @garage.save
-        format.html { redirect_to public_wizard_show_timetable_url(@garage), notice: 'Garage was successfully created.' }
+        format.html do
+          redirect_to public_wizard_show_timetable_url(@garage), notice: t('successfully created', class_name: t('garage'))
+        end
       else
         format.html { render :public_wizard }
       end
@@ -29,7 +31,7 @@ class PublicWizardController < ApplicationController
 
     respond_to do |format|
       if @timetable.save
-        format.html { redirect_to public_wizard_show_holiday_url(@garage), notice: "Timetable was successfully created." }
+        format.html { redirect_to public_wizard_show_holiday_url(@garage), notice: t('successfully created', class_name: t('timetable')) }
       else
         format.html { render :show_timetable }
       end
@@ -46,7 +48,7 @@ class PublicWizardController < ApplicationController
     respond_to do |format|
       if @holiday.save
         redirect = params[:commit] == 'next' ? public_wizard_show_fee_url(@garage) : public_wizard_show_holiday_url(@garage)
-        format.html { redirect_to redirect, notice: "Holiday was successfully created." }
+        format.html { redirect_to redirect, notice: t('successfully created', class_name: t('holiday')) }
       else
         format.html { render :show_holiday }
       end
@@ -67,7 +69,7 @@ class PublicWizardController < ApplicationController
       if @fee.save
         if @tyre_fee.save
           redirect = params[:commit] == 'finish' ? :success : public_wizard_show_fee_url(@garage)
-          format.html { redirect_to redirect, notice: "Tyre fee was successfully created." }
+          format.html { redirect_to redirect, notice: t('successfully created', class_name: t('fee')) }
         else
           format.html { render :create_fee }
         end
