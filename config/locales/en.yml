@@ -78,9 +78,10 @@ en:
   here you can find your login: 'here you can find your login'
   you can login here: 'you can login here'
   public form title: 'public form title'
+  token: 'token'
+  regenerate: 'regenerate'
   The closing time should be later the opening: 'The closing time should be later than the opening time'
   successfully created: "%{class_name} was successfully created."
-
 
   simple_form:
     labels:
