@@ -80,7 +80,7 @@ es:
   you can login here: 'puede ingresar aquí'
   public form title: 'Titulo del formulario publico'
   The closing time should be later the opening: 'La hora de cierre debe ser posterior a la apertura'
-  successfully created: "%{class_name}creado con exito."
+  successfully created: "%{class_name} creado con exito."
 
 
   simple_form:
