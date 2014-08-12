@@ -9,7 +9,7 @@ module API
         garages = Garage.active
 
         garages = filtered_by_price(
-                  garages, params[:tyre_fee]) if params[:tyre_fee]
+                  garages, params[:price]) if params[:price]
         garages = filtered_by_radius(
                   garages, params[:radius]) if params[:radius]
         garages = filtered_by_default(garages, params) unless params[:radius]

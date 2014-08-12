@@ -64,7 +64,7 @@ describe 'Garages' do
       it 'should filter by tyre_fee' do
         spanish_fee
         french_fee
-        api_get 'garages.json?tyre_fee=25', {}, { 'Authorization' => token_header(user.auth_token) }
+        api_get 'garages.json?price=25', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
@@ -78,7 +78,7 @@ describe 'Garages' do
         spanish_fee
         french_fee
 
-        api_get 'garages.json?country=Spain&zip=00000&tyre_fee=25', {}, { 'Authorization' => token_header(user.auth_token) }
+        api_get 'garages.json?country=Spain&zip=00000&price=25', {}, { 'Authorization' => token_header(user.auth_token) }
         response.status.should be(200)
         ids = json(response.body).collect { |g| g[:id] }
         ids.count.should be(1)
