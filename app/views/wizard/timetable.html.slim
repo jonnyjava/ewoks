@@ -6,5 +6,6 @@
 	  = render 'timetables/shared/fields', f: f, timetable: @timetable
 	  .b-keypad
 	    = f.button :submit, class: "b-keypad__btn--success"
+	    = link_to 'skip', wizard_holiday_url(@garage), class: 'b-keypad__btn--success'
 = render template: "layouts/box", locals: { title: 'New timetable' }
 = render 'timetables/shared/scripts'

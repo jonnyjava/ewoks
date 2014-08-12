@@ -7,4 +7,5 @@
       = link_to t('cancel').humanize, garage_tyre_fees_path(@garage), class: "b-keypad__btn--default"
       = f.button :submit, class: "b-keypad__btn--success"
       = f.button :submit, class: "b-keypad__btn--success", value: 'finish'
+      = link_to 'skip', success_url, class: 'b-keypad__btn--success'
 = render template: "layouts/box", locals: { title: t('tyre fees').humanize }
