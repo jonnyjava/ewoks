@@ -1,5 +1,5 @@
 - content_for :content
-  = simple_form_for([@garage, @holiday], url: public_wizard_create_holiday_url) do |f|
+  = simple_form_for([@garage, @holiday], url: wizard_create_holiday_url) do |f|
     = f.error_notification
     = f.association :garage, as: :hidden
     = render 'holidays/shared/fields', f: f, holiday: @holiday

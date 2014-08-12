@@ -1,5 +1,5 @@
 - content_for :content
-  = simple_form_for([@garage, @tyre_fee], url: public_wizard_create_fee_url) do |f|
+  = simple_form_for([@garage, @tyre_fee], url: wizard_create_fee_url) do |f|
     = render 'tyre_fees/shared/errors', fee: @fee, tyre_fee: @tyre_fee
     = render 'tyre_fees/shared/fields', f: f
 

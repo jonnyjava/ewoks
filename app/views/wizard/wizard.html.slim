@@ -1,5 +1,5 @@
 - content_for :content
-  = simple_form_for(@garage, url: public_wizard_create_garage_url) do |f|
+  = simple_form_for(@garage, url: wizard_create_garage_url) do |f|
     h3 = t('new garage').humanize
     = render 'garages/shared/errors', garage: @garage
     = render 'garages/shared/fields', f: f

@@ -16,33 +16,33 @@ Rails.application.routes.draw do
     get '/public_form', to: 'public_form#public_form', as: 'public_form'
     post '/public_form', to: 'public_form#create', as: 'public_form_create'
 
-    get '/public_wizard',
-        to: 'public_wizard#public_wizard',
-        as: 'public_wizard'
-    post '/public_wizard_create_garage',
-         to: 'public_wizard#create_garage',
-         as: 'public_wizard_create_garage'
+    get '/wizard',
+        to: 'wizard#wizard',
+        as: 'wizard'
+    post '/wizard_create_garage',
+         to: 'wizard#create_garage',
+         as: 'wizard_create_garage'
 
-    get '/public_wizard_show_timetable/:garage_id',
-        to: 'public_wizard#show_timetable',
-        as: 'public_wizard_show_timetable'
-    post '/public_wizard_create_timetable/:garage_id',
-         to: 'public_wizard#create_timetable',
-         as: 'public_wizard_create_timetable'
+    get '/wizard_timetable/:garage_id',
+        to: 'wizard#timetable',
+        as: 'wizard_timetable'
+    post '/wizard_create_timetable/:garage_id',
+         to: 'wizard#create_timetable',
+         as: 'wizard_create_timetable'
 
-    get '/public_wizard_show_holiday/:garage_id',
-        to: 'public_wizard#show_holiday',
-        as: 'public_wizard_show_holiday'
-    post '/public_wizard_create_holiday/:garage_id',
-         to: 'public_wizard#create_holiday',
-         as: 'public_wizard_create_holiday'
+    get '/wizard_holiday/:garage_id',
+        to: 'wizard#holiday',
+        as: 'wizard_holiday'
+    post '/wizard_create_holiday/:garage_id',
+         to: 'wizard#create_holiday',
+         as: 'wizard_create_holiday'
 
-    get '/public_wizard_show_fee/:garage_id',
-        to: 'public_wizard#show_fee',
-        as: 'public_wizard_show_fee'
-    post '/public_wizard_create_fee/:garage_id',
-         to: 'public_wizard#create_fee',
-         as: 'public_wizard_create_fee'
+    get '/wizard_fee/:garage_id',
+        to: 'wizard#fee',
+        as: 'wizard_fee'
+    post '/wizard_create_fee/:garage_id',
+         to: 'wizard#create_fee',
+         as: 'wizard_create_fee'
 
     resources :garages do
       resources :fees
