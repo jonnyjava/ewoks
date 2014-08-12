@@ -11,15 +11,7 @@ class WizardController < ApplicationController
 
   def create_garage
     @garage = Garage.new(garage_params)
-    respond_to do |format|
-      if @garage.save
-        format.html do
-          redirect_to wizard_timetable_url(@garage), notice: notice_message('garage')
-        end
-      else
-        format.html { render :wizard }
-      end
-    end
+    redirect_to_response(@garage, :wizard,  'timetable')
   end
 
   def timetable
@@ -28,16 +20,7 @@ class WizardController < ApplicationController
 
   def create_timetable
     @timetable = Timetable.new(timetable_params)
-
-    respond_to do |format|
-      if @timetable.save
-        format.html do
-          redirect_to wizard_holiday_url(@garage), notice: notice_message('timetable')
-        end
-      else
-        format.html { render :timetable }
-      end
-    end
+    redirect_to_response(@garage, :timetable,  'holiday')
   end
 
   def holiday
@@ -46,17 +29,8 @@ class WizardController < ApplicationController
 
   def create_holiday
     @holiday = Holiday.new(holiday_params)
-
-    respond_to do |format|
-      if @holiday.save
-        redirect = params[:commit] == 'next' ? wizard_fee_url(@garage) : wizard_holiday_url(@garage)
-        format.html do
-          redirect_to redirect, notice: notice_message('holiday')
-        end
-      else
-        format.html { render :holiday }
-      end
-    end
+    destination = params[:commit] == 'next' ? 'fee' : 'holiday'
+    redirect_to_response(@garage, :holiday,  destination)
   end
 
   def fee
@@ -69,15 +43,14 @@ class WizardController < ApplicationController
     @tyre_fee = TyreFee.new(tyre_fee_params)
     @fee.garage = @garage
     @tyre_fee.fee = @fee
+
+    redirect = wizard_fee_url(@garage)
+    redirect = :success if params[:commit] == 'finish'
+
     respond_to do |format|
-      if @fee.save
-        if @tyre_fee.save
-          redirect = params[:commit] == 'finish' ? :success : wizard_fee_url(@garage)
-          format.html do
-            redirect_to redirect, notice: notice_message('fee')
-          end
-        else
-          format.html { render :create_fee }
+      if @fee.save && @tyre_fee.save
+        format.html do
+          redirect_to redirect, notice: notice_message('fee')
         end
       else
         format.html { render :create_fee }
@@ -86,6 +59,19 @@ class WizardController < ApplicationController
   end
 
   private
+
+  def redirect_to_response(object, origin, destination)
+    respond_to do |format|
+      if object.save
+        format.html do
+          destination = send("wizard_#{destination}_url".to_sym, object)
+          redirect_to destination, notice: notice_message(object.class.name)
+        end
+      else
+        format.html { render origin }
+      end
+    end
+  end
 
   def set_garage
     @garage = Garage.find(params[:garage_id])
