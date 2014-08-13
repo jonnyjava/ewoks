@@ -7,18 +7,4 @@
     = link_to t('cancel').humanize, garage_holidays_path(@garage), class: "b-keypad__btn--default"
     = f.button :submit, class: "b-keypad__btn--success"
 
-coffee:
-  $ ->
-    $(".js-datepicker-start").datepicker
-      defaultDate: "+1w",
-      changeMonth: true,
-      dateFormat: "yy-mm-dd",
-      onClose: (selectedDate) ->
-        $(".js-datepicker-end").datepicker("option", "minDate", selectedDate)
-
-    $(".js-datepicker-end").datepicker
-      defaultDate: "+1w",
-      changeMonth: true,
-      dateFormat: "yy-mm-dd",
-      onClose: (selectedDate) ->
-        $(".js-datepicker-start").datepicker("option", "maxDate", selectedDate)
+= render 'holidays/shared/scripts'

@@ -82,6 +82,7 @@ es:
   The closing time should be later the opening: 'La hora de cierre debe ser posterior a la apertura'
   token: 'token'
   regenerate: 'regenerar'
+  successfully created: "%{class_name} creado con exito."
 
   simple_form:
     labels:
