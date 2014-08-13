@@ -5,6 +5,7 @@ class TyreFeesController < ApplicationController
   # GET /tyre_fees
   # GET /tyre_fees.json
   def index
+    redirect_to user_path(current_user) unless policy(@garage).show?
     tyre_fees = TyreFee.by_garage(@garage).page(params[:page])
     @tyre_fees = TyreFeeDecorator.decorate_collection(tyre_fees)
   end
