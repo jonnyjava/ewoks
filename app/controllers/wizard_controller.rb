@@ -34,23 +34,17 @@ class WizardController < ApplicationController
   end
 
   def fee
-    @fee = Fee.new
-    @tyre_fee = TyreFee.new
+    @tyre_fee = TyreFee.new(garage: @garage)
   end
 
   def create_fee
-    @fee = Fee.new(fee_params)
     @tyre_fee = TyreFee.new(tyre_fee_params)
-    @fee.garage = @garage
-    @tyre_fee.fee = @fee
-
-    redirect = wizard_fee_url(@garage)
-    redirect = :success if params[:commit] == 'finish'
-
+    destination = wizard_fee_url(@garage)
+    destination = :success if params[:commit] == 'finish'
     respond_to do |format|
-      if @fee.save && @tyre_fee.save
+      if @tyre_fee.save
         format.html do
-          redirect_to redirect, notice: notice_message('fee')
+          redirect_to destination, notice: notice_message('tyre_fee')
         end
       else
         format.html { render :create_fee }

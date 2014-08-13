@@ -2,7 +2,7 @@ class Garage < ActiveRecord::Base
   belongs_to :user, foreign_key: 'owner_id'
   has_many :holidays
   has_one :timetable
-  has_many :fees
+  has_many :tyre_fees
   has_many :garage_properties
   has_many :properties, through: :garage_properties
 
@@ -26,9 +26,6 @@ class Garage < ActiveRecord::Base
   scope :by_country, ->(country) { where(country: country) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
-  scope(:with_tyre_fee_less_than, lambda do |price|
-    includes(:fees).where('fees.price <= ?', price).references(:fees)
-  end)
 
   def address
     [street, city, zip, country].compact.join(', ')

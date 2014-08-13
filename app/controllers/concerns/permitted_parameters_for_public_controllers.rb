@@ -14,10 +14,6 @@ module PermittedParametersForPublicControllers
   end
 
   def tyre_fee_params
-    params.require(:tyre_fee).permit(:vehicle_type, :diameter_min, :diameter_max, :rim_type)
-  end
-
-  def fee_params
-    params.require(:fee).permit(:garage_id, :name, :price)
+    params.require(:tyre_fee).permit(:garage_id, :name, :price, :vehicle_type, :diameter_min, :diameter_max, :rim_type)
   end
 end

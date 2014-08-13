@@ -8,11 +8,9 @@ module API
       def index
         garages = Garage.active
 
-        garages = filtered_by_price(
-                  garages, params[:price]) if params[:price]
-        garages = filtered_by_radius(
-                  garages, params[:radius]) if params[:radius]
-        garages = filtered_by_default(garages, params) unless params[:radius]
+        garages = by_price(garages, params[:price]) if params[:price]
+        garages = by_radius(garages, params[:radius]) if params[:radius]
+        garages = by_default(garages, params) unless params[:radius]
 
         @garages = garages
       end
@@ -39,15 +37,15 @@ module API
         render json: 'Bad credentials', status: 401
       end
 
-      def filtered_by_radius(garages, radius)
+      def by_radius(garages, radius)
         garages.find_by_radius_from_location(@location, radius)
       end
 
-      def filtered_by_price(garages, price)
-        garages.with_tyre_fee_less_than(price)
+      def by_price(garages, price)
+        garages.includes(:tyre_fees).where('tyre_fees.price <= ?', price).references(:tyre_fees)
       end
 
-      def filtered_by_default(garages, params)
+      def by_default(garages, params)
         garages = garages.by_zip(params[:zip]) if params[:zip]
         garages = garages.by_city(params[:city]) if params[:city]
         garages.by_country(@country)

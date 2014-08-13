@@ -1,10 +1,3 @@
-- if fee.errors.any?
-  #error_explanation
-    h2 = "#{pluralize(fee.errors.count, "error")} prohibited this fee from being saved:"
-    ul
-      - fee.errors.full_messages.each do |message|
-        li = message
-
 - if tyre_fee.errors.any?
   #error_explanation
     h2 = "#{pluralize(tyre_fee.errors.count, "error")} prohibited this tyre_fee from being saved:"

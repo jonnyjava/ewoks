@@ -12,15 +12,15 @@
               th price
               th actions
           tbody
-            - if @fees
-              - @fees.each do |fee|
-                - tyre_fee = fee.tyre_fee
+            - if @tyre_fee
+              - @tyre_fee.each do |tyre_fee|
                 tr
-                  td = fee.name
-                  td = fee.price
+                  td = tyre_fee.name
+                  td = tyre_fee.price
                   td
                     .btn-group
-                      button.btn.btn-default = link_to "view", garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--view"
+                      button.btn.btn-default
+                        = link_to "view", garage_tyre_fee_path(@garage, tyre_fee), class: "m-button-action--view"
                       button.btn.btn-default.dropdown-toggle[data-toggle="dropdown"]
                         span.caret
                       ul.dropdown-menu

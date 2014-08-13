@@ -72,13 +72,11 @@ describe 'Wizard' do
   end
 
   describe 'POST /wizard_create_fee' do
-    let(:fee_params) { FactoryGirl.attributes_for(:fee) }
-    let(:tyre_fee_params) { FactoryGirl.attributes_for(:tyre_fee) }
-    let(:posted_params) { { fee: fee_params, tyre_fee: tyre_fee_params } }
+    let(:posted_params) { FactoryGirl.attributes_for(:tyre_fee) }
 
     context 'submitting to create another fee after this one' do
       it 'should return status 302 and redirect to fee' do
-        post wizard_create_fee_url(garage, posted_params)
+        post wizard_create_fee_url(garage, tyre_fee: posted_params)
         response.status.should be(302)
         response.should redirect_to wizard_fee_url(garage)
       end
@@ -86,8 +84,7 @@ describe 'Wizard' do
 
     context 'submitting to next step' do
       it 'should return status 302 and redirect to success' do
-        params_to_post = posted_params.merge(commit: 'finish')
-        post wizard_create_fee_url(garage, params_to_post)
+        post wizard_create_fee_url(garage, tyre_fee: posted_params, commit: 'finish')
         response.status.should be(302)
         response.should redirect_to success_url
       end

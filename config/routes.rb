@@ -45,7 +45,6 @@ Rails.application.routes.draw do
          as: 'wizard_create_fee'
 
     resources :garages do
-      resources :fees
       resources :tyre_fees
       resources :holidays
       resources :timetables
