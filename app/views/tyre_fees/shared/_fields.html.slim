@@ -1,5 +1,10 @@
 = f.input :name
 = f.input :price
+
+.secondary-title-fees
+  h4 = t('Specifies the fee options')
+  p = t('If you leave a field blank, it is like select all')
+
 = f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
 = f.input :diameter_min, collection: TyreFee::DIAMETER
 = f.input :diameter_max, collection: TyreFee::DIAMETER
