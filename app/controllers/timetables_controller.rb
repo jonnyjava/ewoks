@@ -11,14 +11,17 @@ class TimetablesController < ApplicationController
 
   def new
     @timetable = @garage.timetables.build
+    authorize @timetable
   end
 
   def edit
+    redirect_to user_path(current_user) unless policy(@garage).show?
+    authorize @timetable
   end
 
   def create
     @timetable = Timetable.new(timetable_params)
-
+    authorize @timetable
     respond_to do |format|
       if @timetable.save
         format.html { redirect_to edit_garage_timetable_url(@garage, @timetable), notice: "Timetable was successfully created." }
@@ -31,6 +34,7 @@ class TimetablesController < ApplicationController
   end
 
   def update
+    authorize @timetable
     respond_to do |format|
       if @timetable.update(timetable_params)
         format.html { redirect_to edit_garage_timetable_url(@garage, @timetable), notice: "Timetable was successfully updated." }
@@ -43,6 +47,7 @@ class TimetablesController < ApplicationController
   end
 
   def destroy
+    authorize @timetable
     @timetable.destroy
     respond_to do |format|
       format.html { redirect_to edit_garage_timetable_url(@garage, @garage.timetable), notice: "Timetable was successfully destroyed." }
