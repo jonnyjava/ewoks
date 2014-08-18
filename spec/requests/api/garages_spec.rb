@@ -36,54 +36,79 @@ describe 'Garages' do
       let!(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
       let!(:french_garage) { FactoryGirl.create(:french_garage) }
 
-      let(:spanish_fee) { FactoryGirl.create(:tyre_fee, garage: spanish_garage, price: 20) }
-      let(:french_fee) { FactoryGirl.create(:tyre_fee, garage: french_garage, price: 50) }
 
       it 'should filter by country' do
         api_get 'garages.json?country=Spain', {}, @auth_token
-        response.status.should be(200)
-        ids = json(response.body).map { |g| g[:id] }
-        ids.count.should be(1)
-        ids.should include(spanish_garage.id)
-        ids.should_not include(french_garage.id)
+        check_response(response)
       end
 
       it 'should filter by zip' do
         api_get 'garages.json?zip=00000', {}, @auth_token
-        response.status.should be(200)
-        ids = json(response.body).map { |g| g[:id] }
-        ids.count.should be(1)
-        ids.should include(spanish_garage.id)
-        ids.should_not include(french_garage.id)
+        check_response(response)
       end
 
       it 'should filter by city' do
         api_get 'garages.json?city=Valencia', {}, @auth_token
-        response.status.should be(200)
-        ids = json(response.body).map { |g| g[:id] }
-        ids.count.should be(1)
-        ids.should include(spanish_garage.id)
-        ids.should_not include(french_garage.id)
+        check_response(response)
       end
 
-      it 'should filter by tyre_fee' do
-        spanish_fee
-        french_fee
-        api_get 'garages.json?price=25', {}, @auth_token
-        response.status.should be(200)
-        ids = json(response.body).map { |g| g[:id] }
-        ids.count.should be(1)
-        ids.should include(spanish_garage.id)
-        ids.should_not include(french_garage.id)
+      context 'containing tyre_fee params ' do
+        let!(:spanish_fee) { FactoryGirl.create(:spanish_fee, garage: spanish_garage) }
+        let!(:french_fee) { FactoryGirl.create(:french_fee, garage: french_garage) }
+
+        it 'should filter by price' do
+          api_get 'garages.json?price=20', {}, @auth_token
+          check_response(response)
+        end
+
+        it 'should filter by rim' do
+          api_get 'garages.json?rim=steel', {}, @auth_token
+          check_response(response)
+        end
+
+        it 'should filter by vehicle' do
+          api_get 'garages.json?vehicle=car', {}, @auth_token
+          check_response(response)
+        end
+
+        it 'should filter by diameter' do
+          api_get 'garages.json?diameter=25', {}, @auth_token
+          check_response(response)
+        end
+
+        it 'should filter by country, zip and price' do
+          another_garage = FactoryGirl.create(:spanish_garage, zip: '00000')
+          FactoryGirl.create(:tyre_fee, garage: another_garage, price: 40)
+          api_get 'garages.json?country=Spain&zip=00000&price=20', {}, @auth_token
+          check_response(response)
+        end
+
+        context 'filtering a range of prices' do
+          it 'should filter by price in a range' do
+            api_get 'garages.json?price_min=10&price_max=30', {}, @auth_token
+            check_response(response)
+          end
+
+          it 'should filter by_price_in_a_range passing only min_price' do
+            api_get 'garages.json?price_min=20', {}, @auth_token
+            check_response(response)
+          end
+
+          it 'should filter by_price_in_a_range passing only max_price' do
+            api_get 'garages.json?price_max=30', {}, @auth_token
+            check_response(response)
+          end
+
+          it 'should filter by_price_in_a_range returning nothing if passing empty values' do
+            api_get 'garages.json?price_min=&price_max=', {}, @auth_token
+            response.status.should be(200)
+            ids = json(response.body).map { |g| g[:id] }
+            ids.count.should be(0)
+          end
+        end
       end
 
-      it 'should filter by country, zip and tyre_fee' do
-        another_garage = FactoryGirl.create(:garage, country: 'Spain', zip: '00000')
-        FactoryGirl.create(:tyre_fee, garage: another_garage, price: 40)
-        spanish_fee
-        french_fee
-
-        api_get 'garages.json?country=Spain&zip=00000&price=25', {}, @auth_token
+      def check_response(response)
         response.status.should be(200)
         ids = json(response.body).map { |g| g[:id] }
         ids.count.should be(1)

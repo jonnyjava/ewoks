@@ -44,6 +44,12 @@ You can test your connection using `curl` here some examples
 
 `curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?price=25`
 
+`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?min_price=25&max_price=50`
+
+`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?rim=steel`
+
+`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?vehicle=tourism`
+
 `curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?city=Torino&radius=20`
 
 `curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?country=Italy&city=10139&radius=20`
