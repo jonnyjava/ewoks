@@ -32,6 +32,18 @@ FactoryGirl.define do
       longitude 12.3015
     end
 
+    factory :spanish_garage, class: Garage do
+      country 'Spain'
+      zip '00000'
+      city 'Valencia'
+    end
+
+    factory :french_garage, class: Garage do
+      country 'France'
+      zip '111111'
+      city 'Marseille'
+    end
+
     factory :garage_with_timetable, class: Garage do
       timetable { FactoryGirl.create(:timetable) }
     end

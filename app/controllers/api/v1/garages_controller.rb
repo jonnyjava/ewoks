@@ -3,14 +3,19 @@ module API
     class GaragesController < ApplicationController
       skip_before_filter :authenticate_user!
       before_action :authenticate
-      before_action :set_country, :set_location, only: :index
 
       def index
         garages = Garage.active
+        radius = params[:radius]
+        price = params[:price]
+        country = set_country
+        garages = garages.by_price(price) if price
 
-        garages = by_price(garages, params[:price]) if params[:price]
-        garages = by_radius(garages, params[:radius]) if params[:radius]
-        garages = by_default(garages, params) unless params[:radius]
+        if radius
+          garages = garages.find_by_radius_from_location(location(country), radius)
+        else
+          garages = garages.by_default(params[:zip], params[:city], country)
+        end
 
         @garages = garages
       end
@@ -37,28 +42,14 @@ module API
         render json: 'Bad credentials', status: 401
       end
 
-      def by_radius(garages, radius)
-        garages.find_by_radius_from_location(@location, radius)
-      end
-
-      def by_price(garages, price)
-        garages.includes(:tyre_fees).where('tyre_fees.price <= ?', price).references(:tyre_fees)
-      end
-
-      def by_default(garages, params)
-        garages = garages.by_zip(params[:zip]) if params[:zip]
-        garages = garages.by_city(params[:city]) if params[:city]
-        garages.by_country(@country)
-      end
-
       private
 
       def set_country
-        @country = params[:country] || @current_user.country
+        params[:country] || @current_user.country
       end
 
-      def set_location
-        @location = [params[:city], params[:zip], @country].compact.join(', ')
+      def location(country)
+        [params[:city], params[:zip], country].compact.join(', ')
       end
     end
   end

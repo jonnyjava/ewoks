@@ -14,11 +14,10 @@ class TyreFee < ActiveRecord::Base
   RIM_TYPE = Hash[RIMS.map.with_index { |obj, i| [i, obj] }]
   VEHICLE_TYPE = Hash[VEHICLES.map.with_index { |obj, i| [i, obj] }]
 
-  scope :by_garage, ->(garage) { joins(:fee).where('garage_id = ?', garage.id) }
+  scope :by_garage, ->(garage) { where(garage_id: garage.id) }
   scope :by_diameter, ->(diameter) { where('diameter_min >= ?', diameter).where('diameter_max <= ?', diameter) }
   scope :by_rim, ->(rim_type) { where(rim_type: rim_type) }
   scope :by_vehicle, ->(vehicle_type) { where(vehicle_type: vehicle_type)  }
-
-  scope :by_price, ->(price) { joins(:fee).where('price = ?', price) }
-  scope :with_price_less_than, ->(price) { where('price <= ?', price) }
+  scope :by_price, ->(price) { where(price: price) }
+  scope :by_price_in_a_range, ->(min_price, max_price) { where(price: min_price..max_price) }
 end

@@ -8,7 +8,7 @@ describe 'Garages' do
 
   describe 'index' do
     before(:each) do
-      user = FactoryGirl.create(:user)
+      user = FactoryGirl.create(:api_user)
       @auth_token = { 'Authorization' => token_header(user.auth_token) }
     end
 
@@ -28,27 +28,16 @@ describe 'Garages' do
 
     it 'should return status 401' do
       api_get 'garages.json', {}, 'Authorization' => 'Token token=wrongtoken'
+
       response.status.should be(401)
     end
 
     context 'with querystring' do
-      let!(:spanish_garage) do
-        FactoryGirl
-        .create(:garage, country: 'Spain', zip: '00000', city: 'Valencia')
-      end
+      let!(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
+      let!(:french_garage) { FactoryGirl.create(:french_garage) }
 
-      let!(:french_garage) do
-        FactoryGirl
-        .create(:garage, country: 'France', zip: '111111', city: 'Marseille')
-      end
-
-      let(:spanish_fee) do
-        FactoryGirl.create(:tyre_fee, garage: spanish_garage, price: 20)
-      end
-
-      let(:french_fee) do
-        FactoryGirl.create(:tyre_fee, garage: french_garage, price: 50)
-      end
+      let(:spanish_fee) { FactoryGirl.create(:tyre_fee, garage: spanish_garage, price: 20) }
+      let(:french_fee) { FactoryGirl.create(:tyre_fee, garage: french_garage, price: 50) }
 
       it 'should filter by country' do
         api_get 'garages.json?country=Spain', {}, @auth_token

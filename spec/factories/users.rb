@@ -18,5 +18,9 @@ FactoryGirl.define do
     factory :owner, class: User do
       role User::OWNER
     end
+
+    factory :api_user, class: User do
+      role User::API
+    end
   end
 end

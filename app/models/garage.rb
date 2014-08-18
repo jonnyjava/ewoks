@@ -26,6 +26,7 @@ class Garage < ActiveRecord::Base
   scope :by_country, ->(country) { where(country: country) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
+  scope :by_price, ->(price) { includes(:tyre_fees).where('tyre_fees.price <= ?', price).references(:tyre_fees) }
 
   def address
     [street, city, zip, country].compact.join(', ')
@@ -74,6 +75,13 @@ class Garage < ActiveRecord::Base
   def signup_verification_token
     token = [email, status, created_at, 'endor is full of ewoks'].join
     Digest::SHA1.hexdigest(token)
+  end
+
+  def self.by_default(zip, city, country)
+    garages = by_country(country)
+    garages = garages.by_zip(zip) if zip
+    garages = garages.by_city(city) if city
+    garages
   end
 
   def self.find_by_radius_from_location(location, radius = 10)
