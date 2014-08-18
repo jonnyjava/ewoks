@@ -59,6 +59,43 @@ describe Garage do
     end
   end
 
+  describe 'by_price_in_a_range' do
+    let!(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
+    let!(:french_garage) { FactoryGirl.create(:french_garage) }
+    let!(:spanish_fee) { FactoryGirl.create(:spanish_fee, garage: spanish_garage) }
+    let!(:french_fee) { FactoryGirl.create(:french_fee, garage: french_garage) }
+
+    it 'should return the spanish garage passing min = 10 and max 30' do
+      garages = Garage.by_price_in_a_range(10,30)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(1)
+      ids.should include(spanish_garage.id)
+      ids.should_not include(french_garage.id)
+    end
+
+    it 'should return the spanish garage passing min = 10' do
+      garages = Garage.by_price_in_a_range(20, nil)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(1)
+      ids.should include(spanish_garage.id)
+      ids.should_not include(french_garage.id)
+    end
+
+    it 'should return the spanish garage passing max 30' do
+      garages = Garage.by_price_in_a_range(nil, 30)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(1)
+      ids.should include(spanish_garage.id)
+      ids.should_not include(french_garage.id)
+    end
+
+    it 'should return no garages passing nothing' do
+      garages = Garage.by_price_in_a_range(nil, nil)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(0)
+    end
+  end
+
   describe 'find_by_radius_from_location' do
     let!(:garage_inside_radius) { FactoryGirl.create(:turin_garage) }
     let!(:garage_outside_radius) { FactoryGirl.create(:rome_garage) }
