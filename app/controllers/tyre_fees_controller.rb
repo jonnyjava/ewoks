@@ -11,7 +11,7 @@ class TyreFeesController < ApplicationController
   end
 
   def new
-    @tyre_fee = TyreFee.new
+    @tyre_fee = @garage.tyre_fees.build
   end
 
   def edit
@@ -19,7 +19,7 @@ class TyreFeesController < ApplicationController
   end
 
   def create
-    @tyre_fee = TyreFee.new(tyre_fee_params)
+    @tyre_fee = TyreFee.create(tyre_fee_params)
     respond_to do |format|
       if @tyre_fee.save
         format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: "Tyre fee was successfully created." }
@@ -57,6 +57,6 @@ class TyreFeesController < ApplicationController
   end
 
   def tyre_fee_params
-    params.require(:tyre_fee).permit(:name, :price, :vehicle_type, :diameter_min, :diameter_max, :rim_type)
+    params.require(:tyre_fee).permit(:name, :price, :vehicle_type, :diameter_min, :diameter_max, :rim_type, :garage_id)
   end
 end
