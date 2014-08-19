@@ -83,6 +83,8 @@ es:
   token: 'token'
   regenerate: 'regenerar'
   successfully created: "%{class_name} creado con exito."
+  Specifies the fee options: 'Especifica las opciones de la tarifa '
+  If you leave a field blank, it is like select all: 'Si dejas en blanco algún campo, es como seleccionarlos todos'
 
   simple_form:
     labels:

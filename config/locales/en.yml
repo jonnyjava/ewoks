@@ -82,6 +82,8 @@ en:
   regenerate: 'regenerate'
   The closing time should be later the opening: 'The closing time should be later than the opening time'
   successfully created: "%{class_name} was successfully created."
+  Specifies the fee options: 'Specifies the fee options '
+  If you leave a field blank, it is like select all: 'If you leave a field blank, it is like select all'
 
   simple_form:
     labels:
