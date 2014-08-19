@@ -6,6 +6,7 @@ class HolidaysController < ApplicationController
   # GET /holidays
   # GET /holidays.json
   def index
+    redirect_to user_path(current_user) unless policy(@garage).show?
     holidays = policy_scope(@garage.holidays.page(params[:page]))
     authorize holidays
     @holidays = HolidayDecorator.decorate_collection(holidays)

@@ -3,11 +3,9 @@ class TyreFeesController < ApplicationController
   before_action :set_garage
 
   def index
+    redirect_to user_path(current_user) unless policy(@garage).show?
     tyre_fees = @garage.tyre_fees.page(params[:page])
     @tyre_fees = TyreFeeDecorator.decorate_collection(tyre_fees)
-  end
-
-  def show
   end
 
   def new
