@@ -1,5 +1,10 @@
 AllCops:
   Exclude:
-    - db/schema.rb
+    - 'db/schema.rb'
+    - 'bin/*'
 Documentation:
   Enabled: false
+Style/Encoding:
+  Description: 'Use UTF-8 as the source file encoding.'
+  Enabled: false
+

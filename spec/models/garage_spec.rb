@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Garage do
   it { should belong_to(:user) }
   it { should have_many(:holidays) }
-  it { should have_many(:fees) }
+  it { should have_many(:tyre_fees) }
   it { should have_one(:timetable) }
   it { should have_and_belong_to_many(:properties) }
   it { should have_attached_file(:logo) }
@@ -56,6 +56,43 @@ describe Garage do
       garage = FactoryGirl.create(:garage)
       garage.create_my_owner
       User.find(garage.owner_id).should_not be_nil
+    end
+  end
+
+  describe 'by_price_in_a_range' do
+    let!(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
+    let!(:french_garage) { FactoryGirl.create(:french_garage) }
+    let!(:spanish_fee) { FactoryGirl.create(:spanish_fee, garage: spanish_garage) }
+    let!(:french_fee) { FactoryGirl.create(:french_fee, garage: french_garage) }
+
+    it 'should return the spanish garage passing min = 10 and max 30' do
+      garages = Garage.by_price_in_a_range(10,30)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(1)
+      ids.should include(spanish_garage.id)
+      ids.should_not include(french_garage.id)
+    end
+
+    it 'should return the spanish garage passing min = 10' do
+      garages = Garage.by_price_in_a_range(20, nil)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(1)
+      ids.should include(spanish_garage.id)
+      ids.should_not include(french_garage.id)
+    end
+
+    it 'should return the spanish garage passing max 30' do
+      garages = Garage.by_price_in_a_range(nil, 30)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(1)
+      ids.should include(spanish_garage.id)
+      ids.should_not include(french_garage.id)
+    end
+
+    it 'should return no garages passing nothing' do
+      garages = Garage.by_price_in_a_range(nil, nil)
+      ids = garages.map { |g| g[:id] }
+      ids.count.should be(0)
     end
   end
 

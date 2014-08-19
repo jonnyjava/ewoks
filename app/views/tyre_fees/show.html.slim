@@ -5,7 +5,7 @@
   .col-xs-12
     .m-box
       .m-box__header
-        h3.box__title = "Fee: #{@tyre_fee.fee.name}"
+        h3.box__title = "Fee: #{@tyre_fee.name}"
       .panel-body
         .col-sm-12
           .table-responsive
@@ -20,7 +20,7 @@
                   th
                   th
                 tr
-                  td = number_to_currency(@tyre_fee.fee.price)
+                  td = number_to_currency(@tyre_fee.price)
                   td = TyreFee::VEHICLE_TYPE[@tyre_fee.vehicle_type]
                   td = @tyre_fee.diameter_min
                   td = @tyre_fee.diameter_max

@@ -1,6 +1,7 @@
 = simple_form_for([@garage, @tyre_fee]) do |f|
-  = render 'tyre_fees/shared/errors', fee: @fee, tyre_fee: @tyre_fee
-  = render 'tyre_fees/shared/fields', f: f
+  = render 'tyre_fees/shared/errors', tyre_fee: @tyre_fee
+  = render 'tyre_fees/shared/fields', f: f, tyre_fee: @tyre_fee
+  = f.association :garage, as: :hidden
 
   .b-keypad
     = link_to t('cancel').humanize, garage_tyre_fees_path(@garage), class: "b-keypad__btn--default"

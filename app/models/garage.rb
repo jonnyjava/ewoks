@@ -2,7 +2,7 @@ class Garage < ActiveRecord::Base
   belongs_to :user, foreign_key: 'owner_id'
   has_many :holidays
   has_one :timetable
-  has_many :fees
+  has_many :tyre_fees
   has_many :garage_properties
   has_many :properties, through: :garage_properties
 
@@ -26,9 +26,11 @@ class Garage < ActiveRecord::Base
   scope :by_country, ->(country) { where(country: country) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_zip, ->(zip) { where(zip: zip) }
-  scope(:with_tyre_fee_less_than, lambda do |price|
-    includes(:fees).where('fees.price <= ?', price).references(:fees)
-  end)
+  scope :by_diameter, ->(diameter) { joins(:tyre_fees).where('tyre_fees.diameter_min <= ?', diameter).where('tyre_fees.diameter_max >= ?', diameter) }
+  scope :by_price, ->(price) { joins(:tyre_fees).where('tyre_fees.price = ?', price) }
+  scope :by_price_in_a_range, ->(min_price, max_price) { joins(:tyre_fees).where('price BETWEEN ? and ?', (min_price || 0), (max_price || min_price || 0)) }
+  scope :by_rim, ->(rim) { joins(:tyre_fees).where('tyre_fees.rim_type = ?', TyreFee::RIM_TYPE.key(rim)) }
+  scope :by_vehicle, ->(vehicle) { joins(:tyre_fees).where('tyre_fees.vehicle_type = ?', TyreFee::VEHICLE_TYPE.key(vehicle)) }
 
   def address
     [street, city, zip, country].compact.join(', ')
@@ -77,6 +79,13 @@ class Garage < ActiveRecord::Base
   def signup_verification_token
     token = [email, status, created_at, 'endor is full of ewoks'].join
     Digest::SHA1.hexdigest(token)
+  end
+
+  def self.by_default(zip, city, country)
+    garages = by_country(country)
+    garages = garages.by_zip(zip) if zip
+    garages = garages.by_city(city) if city
+    garages
   end
 
   def self.find_by_radius_from_location(location, radius = 10)

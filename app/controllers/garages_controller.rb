@@ -15,7 +15,7 @@ class GaragesController < ApplicationController
   # GET /garages/1.json
   def show
     authorize @garage
-    @fees = @garage.fees.all
+    @tyre_fees = @garage.tyre_fees.all
   end
 
   # GET /garages/new

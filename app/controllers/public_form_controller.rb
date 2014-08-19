@@ -16,14 +16,12 @@ class PublicFormController < ApplicationController
     @timetable = Timetable.new(timetable_params)
     @holiday = Holiday.new(holiday_params)
     @extra_holidays = create_extra_holidays(rows)
-    @fee = Fee.new(fee_params)
     @tyre_fee = TyreFee.new(tyre_fee_params)
 
     garage_properties = []
     garage_properties <<  @holiday
     garage_properties <<  @extra_holidays if @extra_holidays.present?
     garage_properties <<  @timetable
-    garage_properties <<  @fee
     garage_properties <<  @tyre_fee
     garage_properties = garage_properties.flatten
 
@@ -35,7 +33,6 @@ class PublicFormController < ApplicationController
       else
         if @garage.save
           assign_garage_to_his_related(@garage, garage_properties)
-          @tyre_fee.fee = @fee
           if garage_properties.each(&:save)
             format.html { redirect_to :success }
           else
