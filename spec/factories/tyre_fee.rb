@@ -14,7 +14,7 @@ FactoryGirl.define do
       garage { FactoryGirl.create(:spanish_garage) }
       price 20
       rim_type TyreFee::RIM_TYPE.key('steel')
-      vehicle_type TyreFee::VEHICLE_TYPE.key('car')
+      vehicle_type TyreFee::VEHICLE_TYPE.key('tourism')
       diameter_min 20
       diameter_max 30
     end

@@ -67,7 +67,7 @@ describe 'Garages' do
         end
 
         it 'should filter by vehicle' do
-          api_get 'garages.json?vehicle=car', {}, @auth_token
+          api_get 'garages.json?vehicle=tourism', {}, @auth_token
           check_response(response)
         end
 

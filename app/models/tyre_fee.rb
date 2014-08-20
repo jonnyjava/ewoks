@@ -5,7 +5,7 @@ class TyreFee < ActiveRecord::Base
   validates :price, presence: true
 
   RIMS = %w(steel aluminium)
-  VEHICLES = %w(tourism car suv)
+  VEHICLES = %w(tourism suv van)
   DIAMETER_MAX = 30
   DIAMETER_MIN = 10
 
