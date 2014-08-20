@@ -36,24 +36,24 @@ In this case, if you are searching by a city which doesn't belong to your countr
 
 You can test your connection using `curl` here some examples
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?country=Spain`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?country=Spain"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?zip=00000`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?zip=00000"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?city=Valencia`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?city=Valencia"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?price=25`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?price=25"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?min_price=25&max_price=50`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?price_min=25&price_max=50"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?rim=steel`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?rim=steel"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?vehicle=tourism`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?vehicle=tourism"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?city=Torino&radius=20`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?city=Torino&radius=20"`
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages.json?country=Italy&city=10139&radius=20`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages.json?country=Italy&city=10139&radius=20"`
 
 Of course it works for a unique garage too.
 
-`curl -H "Authorization: Token token=yourtoken" http://yourdomain/api/v1/garages/1.json`
+`curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages/1.json"`
