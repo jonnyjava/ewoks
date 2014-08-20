@@ -25,8 +25,8 @@ gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
-gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'mysql2'
 gem 'faker'
 
 group :development do
