@@ -13,11 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20140813130709) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "garage_properties", force: true do |t|
-    t.text     "value"
+    t.string   "value"
     t.integer  "garage_id"
     t.integer  "property_id"
     t.datetime "created_at"
@@ -28,25 +25,25 @@ ActiveRecord::Schema.define(version: 20140813130709) do
   add_index "garage_properties", ["property_id"], name: "index_garage_properties_on_property_id", using: :btree
 
   create_table "garages", force: true do |t|
-    t.text     "name"
-    t.text     "street"
-    t.text     "zip"
-    t.text     "city"
-    t.text     "email"
-    t.text     "phone"
-    t.text     "mobile"
-    t.text     "fax"
+    t.string   "name"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "city"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "fax"
     t.decimal  "latitude",          precision: 9, scale: 6
     t.decimal  "longitude",         precision: 9, scale: 6
-    t.text     "tax_id"
-    t.text     "website"
+    t.string   "tax_id"
+    t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "country"
+    t.string   "country"
     t.integer  "owner_id"
     t.integer  "status",                                    default: -1
-    t.text     "logo_file_name"
-    t.text     "logo_content_type"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
   end
@@ -57,14 +54,14 @@ ActiveRecord::Schema.define(version: 20140813130709) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "garage_id"
-    t.text     "name"
+    t.string   "name"
   end
 
   add_index "holidays", ["garage_id"], name: "index_holidays_on_garage_id", using: :btree
 
   create_table "properties", force: true do |t|
-    t.text     "name"
-    t.text     "type_of"
+    t.string   "name"
+    t.string   "type_of"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -118,24 +115,24 @@ ActiveRecord::Schema.define(version: 20140813130709) do
   end
 
   create_table "users", force: true do |t|
-    t.text     "email",                  default: "", null: false
-    t.text     "encrypted_password",     default: "", null: false
-    t.text     "reset_password_token"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.text     "current_sign_in_ip"
-    t.text     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "name"
-    t.text     "surname"
-    t.text     "phone"
-    t.text     "country"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "phone"
+    t.string   "country"
     t.integer  "role"
-    t.text     "auth_token"
+    t.string   "auth_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
