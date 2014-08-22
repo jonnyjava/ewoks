@@ -5,7 +5,6 @@ module API
       before_action :authenticate
 
       def index
-        garages = Garage.active
         radius = params[:radius]
         price = params[:price]
         price_min = params[:price_min] ? params[:price_min].to_i : nil
@@ -13,15 +12,17 @@ module API
         rim = params[:rim]
         vehicle = params[:vehicle]
         diameter = params[:diameter]
-
         country = set_country
 
-        garages = garages.by_price(price) if price
-        garages = garages.by_price_in_a_range(price_min, price_max) if (price_min || price_max)
-        garages = garages.by_rim(rim) if rim
-        garages = garages.by_vehicle(vehicle) if vehicle
-        garages = garages.by_diameter(diameter) if diameter
+        garages = Garage.active
+        garages = garages.by_price(price)
+        garages = garages.by_rim(rim)
+        garages = garages.by_vehicle(vehicle)
+        garages = garages.by_diameter(diameter)
 
+        if price_min || price_max
+          garages = garages.by_price_in_a_range(price_min, price_max)
+        end
 
         if radius
           garages = garages.find_by_radius_from_location(location(country), radius)
