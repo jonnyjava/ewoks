@@ -1,16 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 # Declare variables
 HASH_LAST_COMMIT=`git rev-parse --short HEAD`
 LAST_TAG=`git describe --tags --always`
 
+# Define app versión
+export APP_VERSION=$LAST_TAG
+
 # Check
 if [[ $LAST_TAG == *$HASH_LAST_COMMIT* ]]
 then
-  export APP_VERSION=$HASH_LAST_COMMIT
   export ENV_NAME='test'
 else
-  export APP_VERSION=$LAST_TAG
   export ENV_NAME='production'
 fi
 
