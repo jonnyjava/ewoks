@@ -21,6 +21,7 @@ sudo pip install awscli
 
 # Clean project to deploy and compress in zip
 git clean -fXd
+chmod -fR 777 public/
 zip -x *.git* -r "${APP_NAME}-${APP_VERSION}.zip" .
 
 # Upload to AWS
