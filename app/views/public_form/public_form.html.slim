@@ -2,8 +2,7 @@
 - holiday = @holiday || Holiday.new
 - extra_holidays = @extra_holidays || []
 - holiday_rowcounter = extra_holidays.count
-- fee = @fee || Fee.new
-- tyre_fee =fee.try(:tyre_fee) || TyreFee.new
+- tyre_fee = TyreFee.new
 
 - content_for :content
   = simple_form_for(@garage, url: public_form_create_url) do |f|
@@ -36,7 +35,7 @@
 
     h3 = t('tyre fees').humanize
     = simple_fields_for tyre_fee do |ftf|
-      = render 'tyre_fees/shared/errors', fee: fee, tyre_fee: tyre_fee
+      = render 'tyre_fees/shared/errors', tyre_fee: tyre_fee
       = render 'tyre_fees/shared/fields', f: ftf
     = f.button :submit
 = render template: "layouts/box", locals: { title: t('public form title').humanize }
