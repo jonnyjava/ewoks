@@ -31,7 +31,7 @@ describe Garage do
       token1.should_not eq(token2)
     end
   end
-
+ 
   describe 'find_by_token' do
     it 'should return only one garage' do
       garage1 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
@@ -155,4 +155,67 @@ describe Garage do
       end
     end
   end
+
+  describe 'scopes' do
+    let!(:garage_without_fee) { FactoryGirl.create(:garage) }
+    garage = FactoryGirl.create(:turin_garage)
+    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage)
+    garage_rome = FactoryGirl.create(:rome_garage)
+    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage_rome)
+    garage_spanish = FactoryGirl.create(:spanish_garage)
+    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage_spanish)
+    garage_french = FactoryGirl.create(:french_garage)
+    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage_french)
+
+    it 'should filter garages by country' do
+      result = Garage.by_country('Italy')
+      result.count.should be(2)
+      result.first.should eq(garage)
+    end
+
+    it 'should filter garages by city' do
+      result = Garage.by_city('Torino')
+      result.count.should be(1)
+      result.first.should eq(garage)
+    end
+
+    it 'should filter garages by zip' do
+      result = Garage.by_zip('10141')
+      result.count.should be(1)
+      result.first.should eq(garage)
+    end
+
+    it 'should return only garages with tyre fees' do
+      result = Garage.by_tyre_fee
+      result.count.should be(4)
+      result.first.should eq(garage)
+    end
+
+    context 'by default' do
+      it 'should filter by zip' do
+        result = Garage.by_default('10141', nil, nil)
+        result.count.should be(1)
+        result.first.should eq(garage)
+      end
+
+      it 'should filter by country' do
+        result = Garage.by_default(nil, nil, 'Italy')
+        result.count.should be(2)
+        result.first.should eq(garage)
+      end
+
+      it 'should filter by city' do
+        result = Garage.by_default(nil, 'Torino', nil)
+        result.count.should be(1)
+        result.first.should eq(garage)
+      end
+
+      it 'should filter by tyre fee' do
+        result = Garage.by_default(nil, nil, nil)
+        result.count.should be(4)
+        result.first.should eq(garage)
+      end
+    end
+  end
 end
+ 
