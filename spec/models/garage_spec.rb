@@ -159,13 +159,13 @@ describe Garage do
   describe 'scopes' do
     let!(:garage_without_fee) { FactoryGirl.create(:garage) }
     garage = FactoryGirl.create(:turin_garage)
-    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage)
+    FactoryGirl.create(:tyre_fee, garage: garage)
     garage_rome = FactoryGirl.create(:rome_garage)
-    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage_rome)
+    FactoryGirl.create(:tyre_fee, garage: garage_rome)
     garage_spanish = FactoryGirl.create(:spanish_garage)
-    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage_spanish)
+    FactoryGirl.create(:tyre_fee, garage: garage_spanish)
     garage_french = FactoryGirl.create(:french_garage)
-    tyre_fee = FactoryGirl.create(:tyre_fee, garage: garage_french)
+    FactoryGirl.create(:tyre_fee, garage: garage_french)
 
     it 'should filter garages by country' do
       result = Garage.by_country('Italy')
@@ -218,4 +218,3 @@ describe Garage do
     end
   end
 end
- 
