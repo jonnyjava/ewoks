@@ -2,7 +2,9 @@
 - holiday = @holiday || Holiday.new
 - extra_holidays = @extra_holidays || []
 - holiday_rowcounter = extra_holidays.count
-- tyre_fee = TyreFee.new
+- tyre_fee = @tyre_fee || TyreFee.new
+- extra_tyre_fees = @extra_tyre_fees || []
+- tyre_fee_rowcounter = extra_tyre_fees.count
 
 - content_for :content
   = simple_form_for(@garage, url: public_form_create_url) do |f|
@@ -26,22 +28,36 @@
           = simple_fields_for extra_holiday do |feh|
             = render 'holidays/shared/errors', holiday: extra_holiday
             = render 'holidays/shared/fields', f: feh
-          button onclick="remove_row('holiday', #{i+1});" class='btn-delete-row'
-            '-
+            .js_delete_button data-objname="holiday" data-rowid="#{i+1}"
 
     input type='hidden' name='holiday[rows_counter]' id='holiday_rows_counter' value="#{holiday_rowcounter}"
     div onclick='add_holidays();' class='btn btn-success'
       '+
 
     h3 = t('tyre fees').humanize
-    = simple_fields_for tyre_fee do |ftf|
-      = render 'tyre_fees/shared/errors', tyre_fee: tyre_fee
-      = render 'tyre_fees/shared/fields', f: ftf
+    = render 'tyre_fees/shared/errors', tyre_fee: tyre_fee
+    .js_tyre_fee
+      = simple_fields_for tyre_fee do |ftf|
+        = render 'tyre_fees/shared/fields', f: ftf
+      hr
+    - if @extra_tyre_fees
+      - @extra_tyre_fees.each_with_index do |extra_tyre_fee, i|
+        div class="js_tyre_fee_row_#{i+1}"
+          = simple_fields_for extra_tyre_fee do |fetf|
+            = render 'tyre_fees/shared/errors', tyre_fee: extra_tyre_fee
+            = render 'tyre_fees/shared/fields', f: fetf
+            .js_delete_button data-objname="tyre_fee" data-rowid="#{i+1}"
+        hr
+    input type='hidden' name='tyre_fee[rows_counter]' id='tyre_fee_rows_counter' value="#{tyre_fee_rowcounter}"
+    div onclick='add_tyre_fees();' class='btn btn-success'
+      '+
+    br
     = f.button :submit
+
+
 = render template: "layouts/box", locals: { title: t('public form title').humanize }
 
 javascript:
-
 
   function add_holidays() {
     row_id = increment_row_counter("holiday");
@@ -51,14 +67,26 @@ javascript:
     clean_inputs("holiday",row_id);
   };
 
-  function wrap_row(obj_name, row_id){
+  function add_tyre_fees() {
+    row_id = increment_row_counter("tyre_fee");
+    content = wrap_row("tyre_fee", row_id)
+    $(content).insertAfter($('.js_tyre_fee'));
+    prepare_input_names_for_strong_parameters("tyre_fee", row_id);
+    clean_inputs("tyre_fee",row_id);
+  };
+
+  function create_delete_button(obj_name, row_id){
     delete_button = "<button onclick=\"remove_row('"+obj_name+"', "+row_id+");\"  class='btn-delete-row'>-</button>";
     wrapper_button = "<div class='col-xs-1'>"+delete_button+"</div>";
+    return wrapper_button;
+  }
 
+  function wrap_row(obj_name, row_id){
+    delete_button = create_delete_button(obj_name, row_id);
     template = $('.js_'+obj_name).clone();
-    template.find('.row').append(wrapper_button);
+    template.find('.js_row').append(wrapper_button);
     wrapped_content = "<div class='js_"+obj_name+"_row_"+row_id+"'>"+template.html()+"</div>";
-    return wrapped_content
+    return wrapped_content;
   }
 
   function increment_row_counter(obj_name){
@@ -79,11 +107,20 @@ javascript:
   }
 
   function prepare_input_names_for_strong_parameters(obj_name, i){
-    $(".js_"+obj_name+"_row_"+i+"  input[type='text']").each(function( index ) {
+    fields = retrieve_fields_for_strong_parameters(obj_name, i);
+    fields.each(function( index ) {
       oldname = $( this ).attr('name') ;
       newname = oldname.replace(obj_name, obj_name+"_"+i);
       $( this ).attr('name', newname);
     });
+  }
+
+  function retrieve_fields_for_strong_parameters(obj_name, i){
+    text_fields = $(".js_"+obj_name+"_row_"+i+" input[type='text']");
+    number_fields = $(".js_"+obj_name+"_row_"+i+" input[type='number']");
+    select_boxes = $(".js_"+obj_name+"_row_"+i+" select");
+    fields = text_fields.add(number_fields).add(select_boxes)
+    return fields
   }
 
   function prepare_form_for_strong_parameters(obj_name){
@@ -93,6 +130,18 @@ javascript:
     }
   }
 
+  function add_delete_row_buttons(){
+    $('.js_delete_button').each(function(){
+     obj_name = $(this).data('objname');
+     row_id = $(this).data('rowid');
+     delete_button = create_delete_button(obj_name, row_id);
+     $(".js_"+obj_name+"_row_"+row_id+" .js_row").append(delete_button);
+     $(this).remove();
+    });
+  }
+
   $(document).ready(function(){
     prepare_form_for_strong_parameters('holiday');
+    prepare_form_for_strong_parameters('tyre_fee');
+    add_delete_row_buttons();
   });
