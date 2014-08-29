@@ -101,14 +101,14 @@ javascript:
   }
 
   function clean_inputs(obj_name, row_id){
-    $(".js_"+obj_name+"_row_"+row_id+"  input[type='text']").each(function( index ) {
+    $(".js_"+obj_name+"_row_"+row_id+"  input[type='text']").each(function() {
       $( this ).val(null);
     });
   }
 
   function prepare_input_names_for_strong_parameters(obj_name, i){
     fields = retrieve_fields_for_strong_parameters(obj_name, i);
-    fields.each(function( index ) {
+    fields.each(function() {
       oldname = $( this ).attr('name') ;
       newname = oldname.replace(obj_name, obj_name+"_"+i);
       $( this ).attr('name', newname);
@@ -131,7 +131,7 @@ javascript:
   }
 
   function add_delete_row_buttons(){
-    $('.js_delete_button').each(function(){
+    $('.js_delete_button').each(function() {
      obj_name = $(this).data('objname');
      row_id = $(this).data('rowid');
      delete_button = create_delete_button(obj_name, row_id);
