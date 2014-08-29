@@ -20,7 +20,7 @@ header.header
             - if @notifications
               ul class="dropdown-menu"
                 li class="header"
-                  = "Tienes #{@notifications.scan(/<li>/).length} notificaciones"
+                  = "You have #{@notifications.scan(/<li>/).length} notifications"
                 li = @notifications
                 li class="footer"
                   a href="#" ...

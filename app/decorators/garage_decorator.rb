@@ -11,18 +11,18 @@ class GarageDecorator < ApplicationDecorator
 
     items << h.link_to("/garages/#{object.id}/tyre_fees") do
       h.concat h.content_tag(:i, nil, class: 'ion ion-pricetags danger')
-      h.concat 'Añadir tarifas de neumaticos'
+      h.concat h.t('Add rates tires')
     end if object.tyre_fees.blank?
 
     items << h.link_to("/garages/#{object.id}/holidays") do
       h.concat h.content_tag(:i, nil, class: 'ion ion-calendar warning')
-      h.concat 'Indicar los dias de vacaciones'
+      h.concat h.t('Indicate vacation days')
     end if object.holidays.blank?
 
     items << h.link_to(
       "/garages/#{object.id}/timetables/#{object.timetable.try(:id)}/edit") do
       h.concat h.content_tag(:i, nil, class: 'ion ion-clock danger')
-      h.concat 'Definir el horario de apertura'
+      h.concat h.t('Define the opening hours')
     end if object.timetable.blank?
 
     h.content_tag :ul, class: 'menu' do
