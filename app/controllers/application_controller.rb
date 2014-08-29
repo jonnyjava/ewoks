@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notifications
-    return unless current_user.owner?
+    return unless current_user && current_user.owner?
     @notifications = current_user.garage.decorate.notifications
   end
 end
