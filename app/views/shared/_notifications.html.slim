@@ -1,0 +1,4 @@
+- if current_user.owner? && !current_user.garage.active?
+  .callout.callout-danger
+    h4 = t('Your garage is not activated yet!')
+    p = t('welcome_message')

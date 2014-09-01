@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     self.auth_token = generate_auth_token
   end
 
+  def full_name
+    "#{name} #{surname}"
+  end
+
   private
 
   def set_auth_token
