@@ -9,20 +9,22 @@ class PublicFormController < ApplicationController
   end
 
   def create
-    rows = params[:holiday][:rows_counter].to_i
+    holiday_rows = params[:holiday][:rows_counter].to_i
+    tyre_fee_rows = params[:tyre_fee][:rows_counter].to_i
 
     @garage = Garage.new(garage_params)
     @garage.status = Garage::TO_BE_CONFIRMED
     @timetable = Timetable.new(timetable_params)
     @holiday = Holiday.new(holiday_params)
-    @extra_holidays = create_extra_holidays(rows)
+    @extra_holidays = create_extra_holidays(holiday_rows)
     @tyre_fee = TyreFee.new(tyre_fee_params)
-
+    @extra_tyre_fees = create_extra_tyre_fees(tyre_fee_rows)
     garage_properties = []
     garage_properties <<  @holiday
     garage_properties <<  @extra_holidays if @extra_holidays.present?
     garage_properties <<  @timetable
     garage_properties <<  @tyre_fee
+    garage_properties <<  @extra_tyre_fees if @extra_tyre_fees.present?
     garage_properties = garage_properties.flatten
 
     valid_submission = @garage.valid? && validate_all(garage_properties)
@@ -60,6 +62,15 @@ class PublicFormController < ApplicationController
     holidays
   end
 
+  def create_extra_tyre_fees(rows)
+    tyre_fees = []
+    (1..rows).each do |i|
+      next unless params["tyre_fee_#{i}".to_sym].present?
+      tyre_fees << TyreFee.new(extra_tyre_fee_params(i))
+    end
+    tyre_fees
+  end
+
   def validate_all(garage_properties)
     valid = true
     garage_properties.each do |property|
@@ -77,4 +88,9 @@ class PublicFormController < ApplicationController
   def extra_holiday_params(i)
     params.require("holiday_#{i}".to_sym).permit(:name, :start_date, :end_date)
   end
+
+  def extra_tyre_fee_params(i)
+    params.require("tyre_fee_#{i}".to_sym).permit(:name, :price, :vehicle_type, :diameter_min, :diameter_max, :rim_type)
+  end
+
 end
