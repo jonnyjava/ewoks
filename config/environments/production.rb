@@ -77,7 +77,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = {
-    host: 'ewoks-test.elasticbeanstalk.com'
+    host: 'ewok.norauto.com'
   }
 
   EMAIL_ADMIN = 'admin@ewoks.com'
