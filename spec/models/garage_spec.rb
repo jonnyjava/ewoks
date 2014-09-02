@@ -158,62 +158,61 @@ describe Garage do
 
   describe 'scopes' do
     let!(:garage_without_fee) { FactoryGirl.create(:garage) }
-    garage = FactoryGirl.create(:turin_garage)
-    FactoryGirl.create(:tyre_fee, garage: garage)
-    garage_rome = FactoryGirl.create(:rome_garage)
-    FactoryGirl.create(:tyre_fee, garage: garage_rome)
-    garage_spanish = FactoryGirl.create(:spanish_garage)
-    FactoryGirl.create(:tyre_fee, garage: garage_spanish)
-    garage_french = FactoryGirl.create(:french_garage)
-    FactoryGirl.create(:tyre_fee, garage: garage_french)
+    let!(:garage) { FactoryGirl.create(:turin_garage) }  
+    let!(:garage_rome) { FactoryGirl.create(:rome_garage) }
+    let!(:garage_spanish) { FactoryGirl.create(:spanish_garage) }
+    let!(:garage_french) { FactoryGirl.create(:french_garage) }
+
+    before (:each) do
+      FactoryGirl.create(:tyre_fee, garage: garage)
+      FactoryGirl.create(:tyre_fee, garage: garage_rome)
+      FactoryGirl.create(:tyre_fee, garage: garage_spanish)
+      FactoryGirl.create(:tyre_fee, garage: garage_french)
+    end
+
+    after (:each) do
+      @result.first.should eq(garage)
+    end
 
     it 'should filter garages by country' do
-      result = Garage.by_country('Italy')
-      result.count.should be(2)
-      result.first.should eq(garage)
+      @result = Garage.by_country('Italy')
+      @result.count.should be(2)
     end
 
     it 'should filter garages by city' do
-      result = Garage.by_city('Torino')
-      result.count.should be(1)
-      result.first.should eq(garage)
+      @result = Garage.by_city('Torino')
+      @result.count.should be(1)
     end
 
     it 'should filter garages by zip' do
-      result = Garage.by_zip('10141')
-      result.count.should be(1)
-      result.first.should eq(garage)
+      @result = Garage.by_zip('10141')
+      @result.count.should be(1)
     end
 
     it 'should return only garages with tyre fees' do
-      result = Garage.by_tyre_fee
-      result.count.should be(4)
-      result.first.should eq(garage)
+      @result = Garage.by_tyre_fee
+      @result.count.should be(4)
     end
 
     context 'by default' do
       it 'should filter by zip' do
-        result = Garage.by_default('10141', nil, nil)
-        result.count.should be(1)
-        result.first.should eq(garage)
+        @result = Garage.by_default('10141', nil, nil)
+        @result.count.should be(1)
       end
 
       it 'should filter by country' do
-        result = Garage.by_default(nil, nil, 'Italy')
-        result.count.should be(2)
-        result.first.should eq(garage)
+        @result = Garage.by_default(nil, nil, 'Italy')
+        @result.count.should be(2)
       end
 
       it 'should filter by city' do
-        result = Garage.by_default(nil, 'Torino', nil)
-        result.count.should be(1)
-        result.first.should eq(garage)
+        @result = Garage.by_default(nil, 'Torino', nil)
+        @result.count.should be(1)
       end
 
       it 'should filter by tyre fee' do
-        result = Garage.by_default(nil, nil, nil)
-        result.count.should be(4)
-        result.first.should eq(garage)
+        @result = Garage.by_default(nil, nil, nil)
+        @result.count.should be(4)
       end
     end
   end
