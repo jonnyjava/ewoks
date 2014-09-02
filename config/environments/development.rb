@@ -14,9 +14,12 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   #email configuration for mailcatcher
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "localhost",
+    :address              => "127.0.0.1",
     :port                 => 1025
   }
 
