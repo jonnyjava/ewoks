@@ -29,9 +29,9 @@ describe GaragePolicy do
       it { should allow_action(:create) }
       it { should allow_action(:edit) }
       it { should allow_action(:update) }
-      it { should_not allow_action(:toggle_status) }
+      it { should allow_action(:toggle_status) }
       it { should allow_action(:destroy_logo) }
-      it { should_not allow_action(:destroy) }
+      it { should allow_action(:destroy) }
     end
 
     context "over a garage of another country" do
