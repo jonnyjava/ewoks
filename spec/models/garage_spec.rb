@@ -31,7 +31,7 @@ describe Garage do
       token1.should_not eq(token2)
     end
   end
-
+ 
   describe 'find_by_token' do
     it 'should return only one garage' do
       garage1 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
@@ -152,6 +152,79 @@ describe Garage do
 
       it "should return only the country's country manager" do
         Garage.countries(country_manager).should eq([country_manager.country])
+      end
+    end
+  end
+
+  describe 'scopes' do
+    let!(:garage_without_fee) { FactoryGirl.create(:garage) }
+    let!(:garage) { FactoryGirl.create(:turin_garage) }  
+    let!(:garage_rome) { FactoryGirl.create(:rome_garage) }
+    let!(:garage_spanish) { FactoryGirl.create(:spanish_garage) }
+    let!(:garage_french) { FactoryGirl.create(:french_garage) }
+
+    before (:each) do
+      FactoryGirl.create(:tyre_fee, garage: garage)
+      FactoryGirl.create(:tyre_fee, garage: garage_rome)
+      FactoryGirl.create(:tyre_fee, garage: garage_spanish)
+      FactoryGirl.create(:tyre_fee, garage: garage_french)
+    end
+
+    after (:each) do
+      @result.first.should eq(garage)
+    end
+
+    it 'should filter garages by country' do
+      @result = Garage.by_country('Italy')
+      @result.count.should be(2)
+      garages_countries = @result.map(&:country).uniq 
+      garages_countries.should == ['Italy']
+      garages_countries.count.should be(1)
+    end
+
+    it 'should filter garages by city' do
+      @result = Garage.by_city('Torino')
+      @result.count.should be(1)
+      @result.first.city.should be_eql('Torino')
+    end
+
+    it 'should filter garages by zip' do
+      @result = Garage.by_zip('10141')
+      @result.count.should be(1)
+      @result.first.zip.should be_eql('10141')
+    end
+
+    it 'should return only garages with tyre fees' do
+      @result = Garage.by_tyre_fee
+      @result.count.should be(4)
+      @result.each { |garage| garage.tyre_fees.should_not be_empty }
+    end
+
+    context 'by default' do
+      it 'should filter by zip' do
+        @result = Garage.by_default('10141', nil, nil)
+        @result.count.should be(1)
+        @result.first.zip.should be_eql('10141')
+      end
+
+      it 'should filter by country' do
+        @result = Garage.by_default(nil, nil, 'Italy')
+        @result.count.should be(2)
+        garages_countries = @result.map(&:country).uniq 
+        garages_countries.should == ['Italy']
+        garages_countries.count.should be(1)
+      end
+
+      it 'should filter by city' do
+        @result = Garage.by_default(nil, 'Torino', nil)
+        @result.count.should be(1)
+        @result.first.city.should be_eql('Torino')
+      end
+
+      it 'should filter by tyre fee' do
+        @result = Garage.by_default(nil, nil, nil)
+        @result.count.should be(4)
+        @result.each { |garage| garage.tyre_fees.should_not be_empty }
       end
     end
   end

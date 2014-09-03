@@ -31,6 +31,7 @@ class Garage < ActiveRecord::Base
   scope :by_price_in_a_range, ->(min_price, max_price) { joins(:tyre_fees).where('price BETWEEN ? and ?', (min_price || 0), (max_price || min_price || 0)) }
   scope :by_rim, ->(rim) { joins(:tyre_fees).where('tyre_fees.rim_type = ?', TyreFee::RIM_TYPE.key(rim)) if rim}
   scope :by_vehicle, ->(vehicle) { joins(:tyre_fees).where('tyre_fees.vehicle_type = ?', TyreFee::VEHICLE_TYPE.key(vehicle)) if vehicle}
+  scope :by_tyre_fee, -> { joins(:tyre_fees) }
 
   def address
     [street, city, zip, country].compact.join(', ')
@@ -82,7 +83,7 @@ class Garage < ActiveRecord::Base
   end
 
   def self.by_default(zip, city, country)
-    by_country(country).by_city(city).by_zip(zip)
+    by_country(country).by_city(city).by_zip(zip).by_tyre_fee
   end
 
   def self.find_by_radius_from_location(location, radius = 10)
