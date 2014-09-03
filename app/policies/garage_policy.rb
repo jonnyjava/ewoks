@@ -57,7 +57,7 @@ class GaragePolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.admin?
+    @user.admin? || belongs_to_user_country?
   end
 
   def belongs_to_user_country?
