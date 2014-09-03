@@ -41,7 +41,7 @@ class WizardController < ApplicationController
   end
 
   def fee
-     @tyre_fee = TyreFee.new(garage: @garage)
+    @tyre_fee = TyreFee.new(garage: @garage)
   end
 
   def create_fee
