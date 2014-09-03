@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /en|es|pt|pl/ do
     get '/success', to: 'public_form#success', as: 'success'
+
     get '/public_form', to: 'public_form#public_form', as: 'public_form'
     post '/public_form', to: 'public_form#create', as: 'public_form_create'
 
@@ -26,9 +27,10 @@ Rails.application.routes.draw do
     get '/wizard_timetable/:garage_id',
         to: 'wizard#timetable',
         as: 'wizard_timetable'
-    post '/wizard_create_timetable/:garage_id',
-         to: 'wizard#create_timetable',
-         as: 'wizard_create_timetable'
+
+    patch '/wizard_update_timetable/:garage_id',
+         to: 'wizard#update_timetable',
+         as: 'wizard_update_timetable'
 
     get '/wizard_holiday/:garage_id',
         to: 'wizard#holiday',

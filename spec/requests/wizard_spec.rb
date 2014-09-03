@@ -31,7 +31,7 @@ describe 'Wizard' do
   describe 'POST /wizard_create_timetable' do
     it 'should return status 302 and redirect to holiday' do
       posted_params = FactoryGirl.attributes_for(:timetable)
-      post wizard_create_timetable_url(garage, timetable: posted_params)
+      patch wizard_update_timetable_url(garage, timetable: posted_params)
       response.status.should be(302)
       response.should redirect_to wizard_holiday_url(garage)
     end
