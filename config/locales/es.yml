@@ -85,6 +85,11 @@ es:
   successfully created: "%{class_name} creado con exito."
   Specifies the fee options: 'Especifica las opciones de la tarifa '
   If you leave a field blank, it is like select all: 'Si dejas en blanco algún campo, es como seleccionarlos todos'
+  Add rates tires: 'Añadir tarifas de neumaticos'
+  Indicate vacation days: 'Indicar los dias de vacaciones'
+  Define the opening hours: 'Definir el horario de apertura'
+  Your garage is not activated yet!: '¡Su garage todavia no está activado!'
+  welcome_message: 'Bienvenido, para terminar el proceso de activación, es necesario rellenar la ficha de garage totalmente. Las notificaciones de la barra superior le indicarán que falta exactamente aún por completar.'
 
   simple_form:
     labels:

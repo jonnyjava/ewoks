@@ -20,7 +20,7 @@ class TyreFeesController < ApplicationController
     @tyre_fee = TyreFee.create(tyre_fee_params)
     respond_to do |format|
       if @tyre_fee.save
-        format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: "Tyre fee was successfully created." }
+        format.html { redirect_to garage_tyre_fees_url(@garage), notice: "Tyre fee was successfully created." }
       else
         format.html { render :new }
       end
@@ -30,7 +30,7 @@ class TyreFeesController < ApplicationController
   def update
     respond_to do |format|
       if @tyre_fee.update(tyre_fee_params)
-        format.html { redirect_to garage_tyre_fee_url(@garage, @tyre_fee), notice: "Tyre fee was successfully updated." }
+        format.html { redirect_to garage_tyre_fees_url(@garage), notice: "Tyre fee was successfully updated." }
       else
         format.html { render :edit }
       end

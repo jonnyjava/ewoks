@@ -84,6 +84,11 @@ en:
   successfully created: "%{class_name} was successfully created."
   Specifies the fee options: 'Specifies the fee options '
   If you leave a field blank, it is like select all: 'If you leave a field blank, it is like select all'
+  Add rates tires: 'Add rates tires'
+  Indicate vacation days: 'Indicate vacation days'
+  Define the opening hours: 'Define the opening hours'
+  Your garage is not activated yet!: 'Your garage is not activated yet!'
+  welcome_message: 'Welcome, to complete the activation process, it is necessary to fill in garage completely. The notifications on the top bar will indicate exactly still missing to complete.'
 
   simple_form:
     labels:

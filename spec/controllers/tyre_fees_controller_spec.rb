@@ -18,13 +18,6 @@ describe TyreFeesController do
     end
   end
 
-  describe 'GET show' do
-    it 'assigns the requested tyre_fee as @tyre_fee' do
-      get :show, { garage_id: garage, id: tyre_fee.to_param }
-      assigns(:tyre_fee).should eq(tyre_fee)
-    end
-  end
-
   describe 'GET new' do
     it 'assigns a new tyre_fee as @tyre_fee' do
       get :new, { garage_id: garage }
@@ -55,7 +48,7 @@ describe TyreFeesController do
 
       it 'redirects to the created tyre_fee' do
         post :create, { garage_id: garage, tyre_fee: valid_attributes }
-        response.should redirect_to garage_tyre_fee_url(garage, TyreFee.last)
+        response.should redirect_to garage_tyre_fees_url(garage)
       end
     end
 
@@ -91,7 +84,7 @@ describe TyreFeesController do
 
       it 'redirects to the tyre_fee' do
         put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: valid_attributes }
-        response.should redirect_to garage_tyre_fee_url(garage, tyre_fee)
+        response.should redirect_to garage_tyre_fees_url(garage)
       end
     end
 
