@@ -33,9 +33,10 @@ describe 'Garages' do
     end
 
     context 'with querystring' do
-      let!(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
-      let!(:french_garage) { FactoryGirl.create(:french_garage) }
-
+      let(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
+      let(:french_garage) { FactoryGirl.create(:french_garage) }
+      let!(:spanish_fee) { FactoryGirl.create(:spanish_fee, garage: spanish_garage) }
+      let!(:french_fee) { FactoryGirl.create(:french_fee, garage: french_garage) }
 
       it 'should filter by country' do
         api_get 'garages.json?country=Spain', {}, @auth_token
@@ -53,8 +54,6 @@ describe 'Garages' do
       end
 
       context 'containing tyre_fee params ' do
-        let!(:spanish_fee) { FactoryGirl.create(:spanish_fee, garage: spanish_garage) }
-        let!(:french_fee) { FactoryGirl.create(:french_fee, garage: french_garage) }
 
         it 'should filter by price' do
           api_get 'garages.json?price=20', {}, @auth_token
