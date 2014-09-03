@@ -45,7 +45,7 @@ class GaragePolicy < ApplicationPolicy
   end
 
   def toggle_status?
-    @user.admin?
+    @user.admin? || belongs_to_user_country?
   end
 
   def update?
