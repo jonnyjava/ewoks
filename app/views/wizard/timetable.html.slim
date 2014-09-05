@@ -1,5 +1,5 @@
 - content_for :content
-	= simple_form_for([@garage, @timetable], url: wizard_create_timetable_url) do |f|
+	= simple_form_for([@garage, @timetable], url: wizard_update_timetable_url, method: 'PATCH') do |f|
 	  = f.error_notification
 	  = f.association :garage, as: :hidden
 

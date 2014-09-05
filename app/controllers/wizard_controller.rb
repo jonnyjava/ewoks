@@ -11,16 +11,23 @@ class WizardController < ApplicationController
 
   def create_garage
     @garage = Garage.new(garage_params)
-    redirect_to_response(@garage, :wizard,  'timetable')
+    @garage.timetable = Timetable.new
+    redirect_to_response(@garage, :wizard, 'timetable')
   end
 
   def timetable
-    @timetable = Timetable.new(garage: @garage)
+    @timetable = @garage.timetable
   end
 
-  def create_timetable
-    @timetable = Timetable.new(timetable_params)
-    redirect_to_response(@garage, :timetable,  'holiday')
+  def update_timetable
+    @timetable = @garage.timetable
+    respond_to do |format|
+      if @timetable.update(timetable_params)
+        format.html { redirect_to wizard_holiday_url(@garage), notice: notice_message("Timetable") }
+      else
+        format.html { render :timetable }
+      end
+    end
   end
 
   def holiday
@@ -30,7 +37,7 @@ class WizardController < ApplicationController
   def create_holiday
     @holiday = Holiday.new(holiday_params)
     destination = params[:commit] == 'next' ? 'fee' : 'holiday'
-    redirect_to_response(@garage, :holiday,  destination)
+    redirect_to_response(@holiday, :holiday,  destination)
   end
 
   def fee
@@ -39,17 +46,8 @@ class WizardController < ApplicationController
 
   def create_fee
     @tyre_fee = TyreFee.new(tyre_fee_params)
-    destination = wizard_fee_url(@garage)
-    destination = :success if params[:commit] == 'finish'
-    respond_to do |format|
-      if @tyre_fee.save
-        format.html do
-          redirect_to destination, notice: notice_message('tyre_fee')
-        end
-      else
-        format.html { render :create_fee }
-      end
-    end
+    destination = params[:commit] == 'finish' ? success_url : 'fee'
+    redirect_to_response(@tyre_fee, :fee,  destination)
   end
 
   private
@@ -58,7 +56,7 @@ class WizardController < ApplicationController
     respond_to do |format|
       if object.save
         format.html do
-          destination = send("wizard_#{destination}_url".to_sym, object)
+          destination = send("wizard_#{destination}_url".to_sym, @garage) unless destination == success_url
           redirect_to destination, notice: notice_message(object.class.name)
         end
       else

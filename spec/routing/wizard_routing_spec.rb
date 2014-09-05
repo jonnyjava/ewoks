@@ -6,7 +6,7 @@ describe WizardController do
     it { post('/wizard_create_garage').should route_to('wizard#create_garage') }
 
     it { get('/wizard_timetable/1').should route_to('wizard#timetable', garage_id: '1') }
-    it { post('/wizard_create_timetable/1').should route_to('wizard#create_timetable', garage_id: '1') }
+    it { patch('/wizard_update_timetable/1').should route_to('wizard#update_timetable', garage_id: '1') }
 
     it { get('/wizard_holiday/1').should route_to('wizard#holiday', garage_id: '1') }
     it { post('/wizard_create_holiday/1').should route_to('wizard#create_holiday', garage_id: '1') }
