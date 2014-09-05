@@ -228,4 +228,30 @@ describe Garage do
       end
     end
   end
+
+  describe 'filter by date' do
+    let!(:garage_without_holidays) { FactoryGirl.create(:garage) }
+    let(:garage_with_holidays) { FactoryGirl.create(:garage) }
+    let!(:holiday) { FactoryGirl.create(:holiday, garage: garage_with_holidays) }
+
+    it 'should return if garage is open' do
+      time = '2014-12-20'
+      result = Garage.by_date(time)
+      result.count.should be(1)
+      result.first.id.should == garage_with_holidays.id
+    end
+
+    it 'should return garages without holidays' do
+      result = Garage.garages_without_holidays
+      result.count.should be(1)
+    end
+
+    it 'should return if garage is opened at date' do 
+      another_garage = FactoryGirl.create(:garage)
+      another_holiday = FactoryGirl.create(:holiday, start_date: '2014-08-15', end_date: '2014-08-31', garage: another_garage)
+      date = '2014-08-25'
+      result = Garage.opened_at(date)
+      result.count.should be(2)
+    end
+  end
 end
