@@ -234,9 +234,9 @@ describe Garage do
     let(:garage_with_holidays) { FactoryGirl.create(:garage) }
     let!(:holiday) { FactoryGirl.create(:holiday, garage: garage_with_holidays) }
 
-    it 'should return if garage is open' do
-      time = '2014-12-20'
-      result = Garage.by_date(time)
+    it 'should return garages with holidays and available' do
+      date = '2014-12-20'
+      result = Garage.by_date(date)
       result.count.should be(1)
       result.first.id.should == garage_with_holidays.id
     end
@@ -244,14 +244,18 @@ describe Garage do
     it 'should return garages without holidays' do
       result = Garage.garages_without_holidays
       result.count.should be(1)
+      result.first.id.should == garage_without_holidays.id
     end
 
-    it 'should return if garage is opened at date' do 
-      another_garage = FactoryGirl.create(:garage)
-      another_holiday = FactoryGirl.create(:holiday, start_date: '2014-08-15', end_date: '2014-08-31', garage: another_garage)
-      date = '2014-08-25'
-      result = Garage.opened_at(date)
-      result.count.should be(2)
+    describe "opened_at" do
+      it 'should return only garages availables at given date' do
+        another_garage = FactoryGirl.create(:garage)
+        another_holiday = FactoryGirl.create(:holiday, start_date: '2014-08-15', end_date: '2014-08-31', garage: another_garage)
+        date = '2014-08-25'
+        result = Garage.opened_at(date)
+        result.count.should be(2)
+        result.map(&:id).should_not include(another_garage.id)
+      end
     end
   end
 end

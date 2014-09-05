@@ -32,7 +32,7 @@ class Garage < ActiveRecord::Base
   scope :by_rim, ->(rim) { joins(:tyre_fees).where('tyre_fees.rim_type = ?', TyreFee::RIM_TYPE.key(rim)) if rim}
   scope :by_vehicle, ->(vehicle) { joins(:tyre_fees).where('tyre_fees.vehicle_type = ?', TyreFee::VEHICLE_TYPE.key(vehicle)) if vehicle}
   scope :by_tyre_fee, -> { joins(:tyre_fees) }
-  scope :by_date, ->(date) { joins(:holidays).where('? NOT BETWEEN holidays.start_date and holidays.end_date', date) if date }
+  scope :by_date, ->(date) { joins(:holidays).where.not('? BETWEEN holidays.start_date and holidays.end_date', date) if date }
 
   def address
     [street, city, zip, country].compact.join(', ')
@@ -108,7 +108,7 @@ class Garage < ActiveRecord::Base
   end
 
   def self.garages_without_holidays
-    Garage.where('id not in (?)', Holiday.pluck(:garage_id))
+    Garage.where.not(id: Holiday.pluck(:garage_id))
   end
 
   def self.opened_at(date)
