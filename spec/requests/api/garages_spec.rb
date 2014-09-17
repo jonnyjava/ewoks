@@ -105,11 +105,24 @@ describe 'Garages' do
             ids.count.should be(0)
           end
         end
+
+        context 'giving all the tyre datas' do
+          it 'should return only one tyre fee per garage' do
+            FactoryGirl.create(:tyre_fee, garage: spanish_garage, price: 55, diameter_min: 10, diameter_max: 15 )
+            FactoryGirl.create(:tyre_fee, garage: spanish_garage, price: 66, diameter_min: 16, diameter_max: 19 )
+            api_get 'garages.json?rim=steel&vehicle=tourism&diameter=25', {}, @auth_token
+            check_response(response)
+            garage_tyre_fees = json(response.body).map { |garage| garage[:tyre_fees] }
+            tyre_fees_ids = garage_tyre_fees.flatten.map { |tyre_fee| tyre_fee[:id] }
+            tyre_fees_ids.count.should be(1)
+            tyre_fees_ids.first.should be(spanish_fee.id)
+          end
+        end
       end
 
       def check_response(response)
         response.status.should be(200)
-        ids = json(response.body).map { |g| g[:id] }
+        ids = json(response.body).map { |garage| garage[:id] }
         ids.count.should be(1)
         ids.should include(spanish_garage.id)
         ids.should_not include(french_garage.id)
