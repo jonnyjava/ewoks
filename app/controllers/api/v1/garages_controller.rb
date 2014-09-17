@@ -29,8 +29,8 @@ module API
         else
           garages = garages.by_default(params[:zip], params[:city], country)
         end
-
         @garages = garages
+        @tyre_fees = TyreFee.where(garage_id: @garages.map(&:id)).by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter)
       end
 
       def show
