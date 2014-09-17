@@ -75,7 +75,6 @@ describe 'Garages' do
           check_response(response)
         end
 
-
         it 'should filter by country, zip and price' do
           another_garage = FactoryGirl.create(:spanish_garage, zip: '00000')
           FactoryGirl.create(:tyre_fee, garage: another_garage, price: 40)

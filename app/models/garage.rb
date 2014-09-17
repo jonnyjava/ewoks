@@ -26,13 +26,13 @@ class Garage < ActiveRecord::Base
   scope :by_country, ->(country) { where(country: country) if country }
   scope :by_city, ->(city) { where(city: city) if city}
   scope :by_zip, ->(zip) { where(zip: zip) if zip}
-  scope :by_diameter, ->(diameter) { joins(:tyre_fees).where('tyre_fees.diameter_min <= ?', diameter).where('tyre_fees.diameter_max >= ?', diameter) if diameter }
-  scope :by_price, ->(price) { joins(:tyre_fees).where('tyre_fees.price = ?', price) if price }
-  scope :by_price_in_a_range, ->(min_price, max_price) { joins(:tyre_fees).where('price BETWEEN ? and ?', (min_price || 0), (max_price || min_price || 0)) }
-  scope :by_rim, ->(rim) { joins(:tyre_fees).where('tyre_fees.rim_type = ?', TyreFee::RIM_TYPE.key(rim)) if rim}
-  scope :by_vehicle, ->(vehicle) { joins(:tyre_fees).where('tyre_fees.vehicle_type = ?', TyreFee::VEHICLE_TYPE.key(vehicle)) if vehicle}
   scope :by_tyre_fee, -> { joins(:tyre_fees) }
-  scope :by_date, ->(date) { joins(:holidays).where.not('? BETWEEN holidays.start_date and holidays.end_date', date) if date }
+  scope :by_price, ->(price) { by_tyre_fee.merge(TyreFee.by_price(price)) if price }
+  scope :by_rim, ->(rim) { by_tyre_fee.merge(TyreFee.by_rim(rim)) if rim }
+  scope :by_vehicle, ->(vehicle) { by_tyre_fee.merge(TyreFee.by_vehicle(vehicle)) if vehicle }
+  scope :by_diameter, ->(diameter) { by_tyre_fee.merge(TyreFee.by_diameter(diameter)) if diameter }
+  scope :by_price_in_a_range, ->(min_price, max_price) { by_tyre_fee.merge(TyreFee.by_price_in_a_range(min_price, max_price)) }
+  scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
 
   def address
     [street, city, zip, country].compact.join(', ')
