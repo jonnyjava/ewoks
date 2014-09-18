@@ -5,13 +5,15 @@ module API
       before_action :authenticate
 
       def index
-        radius = params[:radius]
-        price = params[:price]
-        price_min = params[:price_min] ? params[:price_min].to_i : nil
-        price_max = params[:price_max] ? params[:price_max].to_i : nil
-        rim = params[:rim]
-        vehicle = params[:vehicle]
-        diameter = params[:diameter]
+        radius = garage_params[:radius]
+        price = garage_params[:price]
+        price_min = garage_params[:price_min] ? garage_params[:price_min].to_i : nil
+        price_max = garage_params[:price_max] ? garage_params[:price_max].to_i : nil
+        rim = garage_params[:rim]
+        vehicle = garage_params[:vehicle]
+        diameter = garage_params[:diameter]
+        zip = garage_params[:zip]
+        city = garage_params[:city]
         country = set_country
 
         garages = Garage.active.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter)
@@ -23,7 +25,7 @@ module API
         if radius
           garages = garages.find_by_radius_from_location(location(country), radius)
         else
-          garages = garages.by_default(params[:zip], params[:city], country)
+          garages = garages.by_default(zip, city, country)
         end
 
         @garages = garages
@@ -32,11 +34,11 @@ module API
       end
 
       def show
-        @garage = Garage.find(params[:id])
+        @garage = Garage.find(garage_params[:id])
         @holidays = @garage.holidays.all
       end
 
-      protected
+    protected
 
       def authenticate
         authenticate_token || render_unauthorized
@@ -53,14 +55,18 @@ module API
         render json: 'Bad credentials', status: 401
       end
 
-      private
+    private
 
       def set_country
-        params[:country] || @current_user.country
+        garage_params[:country] || @current_user.country
       end
 
       def location(country)
-        [params[:city], params[:zip], country].compact.join(', ')
+        [garage_params[:city], garage_params[:zip], country].compact.join(', ')
+      end
+
+      def garage_params
+        params.permit(:city, :country, :zip, :radius, :price, :price_min, :price_max, :rim, :vehicle, :diameter)
       end
     end
   end
