@@ -14,7 +14,7 @@ module API
         diameter = params[:diameter]
         country = set_country
 
-        garages = Garage.active.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter)
+        garages = Garage.active.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter).by_country(country)
 
         if price_min || price_max
           garages = garages.by_price_in_a_range(price_min, price_max)
@@ -23,7 +23,7 @@ module API
         if radius
           garages = garages.find_by_radius_from_location(location(country), radius)
         else
-          garages = garages.by_default(params[:zip], params[:city], country)
+          garages = garages.by_default(params[:zip], params[:city])
         end
 
         @garages = garages
