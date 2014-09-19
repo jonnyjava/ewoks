@@ -31,7 +31,7 @@ describe Garage do
       token1.should_not eq(token2)
     end
   end
- 
+
   describe 'find_by_token' do
     it 'should return only one garage' do
       garage1 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
@@ -158,7 +158,7 @@ describe Garage do
 
   describe 'scopes' do
     let!(:garage_without_fee) { FactoryGirl.create(:garage) }
-    let!(:garage) { FactoryGirl.create(:turin_garage) }  
+    let!(:garage) { FactoryGirl.create(:turin_garage) }
     let!(:garage_rome) { FactoryGirl.create(:rome_garage) }
     let!(:garage_spanish) { FactoryGirl.create(:spanish_garage) }
     let!(:garage_french) { FactoryGirl.create(:french_garage) }
@@ -177,7 +177,7 @@ describe Garage do
     it 'should filter garages by country' do
       @result = Garage.by_country('Italy')
       @result.count.should be(2)
-      garages_countries = @result.map(&:country).uniq 
+      garages_countries = @result.map(&:country).uniq
       garages_countries.should == ['Italy']
       garages_countries.count.should be(1)
     end
@@ -202,27 +202,19 @@ describe Garage do
 
     context 'by default' do
       it 'should filter by zip' do
-        @result = Garage.by_default('10141', nil, nil)
+        @result = Garage.by_default('10141', nil)
         @result.count.should be(1)
         @result.first.zip.should be_eql('10141')
       end
 
-      it 'should filter by country' do
-        @result = Garage.by_default(nil, nil, 'Italy')
-        @result.count.should be(2)
-        garages_countries = @result.map(&:country).uniq 
-        garages_countries.should == ['Italy']
-        garages_countries.count.should be(1)
-      end
-
       it 'should filter by city' do
-        @result = Garage.by_default(nil, 'Torino', nil)
+        @result = Garage.by_default(nil, 'Torino')
         @result.count.should be(1)
         @result.first.city.should be_eql('Torino')
       end
 
       it 'should filter by tyre fee' do
-        @result = Garage.by_default(nil, nil, nil)
+        @result = Garage.by_default(nil, nil)
         @result.count.should be(4)
         @result.each { |garage| garage.tyre_fees.should_not be_empty }
       end
