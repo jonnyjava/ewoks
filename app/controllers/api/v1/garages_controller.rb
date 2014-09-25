@@ -63,7 +63,7 @@ module API
       end
 
       def garage_params
-        params.permit(:city, :country, :zip, :radius, :price, :price_min, :price_max, :rim, :vehicle, :diameter)
+        params.permit(:id, :city, :country, :zip, :radius, :price, :price_min, :price_max, :rim, :vehicle, :diameter)
       end
     end
   end
