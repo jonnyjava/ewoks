@@ -7,5 +7,7 @@ end
 json.partial! 'api/v1/garages/timetable', garage: @garage
 
 json.tyre_fees do
-  json.partial! 'api/v1/garages/tyre_fees', tyre_fees: @garage.tyre_fees
+  json.array!(@garage.tyre_fees) do |tyre_fee|
+    json.(tyre_fee, :name, :price, :vehicle_type, :diameter_min, :diameter_max, :rim_type)
+  end
 end

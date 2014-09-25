@@ -15,7 +15,6 @@ module API
         zip = garage_params[:zip]
         city = garage_params[:city]
         country = set_country
-
         garages = Garage.active.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter).by_country(country)
 
         if price_min || price_max
@@ -27,10 +26,8 @@ module API
         else
           garages = garages.by_default(zip, city)
         end
-
         @garages = garages
-        tyre_fees = TyreFee.where(garage_id: @garages.map(&:id))
-        @tyre_fees = tyre_fees.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter)
+        @tyre_fees = TyreFee.where(garage_id: @garages.map(&:id)).by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter)
       end
 
       def show
@@ -66,7 +63,7 @@ module API
       end
 
       def garage_params
-        params.permit(:city, :country, :zip, :radius, :price, :price_min, :price_max, :rim, :vehicle, :diameter)
+        params.permit(:id, :city, :country, :zip, :radius, :price, :price_min, :price_max, :rim, :vehicle, :diameter)
       end
     end
   end
