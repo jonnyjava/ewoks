@@ -25,7 +25,7 @@ module API
         if radius
           garages = garages.find_by_radius_from_location(location(country), radius)
         else
-          garages = garages.by_default(zip, city, country)
+          garages = garages.by_default(zip, city)
         end
 
         @garages = garages
