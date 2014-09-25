@@ -28,11 +28,12 @@ describe UserPolicy do
     end
   end
 
-  context "for a country_manager" do
+  context 'for a country_manager' do
     it 'contains users of the same country of country_manager' do
-      expect(Pundit.policy_scope(country_manager, User).all).to match_array User.where(country: country_manager.country)
+      expect(Pundit.policy_scope(country_manager, User).all)
+        .to match_array User.where(country: country_manager.country, role: User::OWNER)
     end
-    context "and an user of his country" do
+    context 'and an user of his country' do
       subject { UserPolicy.new(country_manager, spanish_owner) }
       it { should_not allow_action(:create) }
       it { should_not allow_action(:new) }
@@ -42,7 +43,7 @@ describe UserPolicy do
       it { should allow_action(:edit) }
       it { should allow_action(:update) }
     end
-    context "and an user of another country" do
+    context 'and an user of another country' do
       subject { UserPolicy.new(country_manager, another_owner) }
       it { should_not allow_action(:create) }
       it { should_not allow_action(:new) }
