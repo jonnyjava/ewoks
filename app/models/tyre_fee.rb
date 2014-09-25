@@ -17,7 +17,7 @@ class TyreFee < ActiveRecord::Base
   scope :by_garage, ->(garage) { where(garage_id: garage.id) }
   scope :by_diameter, ->(diameter) { where('diameter_min <= ?', diameter).where('diameter_max >= ?', diameter) if diameter}
   scope :by_rim, ->(rim) { where(rim_type: RIM_TYPE.key(rim)) if rim}
-  scope :by_vehicle, ->(vehicle) { where(vehicle_type: vehicle) if vehicle }
+  scope :by_vehicle, ->(vehicle) { where(vehicle_type: VEHICLE_TYPE.key(vehicle)) if vehicle }
   scope :by_price, ->(price) { where(price: price) if price}
   scope :by_price_in_a_range, ->(min_price, max_price) { where(price: (min_price || 0)..(max_price || min_price || 0)) }
 end
