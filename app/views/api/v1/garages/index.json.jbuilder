@@ -1,5 +1,5 @@
 json.array!(@garages) do |garage|
-  json.(garage, :id, :name, :latitude, :longitude, :street, :zip, :city)
+  json.(garage, :id, :name, :latitude, :longitude, :street, :zip, :city, :email, :phone, :mobile, :fax, :website, :logo_file_name)
 
   garage_tyre_fees = @tyre_fees.select { |tyre_fee| tyre_fee.garage_id == garage.id }
   json.tyre_fees do

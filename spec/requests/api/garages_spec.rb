@@ -106,6 +106,18 @@ describe 'Garages' do
           end
         end
 
+        context 'searching inside a country' do
+          it 'should return only garages of the country of the token owner' do
+            api_get 'garages.json', {}, @auth_token
+            check_response(response)
+          end
+
+          it 'should return only garages of the country of the token owner' do
+            api_get 'garages.json?country=Spain&radius=5000', {}, @auth_token
+            check_response(response)
+          end
+        end
+
         context 'giving all the tyre datas' do
           it 'should return only one tyre fee per garage' do
             FactoryGirl.create(:tyre_fee, garage: spanish_garage, price: 55, diameter_min: 10, diameter_max: 15 )

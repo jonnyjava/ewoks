@@ -83,8 +83,8 @@ class Garage < ActiveRecord::Base
     Digest::SHA1.hexdigest(token)
   end
 
-  def self.by_default(zip, city, country)
-    by_country(country).by_city(city).by_zip(zip).by_tyre_fee
+  def self.by_default(zip, city)
+    by_city(city).by_zip(zip).by_tyre_fee
   end
 
   def self.find_by_radius_from_location(location, radius = 10)

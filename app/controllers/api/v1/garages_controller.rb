@@ -16,7 +16,7 @@ module API
         city = garage_params[:city]
         country = set_country
 
-        garages = Garage.active.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter)
+        garages = Garage.active.by_price(price).by_rim(rim).by_vehicle(vehicle).by_diameter(diameter).by_country(country)
 
         if price_min || price_max
           garages = garages.by_price_in_a_range(price_min, price_max)
