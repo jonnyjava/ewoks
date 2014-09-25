@@ -5,3 +5,7 @@ json.holidays do
 end
 
 json.partial! 'api/v1/garages/timetable', garage: @garage
+
+json.tyre_fees do
+  json.partial! 'api/v1/garages/tyre_fees', tyre_fees: @garage.tyre_fees
+end
