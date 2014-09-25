@@ -1,5 +1,4 @@
 class UserPolicy < ApplicationPolicy
-
   def initialize(logged_user, user)
     @logged_user = logged_user
     @user = user
@@ -17,7 +16,7 @@ class UserPolicy < ApplicationPolicy
       if logged_user.admin?
         scope.all
       elsif logged_user.country_manager?
-        scope.where(country: logged_user.country)
+        scope.where(country: logged_user.country, role: User::OWNER)
       else
         logged_user
       end
