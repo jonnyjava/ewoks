@@ -19,7 +19,8 @@
 
   = paginate @users
 
-  .b-keypad
-    = link_to t('new user').humanize, new_user_path, class: "b-keypad__btn--success"
+  - if current_user.admin?
+    .b-keypad
+      = link_to t('new user').humanize, new_user_path, class: "b-keypad__btn--success"
 
 = render template: "layouts/box", locals: { title: t('users list').humanize }
