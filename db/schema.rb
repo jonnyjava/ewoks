@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813130709) do
+ActiveRecord::Schema.define(version: 20140929095342) do
 
   create_table "garage_properties", force: true do |t|
     t.string   "value"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140813130709) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "town"
   end
 
   create_table "holidays", force: true do |t|
