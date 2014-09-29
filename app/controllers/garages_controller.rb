@@ -26,8 +26,8 @@ class GaragesController < ApplicationController
 
   def create
     @garage = Garage.new(garage_params)
+    @garage.country = current_user.try(:country)
     @garage.timetable = Timetable.new
-
     authorize @garage
     respond_to do |format|
       if @garage.save
