@@ -3,35 +3,27 @@ class GaragesController < ApplicationController
   skip_before_filter :authenticate_user!, only: :signup_verification
   after_action :verify_authorized, except: :signup_verification
 
-  # GET /garages
-  # GET /garages.json
   def index
     garages = policy_scope(Garage.all.order(:name).page(params[:page]))
     authorize garages
     @garages = GarageDecorator.decorate_collection(garages)
   end
 
-  # GET /garages/1
-  # GET /garages/1.json
   def show
     authorize @garage
     @tyre_fees = @garage.tyre_fees.all
   end
 
-  # GET /garages/new
   def new
     country = current_user.country_manager? ? current_user.country : nil
     @garage = Garage.new(country: country)
     authorize @garage
   end
 
-  # GET /garages/1/edit
   def edit
     authorize @garage
   end
 
-  # POST /garages
-  # POST /garages.json
   def create
     @garage = Garage.new(garage_params)
     @garage.timetable = Timetable.new
@@ -46,8 +38,6 @@ class GaragesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /garages/1
-  # PATCH/PUT /garages/1.json
   def update
     authorize @garage
     respond_to do |format|
@@ -59,8 +49,6 @@ class GaragesController < ApplicationController
     end
   end
 
-  # DELETE /garages/1
-  # DELETE /garages/1.json
   def destroy
     authorize @garage
     @garage.destroy
@@ -99,12 +87,10 @@ class GaragesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_garage
       @garage = Garage.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def garage_params
       params.require(:garage).permit(:name, :owner, :country, :street, :zip, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo, :status)
     end
