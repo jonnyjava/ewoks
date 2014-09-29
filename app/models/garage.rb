@@ -36,11 +36,11 @@ class Garage < ActiveRecord::Base
   scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
 
   def address
-    [street, city, zip, country].compact.join(', ')
+    [street, town, city, zip, country].compact.join(', ')
   end
 
   def address_changed?
-    attrs = %w(street city zip country)
+    attrs = %w(street town city zip country)
     attrs.any? { |a| send "#{a}_changed?" }
   end
 

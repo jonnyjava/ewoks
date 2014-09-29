@@ -6,6 +6,7 @@ FactoryGirl.define do
     name      Faker::Name.name
     street    Faker::Address.street_name
     zip       Faker::Address.zip_code
+    town      "#{Faker::Address.city_suffix} #{Faker::Address.city_prefix}"
     city      Faker::Address.city
     country   Faker::Address.country
     phone     Faker::PhoneNumber.phone_number
