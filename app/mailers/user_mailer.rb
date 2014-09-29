@@ -10,4 +10,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: user.email, subject: t('Your account has been activated'))
   end
+
+  def send_desactivation_notification(user)
+    @user = user
+    mail(to: user.email, subject: t('Your account has been desactivated'))
+  end
 end

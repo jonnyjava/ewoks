@@ -73,6 +73,7 @@ class Garage < ActiveRecord::Base
   def notify_my_owner
     return unless user
     UserMailer.send_activation_notification(user).deliver if active?
+    UserMailer.send_desactivation_notification(user).deliver if inactive?
   end
 
   def send_signup_confirmation
