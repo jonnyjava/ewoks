@@ -28,4 +28,15 @@ describe UserMailer do
       sent_email.should have_body_text(/#{new_user_session_url}/)
     end
   end
+
+  describe 'country manager disable one garage' do
+    it 'should send an email to the owner' do
+      owner = FactoryGirl.create(:owner)
+      sent_email = UserMailer.send_desactivation_notification(owner)
+      sent_email.should deliver_from(EMAIL_ADMIN)
+      sent_email.should deliver_to(owner.email)
+      sent_email.should have_subject( I18n.t('Your account has been desactivated') )
+      sent_email.should have_body_text(/Your account has been desactivated!/)
+    end
+  end
 end
