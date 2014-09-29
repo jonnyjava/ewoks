@@ -20,7 +20,7 @@ describe PublicFormController do
       let(:tyre_fee_params) { FactoryGirl.attributes_for(:tyre_fee, garage: garage) }
       let(:holiday_params) { FactoryGirl.attributes_for(:holiday, garage: garage) }
       let(:timetable_params) { FactoryGirl.attributes_for(:timetable, garage: garage) }
-      let(:valid_params) { { locale: locales.sample, garage: garage_params, tyre_fee: tyre_fee_params, holiday: holiday_params, timetable: timetable_params } }
+      let(:valid_params) { { locale: locales.sample.to_sym, garage: garage_params, tyre_fee: tyre_fee_params, holiday: holiday_params, timetable: timetable_params } }
 
       it 'creates a new Garage' do
         n = Garage.count

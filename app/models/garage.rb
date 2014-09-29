@@ -20,7 +20,7 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
-  COUNTRIES_WITH_LOCALE = { it: 'Italy', pl: 'Poland', pt: 'Portugal', ar: 'Argentina', fr: 'France', es: 'Spain', be: 'Belgium' }
+  COUNTRIES_WITH_LOCALE = { 'it' => 'Italy', 'pl' => 'Poland', 'pt' => 'Portugal', 'es-AR' => 'Argentina', 'fr' => 'France', 'es' => 'Spain', 'be' => 'Belgium' }
   COUNTRIES = COUNTRIES_WITH_LOCALE.values.compact
 
   scope :active, -> { where(status: ACTIVE) }
@@ -120,7 +120,7 @@ class Garage < ActiveRecord::Base
   end
 
   def self.fetch_country_from_locale(locale)
-    COUNTRIES_WITH_LOCALE.fetch(locale)
+    COUNTRIES_WITH_LOCALE.fetch(locale.to_s)
   end
 
   def s3_credentials
