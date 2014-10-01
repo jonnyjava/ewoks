@@ -15,28 +15,20 @@ describe UserMailer do
     end
   end
 
-  describe 'country manager active one garage' do
-    it 'should send an email to the owner' do
-      owner = FactoryGirl.create(:owner)
-      sent_email = UserMailer.send_activation_notification(owner)
-      sent_email.should deliver_from(EMAIL_ADMIN)
-      sent_email.should deliver_to(owner.email)
-      sent_email.should have_subject( I18n.t('Your account has been activated') )
-      sent_email.should have_body_text(/Your account has been activated!/)
-      sent_email.should have_body_text(/#{owner.email}/)
-      sent_email.should have_body_text(/#{owner.password}/)
-      sent_email.should have_body_text(/#{new_user_session_url}/)
-    end
-  end
+  describe 'the country manager changes the status of a garage' do
+   it 'should send an email to the owner' do
+     garage = FactoryGirl.create(:garage)
+     garage.create_my_owner
+     owner = garage.user
 
-  describe 'country manager disable one garage' do
-    it 'should send an email to the owner' do
-      owner = FactoryGirl.create(:owner)
-      sent_email = UserMailer.send_desactivation_notification(owner)
-      sent_email.should deliver_from(EMAIL_ADMIN)
-      sent_email.should deliver_to(owner.email)
-      sent_email.should have_subject( I18n.t('Your account has been desactivated') )
-      sent_email.should have_body_text(/Your account has been desactivated!/)
-    end
-  end
+     sent_email = UserMailer.send_changed_status_notification(owner)
+     sent_email.should deliver_from(EMAIL_ADMIN)
+     sent_email.should deliver_to(owner.email)
+     sent_email.should have_subject( I18n.t('Your account has been changed') )
+     sent_email.should have_body_text(/Your account has been activated!/)
+     sent_email.should have_body_text(/#{owner.email}/)
+     sent_email.should have_body_text(/#{owner.password}/)
+     sent_email.should have_body_text(/#{new_user_session_url}/)
+   end
+ end
 end
