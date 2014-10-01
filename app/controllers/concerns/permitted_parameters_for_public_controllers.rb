@@ -2,7 +2,7 @@ module PermittedParametersForPublicControllers
   extend ActiveSupport::Concern
 
   def garage_params
-    params.require(:garage).permit(:name, :owner, :country, :street, :zip, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website)
+    params.require(:garage).permit(:name, :owner, :country, :street, :zip, :province, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website)
   end
 
   def timetable_params

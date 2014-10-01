@@ -13,6 +13,7 @@ class PublicFormController < ApplicationController
     tyre_fee_rows = params[:tyre_fee][:rows_counter].to_i
 
     @garage = Garage.new(garage_params)
+    @garage.country = Garage.fetch_country_from_locale(I18n.locale)
     @garage.status = Garage::TO_BE_CONFIRMED
     @timetable = Timetable.new(timetable_params)
     @holiday = Holiday.new(holiday_params)
@@ -28,7 +29,6 @@ class PublicFormController < ApplicationController
     garage_properties = garage_properties.flatten
 
     valid_submission = @garage.valid? && validate_all(garage_properties)
-
     respond_to do |format|
       if !valid_submission
         format.html { render :public_form }
