@@ -25,8 +25,8 @@ class Garage < ActiveRecord::Base
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
   scope :by_country, ->(country) { where(country: country) if country }
-  scope :by_city, ->(city) { where(city: city) if city}
-  scope :by_zip, ->(zip) { where(zip: zip) if zip}
+  scope :by_city, ->(city) { where(city: city) if city }
+  scope :by_zip, ->(zip) { where(zip: zip) if zip }
   scope :by_tyre_fee, -> { joins(:tyre_fees) }
   scope :by_price, ->(price) { by_tyre_fee.merge(TyreFee.by_price(price)) if price }
   scope :by_rim, ->(rim) { by_tyre_fee.merge(TyreFee.by_rim(rim)) if rim }
@@ -72,7 +72,7 @@ class Garage < ActiveRecord::Base
 
   def notify_my_owner
     return unless user
-    UserMailer.send_activation_notification(user).deliver if active?
+    UserMailer.send_changed_status_notification(user).deliver if user.garage.status_was >= 0
   end
 
   def send_signup_confirmation
