@@ -1,4 +1,15 @@
 - content_for :content
+  -if @tyre_fees
+    table
+      - @tyre_fees.each do |tyre_fee|
+        tr
+          td= tyre_fee.name
+          td= "#{t('simple_form.labels.defaults.price')}: #{tyre_fee.price}"
+          td= "#{t('simple_form.labels.defaults.vehicle_type')}: #{t(TyreFee::VEHICLES[tyre_fee.vehicle_type])}"
+          td= "#{t('simple_form.labels.defaults.diameter_min')}: #{tyre_fee.diameter_min}"
+          td= "#{t('simple_form.labels.defaults.diameter_max')}: #{tyre_fee.diameter_max}"
+          td= "#{t('simple_form.labels.defaults.rim_type')}: #{t(TyreFee::RIMS[tyre_fee.rim_type])}"
+
   = simple_form_for([@garage, @tyre_fee], url: wizard_create_fee_url) do |f|
     = f.association :garage, as: :hidden
     = render 'tyre_fees/shared/errors', tyre_fee: @tyre_fee
@@ -10,3 +21,4 @@
       = f.button :submit, class: "b-keypad__btn--success", value: 'finish'
       = link_to 'skip', success_url, class: 'b-keypad__btn--success'
 = render template: "layouts/box", locals: { title: t('tyre fees').humanize }
+

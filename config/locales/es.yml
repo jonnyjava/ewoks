@@ -92,6 +92,12 @@ es:
   welcome_message: 'Bienvenido, para terminar el proceso de activación, es necesario rellenar la ficha de garage totalmente. Las notificaciones de la barra superior le indicarán que falta exactamente aún por completar.'
   from: 'desde'
   to: 'hasta'
+  steel: 'steel'
+  aluminium: 'aluminium'
+  tourism: 'tourism'
+  suv: 'suv'
+  van: 'van'
+
 
   simple_form:
     labels:

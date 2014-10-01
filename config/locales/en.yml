@@ -91,6 +91,13 @@ en:
   welcome_message: 'Welcome, to complete the activation process, it is necessary to fill in garage completely. The notifications on the top bar will indicate exactly still missing to complete.'
   from: 'from'
   to: 'to'
+  steel: 'steel'
+  aluminium: 'aluminium'
+  tourism: 'tourism'
+  suv: 'suv'
+  van: 'van'
+
+
 
   simple_form:
     labels:
