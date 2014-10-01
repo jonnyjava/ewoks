@@ -31,6 +31,7 @@ class WizardController < ApplicationController
   end
 
   def holiday
+    @holidays = @garage.holidays
     @holiday = Holiday.new(garage: @garage)
   end
 
@@ -41,6 +42,7 @@ class WizardController < ApplicationController
   end
 
   def fee
+    @tyre_fees = @garage.tyre_fees
     @tyre_fee = TyreFee.new(garage: @garage)
   end
 

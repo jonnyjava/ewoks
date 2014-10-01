@@ -91,6 +91,13 @@
   Define the opening hours: 'Definir o horário de abertura'
   Your garage is not activated yet!: 'A sua oficina ainda não está activa!'
   welcome_message: 'Bem vindo, para terminar o processo de activação, é necessário preencher a ficha de oficina na totalidade. As notificações na barra superior indicam o que falta completar.'
+  from: 'a partir de'
+  to: 'up'
+  steel: 'steel'
+  aluminium: 'aluminium'
+  tourism: 'tourism'
+  suv: 'suv'
+  van: 'van'
 
   simple_form:
     labels:
