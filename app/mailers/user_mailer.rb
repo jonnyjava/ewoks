@@ -6,13 +6,8 @@ class UserMailer < ActionMailer::Base
     mail(to: user.email, subject: t('Your login for Ewoks'))
   end
 
-  def send_activation_notification(user)
+  def send_changed_status_notification(user)
     @user = user
-    mail(to: user.email, subject: t('Your account has been activated'))
-  end
-
-  def send_desactivation_notification(user)
-    @user = user
-    mail(to: user.email, subject: t('Your account has been desactivated'))
+    mail(to: user.email, subject: t('Your account has been changed'))
   end
 end
