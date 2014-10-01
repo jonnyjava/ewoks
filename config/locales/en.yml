@@ -89,6 +89,8 @@ en:
   Define the opening hours: 'Define the opening hours'
   Your garage is not activated yet!: 'Your garage is not activated yet!'
   welcome_message: 'Welcome, to complete the activation process, it is necessary to fill in garage completely. The notifications on the top bar will indicate exactly still missing to complete.'
+  from: 'from'
+  to: 'to'
 
   simple_form:
     labels:

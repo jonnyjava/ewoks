@@ -1,4 +1,8 @@
 - content_for :content
+
+  - @holidays.each do |holiday|
+    p= "#{holiday.name}: #{t('from')}: #{holiday.start_date} #{t('to')}: #{holiday.end_date}"
+
   = simple_form_for([@garage, @holiday], url: wizard_create_holiday_url) do |f|
     = f.error_notification
     = f.association :garage, as: :hidden
