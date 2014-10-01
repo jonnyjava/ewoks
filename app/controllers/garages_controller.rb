@@ -92,6 +92,6 @@ class GaragesController < ApplicationController
     end
 
     def garage_params
-      params.require(:garage).permit(:name, :owner, :country, :street, :zip, :town, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo, :status)
+      params.require(:garage).permit(:name, :owner, :country, :street, :zip, :province, :city, :email, :phone, :mobile, :fax, :latitude, :longitude, :tax_id, :website, :logo, :status)
     end
 end

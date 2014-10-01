@@ -2,7 +2,7 @@
 .col-sm-6 = f.input :email, as: :email
 .col-sm-3 = f.input :street, as: :string
 .col-sm-3 = f.input :zip, as: :string
-.col-sm-3 = f.input :town, as: :string
+.col-sm-3 = f.input :province, as: :string
 .col-sm-3 = f.input :city, as: :string
 - if current_user && current_user.admin?
   .col-sm-6 = f.input :country, collection: Garage.countries(current_user)

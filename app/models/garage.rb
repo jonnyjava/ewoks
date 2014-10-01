@@ -6,7 +6,7 @@ class Garage < ActiveRecord::Base
   has_many :garage_properties
   has_many :properties, through: :garage_properties
 
-  validates :street, :zip, :town, :city, :country, :phone, :tax_id, presence: true
+  validates :street, :zip, :province, :city, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
   has_attached_file :logo, storage: :s3, s3_credentials: Proc.new { |a| a.instance.s3_credentials }, url: ':s3_domain_url',
   path: '/:class/:attachment/:id_partition/:style/:filename', default_url: '/assets/avatar_default.jpg'
@@ -37,11 +37,11 @@ class Garage < ActiveRecord::Base
   scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
 
   def address
-    [street, town, city, zip, country].compact.join(', ')
+    [street, province, city, zip, country].compact.join(', ')
   end
 
   def address_changed?
-    attrs = %w(street town city zip country)
+    attrs = %w(street province city zip country)
     attrs.any? { |a| send "#{a}_changed?" }
   end
 
