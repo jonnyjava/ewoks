@@ -157,7 +157,7 @@ describe Garage do
   end
 
   describe 'scopes' do
-    let!(:garage_without_fee) { FactoryGirl.create(:garage) }
+    let!(:garage_without_fee) { FactoryGirl.create(:garage, country: "Belgium") }
     let!(:garage) { FactoryGirl.create(:turin_garage) }
     let!(:garage_rome) { FactoryGirl.create(:rome_garage) }
     let!(:garage_spanish) { FactoryGirl.create(:spanish_garage) }
