@@ -6,7 +6,7 @@ class Garage < ActiveRecord::Base
   has_many :garage_properties
   has_many :properties, through: :garage_properties
 
-  validates :street, :zip, :city, :country, :phone, :tax_id, presence: true
+  validates :street, :zip, :province, :city, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
   has_attached_file :logo, storage: :s3, s3_credentials: Proc.new { |a| a.instance.s3_credentials }, url: ':s3_domain_url',
   path: '/:class/:attachment/:id_partition/:style/:filename', default_url: '/assets/avatar_default.jpg'
@@ -20,7 +20,8 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
-  COUNTRIES = %w(Italy Poland Portugal Argentina France Spain Belgium)
+  COUNTRIES_WITH_LOCALE = { 'it' => 'Italy', 'pl' => 'Poland', 'pt' => 'Portugal', 'es-AR' => 'Argentina', 'fr' => 'France', 'es' => 'Spain', 'be' => 'Belgium' }
+  COUNTRIES = COUNTRIES_WITH_LOCALE.values.compact
 
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
@@ -36,11 +37,11 @@ class Garage < ActiveRecord::Base
   scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
 
   def address
-    [street, city, zip, country].compact.join(', ')
+    [street, province, city, zip, country].compact.join(', ')
   end
 
   def address_changed?
-    attrs = %w(street city zip country)
+    attrs = %w(street province city zip country)
     attrs.any? { |a| send "#{a}_changed?" }
   end
 
@@ -116,6 +117,10 @@ class Garage < ActiveRecord::Base
     garages_opened = Garage.garages_without_holidays
     garage_with_holidays_opened = Garage.by_date(date)
     garage_with_holidays_opened | garages_opened
+  end
+
+  def self.fetch_country_from_locale(locale)
+    COUNTRIES_WITH_LOCALE.fetch(locale.to_s)
   end
 
   def s3_credentials

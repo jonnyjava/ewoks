@@ -11,6 +11,7 @@ class WizardController < ApplicationController
 
   def create_garage
     @garage = Garage.new(garage_params)
+    @garage.country = Garage.fetch_country_from_locale(I18n.locale)
     @garage.timetable = Timetable.new
     redirect_to_response(@garage, :wizard, 'timetable')
   end
@@ -31,6 +32,7 @@ class WizardController < ApplicationController
   end
 
   def holiday
+    @holidays = @garage.holidays
     @holiday = Holiday.new(garage: @garage)
   end
 
@@ -41,6 +43,7 @@ class WizardController < ApplicationController
   end
 
   def fee
+    @tyre_fees = @garage.tyre_fees
     @tyre_fee = TyreFee.new(garage: @garage)
   end
 

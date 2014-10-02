@@ -8,8 +8,8 @@ describe HolidayPolicy do
   let(:holiday) { FactoryGirl.create(:holiday, garage: spanish_garage) }
   let(:someone_else_holiday) { FactoryGirl.create(:holiday) }
 
-  context "for an admin" do
-    context "over an holiday" do
+  context 'for an admin' do
+    context 'over an holiday' do
       subject { HolidayPolicy.new(admin, holiday) }
       it { should allow_action(:show) }
       it { should allow_action(:index) }
@@ -21,8 +21,8 @@ describe HolidayPolicy do
     end
   end
 
-  context "for a country_manager" do
-    context "and an holiday of a garage in his country" do
+  context 'for a country_manager' do
+    context 'and an holiday of a garage in his country' do
       subject { HolidayPolicy.new(country_manager, holiday) }
       it { should allow_action(:show) }
       it { should allow_action(:index) }
@@ -32,7 +32,7 @@ describe HolidayPolicy do
       it { should allow_action(:update) }
       it { should allow_action(:destroy) }
     end
-    context "and an holiday of a garage in another country" do
+    context 'and an holiday of a garage in another country' do
       subject { HolidayPolicy.new(country_manager, someone_else_holiday) }
       it { should_not allow_action(:show) }
       it { should allow_action(:index) }

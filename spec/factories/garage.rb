@@ -6,8 +6,9 @@ FactoryGirl.define do
     name      Faker::Name.name
     street    Faker::Address.street_name
     zip       Faker::Address.zip_code
+    province  Faker::Address.city
     city      Faker::Address.city
-    country   Faker::Address.country
+    country   Garage::COUNTRIES.sample
     phone     Faker::PhoneNumber.phone_number
     tax_id    Faker::Code.isbn
     latitude  Faker::Address.latitude

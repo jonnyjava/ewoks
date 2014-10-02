@@ -97,6 +97,13 @@ es:
   afternoon_open: 'Apertura tarde'
   afternoon_close: 'Cierre tarde'
   Is it closed?: '¿Está cerrado?'
+  from: 'desde'
+  to: 'hasta'
+  steel: 'steel'
+  aluminium: 'aluminium'
+  tourism: 'tourism'
+  suv: 'suv'
+  van: 'van'
 
   simple_form:
     labels:

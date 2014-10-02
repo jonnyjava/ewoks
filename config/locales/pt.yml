@@ -97,6 +97,13 @@
   afternoon_open: 'Afternoon open'
   afternoon_close: 'Afternoon close'
   Is it closed?: 'Is it closed?'
+  from: 'a partir de'
+  to: 'up'
+  steel: 'steel'
+  aluminium: 'aluminium'
+  tourism: 'tourism'
+  suv: 'suv'
+  van: 'van'
 
   simple_form:
     labels:

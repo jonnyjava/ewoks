@@ -33,9 +33,10 @@
       .checkbox.js_break
         label
           - does_break = timetable.closes_at_noon(day)
-          input id="#{day.downcase[0, 3]}_noon" name="#{day.downcase[0, 3]}_noon" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(!does_break) class="at_noon"
+          - closed = timetable.closed(day)
+
+          input id="#{day.downcase[0, 3]}_noon" name="#{day.downcase[0, 3]}_noon" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(!does_break) class="at_noon" disabled=(closed)
           = t('At noon')
         label
-          - closed = timetable.closed(day)
           input id="#{day.downcase[0, 3]}_long" name="#{day.downcase[0, 3]}_long" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(closed) class="daylong"
           = t('daylong')
