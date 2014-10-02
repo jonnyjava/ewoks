@@ -35,8 +35,20 @@ class TimetablesController < ApplicationController
 
   def update
     authorize @timetable
+    noon_times = {}
+
+    Date::DAYNAMES.each do |day|
+      unless params["#{day.downcase[0, 3]}_noon"]
+        noon_times = noon_times.merge({"#{day.downcase[0, 3]}_morning_close" => nil, "#{day.downcase[0, 3]}_afternoon_open" => nil})
+      end
+      if params["#{day.downcase[0, 3]}_long"]
+        noon_times = noon_times.merge({"#{day.downcase[0, 3]}_morning_open" => nil, "#{day.downcase[0, 3]}_afternoon_close" => nil})
+      end
+    end
+
     respond_to do |format|
-      if @timetable.update(timetable_params)
+      noon_times = noon_times.merge(timetable_params)
+      if @timetable.update(noon_times)
         format.html { redirect_to edit_garage_timetable_url(@garage, @timetable), notice: "Timetable was successfully updated." }
         format.json { render :show, status: :ok, location: @timetable }
       else
