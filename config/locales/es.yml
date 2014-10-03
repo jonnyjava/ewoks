@@ -63,7 +63,7 @@ es:
   rim type: 'tipo de llanta'
   new tyre fee: 'nueva tarifa de neumáticos'
   tyre fees list: 'listado de tarifas de neumáticos'
-  Check if closes at noon: 'Marcar si cierra a mediodia'
+  At noon: 'A mediodia'
   Sunday: 'Domingo'
   Monday: 'Lunes'
   Tuesday: 'Martes'
@@ -91,6 +91,12 @@ es:
   Define the opening hours: 'Definir el horario de apertura'
   Your garage is not activated yet!: '¡Su garage todavia no está activado!'
   welcome_message: 'Bienvenido, para terminar el proceso de activación, es necesario rellenar la ficha de garage totalmente. Las notificaciones de la barra superior le indicarán que falta exactamente aún por completar.'
+  Day: 'Día'
+  morning_open: 'Apertura mañana'
+  morning_close: 'Cierre mañana'
+  afternoon_open: 'Apertura tarde'
+  afternoon_close: 'Cierre tarde'
+  Is it closed?: '¿Está cerrado?'
   from: 'desde'
   to: 'hasta'
   steel: 'steel'
@@ -98,7 +104,6 @@ es:
   tourism: 'tourism'
   suv: 'suv'
   van: 'van'
-
 
   simple_form:
     labels:
