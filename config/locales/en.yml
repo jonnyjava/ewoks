@@ -91,6 +91,12 @@ en:
   Define the opening hours: 'Define the opening hours'
   Your garage is not activated yet!: 'Your garage is not activated yet!'
   welcome_message: 'Welcome, to complete the activation process, it is necessary to fill in garage completely. The notifications on the top bar will indicate exactly still missing to complete.'
+  Day: 'Day'
+  morning_open: 'Morning open'
+  morning_close: 'Morning close'
+  afternoon_open: 'Afternoon open'
+  afternoon_close: 'Afternoon close'
+  Is it closed?: 'Is it closed?'
   from: 'from'
   to: 'to'
   steel: 'steel'
@@ -98,8 +104,6 @@ en:
   tourism: 'tourism'
   suv: 'suv'
   van: 'van'
-
-
 
   simple_form:
     labels:
@@ -126,7 +130,7 @@ en:
         diameter_min: 'Minimal diameter'
         diameter_max: 'Maximal diameter'
         rim_type: 'Rim type'
-        Check if closes at noon: 'Check if closes at noon'
+        At noon: 'At noon'
         Sunday: 'Sunday'
         Monday: 'Monday'
         Tuesday: 'Tuesday'
