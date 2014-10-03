@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       to: 'garages#signup_verification',
       as: 'signup_verification'
 
-  scope '(:locale)', locale: /it|pl|pt|es-AR|fr|es|be|en/ do
+  scope '(:locale)', locale: /it|pl|pt|fr|es|be|en/ do
     get '/success', to: 'public_form#success', as: 'success'
 
     get '/public_form', to: 'public_form#public_form', as: 'public_form'

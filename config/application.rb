@@ -24,7 +24,7 @@ module Ewoks
       Devise::PasswordsController.layout "devise"
     end
 
-    config.i18n.available_locales = ['it', 'pl', 'pt', 'es-AR', 'fr', 'es', 'be', 'en']
+    config.i18n.available_locales = ['it', 'pl', 'pt', 'fr', 'es', 'be', 'en']
 
     config.exceptions_app = routes
   end
