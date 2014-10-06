@@ -6,11 +6,6 @@ html
     - if @user.garage.status == Garage::ACTIVE
       h1= t('Your account has been activated')
 
-      p= t('here you can find your login')
-      = @user.email
-      br
-      = @user.password
-      br
       = link_to t('you can login here'), new_user_session_url
 
     - else

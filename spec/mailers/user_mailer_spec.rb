@@ -27,8 +27,6 @@ describe UserMailer do
      sent_email.should deliver_to(@owner.email)
      sent_email.should have_subject( I18n.t('Your account has been changed') )
      sent_email.should have_body_text(I18n.t('Your account has been activated'))
-     sent_email.should have_body_text(/#{@owner.email}/)
-     sent_email.should have_body_text(/#{@owner.password}/)
      sent_email.should have_body_text(/#{new_user_session_url}/)
    end
  end
