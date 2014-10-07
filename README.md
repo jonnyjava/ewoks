@@ -1,7 +1,7 @@
 ![alt text](https://magnum-ci.com/status/011225dd347d78c1ead6e2cc432984b9.png "Magnum CI")
 
 Ewoks
-# v1.0.2
+# v1.0.3
 
 # API for partners geolocalization.
 
