@@ -39,6 +39,7 @@ Garage::COUNTRIES.each do |country|
     garage.street = "#{country} road"
     garage.zip = "#{46000 + i}"
     garage.city = 'Valencia'
+    garage.province = 'Valencia'
     garage.email = "fake_ #{i}_#{country}@email.com"
     garage.phone = '666 666 666'
     garage.tax_id = '999888777666123'
