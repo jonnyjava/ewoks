@@ -147,7 +147,7 @@ describe Garage do
 
     context 'user is admin' do
       it 'should return all countries' do
-        Garage.countries(admin).should eq(Garage::COUNTRIES)
+        Garage.countries(admin).should eq(COUNTRIES)
       end
 
       it "should return only the country's country manager" do

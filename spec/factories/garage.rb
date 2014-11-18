@@ -8,7 +8,7 @@ FactoryGirl.define do
     zip       Faker::Address.zip_code
     province  Faker::Address.city
     city      Faker::Address.city
-    country   Garage::COUNTRIES.sample
+    country   COUNTRIES.sample
     phone     Faker::PhoneNumber.phone_number
     tax_id    Faker::Code.isbn
     latitude  Faker::Address.latitude

@@ -7,7 +7,7 @@ admin.country = 'Spain'
 admin.save!
 
 
-Garage::COUNTRIES.each do |country|
+COUNTRIES.each do |country|
 
   api = User.new
   api.email = "#{country}_api@norauto.com"

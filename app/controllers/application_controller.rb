@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def fetch_country_from_locale(locale)
+    COUNTRIES_WITH_LOCALE.fetch(locale.to_s)
+  end
+
   private
 
   def user_not_authorized
