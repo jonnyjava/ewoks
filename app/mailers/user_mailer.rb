@@ -16,6 +16,6 @@ class UserMailer < ActionMailer::Base
   private
 
   def set_locale(user)
-    I18n.locale = Garage::COUNTRIES_WITH_LOCALE.key(user.garage.country)
+    I18n.locale = COUNTRIES_WITH_LOCALE.key(user.garage.country)
   end
 end

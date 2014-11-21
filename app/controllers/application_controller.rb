@@ -9,6 +9,14 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def fetch_country_from_locale(locale)
+    COUNTRIES_WITH_LOCALE.fetch(locale.to_s)
+  end
+
+  def fetch_locale_from_country(country)
+    COUNTRIES_WITH_LOCALE.key(country)
+  end
+
   private
 
   def user_not_authorized
@@ -17,11 +25,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
+    I18n.locale = fetch_locale_from_country(current_user.try(:country)) || params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
   end
 
   def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
+    { locale: nil }.merge options
   end
 
   def extract_locale_from_accept_language_header

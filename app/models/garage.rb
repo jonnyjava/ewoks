@@ -20,8 +20,6 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
-  COUNTRIES_WITH_LOCALE = { 'it' => 'Italy', 'pl' => 'Poland', 'pt' => 'Portugal', 'fr' => 'France', 'es' => 'Spain', 'be' => 'Belgium' }
-  COUNTRIES = COUNTRIES_WITH_LOCALE.values.compact
 
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
@@ -117,10 +115,6 @@ class Garage < ActiveRecord::Base
     garages_opened = Garage.garages_without_holidays
     garage_with_holidays_opened = Garage.by_date(date)
     garage_with_holidays_opened | garages_opened
-  end
-
-  def self.fetch_country_from_locale(locale)
-    COUNTRIES_WITH_LOCALE.fetch(locale.to_s)
   end
 
   def s3_credentials
