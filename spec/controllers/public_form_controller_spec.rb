@@ -12,7 +12,7 @@ describe PublicFormController do
   describe 'POST' do
     let(:valid_session) { {} }
     let(:garage) { FactoryGirl.build(:garage) }
-    locales = Garage::COUNTRIES_WITH_LOCALE.keys
+    locales = COUNTRIES_WITH_LOCALE.keys
 
     context 'with valid params' do
 

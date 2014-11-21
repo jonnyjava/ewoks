@@ -14,7 +14,7 @@ describe 'Wizard' do
   describe 'POST /wizard_create_garage' do
     it 'should return status 302 and redirect to timetable' do
       posted_params = FactoryGirl.attributes_for(:garage)
-      locales = Garage::COUNTRIES_WITH_LOCALE.keys
+      locales = COUNTRIES_WITH_LOCALE.keys
       post wizard_create_garage_url(garage: posted_params, locale: locales.sample)
       response.status.should be(302)
       new_garage = assigns[:garage]

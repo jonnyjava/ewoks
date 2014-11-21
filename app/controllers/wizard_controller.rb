@@ -11,7 +11,7 @@ class WizardController < ApplicationController
 
   def create_garage
     @garage = Garage.new(garage_params)
-    @garage.country = Garage.fetch_country_from_locale(I18n.locale)
+    @garage.country = fetch_country_from_locale(I18n.locale)
     @garage.timetable = Timetable.new
     redirect_to_response(@garage, :wizard, 'timetable')
   end

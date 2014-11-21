@@ -10,7 +10,7 @@
   = f.input :surname, as: :string
   = f.input :email, as: :email
   = f.input :password, as: :password if @user.id.blank?
-  = f.input :country, collection: Garage::COUNTRIES
+  = f.input :country, collection: COUNTRIES
   = f.input :phone, as: :tel
 
   - if @user.id.present?
