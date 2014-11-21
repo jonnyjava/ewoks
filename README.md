@@ -57,3 +57,6 @@ You can test your connection using `curl` here some examples
 Of course it works for a unique garage too.
 
 `curl -H "Authorization: Token token=yourtoken" "http://yourdomain/api/v1/garages/1.json"`
+
+## Changelog
+- v1.0.3 Added polish translations
