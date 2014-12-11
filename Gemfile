@@ -31,9 +31,11 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'quiet_assets'
+  gem 'capistrano'
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm'
-  gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-unicorn-nginx', '~> 3.1.0'
 end
 
 group :development, :test do
