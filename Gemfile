@@ -26,6 +26,7 @@ gem 'jquery-ui-rails'
 gem 'mysql2'
 gem 'faker'
 gem 'aws-sdk'
+gem 'unicorn'
 
 group :development do
   gem "better_errors"
