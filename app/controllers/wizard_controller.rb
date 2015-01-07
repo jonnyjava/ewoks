@@ -24,7 +24,7 @@ class WizardController < ApplicationController
     @timetable = @garage.timetable
     respond_to do |format|
       if @timetable.update(timetable_params)
-        format.html { redirect_to wizard_holiday_url(@garage), notice: notice_message("Timetable") }
+        format.html { redirect_to wizard_holiday_url(@garage, locale: I18n.locale), notice: notice_message("Timetable") }
       else
         format.html { render :timetable }
       end
@@ -49,7 +49,7 @@ class WizardController < ApplicationController
 
   def create_fee
     @tyre_fee = TyreFee.new(tyre_fee_params)
-    destination = params[:commit] == 'finish' ? success_url : 'fee'
+    destination = params[:commit] == 'finish' ? success_url(locale: I18n.locale) : 'fee'
     redirect_to_response(@tyre_fee, :fee,  destination)
   end
 
@@ -59,7 +59,7 @@ class WizardController < ApplicationController
     respond_to do |format|
       if object.save
         format.html do
-          destination = send("wizard_#{destination}_url".to_sym, @garage) unless destination == success_url
+          destination = send("wizard_#{destination}_url".to_sym, @garage, locale: I18n.locale) unless destination == success_url(locale: I18n.locale)
           redirect_to destination, notice: notice_message(object.class.name)
         end
       else

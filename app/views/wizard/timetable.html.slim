@@ -1,10 +1,10 @@
 - content_for :content
-	= simple_form_for([@garage, @timetable], url: wizard_update_timetable_url, method: 'PATCH') do |f|
+	= simple_form_for([@garage, @timetable], url: wizard_update_timetable_url(locale: I18n.locale), method: 'PATCH') do |f|
 	  = f.error_notification
 	  = f.association :garage, as: :hidden
 
 	  = render 'timetables/shared/fields', f: f, timetable: @timetable
 	  .b-keypad
 	    = f.button :submit, class: "b-keypad__btn--success"
-	    = link_to t('skip'), wizard_holiday_url(@garage), class: 'b-keypad__btn--success'
+	    = link_to t('skip'), wizard_holiday_url(@garage, locale: I18n.locale), class: 'b-keypad__btn--success'
 = render template: "layouts/box", locals: { title: 'New timetable' }
