@@ -1,25 +1,24 @@
 class HolidayPolicy < ApplicationPolicy
-
   def initialize(user, holiday)
     @user = user
     @holiday = holiday
   end
 
   class Scope
-    attr_reader :logged_user, :scope
+    attr_reader :user, :scope
 
-    def initialize(logged_user, scope)
-      @logged_user = logged_user
+    def initialize(user, scope)
+      @user = user
       @scope = scope
     end
 
     def resolve
-      if logged_user.admin?
+      if user.admin?
         scope.all
-      elsif logged_user.country_manager?
-        scope.includes(:garage).where('garages.country = ?', logged_user.country).references(:garage)
+      elsif user.country_manager?
+        scope.includes(:garage).where('garages.country = ?', user.country).references(:garage)
       else
-        scope.where(garage_id: logged_user.garage.id)
+        scope.where(garage_id: user.garage.id)
       end
     end
   end
