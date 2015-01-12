@@ -107,6 +107,7 @@
   tourism: 'tourism'
   suv: 'suv'
   van: 'van'
+  daylong: 'todo o dia'
 
   simple_form:
     labels:

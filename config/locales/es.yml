@@ -100,11 +100,12 @@ es:
   Is it closed?: '¿Está cerrado?'
   from: 'desde'
   to: 'hasta'
-  steel: 'steel'
-  aluminium: 'aluminium'
-  tourism: 'tourism'
+  steel: 'acero'
+  aluminium: 'aluminio'
+  tourism: 'turismo'
   suv: 'suv'
-  van: 'van'
+  van: 'furgoneta'
+  daylong: 'Todo el dia'
 
   simple_form:
     labels:
