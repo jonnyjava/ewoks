@@ -3,10 +3,10 @@
   .col-xs-6= f.input :price
 
 .row.js_row
-  .col-xs-3= f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [v,k]} , prompt: "Select vehicle_type"
+  .col-xs-3= f.input :vehicle_type, collection: TyreFee::VEHICLE_TYPE.map {|k,v| [t(v),k]} , prompt: t("Select vehicle_type")
   .col-xs-3= f.input :diameter_min, collection: TyreFee::DIAMETER
   .col-xs-3= f.input :diameter_max, collection: TyreFee::DIAMETER
-  .col-xs-2= f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [v,k]} , prompt: "Select rim_type"
+  .col-xs-2= f.input :rim_type, collection: TyreFee::RIM_TYPE.map {|k,v| [t(v),k]} , prompt: t("Select rim_type")
 
 .row
   .col-xs-12
