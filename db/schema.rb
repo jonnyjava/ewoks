@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141001133733) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "garage_properties", force: true do |t|
     t.string   "value"
     t.integer  "garage_id"
@@ -41,11 +44,11 @@ ActiveRecord::Schema.define(version: 20141001133733) do
     t.datetime "updated_at"
     t.string   "country"
     t.integer  "owner_id"
-    t.integer  "status",                                    default: -1
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "status",                                    default: -1
     t.string   "province"
   end
 

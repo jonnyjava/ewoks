@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.2"
+ruby "2.2.3"
 
 gem 'rails', '4.1.1'
 gem 'sass-rails', '~> 4.0.3'
@@ -23,7 +23,7 @@ gem 'geocoder', '~> 1.2.2'
 gem 'newrelic_rpm'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
-gem 'mysql2'
+gem 'pg'
 gem 'faker'
 gem 'aws-sdk'
 gem 'unicorn'
