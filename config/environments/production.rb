@@ -69,15 +69,15 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    domain: 'norauto.com',
-    user_name: 'fittingpartners@norauto.com',
-    password: '9Dn8P<=U',
+    domain: 'stormy-cliffs-9773.herokuapp.com',
+    user_name: '123mecanico.es@gmail.com',
+    password: '123mecanico',
     authentication: 'plain',
     enable_starttls_auto: true
   }
 
   config.action_mailer.default_url_options = {
-    host: 'ewok.norauto.com'
+    host: 'stormy-cliffs-9773.herokuapp.com'
   }
 
   EMAIL_ADMIN = 'admin@ewoks.com'
