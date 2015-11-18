@@ -3,6 +3,11 @@ class WizardController < ApplicationController
   layout 'public_form'
   before_action :set_garage, except: [:wizard, :create_garage]
   skip_before_filter :authenticate_user!
+  after_filter :allow_iframe
+
+  def allow_iframe
+    response.headers.delete "X-Frame-Options"
+  end
 
   def wizard
     @garage = Garage.new(country: nil)
