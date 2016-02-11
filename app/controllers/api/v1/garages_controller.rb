@@ -1,6 +1,8 @@
 module API
   module V1
     class GaragesController < ApplicationController
+      protect_from_forgery except: :create
+
       skip_before_filter :authenticate_user!
       before_action :authenticate
 
@@ -34,6 +36,10 @@ module API
         @garage = Garage.find(garage_params[:id])
         @holidays = @garage.holidays.all
       end
+
+      def create
+      end
+
 
     protected
 

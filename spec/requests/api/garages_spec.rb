@@ -14,22 +14,22 @@ describe 'Garages' do
 
     it 'should return status 200' do
       api_get 'garages.json', {}, @auth_token
-      response.status.should be(200)
-      response.body.should_not be_empty
-      response.content_type.should == Mime::JSON
+      expect(response.status).to be(200)
+      expect(response.body).not_to be_empty
+      expect(response.content_type).to eq(Mime::JSON)
     end
 
     it 'should return status 404' do
       api_get 'alderaan.json', {}, @auth_token
-      response.status.should be(404)
-      response.body.should_not be_empty
-      response.content_type.should == Mime::JSON
+      expect(response.status).to be(404)
+      expect(response.body).not_to be_empty
+      expect(response.content_type).to eq(Mime::JSON)
     end
 
     it 'should return status 401' do
       api_get 'garages.json', {}, 'Authorization' => 'Token token=wrongtoken'
 
-      response.status.should be(401)
+      expect(response.status).to be(401)
     end
 
     context 'with querystring' do
@@ -100,9 +100,9 @@ describe 'Garages' do
 
           it 'should filter by_price_in_a_range returning nothing if passing empty values' do
             api_get 'garages.json?price_min=&price_max=', {}, @auth_token
-            response.status.should be(200)
+            expect(response.status).to be(200)
             ids = json(response.body).map { |g| g[:id] }
-            ids.count.should be(0)
+            expect(ids.count).to be(0)
           end
         end
 
@@ -126,18 +126,18 @@ describe 'Garages' do
             check_response(response)
             garage_tyre_fees = json(response.body).map { |garage| garage[:tyre_fees] }
             tyre_fees_ids = garage_tyre_fees.flatten.map { |tyre_fee| tyre_fee[:id] }
-            tyre_fees_ids.count.should be(1)
-            tyre_fees_ids.first.should be(spanish_fee.id)
+            expect(tyre_fees_ids.count).to be(1)
+            expect(tyre_fees_ids.first).to be(spanish_fee.id)
           end
         end
       end
 
       def check_response(response)
-        response.status.should be(200)
+        expect(response.status).to be(200)
         ids = json(response.body).map { |garage| garage[:id] }
-        ids.count.should be(1)
-        ids.should include(spanish_garage.id)
-        ids.should_not include(french_garage.id)
+        expect(ids.count).to be(1)
+        expect(ids).to include(spanish_garage.id)
+        expect(ids).not_to include(french_garage.id)
       end
     end
 
@@ -151,20 +151,20 @@ describe 'Garages' do
 
       it 'should return one garage searching by city' do
         api_get 'garages.json?country=Italy&city=Torino&radius=20', {}, @auth_token
-        response.status.should be(200)
+        expect(response.status).to be(200)
         ids = json(response.body).map { |g| g[:id] }
-        ids.count.should be(1)
-        ids.should include(garage_inside_radius.id)
-        ids.should_not include(garage_outside_radius.id)
+        expect(ids.count).to be(1)
+        expect(ids).to include(garage_inside_radius.id)
+        expect(ids).not_to include(garage_outside_radius.id)
       end
 
       it 'should return one garage searching by zip' do
         api_get 'garages.json?country=Italy&city=10139&radius=20', {}, @auth_token
-        response.status.should be(200)
+        expect(response.status).to be(200)
         ids = json(response.body).map { |g| g[:id] }
-        ids.count.should be(1)
-        ids.should include(garage_inside_radius.id)
-        ids.should_not include(garage_outside_radius.id)
+        expect(ids.count).to be(1)
+        expect(ids).to include(garage_inside_radius.id)
+        expect(ids).not_to include(garage_outside_radius.id)
       end
     end
   end

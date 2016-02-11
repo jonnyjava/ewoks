@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Property do
-  it { should have_and_belong_to_many(:garages) }
+  it { is_expected.to have_many(:garages).through(:garage_properties) }
 end

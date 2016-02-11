@@ -9,22 +9,22 @@ describe UserPolicy do
   context "for an admin" do
     context "over a country manager" do
       subject { UserPolicy.new(admin, country_manager) }
-      it { should allow_action(:index) }
-      it { should allow_action(:create) }
-      it { should allow_action(:new) }
-      it { should allow_action(:update) }
-      it { should allow_action(:edit) }
-      it { should allow_action(:destroy) }
+      it { is_expected.to allow_action(:index) }
+      it { is_expected.to allow_action(:create) }
+      it { is_expected.to allow_action(:new) }
+      it { is_expected.to allow_action(:update) }
+      it { is_expected.to allow_action(:edit) }
+      it { is_expected.to allow_action(:destroy) }
     end
 
     context "over a user" do
       subject { UserPolicy.new(admin, spanish_owner) }
-      it { should allow_action(:index) }
-      it { should allow_action(:create) }
-      it { should allow_action(:new) }
-      it { should allow_action(:update) }
-      it { should allow_action(:edit) }
-      it { should allow_action(:destroy) }
+      it { is_expected.to allow_action(:index) }
+      it { is_expected.to allow_action(:create) }
+      it { is_expected.to allow_action(:new) }
+      it { is_expected.to allow_action(:update) }
+      it { is_expected.to allow_action(:edit) }
+      it { is_expected.to allow_action(:destroy) }
     end
   end
 
@@ -35,57 +35,57 @@ describe UserPolicy do
     end
     context 'and an user of his country' do
       subject { UserPolicy.new(country_manager, spanish_owner) }
-      it { should_not allow_action(:create) }
-      it { should_not allow_action(:new) }
-      it { should_not allow_action(:destroy) }
-      it { should allow_action(:index) }
-      it { should allow_action(:show) }
-      it { should allow_action(:edit) }
-      it { should allow_action(:update) }
+      it { is_expected.not_to allow_action(:create) }
+      it { is_expected.not_to allow_action(:new) }
+      it { is_expected.not_to allow_action(:destroy) }
+      it { is_expected.to allow_action(:index) }
+      it { is_expected.to allow_action(:show) }
+      it { is_expected.to allow_action(:edit) }
+      it { is_expected.to allow_action(:update) }
     end
     context 'and an user of another country' do
       subject { UserPolicy.new(country_manager, another_owner) }
-      it { should_not allow_action(:create) }
-      it { should_not allow_action(:new) }
-      it { should_not allow_action(:destroy) }
-      it { should_not allow_action(:show) }
-      it { should_not allow_action(:edit) }
-      it { should_not allow_action(:update) }
+      it { is_expected.not_to allow_action(:create) }
+      it { is_expected.not_to allow_action(:new) }
+      it { is_expected.not_to allow_action(:destroy) }
+      it { is_expected.not_to allow_action(:show) }
+      it { is_expected.not_to allow_action(:edit) }
+      it { is_expected.not_to allow_action(:update) }
     end
   end
 
   context "for an owner" do
     context "over himself" do
       subject { UserPolicy.new(spanish_owner, spanish_owner) }
-      it { should allow_action(:show) }
-      it { should allow_action(:edit) }
-      it { should allow_action(:update) }
-      it { should_not allow_action(:index) }
-      it { should_not allow_action(:create) }
-      it { should_not allow_action(:new) }
-      it { should_not allow_action(:destroy) }
+      it { is_expected.to allow_action(:show) }
+      it { is_expected.to allow_action(:edit) }
+      it { is_expected.to allow_action(:update) }
+      it { is_expected.not_to allow_action(:index) }
+      it { is_expected.not_to allow_action(:create) }
+      it { is_expected.not_to allow_action(:new) }
+      it { is_expected.not_to allow_action(:destroy) }
     end
 
     context "over a country manager" do
       subject { UserPolicy.new(spanish_owner, country_manager) }
-      it { should_not allow_action(:show) }
-      it { should_not allow_action(:edit) }
-      it { should_not allow_action(:update) }
-      it { should_not allow_action(:index) }
-      it { should_not allow_action(:create) }
-      it { should_not allow_action(:new) }
-      it { should_not allow_action(:destroy) }
+      it { is_expected.not_to allow_action(:show) }
+      it { is_expected.not_to allow_action(:edit) }
+      it { is_expected.not_to allow_action(:update) }
+      it { is_expected.not_to allow_action(:index) }
+      it { is_expected.not_to allow_action(:create) }
+      it { is_expected.not_to allow_action(:new) }
+      it { is_expected.not_to allow_action(:destroy) }
     end
 
     context "over another owner" do
       subject { UserPolicy.new(spanish_owner, another_owner) }
-      it { should_not allow_action(:show) }
-      it { should_not allow_action(:edit) }
-      it { should_not allow_action(:update) }
-      it { should_not allow_action(:index) }
-      it { should_not allow_action(:create) }
-      it { should_not allow_action(:new) }
-      it { should_not allow_action(:destroy) }
+      it { is_expected.not_to allow_action(:show) }
+      it { is_expected.not_to allow_action(:edit) }
+      it { is_expected.not_to allow_action(:update) }
+      it { is_expected.not_to allow_action(:index) }
+      it { is_expected.not_to allow_action(:create) }
+      it { is_expected.not_to allow_action(:new) }
+      it { is_expected.not_to allow_action(:destroy) }
     end
   end
 end

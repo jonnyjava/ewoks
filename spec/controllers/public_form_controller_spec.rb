@@ -5,7 +5,7 @@ describe PublicFormController do
   describe 'GET public_form' do
     it 'returns http success' do
       get 'public_form'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -25,8 +25,8 @@ describe PublicFormController do
       it 'creates a new Garage' do
         n = Garage.count
         post :create, valid_params, valid_session
-        response.should redirect_to success_path
-        Garage.count.should be(n+1)
+        expect(response).to redirect_to success_path
+        expect(Garage.count).to be(n+1)
       end
     end
 
@@ -41,8 +41,8 @@ describe PublicFormController do
       it 'should re-render the form' do
         n = Garage.count
         post :create, invalid_params, valid_session
-        response.should render_template 'public_form'
-        Garage.count.should be(n)
+        expect(response).to render_template 'public_form'
+        expect(Garage.count).to be(n)
       end
     end
   end

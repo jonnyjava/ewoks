@@ -5,7 +5,7 @@ describe "Properties" do
     login_user
     it "works! (now write some real specs)" do
       get properties_path
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end

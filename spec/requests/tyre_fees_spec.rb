@@ -6,7 +6,7 @@ describe "TyreFees" do
     let!(:garage) { FactoryGirl.create(:garage_with_timetable) }
     it "works! (now write some real specs)" do
       get garage_tyre_fees_path(garage)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end
