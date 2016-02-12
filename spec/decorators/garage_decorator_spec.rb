@@ -19,17 +19,17 @@ describe GarageDecorator do
     FactoryGirl.create(:garage)
   end
 
-  it { garage_to_confirm.decorate.status.should eq('to_confirm') }
-  it { garage_active.decorate.status.should eq('enabled') }
-  it { garage_disabled.decorate.status.should eq('disabled') }
+  it { expect(garage_to_confirm.decorate.status).to eq('to_confirm') }
+  it { expect(garage_active.decorate.status).to eq('enabled') }
+  it { expect(garage_disabled.decorate.status).to eq('disabled') }
 
   it 'should detect which data of garage are incomplete' do
     response = garage_incompleted.decorate.notifications
-    response.should have_selector('li', count: 3)
+    expect(response).to have_selector('li', count: 3)
   end
 
   it 'should detect which data of garage are complete' do
     response = garage_completed.decorate.notifications
-    response.should be_nil
+    expect(response).to be_nil
   end
 end

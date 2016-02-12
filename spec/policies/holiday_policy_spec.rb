@@ -12,13 +12,13 @@ describe HolidayPolicy do
   context 'for an admin' do
     context 'over an holiday' do
       subject { HolidayPolicy.new(admin, holiday) }
-      it { should allow_action(:show) }
-      it { should allow_action(:index) }
-      it { should allow_action(:new) }
-      it { should allow_action(:create) }
-      it { should allow_action(:edit) }
-      it { should allow_action(:update) }
-      it { should allow_action(:destroy) }
+      it { is_expected.to allow_action(:show) }
+      it { is_expected.to allow_action(:index) }
+      it { is_expected.to allow_action(:new) }
+      it { is_expected.to allow_action(:create) }
+      it { is_expected.to allow_action(:edit) }
+      it { is_expected.to allow_action(:update) }
+      it { is_expected.to allow_action(:destroy) }
     end
   end
 
@@ -29,22 +29,22 @@ describe HolidayPolicy do
           .to match_array Holiday.includes(:garage).where('garages.country = ?', country_manager.country).references(:garage)
       end
       subject { HolidayPolicy.new(country_manager, holiday) }
-      it { should allow_action(:show) }
-      it { should allow_action(:index) }
-      it { should allow_action(:new) }
-      it { should allow_action(:create) }
-      it { should allow_action(:edit) }
-      it { should allow_action(:update) }
-      it { should allow_action(:destroy) }
+      it { is_expected.to allow_action(:show) }
+      it { is_expected.to allow_action(:index) }
+      it { is_expected.to allow_action(:new) }
+      it { is_expected.to allow_action(:create) }
+      it { is_expected.to allow_action(:edit) }
+      it { is_expected.to allow_action(:update) }
+      it { is_expected.to allow_action(:destroy) }
     end
     context 'and an holiday of a garage in another country' do
       subject { HolidayPolicy.new(country_manager, someone_else_holiday) }
-      it { should_not allow_action(:show) }
-      it { should_not allow_action(:new) }
-      it { should_not allow_action(:create) }
-      it { should_not allow_action(:edit) }
-      it { should_not allow_action(:update) }
-      it { should_not allow_action(:destroy) }
+      it { is_expected.not_to allow_action(:show) }
+      it { is_expected.not_to allow_action(:new) }
+      it { is_expected.not_to allow_action(:create) }
+      it { is_expected.not_to allow_action(:edit) }
+      it { is_expected.not_to allow_action(:update) }
+      it { is_expected.not_to allow_action(:destroy) }
     end
   end
 

@@ -8,7 +8,7 @@ describe "Timetables" do
   describe "edit" do
     it "should render the timetable" do
       get edit_garage_timetable_path(garage, timetable)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end

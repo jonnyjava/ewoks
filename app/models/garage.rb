@@ -66,16 +66,16 @@ class Garage < ActiveRecord::Base
   def create_my_owner
     owner = User.create(email: email, password: Faker::Internet.password(10))
     update_attribute(:owner_id, owner.id)
-    UserMailer.send_generated_password(owner).deliver
+    UserMailer.send_generated_password(owner).deliver_now
   end
 
   def notify_my_owner
     return unless user
-    UserMailer.send_changed_status_notification(user).deliver if user.garage.status_was >= 0
+    UserMailer.send_changed_status_notification(user).deliver_now if user.garage.status_was >= 0
   end
 
   def send_signup_confirmation
-    PublicFormMailer.signup_confirmation(self).deliver
+    PublicFormMailer.signup_confirmation(self).deliver_now
   end
 
   def signup_verification_token

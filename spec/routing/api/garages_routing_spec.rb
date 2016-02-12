@@ -4,7 +4,7 @@ describe API::V1::GaragesController do
   describe "routing" do
 
     it "routes to #index" do
-      api_get('garages').should route_to("api/v1/garages#index")
+      expect(api_get('garages')).to route_to("api/v1/garages#index")
     end
   end
 

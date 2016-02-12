@@ -32,7 +32,7 @@ describe UsersController do
   describe 'GET index' do
     it 'assigns all users as @users' do
       get :index, {}
-      assigns(:users).should eq(User.all)
+      expect(assigns(:users)).to eq(User.all)
     end
 
     context 'for a country manager' do
@@ -42,8 +42,8 @@ describe UsersController do
         another_owner = FactoryGirl.create(:user, country: 'Albania')
         get :index, {}
         filtered_users = assigns(:users)
-        filtered_users.should include(spanish_owner)
-        filtered_users.should_not include(another_owner)
+        expect(filtered_users).to include(spanish_owner)
+        expect(filtered_users).not_to include(another_owner)
       end
     end
   end
@@ -51,21 +51,21 @@ describe UsersController do
   describe 'GET show' do
     it 'assigns the requested user as @user' do
       get :show, {id: user.to_param}, valid_session
-      assigns(:user).should eq(user)
+      expect(assigns(:user)).to eq(user)
     end
   end
 
   describe 'GET new' do
     it 'assigns a new user as @user' do
       get :new, {}, valid_session
-      assigns(:user).should be_a_new(User)
+      expect(assigns(:user)).to be_a_new(User)
     end
   end
 
   describe 'GET edit' do
     it 'assigns the requested user as @user' do
       get :edit, {id: user.to_param}
-      assigns(:user).should eq(user)
+      expect(assigns(:user)).to eq(user)
     end
   end
 
@@ -79,27 +79,27 @@ describe UsersController do
 
       it 'assigns a newly created user as @user' do
         post :create, { user: valid_attributes }, valid_session
-        assigns(:user).should be_a(User)
-        assigns(:user).should be_persisted
+        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user)).to be_persisted
       end
 
       it 'redirects to the created user' do
         post :create, { user: valid_attributes }, valid_session
-        response.should redirect_to(User.last)
+        expect(response).to redirect_to(User.last)
       end
     end
 
     describe 'with invalid params' do
       it 'assigns a newly created but unsaved user as @user' do
-        User.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(User).to receive(:save).and_return(false)
         post :create, { user: invalid_attributes }, valid_session
-        assigns(:user).should be_a_new(User)
+        expect(assigns(:user)).to be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
-        User.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(User).to receive(:save).and_return(false)
         post :create, { user: invalid_attributes }, valid_session
-        response.should render_template('new')
+        expect(response).to render_template('new')
       end
     end
   end
@@ -108,31 +108,31 @@ describe UsersController do
     describe 'with valid params' do
       it 'assigns the requested user as @user' do
         put :update, { id: user.to_param, user: valid_attributes }, valid_session
-        assigns(:user).should eq(user)
+        expect(assigns(:user)).to eq(user)
       end
 
       it 'redirects to the user without password' do
         put :update, { id: user.to_param, user: valid_update_attributes_without_password }, valid_session
-        response.should redirect_to(user)
+        expect(response).to redirect_to(user)
       end
 
       it 'redirects to the user with password' do
         put :update, { id: user.to_param, user: valid_update_attributes_with_password }, valid_session
-        response.should redirect_to(user)
+        expect(response).to redirect_to(user)
       end
     end
 
     describe 'with invalid params' do
       it 'assigns the user as @user' do
-        User.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(User).to receive(:save).and_return(false)
         put :update, { id: user.to_param, user: invalid_attributes }, valid_session
-        assigns(:user).should eq(user)
+        expect(assigns(:user)).to eq(user)
       end
 
       it "re-renders the 'edit' template" do
-        User.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(User).to receive(:save).and_return(false)
         put :update, { id: user.to_param, user: invalid_attributes }, valid_session
-        response.should render_template('edit')
+        expect(response).to render_template('edit')
       end
     end
   end
@@ -147,7 +147,7 @@ describe UsersController do
 
     it 'redirects to the users list' do
       delete :destroy, { id: user.to_param }, valid_session
-      response.should redirect_to(users_url)
+      expect(response).to redirect_to(users_url)
     end
   end
 

@@ -15,27 +15,27 @@ describe GaragesController do
 
       it 'assigns a newly created garage as @garage' do
         post :create, { garage: valid_attributes }
-        assigns(:garage).should be_a(Garage)
-        assigns(:garage).should be_persisted
+        expect(assigns(:garage)).to be_a(Garage)
+        expect(assigns(:garage)).to be_persisted
       end
 
       it 'redirects to the created garage' do
         post :create, { garage: valid_attributes }
-        response.should redirect_to(Garage.last)
+        expect(response).to redirect_to(Garage.last)
       end
     end
 
     describe 'with invalid params' do
       it 'assigns a newly created but unsaved garage as @garage' do
-        Garage.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Garage).to receive(:save).and_return(false)
         post :create, { garage: invalid_attributes }
-        assigns(:garage).should be_a_new(Garage)
+        expect(assigns(:garage)).to be_a_new(Garage)
       end
 
       it "re-renders the 'new' template" do
-        Garage.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Garage).to receive(:save).and_return(false)
         post :create, { garage: invalid_attributes }
-        response.should render_template('new')
+        expect(response).to render_template('new')
       end
     end
   end

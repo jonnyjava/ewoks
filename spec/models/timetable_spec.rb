@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Timetable do
 
-  it { should belong_to(:garage) }
+  it { is_expected.to belong_to(:garage) }
 
   it 'the closing time should be later the opening' do
     bad_timetable = {
@@ -10,9 +10,9 @@ describe Timetable do
       'mon_afternoon_close' => Time.now
     }
 
-    Timetable.create(bad_timetable)
-      .errors.full_messages
-      .should include(I18n.t('The closing time should be later the opening'))
+    expect(Timetable.create(bad_timetable)
+      .errors.full_messages)
+      .to include(I18n.t('The closing time should be later the opening'))
   end
 
   it 'the morning close time should be later the opening' do
@@ -21,9 +21,9 @@ describe Timetable do
       'tue_morning_close' => Time.now
     }
 
-    Timetable.create(bad_timetable)
-      .errors.full_messages
-      .should include(I18n.t('The closing time should be later the opening'))
+    expect(Timetable.create(bad_timetable)
+      .errors.full_messages)
+      .to include(I18n.t('The closing time should be later the opening'))
   end
 
   it 'the afternoon open time should be later the morning close' do
@@ -32,9 +32,9 @@ describe Timetable do
       'wed_afternoon_open' => Time.now
     }
 
-    Timetable.create(bad_timetable)
-      .errors.full_messages
-      .should include(I18n.t('The closing time should be later the opening'))
+    expect(Timetable.create(bad_timetable)
+      .errors.full_messages)
+      .to include(I18n.t('The closing time should be later the opening'))
   end
 
   it 'the afternoon close time should be later the open' do
@@ -43,8 +43,8 @@ describe Timetable do
       'fri_afternoon_close' => Time.now
     }
 
-    Timetable.create(bad_timetable)
-      .errors.full_messages
-      .should include(I18n.t('The closing time should be later the opening'))
+    expect(Timetable.create(bad_timetable)
+      .errors.full_messages)
+      .to include(I18n.t('The closing time should be later the opening'))
   end
 end

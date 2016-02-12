@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe TyreFee do
-  it { should belong_to(:garage) }
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:price) }
-  it { should have_db_column(:price).with_options(precision: 15, scale: 2) }
+  it { is_expected.to belong_to(:garage) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:price) }
+  it { is_expected.to have_db_column(:price).with_options(precision: 15, scale: 2) }
 
   it 'should return only tyre fees of the choosen vehicle type' do
     TyreFee::VEHICLES.each do |vehicle|
@@ -14,8 +14,8 @@ describe TyreFee do
     vehicle_id = random_vehicle[0]
     vehicle_type = random_vehicle[1]
     fees = TyreFee.by_vehicle(vehicle_type)
-    fees.count.should be(1)
-    fees.first.vehicle_type.should be(vehicle_id)
+    expect(fees.count).to be(1)
+    expect(fees.first.vehicle_type).to be(vehicle_id)
   end
 
   it 'should return only tyre fees of the choosen rim' do
@@ -26,7 +26,7 @@ describe TyreFee do
     rim_id = random_rim[0]
     rim_type = random_rim[1]
     fees = TyreFee.by_rim(rim_type)
-    fees.count.should be(1)
-    fees.first.rim_type.should be(rim_id)
+    expect(fees.count).to be(1)
+    expect(fees.first.rim_type).to be(rim_id)
   end
 end

@@ -7,21 +7,21 @@ describe "Holidays" do
   describe "index" do
     it "should render the holiday index" do
       get garage_holidays_path(garage)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 
   describe "get" do
     it "should render the holiday sheet" do
       get garage_holiday_path(garage, holiday)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 
   describe "edit" do
     it "should render the holiday sheet" do
       get edit_garage_holiday_path(garage, holiday)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end

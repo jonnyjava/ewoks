@@ -1,25 +1,26 @@
 require 'spec_helper'
 
 describe Garage do
-  it { should belong_to(:user) }
-  it { should have_many(:holidays) }
-  it { should have_many(:tyre_fees) }
-  it { should have_one(:timetable) }
-  it { should have_and_belong_to_many(:properties) }
-  it { should have_attached_file(:logo) }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_many(:holidays) }
+  it { is_expected.to have_many(:tyre_fees) }
+  it { is_expected.to have_one(:timetable) }
+  it { is_expected.to have_many(:properties).through(:garage_properties) }
+  it { is_expected.to have_attached_file(:logo) }
 
-  it { should validate_presence_of(:street) }
-  it { should validate_presence_of(:zip) }
-  it { should validate_presence_of(:city) }
-  it { should validate_presence_of(:country) }
-  it { should validate_presence_of(:phone) }
-  it { should validate_presence_of(:tax_id) }
-  it { should validate_attachment_content_type(:logo).allowing('image/png', 'image/jpeg') }
-  it { should validate_uniqueness_of(:email) }
+  it { is_expected.to validate_presence_of(:street) }
+  it { is_expected.to validate_presence_of(:zip) }
+  it { is_expected.to validate_presence_of(:city) }
+  it { is_expected.to validate_presence_of(:country) }
+  it { is_expected.to validate_presence_of(:phone) }
+  it { is_expected.to validate_presence_of(:tax_id) }
+  it { is_expected.to validate_attachment_content_type(:logo).allowing('image/png', 'image/jpeg') }
+  it { is_expected.to validate_uniqueness_of(:email) }
 
   describe 'callbacks' do
     let(:garage) { FactoryGirl.create(:garage) }
     it { Garage.any_instance.should_receive(:send_signup_confirmation).with(garage.email) }
+    xit { expect_any_instance_of(Garage).to receive(:send_signup_confirmation).with(garage.email) }
   end
 
   describe 'signup_verification_token' do
@@ -28,7 +29,7 @@ describe Garage do
       garage2 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
       token1 = garage1.signup_verification_token
       token2 = garage2.signup_verification_token
-      token1.should_not eq(token2)
+      expect(token1).not_to eq(token2)
     end
   end
 
@@ -38,8 +39,8 @@ describe Garage do
       garage2 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
       token = garage1.signup_verification_token
       result = Garage.find_by_signup_verification_token(token)
-      result.should eq(garage1)
-      result.should_not eq(garage2)
+      expect(result).to eq(garage1)
+      expect(result).not_to eq(garage2)
     end
   end
 
@@ -47,7 +48,7 @@ describe Garage do
     it 'should make the garage inactive' do
       garage = FactoryGirl.create(:garage)
       garage.inactive!
-      garage.status.should be(Garage::INACTIVE)
+      expect(garage.status).to be(Garage::INACTIVE)
     end
   end
 
@@ -55,7 +56,7 @@ describe Garage do
     it 'should create a new owner who owns the garage' do
       garage = FactoryGirl.create(:garage)
       garage.create_my_owner
-      User.find(garage.owner_id).should_not be_nil
+      expect(User.find(garage.owner_id)).not_to be_nil
     end
   end
 
@@ -68,31 +69,31 @@ describe Garage do
     it 'should return the spanish garage passing min = 10 and max 30' do
       garages = Garage.by_price_in_a_range(10,30)
       ids = garages.map { |g| g[:id] }
-      ids.count.should be(1)
-      ids.should include(spanish_garage.id)
-      ids.should_not include(french_garage.id)
+      expect(ids.count).to be(1)
+      expect(ids).to include(spanish_garage.id)
+      expect(ids).not_to include(french_garage.id)
     end
 
     it 'should return the spanish garage passing min = 10' do
       garages = Garage.by_price_in_a_range(20, nil)
       ids = garages.map { |g| g[:id] }
-      ids.count.should be(1)
-      ids.should include(spanish_garage.id)
-      ids.should_not include(french_garage.id)
+      expect(ids.count).to be(1)
+      expect(ids).to include(spanish_garage.id)
+      expect(ids).not_to include(french_garage.id)
     end
 
     it 'should return the spanish garage passing max 30' do
       garages = Garage.by_price_in_a_range(nil, 30)
       ids = garages.map { |g| g[:id] }
-      ids.count.should be(1)
-      ids.should include(spanish_garage.id)
-      ids.should_not include(french_garage.id)
+      expect(ids.count).to be(1)
+      expect(ids).to include(spanish_garage.id)
+      expect(ids).not_to include(french_garage.id)
     end
 
     it 'should return no garages passing nothing' do
       garages = Garage.by_price_in_a_range(nil, nil)
       ids = garages.map { |g| g[:id] }
-      ids.count.should be(0)
+      expect(ids.count).to be(0)
     end
   end
 
@@ -107,36 +108,36 @@ describe Garage do
     context 'given a city' do
       it 'should return one garage' do
         garages = Garage.find_by_radius_from_location('Torino', 10)
-        garages.first.should eq(garage_inside_radius)
+        expect(garages.first).to eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
-        ids.count.should be(1)
+        expect(ids.count).to be(1)
       end
     end
 
     context 'given a zip code' do
       it 'should return one garage' do
         garages = Garage.find_by_radius_from_location('10135, Italy', 10)
-        garages.first.should eq(garage_inside_radius)
+        expect(garages.first).to eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
-        ids.count.should be(1)
+        expect(ids.count).to be(1)
       end
     end
 
     context 'given a city and a zip code' do
       it 'should return one garage' do
         garages = Garage.find_by_radius_from_location('Torino, 10135, Italy', 10)
-        garages.first.should eq(garage_inside_radius)
+        expect(garages.first).to eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
-        ids.count.should be(1)
+        expect(ids.count).to be(1)
       end
     end
 
     context 'without radius' do
       it 'should return one garage' do
         garages = Garage.find_by_radius_from_location('Torino, 10141, Italy')
-        garages.first.should eq(garage_inside_radius)
+        expect(garages.first).to eq(garage_inside_radius)
         ids = garages.collect { |g| g[:id] }
-        ids.count.should be(1)
+        expect(ids.count).to be(1)
       end
     end
   end
@@ -147,11 +148,11 @@ describe Garage do
 
     context 'user is admin' do
       it 'should return all countries' do
-        Garage.countries(admin).should eq(COUNTRIES)
+        expect(Garage.countries(admin)).to eq(COUNTRIES)
       end
 
       it "should return only the country's country manager" do
-        Garage.countries(country_manager).should eq([country_manager.country])
+        expect(Garage.countries(country_manager)).to eq([country_manager.country])
       end
     end
   end
@@ -171,55 +172,56 @@ describe Garage do
     end
 
     after (:each) do
-      @result.first.should eq(garage)
+      expect(@result.first).to eq(garage)
     end
 
     it 'should filter garages by country' do
       @result = Garage.by_country('Italy')
-      @result.count.should be(2)
+      expect(@result.count).to be(2)
       garages_countries = @result.map(&:country).uniq
-      garages_countries.should == ['Italy']
-      garages_countries.count.should be(1)
+      expect(garages_countries).to eq(['Italy'])
+      expect(garages_countries.count).to be(1)
     end
 
     it 'should filter garages by city' do
       @result = Garage.by_city('Torino')
-      @result.count.should be(1)
-      @result.first.city.should be_eql('Torino')
+      expect(@result.count).to be(1)
+      expect(@result.first.city).to be_eql('Torino')
     end
 
     it 'should filter garages by zip' do
       @result = Garage.by_zip('10141')
-      @result.count.should be(1)
-      @result.first.zip.should be_eql('10141')
+      expect(@result.count).to be(1)
+      expect(@result.first.zip).to be_eql('10141')
     end
 
     it 'should return only garages with tyre fees' do
       @result = Garage.by_tyre_fee
-      @result.count.should be(4)
-      @result.each { |garage| garage.tyre_fees.should_not be_empty }
+      expect(@result.count).to be(4)
+      @result.each { |garage| expect(garage.tyre_fees).not_to be_empty }
     end
 
     context 'by default' do
       it 'should filter by zip' do
         @result = Garage.by_default('10141', nil)
-        @result.count.should be(1)
-        @result.first.zip.should be_eql('10141')
+        expect(@result.count).to be(1)
+        expect(@result.first.zip).to be_eql('10141')
       end
 
       it 'should filter by city' do
         @result = Garage.by_default(nil, 'Torino')
-        @result.count.should be(1)
-        @result.first.city.should be_eql('Torino')
+        expect(@result.count).to be(1)
+        expect(@result.first.city).to be_eql('Torino')
       end
 
       it 'should filter by tyre fee' do
         @result = Garage.by_default(nil, nil)
-        @result.count.should be(4)
-        @result.each { |garage| garage.tyre_fees.should_not be_empty }
+        expect(@result.count).to be(4)
+        @result.each { |garage| expect(garage.tyre_fees).not_to be_empty }
       end
     end
   end
+
 
   describe 'filter by date' do
     let!(:garage_without_holidays) { FactoryGirl.create(:garage) }
@@ -229,14 +231,14 @@ describe Garage do
     it 'should return garages with holidays and available' do
       date = '2014-12-20'
       result = Garage.by_date(date)
-      result.count.should be(1)
-      result.first.id.should == garage_with_holidays.id
+      expect(result.count).to be(1)
+      expect(result.first.id).to eq(garage_with_holidays.id)
     end
 
     it 'should return garages without holidays' do
       result = Garage.garages_without_holidays
-      result.count.should be(1)
-      result.first.id.should == garage_without_holidays.id
+      expect(result.count).to be(1)
+      expect(result.first.id).to eq(garage_without_holidays.id)
     end
 
     describe "opened_at" do
@@ -245,8 +247,9 @@ describe Garage do
         another_holiday = FactoryGirl.create(:holiday, start_date: '2014-08-15', end_date: '2014-08-31', garage: another_garage)
         date = '2014-08-25'
         result = Garage.opened_at(date)
-        result.count.should be(2)
-        result.map(&:id).should_not include(another_garage.id)
+
+        expect(result.count).to be(2)
+        expect(result.map(&:id)).not_to include(another_garage.id)
       end
     end
   end
