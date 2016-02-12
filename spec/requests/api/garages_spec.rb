@@ -28,7 +28,6 @@ describe 'Garages' do
 
     it 'should return status 401' do
       api_get 'garages.json', {}, 'Authorization' => 'Token token=wrongtoken'
-
       expect(response.status).to be(401)
     end
 

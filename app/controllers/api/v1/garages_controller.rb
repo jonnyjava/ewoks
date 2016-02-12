@@ -1,7 +1,7 @@
 module API
   module V1
     class GaragesController < ApplicationController
-      protect_from_forgery except: :create
+      include TokenAuthenticationForApiControllers
 
       skip_before_filter :authenticate_user!
       before_action :authenticate
@@ -35,27 +35,6 @@ module API
       def show
         @garage = Garage.find(garage_params[:id])
         @holidays = @garage.holidays.all
-      end
-
-      def create
-      end
-
-
-    protected
-
-      def authenticate
-        authenticate_token || render_unauthorized
-      end
-
-      def authenticate_token
-        authenticate_with_http_token do |token|
-          @current_user = User.find_by_auth_token(token)
-        end
-      end
-
-      def render_unauthorized
-        headers['WWW-Authenticate'] = 'Token realm="Application"'
-        render json: 'Bad credentials', status: 401
       end
 
     private

@@ -11,6 +11,7 @@
 # Ignore all logfiles and tempfiles.
 /log
 /tmp
+/private
 
 # Recommendation ignore of Github for Rails projects.
 *.rbc
@@ -35,7 +36,7 @@ Capfile
 
 # Environment normalisation:
 /.bundle
-/vendor/bundle
+/vendor
 
 # These should all be checked in to normalise the environment:
 .ruby-version

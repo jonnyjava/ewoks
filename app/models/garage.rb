@@ -6,7 +6,7 @@ class Garage < ActiveRecord::Base
   has_many :garage_properties
   has_many :properties, through: :garage_properties
 
-  validates :street, :zip, :province, :city, :country, :phone, :tax_id, presence: true
+  validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
   has_attached_file :logo, storage: :s3, s3_credentials: Proc.new { |a| a.instance.s3_credentials }, url: ':s3_domain_url',
   path: '/:class/:attachment/:id_partition/:style/:filename', default_url: '/assets/avatar_default.jpg'
@@ -20,6 +20,8 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
+  SERVICES = ["diagnósticos", "cambio de batería", "neumáticos", "cambio de aceite", "chapa y lunas", "frenado", "iluminación", "audio y multimedia", "motor", "escapes", "trenes y suspensión", "aire acondicionado"]
+  SERVICE_TYPE = Hash[SERVICES.map.with_index { |obj, i| [i, obj] }]
 
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
@@ -81,6 +83,11 @@ class Garage < ActiveRecord::Base
   def signup_verification_token
     token = [email, status, created_at, 'endor is full of ewoks'].join
     Digest::SHA1.hexdigest(token)
+  end
+
+  def update_service_ids(service_ids)
+    return unless service_ids
+    update_attribute(:service_ids, service_ids.join(','))
   end
 
   def self.by_default(zip, city)
