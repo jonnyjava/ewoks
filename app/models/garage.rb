@@ -6,7 +6,7 @@ class Garage < ActiveRecord::Base
   has_many :garage_properties
   has_many :properties, through: :garage_properties
 
-  validates :street, :zip, :province, :city, :country, :phone, :tax_id, presence: true
+  validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
   has_attached_file :logo, storage: :s3, s3_credentials: Proc.new { |a| a.instance.s3_credentials }, url: ':s3_domain_url',
   path: '/:class/:attachment/:id_partition/:style/:filename', default_url: '/assets/avatar_default.jpg'

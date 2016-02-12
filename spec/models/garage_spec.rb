@@ -10,7 +10,6 @@ describe Garage do
 
   it { is_expected.to validate_presence_of(:street) }
   it { is_expected.to validate_presence_of(:zip) }
-  it { is_expected.to validate_presence_of(:city) }
   it { is_expected.to validate_presence_of(:country) }
   it { is_expected.to validate_presence_of(:phone) }
   it { is_expected.to validate_presence_of(:tax_id) }

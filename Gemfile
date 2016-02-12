@@ -29,6 +29,8 @@ gem 'aws-sdk'
 gem 'unicorn'
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'sendinblue', '~> 2.3'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'

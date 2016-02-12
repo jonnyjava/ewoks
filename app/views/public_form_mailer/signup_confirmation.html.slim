@@ -4,4 +4,4 @@ html
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
   body
     h1 =t('Welcome to Ewoks')
-    = link_to t('click here to confirm your registration'), signup_verification_url(@garage.signup_verification_token)
+    =render 'signup_link'

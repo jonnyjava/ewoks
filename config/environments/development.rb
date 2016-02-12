@@ -43,5 +43,5 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  EMAIL_ADMIN = "admin@ewoks.com"
+  EMAIL_ADMIN = "123mecanico.es@gmail.com"
 end

@@ -14,9 +14,14 @@ class User < ActiveRecord::Base
   API = roles[:api]
 
   after_initialize :set_default_role, if: :new_record?
+  after_initialize :set_default_country, if: :new_record?
 
   def set_default_role
     self.role ||= :owner
+  end
+
+  def set_default_country
+    self.country ||= 'Spain'
   end
 
   def update_auth_token
