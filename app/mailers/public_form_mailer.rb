@@ -33,3 +33,4 @@ class PublicFormMailer < ActionMailer::Base
     mail(to: @garage.email, bcc: EMAIL_ADMIN, subject: t('Welcome to Ewoks'))
   end
 end
+
