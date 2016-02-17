@@ -2,10 +2,8 @@ require "spec_helper"
 
 describe API::V1::GarageRegistrationsController do
   describe "routing" do
-
-    it "routes to #create" do
-      expect(api_post('garage_registrations')).to route_to("api/v1/garage_registrations#create")
-    end
+    it { expect(post('/api/v1/garage_registrations')).to route_to("api/v1/garage_registrations#create") }
+    it { expect(patch('/api/v1/garage_registrations/1')).to route_to('api/v1/garage_registrations#update', id: '1') }
   end
 
   describe "versioning" do

@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001133733) do
+ActiveRecord::Schema.define(version: 20160217165502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "garage_properties", force: true do |t|
-    t.string   "value"
+  create_table "garage_properties", force: :cascade do |t|
+    t.string   "value",       limit: 255
     t.integer  "garage_id"
     t.integer  "property_id"
     t.datetime "created_at"
@@ -27,50 +27,51 @@ ActiveRecord::Schema.define(version: 20141001133733) do
   add_index "garage_properties", ["garage_id"], name: "index_garage_properties_on_garage_id", using: :btree
   add_index "garage_properties", ["property_id"], name: "index_garage_properties_on_property_id", using: :btree
 
-  create_table "garages", force: true do |t|
-    t.string   "name"
-    t.string   "street"
-    t.string   "zip"
-    t.string   "city"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "mobile"
-    t.string   "fax"
-    t.decimal  "latitude",          precision: 9, scale: 6
-    t.decimal  "longitude",         precision: 9, scale: 6
-    t.string   "tax_id"
-    t.string   "website"
+  create_table "garages", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.string   "street",            limit: 255
+    t.string   "zip",               limit: 255
+    t.string   "city",              limit: 255
+    t.string   "email",             limit: 255
+    t.string   "phone",             limit: 255
+    t.string   "mobile",            limit: 255
+    t.string   "fax",               limit: 255
+    t.decimal  "latitude",                      precision: 9, scale: 6
+    t.decimal  "longitude",                     precision: 9, scale: 6
+    t.string   "tax_id",            limit: 255
+    t.string   "website",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "country"
+    t.string   "country",           limit: 255
     t.integer  "owner_id"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.integer  "status",                                    default: -1
-    t.string   "province"
+    t.integer  "status",                                                default: -1
+    t.string   "province",          limit: 255
+    t.string   "service_ids"
   end
 
-  create_table "holidays", force: true do |t|
+  create_table "holidays", force: :cascade do |t|
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "garage_id"
-    t.string   "name"
+    t.string   "name",       limit: 255
   end
 
   add_index "holidays", ["garage_id"], name: "index_holidays_on_garage_id", using: :btree
 
-  create_table "properties", force: true do |t|
-    t.string   "name"
-    t.string   "type_of"
+  create_table "properties", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "type_of",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "timetables", force: true do |t|
+  create_table "timetables", force: :cascade do |t|
     t.integer  "garage_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -106,37 +107,37 @@ ActiveRecord::Schema.define(version: 20141001133733) do
 
   add_index "timetables", ["garage_id"], name: "index_timetables_on_garage_id", using: :btree
 
-  create_table "tyre_fees", force: true do |t|
+  create_table "tyre_fees", force: :cascade do |t|
     t.integer  "vehicle_type"
     t.integer  "diameter_min"
     t.integer  "diameter_max"
     t.integer  "rim_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.decimal  "price",        precision: 15, scale: 2
+    t.string   "name",         limit: 255
+    t.decimal  "price",                    precision: 15, scale: 2
     t.integer  "garage_id"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "surname"
-    t.string   "phone"
-    t.string   "country"
+    t.string   "name",                   limit: 255
+    t.string   "surname",                limit: 255
+    t.string   "phone",                  limit: 255
+    t.string   "country",                limit: 255
     t.integer  "role"
-    t.string   "auth_token"
+    t.string   "auth_token",             limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

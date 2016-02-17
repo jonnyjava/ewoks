@@ -14,6 +14,15 @@ module API
         end
       end
 
+      def update
+        @garage = Garage.find_by_id(garage_update_params[:id])
+        if @garage.update_service_ids(garage_update_params[:service_ids])
+          @garage
+        else
+          render json: {errors: @garage.errors}
+        end
+      end
+
     protected
 
       def authenticate
@@ -35,6 +44,10 @@ module API
 
       def garage_registration_params
         params.permit(:garage_name, :tax_id, :street, :zip, :phone, :email, :password)
+      end
+
+      def garage_update_params
+        params.permit(:id, service_ids: [])
       end
     end
   end

@@ -20,6 +20,8 @@ class Garage < ActiveRecord::Base
   ACTIVE = 1
   INACTIVE = 0
   TO_BE_CONFIRMED = -1
+  SERVICES = ["diagnósticos", "cambio de batería", "neumáticos", "cambio de aceite", "chapa y lunas", "frenado", "iluminación", "audio y multimedia", "motor", "escapes", "trenes y suspensión", "aire acondicionado"]
+  SERVICE_TYPE = Hash[SERVICES.map.with_index { |obj, i| [i, obj] }]
 
   scope :active, -> { where(status: ACTIVE) }
   scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
@@ -81,6 +83,11 @@ class Garage < ActiveRecord::Base
   def signup_verification_token
     token = [email, status, created_at, 'endor is full of ewoks'].join
     Digest::SHA1.hexdigest(token)
+  end
+
+  def update_service_ids(service_ids)
+    return unless service_ids
+    update_attribute(:service_ids, service_ids.join(','))
   end
 
   def self.by_default(zip, city)

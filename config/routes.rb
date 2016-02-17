@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :garages, only: [:index, :show]
-      resources :garage_registrations, only: [:create]
+      resources :garage_registrations, only: [:create, :update]
     end
   end
 
