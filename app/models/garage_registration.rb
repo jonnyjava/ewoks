@@ -68,7 +68,7 @@ class GarageRegistration
     child_errors = object.errors
     class_name = object.class.name
     child_errors.each do |attribute, message|
-      errors.add("#{class_name.downcase}_#{attribute}", message)
+      errors.add("#{attribute}", message)
     end
   end
 end

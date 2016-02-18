@@ -1,4 +1,4 @@
-require './vendor/mailin'
+require 'sendinblue'
 
 class PublicFormMailer < ActionMailer::Base
   include MailerHelper
@@ -14,7 +14,7 @@ class PublicFormMailer < ActionMailer::Base
 
   def send_confirmation_via_sendiblue
     return false unless Rails.env.production?
-    sendinblue_mailer = Mailin.new(ENV["SENDINBLUE_API_URL"], ENV["SENDINBLUE_API_TOKEN"])
+    sendinblue_mailer = Sendinblue::Mailin.new(ENV["SENDINBLUE_API_URL"], ENV["SENDINBLUE_API_TOKEN"])
     data = build_data_for_sendinblue_mailer(@garage)
     result = sendinblue_mailer.send_transactional_template(data)
     return (result['code'] == 'success')
