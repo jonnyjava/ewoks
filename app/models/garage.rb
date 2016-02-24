@@ -9,13 +9,13 @@ class Garage < ActiveRecord::Base
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
   has_attached_file :logo, storage: :s3, s3_credentials: Proc.new { |a| a.instance.s3_credentials }, url: ':s3_domain_url',
-  path: '/:class/:attachment/:id_partition/:style/:filename', default_url: '/assets/avatar_default.jpg'
+  path: '/:class/:attachment/:id_partition/:style/:filename', default_url: 'avatar_default.jpg'
   validates_attachment_content_type :logo, content_type: %w(image/png image/jpeg)
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
   after_save :notify_my_owner, if: :status_changed?
-  after_create :send_signup_confirmation
+  after_create :send_signup_confirmation, :create_my_timetable
 
   ACTIVE = 1
   INACTIVE = 0
@@ -69,6 +69,11 @@ class Garage < ActiveRecord::Base
     owner = User.create(email: email, password: Faker::Internet.password(10))
     update_attribute(:owner_id, owner.id)
     UserMailer.send_generated_password(owner).deliver_now
+  end
+
+  def create_my_timetable
+    return if self.timetable
+    Timetable.create(garage: self)
   end
 
   def notify_my_owner

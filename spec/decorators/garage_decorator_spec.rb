@@ -25,7 +25,7 @@ describe GarageDecorator do
 
   it 'should detect which data of garage are incomplete' do
     response = garage_incompleted.decorate.notifications
-    expect(response).to have_selector('li', count: 3)
+    expect(response).to have_selector('li', count: 2)
   end
 
   it 'should detect which data of garage are complete' do

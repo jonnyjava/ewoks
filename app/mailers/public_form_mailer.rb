@@ -24,13 +24,13 @@ class PublicFormMailer < ActionMailer::Base
     to = garage.email
     bcc = EMAIL_ADMIN
     username = garage.name
-    subject = t('Welcome to Ewoks')
+    subject = t('Welcome')
     content = render partial: 'signup_link'
     data = { "id" => 4, "to" => to, "bcc"=> bcc, "attr" => {"USERNAME" => username, "SUBJECT" => subject, "CONTENT" => content} }
   end
 
   def send_confirmation_via_gmail
-    mail(to: @garage.email, bcc: EMAIL_ADMIN, subject: t('Welcome to Ewoks'))
+    mail(to: @garage.email, bcc: EMAIL_ADMIN, subject: t('Welcome'))
   end
 end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe TyreFeesController do
-  login_user
+  login_admin
 
   let(:valid_attributes) { FactoryGirl.attributes_for(:tyre_fee) }
   let(:invalid_attributes) { { 'wrong_param' => 'wrong' } }

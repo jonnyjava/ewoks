@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
   def send_generated_password(user)
     @user = user
     set_locale(@user.garage)
-    mail(to: user.email, subject: t('Your login for Ewoks'))
+    mail(to: user.email, subject: t('Your login for 123Mecanico'))
   end
 
   def send_changed_status_notification(user)

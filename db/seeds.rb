@@ -1,5 +1,5 @@
 admin = User.new
-admin.email = 'admin@norauto.com'
+admin.email = 'admin@123mecanico.es'
 admin.password  = 'Igotthepower'
 admin.password_confirmation  = 'Igotthepower'
 admin.role = User::ADMIN
@@ -10,7 +10,7 @@ admin.save!
 COUNTRIES.each do |country|
 
   api = User.new
-  api.email = "#{country}_api@norauto.com"
+  api.email = "#{country}_api@123mecanico.es"
   api.password  = 'Igotthetoken'
   api.password_confirmation  = 'Igotthetoken'
   api.role = User::API
@@ -18,7 +18,7 @@ COUNTRIES.each do |country|
   api.save!
 
   country_manager = User.new
-  country_manager.email = "#{country}_manager@norauto.com"
+  country_manager.email = "#{country}_manager@123mecanico.es"
   country_manager.password  = 'Igotsomepower'
   country_manager.password_confirmation  = 'Igotsomepower'
   country_manager.role = User::COUNTRY_MANAGER
@@ -27,7 +27,7 @@ COUNTRIES.each do |country|
 
   3.times do |i|
     owner = User.new
-    owner.email = "#{country}_#{i}_owner@norauto.com"
+    owner.email = "#{country}_#{i}_owner@123mecanico.es"
     owner.password  = 'Igotnopower'
     owner.password_confirmation  = 'Igotnopower'
     owner.role = User::OWNER
@@ -40,7 +40,7 @@ COUNTRIES.each do |country|
     garage.zip = "#{46000 + i}"
     garage.city = 'Valencia'
     garage.province = 'Valencia'
-    garage.email = "fake_ #{i}_#{country}@email.com"
+    garage.email = "fake_#{i}_#{country}@email.com"
     garage.phone = '666 666 666'
     garage.tax_id = '999888777666123'
     garage.country = country

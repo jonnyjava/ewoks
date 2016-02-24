@@ -59,6 +59,14 @@ describe Garage do
     end
   end
 
+  describe 'create_my_timetable' do
+    it 'should create a new owner who owns the garage' do
+      garage = FactoryGirl.create(:garage)
+      garage.create_my_timetable
+      expect(garage.timetable).not_to be_nil
+    end
+  end
+
   describe 'by_price_in_a_range' do
     let!(:spanish_garage) { FactoryGirl.create(:spanish_garage) }
     let!(:french_garage) { FactoryGirl.create(:french_garage) }
