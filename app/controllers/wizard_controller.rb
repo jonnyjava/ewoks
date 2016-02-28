@@ -1,5 +1,6 @@
 class WizardController < ApplicationController
   include PermittedParametersForPublicControllers
+
   layout 'public_form'
   before_action :set_garage, except: [:wizard, :create_garage]
   skip_before_filter :authenticate_user!

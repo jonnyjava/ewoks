@@ -1,4 +1,6 @@
 class TimetablesController < ApplicationController
+  include PermittedParametersForTimetable
+
   before_action :set_garage
   before_action :set_timetable, only: [:show, :edit, :update, :destroy]
 
@@ -35,20 +37,10 @@ class TimetablesController < ApplicationController
 
   def update
     authorize @timetable
-    noon_times = {}
-
-    Date::DAYNAMES.each do |day|
-      unless params["#{day.downcase[0, 3]}_noon"]
-        noon_times = noon_times.merge({"#{day.downcase[0, 3]}_morning_close" => nil, "#{day.downcase[0, 3]}_afternoon_open" => nil})
-      end
-      if params["#{day.downcase[0, 3]}_long"]
-        noon_times = noon_times.merge({"#{day.downcase[0, 3]}_morning_open" => nil, "#{day.downcase[0, 3]}_afternoon_close" => nil})
-      end
-    end
-
+    time_slots = nullify_time_slots
+    time_slots = time_slots.merge(timetable_params)
     respond_to do |format|
-      noon_times = noon_times.merge(timetable_params)
-      if @timetable.update(noon_times)
+      if @timetable.update(time_slots)
         format.html { redirect_to edit_garage_timetable_url(@garage, @timetable), notice: "Timetable was successfully updated." }
         format.json { render :show, status: :ok, location: @timetable }
       else
@@ -77,7 +69,26 @@ class TimetablesController < ApplicationController
     @timetable = Timetable.find(params[:id])
   end
 
-  def timetable_params
-    params.require(:timetable).permit(:mon_morning_open, :mon_morning_close, :mon_afternoon_open, :mon_afternoon_close, :tue_morning_open, :tue_morning_close, :tue_afternoon_open, :tue_afternoon_close, :wed_morning_open, :wed_morning_close, :wed_afternoon_open, :wed_afternoon_close, :thu_morning_open, :thu_morning_close, :thu_afternoon_open, :thu_afternoon_close, :fri_morning_open, :fri_morning_close, :fri_afternoon_open, :fri_afternoon_close, :sat_morning_open, :sat_morning_close, :sat_afternoon_open, :sat_afternoon_close, :sun_morning_open, :sun_morning_close, :sun_afternoon_open, :sun_afternoon_close, :garage_id)
+  def nullify_time_slots
+    time_slots = {}
+    Date::DAYNAMES.each do |day|
+      time_slots = nullify_noon_break(day, time_slots)
+      time_slots = nullify_daily_opening(day, time_slots)
+    end
+    time_slots
+  end
+
+  def nullify_noon_break(day, time_slots)
+    unless params["#{day.downcase[0, 3]}_noon"]
+      time_slots = time_slots.merge({"#{day.downcase[0, 3]}_morning_close" => nil, "#{day.downcase[0, 3]}_afternoon_open" => nil})
+    end
+    time_slots
+  end
+
+  def nullify_daily_opening(day, time_slots)
+    if params["#{day.downcase[0, 3]}_long"]
+      time_slots = time_slots.merge({"#{day.downcase[0, 3]}_morning_open" => nil, "#{day.downcase[0, 3]}_afternoon_close" => nil})
+    end
+    time_slots
   end
 end
