@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Timetables" do
-  login_user
+  login_admin
   let!(:garage) { FactoryGirl.create(:garage) }
   let!(:timetable) { FactoryGirl.create(:timetable, garage: garage) }
 

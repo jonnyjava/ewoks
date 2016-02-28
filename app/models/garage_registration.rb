@@ -35,6 +35,7 @@ class GarageRegistration
     if valid?
       ActiveRecord::Base.transaction do
         user.save!
+        garage.user = user
         garage.save!
       end
     end
@@ -52,7 +53,6 @@ class GarageRegistration
 
   def setup_associations
     garage.name = garage_name
-    garage.owner_id = user.id
     garage.country = user.country
     garage.email = user.email
     garage.phone = user.phone

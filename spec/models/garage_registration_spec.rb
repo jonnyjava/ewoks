@@ -10,6 +10,10 @@ describe GarageRegistration do
       garage_registration.save
       expect(User.count).to be(users+1)
       expect(Garage.count).to be(garages+1)
+      expect(Garage.last.user).to_not be_nil
+      expect(User.last.garage).to_not be_nil
+      expect(Garage.last.user).to eq(User.last)
+      expect(User.last.garage).to eq(Garage.last)
     end
   end
 

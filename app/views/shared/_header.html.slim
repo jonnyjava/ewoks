@@ -1,5 +1,5 @@
 header.header
-  = link_to( image_tag("logo.png"), "#", class: "logo")
+  = link_to( image_tag("123Mecanico.svg"), "#", class: "logo")
 
   nav.navbar.navbar-static-top role="navigation"
 
@@ -33,7 +33,7 @@ header.header
               i.caret
 
           ul.dropdown-menu
-            li.user-header.bg-light-blue
+            li.user-header.bg-light-orange
               = image_tag "profile_default.jpg", class: "img-circle", alt: "User Image"
               p
                 = "#{current_user.try(:name)} #{current_user.try(:surname)}"

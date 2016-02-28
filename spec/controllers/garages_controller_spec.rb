@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GaragesController do
-  login_user
+  login_admin
   let(:valid_attributes) { FactoryGirl.attributes_for(:garage) }
   let(:invalid_attributes) { { 'wrong_param' => 'wrong' } }
 

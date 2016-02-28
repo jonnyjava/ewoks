@@ -19,7 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe UsersController do
-  login_user
+  login_admin
 
   let(:valid_attributes) { { 'name' => "#{Faker::Name.name}", 'email' => "#{Faker::Internet::email}", 'password' => "12345678" } }
   let(:invalid_attributes) { { 'password' => 'password', 'password_confirmation' => 'password' } }

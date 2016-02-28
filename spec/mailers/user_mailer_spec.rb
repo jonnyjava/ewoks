@@ -12,7 +12,7 @@ describe UserMailer do
       sent_email = UserMailer.send_generated_password(@owner)
       expect(sent_email).to deliver_from(EMAIL_ADMIN)
       expect(sent_email).to deliver_to(@owner.email)
-      expect(sent_email).to have_subject( I18n.t('Your login for Ewoks') )
+      expect(sent_email).to have_subject( I18n.t('Your login for 123Mecanico') )
       expect(sent_email).to have_body_text(I18n.t('Your account has been confirmed!'))
       expect(sent_email).to have_body_text(/#{@owner.email}/)
       expect(sent_email).to have_body_text(/#{@owner.password}/)

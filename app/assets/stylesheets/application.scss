@@ -6,6 +6,9 @@
 @import "jquery-ui/datepicker";
 @import "AdminLTE";
 
+//vendor customizations
+@import "orange_skin";
+
 // Base
 @import "base/config";
 @import "base/mixins";
@@ -51,7 +54,7 @@
 
   .icon {
     margin-right: .5em;
-    color: #1c7ebb;
+    color: #E67500;
   }
 
   li {
@@ -86,4 +89,7 @@
   font-size: 1.2em;
   margin-bottom: 1em;
   margin-top: 1em;
+}
+.logo img{
+  width: 100%;
 }
