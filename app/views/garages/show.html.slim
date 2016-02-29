@@ -10,7 +10,7 @@
     .col-sm-7.col-sm-push-1
       .map-info
         .media
-          = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@garage.latitude},#{@garage.longitude}&zoom=16&size=768x150&sensor=true&markers=color:red%7C#{@garage.latitude},#{@garage.longitude}", class: 'garage-map'
+          = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@garage.latitude},#{@garage.longitude}&zoom=18&size=768x400&sensor=true&markers=color:red%7C#{@garage.latitude},#{@garage.longitude}", class: 'garage-map'
 
           .media-body
             ul.list-unstyled.list-info
