@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @garage_recruitable.name
+p
+  strong Street:
+  = @garage_recruitable.street
+p
+  strong Zip:
+  = @garage_recruitable.zip
+p
+  strong City:
+  = @garage_recruitable.city
+p
+  strong Email:
+  = @garage_recruitable.email
+p
+  strong Phone:
+  = @garage_recruitable.phone
+p
+  strong Mobile:
+  = @garage_recruitable.mobile
+p
+  strong Tax:
+  = @garage_recruitable.tax_id
+p
+  strong Province:
+  = @garage_recruitable.province
+p
+  strong Status:
+  = @garage_recruitable.status
+
+= link_to 'Edit', edit_garage_recruitable_path(@garage_recruitable)
+'|
+= link_to 'Back', garage_recruitables_path

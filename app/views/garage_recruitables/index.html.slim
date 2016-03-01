@@ -1,0 +1,39 @@
+h1 Listing garage_recruitables
+
+table
+  thead
+    tr
+      th Name
+      th Street
+      th Zip
+      th City
+      th Email
+      th Phone
+      th Mobile
+      th Tax
+      th Province
+      th Status
+      th
+      th
+      th
+
+  tbody
+    - @garage_recruitables.each do |garage_recruitable|
+      tr
+        td = garage_recruitable.name
+        td = garage_recruitable.street
+        td = garage_recruitable.zip
+        td = garage_recruitable.city
+        td = garage_recruitable.email
+        td = garage_recruitable.phone
+        td = garage_recruitable.mobile
+        td = garage_recruitable.tax_id
+        td = garage_recruitable.province
+        td = garage_recruitable.status
+        td = link_to 'Show', garage_recruitable
+        td = link_to 'Edit', edit_garage_recruitable_path(garage_recruitable)
+        td = link_to 'Destroy', garage_recruitable, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Garage recruitable', new_garage_recruitable_path

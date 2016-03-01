@@ -1,0 +1,1 @@
+json.extract! @garage_recruitable, :id, :name, :street, :zip, :city, :email, :phone, :mobile, :tax_id, :province

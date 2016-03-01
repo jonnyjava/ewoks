@@ -1,0 +1,17 @@
+= simple_form_for(@garage_recruitable) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :street
+    = f.input :zip
+    = f.input :city
+    = f.input :email
+    = f.input :phone
+    = f.input :mobile
+    = f.input :tax_id
+    = f.input :province
+    = f.input :status
+
+  .form-actions
+    = f.button :submit
