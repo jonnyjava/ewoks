@@ -1,8 +1,3 @@
-h1 Editing garage_recruitable
-
-== render 'form'
-
-= link_to 'Show', @garage_recruitable
-'|
-= link_to 'Back', garage_recruitables_path
-
+- content_for :content
+  - render 'form'
+= render template: "layouts/box", locals: { title: t('edit garage').humanize }

@@ -1,39 +1,42 @@
-h1 Listing garage_recruitables
+- content_for :content
 
-table
-  thead
-    tr
-      th Name
-      th Street
-      th Zip
-      th City
-      th Email
-      th Phone
-      th Mobile
-      th Tax
-      th Province
-      th Status
-      th
-      th
-      th
+  .table-responsive
+    table.table.table-condensed.table-striped.table-bordered
+      thead
+        tr
+          th = t('actions').humanize
+          th = t('status').humanize
+          th = t('name').humanize
+          th = t('street').humanize
+          th = t('zip').humanize
+          th = t('city').humanize
+          th = t('province').humanize
+          th = t('email').humanize
+          th = t('phone').humanize
+          th = t('mobile').humanize
+          th = t('tax_id').humanize.upcase
+          th = t('actions').humanize
 
-  tbody
-    - @garage_recruitables.each do |garage_recruitable|
-      tr
-        td = garage_recruitable.name
-        td = garage_recruitable.street
-        td = garage_recruitable.zip
-        td = garage_recruitable.city
-        td = garage_recruitable.email
-        td = garage_recruitable.phone
-        td = garage_recruitable.mobile
-        td = garage_recruitable.tax_id
-        td = garage_recruitable.province
-        td = garage_recruitable.status
-        td = link_to 'Show', garage_recruitable
-        td = link_to 'Edit', edit_garage_recruitable_path(garage_recruitable)
-        td = link_to 'Destroy', garage_recruitable, data: {:confirm => 'Are you sure?'}, :method => :delete
+      tbody
+        - @garage_recruitables.each do |garage_recruitable|
+          tr
+            td.b-crudbar
+              = link_to content_tag(:i, nil, class: "fa fa-eye"), garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default'
+              = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default'
+            td
+              span class="label label-success" = t("#{garage_recruitable.status}")
+            td = link_to garage_recruitable.name, garage_recruitable_path(garage_recruitable)
+            td = garage_recruitable.street
+            td = garage_recruitable.zip
+            td = garage_recruitable.city
+            td = garage_recruitable.province
+            td = garage_recruitable.email
+            td = garage_recruitable.phone
+            td = garage_recruitable.mobile
+            td = garage_recruitable.tax_id
+            td.b-crudbar
+              = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default'
+              = link_to content_tag(:i, nil, class: "fa fa-eye"), garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default'
+  = paginate @garage_recruitables
 
-br
-
-= link_to 'New Garage recruitable', new_garage_recruitable_path
+= render template: "layouts/box", locals: { title: t('garages list').humanize }

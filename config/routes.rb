@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :garage_recruitables
+  resources :garage_recruitables, except: :new
 
   root to: 'garages#index'
 

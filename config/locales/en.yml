@@ -105,6 +105,7 @@ en:
   suv: 'suv'
   van: 'van'
   daylong: 'All the day'
+  garage_recruitable: "Recruitable garages"
 
   simple_form:
     labels:

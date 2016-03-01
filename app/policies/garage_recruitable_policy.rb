@@ -13,7 +13,7 @@ class GarageRecruitablePolicy < ApplicationPolicy
   end
 
   def new?
-    @user.admin? || @user.country_manager?
+    false
   end
 
   def edit?

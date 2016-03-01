@@ -3,16 +3,11 @@ class GarageRecruitablesController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @garage_recruitables = GarageRecruitable.all
+    @garage_recruitables = GarageRecruitable.all.order(:name).page(params[:page])
     authorize @garage_recruitables
   end
 
   def show
-    authorize @garage_recruitable
-  end
-
-  def new
-    @garage_recruitable = GarageRecruitable.new
     authorize @garage_recruitable
   end
 
@@ -58,7 +53,7 @@ class GarageRecruitablesController < ApplicationController
 
   private
     def set_garage_recruitable
-      @garage_recruitable = GarageRecruitable.find(params[:id])
+      @garage_recruitable = GarageRecruitable.find(params[:id]).decorate
     end
 
     def garage_recruitable_params

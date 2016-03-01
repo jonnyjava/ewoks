@@ -8,7 +8,7 @@ RSpec.describe GarageRecruitablesController, type: :routing do
     end
 
     it "routes to #new" do
-      expect(:get => "/garage_recruitables/new").to route_to("garage_recruitables#new")
+      expect(:get => "/garage_recruitables/new").to_not route_to("garage_recruitables#new")
     end
 
     it "routes to #show" do

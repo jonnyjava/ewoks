@@ -93,6 +93,8 @@
   Your garage is not activated yet!: 'Twój garaż nie jest jeszcze aktywny!'
   welcome_message: 'Witaj aby ukończyć proces aktywacji wymagane jest uzupełnienei wszystkich pól. Powiadomienia na górze formularza będą wskazywał które pola należy jeszcze uzupełnić'
   daylong: 'wszystkie dni'
+  garage_recruitable: "Garages alistables"
+
   simple_form:
      labels:
       defaults:

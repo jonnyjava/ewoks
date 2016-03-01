@@ -1,36 +1,33 @@
-p#notice = notice
-
-p
-  strong Name:
-  = @garage_recruitable.name
-p
-  strong Street:
-  = @garage_recruitable.street
-p
-  strong Zip:
-  = @garage_recruitable.zip
-p
-  strong City:
-  = @garage_recruitable.city
-p
-  strong Email:
-  = @garage_recruitable.email
-p
-  strong Phone:
-  = @garage_recruitable.phone
-p
-  strong Mobile:
-  = @garage_recruitable.mobile
-p
-  strong Tax:
-  = @garage_recruitable.tax_id
-p
-  strong Province:
-  = @garage_recruitable.province
-p
-  strong Status:
-  = @garage_recruitable.status
-
-= link_to 'Edit', edit_garage_recruitable_path(@garage_recruitable)
-'|
-= link_to 'Back', garage_recruitables_path
+.row
+  .col-sm-12
+    .map-info
+      .media
+        .media-body
+          ul.list-unstyled.list-info
+            li
+              span.icon.glyphicon.glyphicon-home
+              label = t('name').humanize
+              = @garage_recruitable.name
+            li
+              span.icon.glyphicon.glyphicon-map-marker
+              label = t('street').humanize
+              = @garage_recruitable.complete_address
+            li
+              span.icon.glyphicon.glyphicon-envelope
+              label = t('email').humanize
+              = @garage_recruitable.email
+            li
+              span.icon.glyphicon.glyphicon-earphone
+              label = t('phone').humanize
+              = "#{@garage_recruitable.phone} - #{@garage_recruitable.mobile}"
+            li
+              span.icon.glyphicon.glyphicon-info-sign
+              label = t('tax_id').humanize
+              = @garage_recruitable.tax_id
+            li
+              span.icon.glyphicon.glyphicon-bell
+              label = t('status').humanize
+              span class="label label-success" = @garage_recruitable.status
+.row
+  .col-sm-4= link_to t('edit information').humanize, edit_garage_recruitable_path(@garage_recruitable), class: "btn btn-success btn-block btn-flat"
+  .col-sm-4= link_to t('list all garages').humanize, garage_recruitables_path, class: "btn btn-default btn-block btn-flat"

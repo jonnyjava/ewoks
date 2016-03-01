@@ -10,7 +10,7 @@ describe GarageRecruitablePolicy do
     subject { GarageRecruitablePolicy.new(admin, recruitable) }
     it { is_expected.to allow_action(:show) }
     it { is_expected.to allow_action(:index) }
-    it { is_expected.to allow_action(:new) }
+    it { is_expected.not_to allow_action(:new) }
     it { is_expected.to allow_action(:create) }
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }
@@ -21,7 +21,7 @@ describe GarageRecruitablePolicy do
     subject { GarageRecruitablePolicy.new(country_manager, recruitable) }
     it { is_expected.to allow_action(:show) }
     it { is_expected.to allow_action(:index) }
-    it { is_expected.to allow_action(:new) }
+    it { is_expected.not_to allow_action(:new) }
     it { is_expected.to allow_action(:create) }
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }

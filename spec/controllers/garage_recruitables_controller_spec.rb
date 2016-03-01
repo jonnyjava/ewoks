@@ -24,13 +24,6 @@ describe GarageRecruitablesController do
     end
   end
 
-  describe "#new" do
-    it "should render the new page" do
-      get :new, {}, valid_session
-      expect(response).to render_template(:new)
-    end
-  end
-
   describe "#edit" do
     it "should render the edit page" do
       garage_recruitable = GarageRecruitable.create! valid_attributes
