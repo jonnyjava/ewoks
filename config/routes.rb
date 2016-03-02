@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :garage_recruitables, except: :new
 
   root to: 'garages#index'
 
@@ -34,6 +33,9 @@ Rails.application.routes.draw do
 
     resources :properties
     resources :users
+    resources :garage_recruitables, except: :new do
+      get 'export', on: :collection
+    end
 
     devise_for :users, path: '', path_names: {
       sign_in: 'login',

@@ -16,6 +16,10 @@ class GarageRecruitablePolicy < ApplicationPolicy
     false
   end
 
+  def export?
+    @user.admin? || @user.country_manager?
+  end
+
   def edit?
     @user.admin? || @user.country_manager?
   end

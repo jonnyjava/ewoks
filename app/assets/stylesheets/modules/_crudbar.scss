@@ -5,7 +5,7 @@
 
 @include element(crudbar, btn) {
   margin-right: .25em;
-  padding: 2px 8px;
+  padding: 4px 7px;
 
   @extend .btn;
   @extend .btn-sm;

@@ -3,6 +3,7 @@ es:
   recruited: 'Ya registrado'
   has_bounced_us: 'No le interesa'
   waiting_for_answer: 'A la espera de respuesta'
+  export_to_excel: 'Exportar a excel'
   holidays: 'vacaciones'
   timetable: 'horarios'
   tyre fees: 'tarifas de neumaticos'

@@ -15,6 +15,7 @@ describe GarageRecruitablePolicy do
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }
     it { is_expected.to allow_action(:destroy) }
+    it { is_expected.to allow_action(:export) }
   end
 
   context "for an country manager" do
@@ -26,6 +27,7 @@ describe GarageRecruitablePolicy do
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }
     it { is_expected.to allow_action(:destroy) }
+    it { is_expected.to allow_action(:export) }
   end
 
   context "for an owner" do
@@ -37,6 +39,7 @@ describe GarageRecruitablePolicy do
     it { is_expected.not_to allow_action(:edit) }
     it { is_expected.not_to allow_action(:update) }
     it { is_expected.not_to allow_action(:destroy) }
+    it { is_expected.not_to allow_action(:export) }
   end
 
   context "for an api_user" do
@@ -48,5 +51,6 @@ describe GarageRecruitablePolicy do
     it { is_expected.not_to allow_action(:edit) }
     it { is_expected.not_to allow_action(:update) }
     it { is_expected.not_to allow_action(:destroy) }
+    it { is_expected.not_to allow_action(:export) }
   end
 end

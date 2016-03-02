@@ -16,6 +16,13 @@ class GarageRecruitablesController < ApplicationController
     authorize @garage_recruitable
   end
 
+  def export
+    garage_recruitables = GarageRecruitable.where(id: params[:ids])
+    authorize_collection garage_recruitables
+    @garage_recruitables = garage_recruitables
+    respond_to :xls
+  end
+
   def create
     @garage_recruitable = GarageRecruitable.new(garage_recruitable_params)
     authorize @garage_recruitable
@@ -53,6 +60,12 @@ class GarageRecruitablesController < ApplicationController
   end
 
   private
+
+    def authorize_collection(authorizable_collection)
+      return authorize authorizable_collection if authorizable_collection.blank?
+      authorizable_collection.each { |element| authorize element }
+    end
+
     def set_garage_recruitable
       @garage_recruitable = GarageRecruitable.find(params[:id]).decorate
     end
