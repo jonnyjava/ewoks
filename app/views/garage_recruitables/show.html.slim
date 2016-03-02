@@ -1,5 +1,5 @@
 .row
-  .col-sm-12
+  .col-sm-6
     .map-info
       .media
         .media-body
@@ -19,7 +19,7 @@
             li
               span.icon.glyphicon.glyphicon-earphone
               label = t('phone').humanize
-              = "#{@garage_recruitable.phone} - #{@garage_recruitable.mobile}"
+              = @garage_recruitable.complete_contacts
             li
               span.icon.glyphicon.glyphicon-info-sign
               label = t('tax_id').humanize
@@ -27,7 +27,11 @@
             li
               span.icon.glyphicon.glyphicon-bell
               label = t('status').humanize
-              span class="label label-success" = @garage_recruitable.status
+              span class="label #{@garage_recruitable.set_label_color}" = t(@garage_recruitable.status)
+  .col-sm-6
+    .map-info
+      .media
+
 .row
   .col-sm-4= link_to t('edit information').humanize, edit_garage_recruitable_path(@garage_recruitable), class: "btn btn-success btn-block btn-flat"
   .col-sm-4= link_to t('list all garages').humanize, garage_recruitables_path, class: "btn btn-default btn-block btn-flat"

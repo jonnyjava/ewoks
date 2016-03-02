@@ -24,7 +24,7 @@
               = link_to content_tag(:i, nil, class: "fa fa-eye"), garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default'
               = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default'
             td
-              span class="label label-success" = t("#{garage_recruitable.status}")
+              span class="label #{garage_recruitable.set_label_color}" = t("#{garage_recruitable.status}")
             td = link_to garage_recruitable.name, garage_recruitable_path(garage_recruitable)
             td = garage_recruitable.street
             td = garage_recruitable.zip

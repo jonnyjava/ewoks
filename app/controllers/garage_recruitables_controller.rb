@@ -3,8 +3,9 @@ class GarageRecruitablesController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @garage_recruitables = GarageRecruitable.all.order(:name).page(params[:page])
-    authorize @garage_recruitables
+    garage_recruitables = GarageRecruitable.all.order(:name).page(params[:page])
+    authorize garage_recruitables
+    @garage_recruitables = GarageRecruitableDecorator.decorate_collection(garage_recruitables)
   end
 
   def show
