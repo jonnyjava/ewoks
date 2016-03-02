@@ -4,6 +4,7 @@ class GarageRecruitablesController < ApplicationController
 
   def index
     garage_recruitables = GarageRecruitable.all.order(:name).page(params[:page])
+    garage_recruitables = filter(garage_recruitables, garage_recruitable_params) if params[:garage_recruitable]
     authorize garage_recruitables
     @garage_recruitables = GarageRecruitableDecorator.decorate_collection(garage_recruitables)
   end
@@ -60,6 +61,11 @@ class GarageRecruitablesController < ApplicationController
   end
 
   private
+
+    def filter(collection, filtering_params)
+      filtering_params.each { |name, value| collection = collection.send('filter_by', name, value ) }
+      collection.by_status(filtering_params[:status])
+    end
 
     def authorize_collection(authorizable_collection)
       return authorize authorizable_collection if authorizable_collection.blank?

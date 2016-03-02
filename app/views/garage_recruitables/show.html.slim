@@ -27,7 +27,7 @@
             li
               span.icon.glyphicon.glyphicon-bell
               label = t('status').humanize
-              span class="label #{@garage_recruitable.set_label_color}" = t(@garage_recruitable.status)
+              span class="label #{status_label(@garage_recruitable.status)}" = t(@garage_recruitable.status)
   .col-sm-6
     .map-info
       .media
