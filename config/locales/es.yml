@@ -1,8 +1,8 @@
 es:
   recruitable: 'Contactable'
-  recruited: 'Ya registrado'
-  has_bounced_us: 'No le interesa'
   waiting_for_answer: 'Esperando respuesta'
+  unreachable: 'Ilocalizable'
+  dismissed: 'No le interesa'
   export_to_excel: 'Exportar a excel'
   filter_by: 'Filtrar por:'
   holidays: 'vacaciones'

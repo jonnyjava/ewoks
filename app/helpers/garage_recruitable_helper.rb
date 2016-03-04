@@ -1,5 +1,5 @@
 module GarageRecruitableHelper
-  COLORS = Hash[%w(success info danger warning).map.with_index { |obj, i| [i, obj] }]
+  COLORS = Hash[%w(success info warning danger).map.with_index { |obj, i| [i, obj] }]
 
   def status_label(status)
     "label-#{COLORS[GarageRecruitable.statuses[status]]}"
