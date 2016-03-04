@@ -43,8 +43,8 @@ describe GarageRecruitablePolicy do
   end
 
   context "for an api_user" do
-    subject { GarageRecruitablePolicy.new(owner, recruitable) }
-    it { is_expected.not_to allow_action(:show) }
+    subject { GarageRecruitablePolicy.new(api_user, recruitable) }
+    it { is_expected.to allow_action(:show) }
     it { is_expected.not_to allow_action(:index) }
     it { is_expected.not_to allow_action(:new) }
     it { is_expected.not_to allow_action(:create) }

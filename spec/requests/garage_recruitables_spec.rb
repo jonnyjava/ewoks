@@ -35,7 +35,7 @@ RSpec.describe "GarageRecruitables", type: :request do
 
     context 'with an api user' do
       login_api_user
-      it_behaves_like "an unauthorized show"
+      it_behaves_like "an authorized show"
     end
   end
 
