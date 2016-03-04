@@ -17,6 +17,13 @@ describe GarageRecruitable do
         expect(@filtered_garages.first.send(attribute)).to be_eql(attribute_value)
       end
     end
+
+    it 'should filter by status' do
+      status = recruitable.status
+      @filtered_garages = GarageRecruitable.by_status(status)
+      expect(@filtered_garages.count).to be(1)
+      expect(@filtered_garages.first.status).to be_eql(status)
+    end
   end
 
   describe 'recruiting_token' do

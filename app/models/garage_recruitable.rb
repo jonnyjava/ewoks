@@ -7,6 +7,7 @@ class GarageRecruitable < ActiveRecord::Base
   after_create :set_token
 
   scope :filter_by, ->(param, value) { where("lower(#{param}) LIKE ?", "%#{value.downcase}%") if method_defined?(param) && value && !(columns_hash[param].type == :integer) }
+  scope :by_status, ->(status) { where(status: statuses[status]) if status }
 
   def recruiting_token
     token = [email, tax_id, 'Let The Wookiee Win', name].join
