@@ -80,10 +80,11 @@ describe GarageRecruitablesController do
 
       it "updates the requested garage_recruitable" do
         garage_recruitable = GarageRecruitable.create! valid_attributes
+        name = garage_recruitable.name
         put :update, {id: garage_recruitable.to_param, garage_recruitable: new_attributes}, valid_session
-        expect(garage_recruitable.name).to eq(valid_attributes[:name])
         garage_recruitable.reload
         expect(garage_recruitable.name).to eq(new_attributes[:name])
+        expect(garage_recruitable.name).to_not eq(name)
       end
 
       it "redirects to the garage_recruitable" do

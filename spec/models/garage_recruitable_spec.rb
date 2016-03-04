@@ -18,6 +18,12 @@ describe GarageRecruitable do
       end
     end
 
+    it 'should ignore non string attributes in filter_by scope' do
+      FactoryGirl.create(:garage_recruitable)
+      @filtered_garages = GarageRecruitable.filter_by('status', recruitable.status)
+      expect(@filtered_garages.count).to be(GarageRecruitable.count)
+    end
+
     it 'should filter by status' do
       status = recruitable.status
       @filtered_garages = GarageRecruitable.by_status(status)
@@ -30,9 +36,7 @@ describe GarageRecruitable do
     it 'should generate an unique token' do
       recruitable1 = FactoryGirl.create(:garage_recruitable)
       recruitable2 = FactoryGirl.create(:garage_recruitable)
-      token1 = recruitable1.recruiting_token
-      token2 = recruitable2.recruiting_token
-      expect(token1).not_to eq(token2)
+      expect(recruitable1.token).not_to eq(recruitable2.token)
     end
   end
 
@@ -48,11 +52,11 @@ describe GarageRecruitable do
 
   describe 'fill_empty_token' do
     it 'should assign a token to all GarageRecruitables without it' do
-      5.times { FactoryGirl.create(:garage_recruitable) }
+      rand(10).times { FactoryGirl.create(:garage_recruitable) }
       GarageRecruitable.update_all(token: nil)
       GarageRecruitable.fill_empty_token
       expect(GarageRecruitable.where.not(token: nil).size).to eq(GarageRecruitable.count)
+      expect(GarageRecruitable.where(token: nil).size).to eq(0)
     end
   end
-
 end

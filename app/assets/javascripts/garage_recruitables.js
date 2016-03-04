@@ -8,8 +8,21 @@ function activate_search(){
   $('.js_search').click(function(){
     var filtering_params = $('.js_searchable');
     if (search_has_values(filtering_params)){
-      submit_search($(this),filtering_params);
+      submit_search($(this), filtering_params);
     }
+  });
+}
+
+function activate_export(){
+  $('.js_excel_exporter').click(function(){
+    var selected_garages = $('.js_exportable');
+    $($(this)[0].form).append(selected_garages).submit();
+  });
+}
+
+function activate_check_toggler(){
+  $('.js_check_toggler').click(function(){
+    toggle_check();
   });
 }
 
@@ -29,19 +42,6 @@ function submit_search(clicked_button, filtering_params){
   filtering_params.clone().hide().appendTo(form);
   $('.js_selectable').val(status);
   $(form).submit();
-}
-
-function activate_export(){
-  $('.js_excel_exporter').click(function(){
-    var selected_garages = $('.js_exportable');
-    $($(this)[0].form).append(selected_garages).submit();
-  });
-}
-
-function activate_check_toggler(){
-  $('.js_check_toggler').click(function(){
-    toggle_check();
-  });
 }
 
 function toggle_check(){

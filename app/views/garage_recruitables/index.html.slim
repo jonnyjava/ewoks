@@ -8,11 +8,11 @@
               = button_tag(type: 'button', class:'b-keypad__btn--success bg-orange col-xs-12 js_excel_exporter')
                 i.fa.fa-download
                 = t("export_to_excel")
-          th= select_status('status', value_of_param_in?(params, 'status'), {class: 'form-control js_searchable js_selectable'})
-          th= render partial: 'filter', locals: { type: 'name', extra_options: {} }
-          th[colspan=2]= render partial: 'filter', locals: { type: 'zip', extra_options: { maxlength: 5 } }
-          th[colspan=2]= render partial: 'filter', locals: { type: 'city', extra_options: {} }
-          th= render partial: 'filter', locals: { type: 'email', extra_options: {} }
+          th = select_status('status', value_of_param_in?(params, 'status'), {class: 'form-control js_searchable js_selectable'})
+          th = filter_tag('name')
+          th[colspan=2] = filter_tag('zip', { maxlength: 5 })
+          th[colspan=2] = filter_tag('city')
+          th = filter_tag('email')
           th
             =form_tag(garage_recruitables_path, name: 'filter_by', method: 'get') do
               = button_tag(type: 'button', class:'b-keypad__btn--success bg-orange col-xs-12 js_search')

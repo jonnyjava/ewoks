@@ -6,11 +6,11 @@ class GarageRecruitable < ActiveRecord::Base
 
   after_create :set_token
 
-  scope :filter_by, ->(param, value) { where("lower(#{param}) LIKE ?", "%#{value.downcase}%") if method_defined?(param) && value && !(columns_hash[param].type == :integer) }
+  scope :filter_by, ->(param, value) { where("lower(#{param}) LIKE ?", "%#{value.downcase}%") if method_defined?(param) && value && is_string?(param) }
   scope :by_status, ->(status) { where(status: statuses[status]) if status }
 
   def recruiting_token
-    token = [email, tax_id, 'Let The Wookiee Win', name].join
+    token = [email, tax_id, ENV['RECRUITABLE_TOKENIZER'], name].join
     Digest::SHA1.hexdigest(token)
   end
 
@@ -21,4 +21,9 @@ class GarageRecruitable < ActiveRecord::Base
   def self.fill_empty_token
     GarageRecruitable.where(token: nil).each{|recruitable| recruitable.set_token }
   end
+
+  private
+    def self.is_string?(param)
+      (columns_hash[param].type == :string)
+    end
 end

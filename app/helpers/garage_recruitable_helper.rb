@@ -20,4 +20,9 @@ module GarageRecruitableHelper
   def select_status(name, default, options)
     select_tag("garage_recruitable[#{name}]", options_for_statuses(default), options)
   end
+
+  def filter_tag(type, extra_options = {})
+    options =  { placeholder: "#{t('filter_by')} #{t(type)}", class: 'form-control js_searchable' }.merge( extra_options )
+    text_field_tag("garage_recruitable[#{type}]", value_of_param_in?(params, type), options )
+  end
 end
