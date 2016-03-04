@@ -1,16 +1,9 @@
 require 'spec_helper'
 
 describe 'Garages' do
-
-  def token_header(token)
-    ActionController::HttpAuthentication::Token.encode_credentials(token)
-  end
+  api_user_token
 
   describe 'index' do
-    before(:each) do
-      user = FactoryGirl.create(:api_user)
-      @auth_token = { 'Authorization' => token_header(user.auth_token) }
-    end
 
     it 'should return status 200' do
       api_get 'garages.json', {}, @auth_token

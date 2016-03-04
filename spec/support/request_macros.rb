@@ -27,4 +27,11 @@ module RequestMacros
       post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
     end
   end
+
+  def api_user_token
+    before(:each) do
+      user = FactoryGirl.create(:api_user)
+      @auth_token = { 'Authorization' => token_header(user.auth_token) }
+    end
+  end
 end
