@@ -5,23 +5,31 @@ describe 'Garages' do
 
   describe 'index' do
 
-    it 'should return status 200' do
-      api_get 'garages.json', {}, @auth_token
-      expect(response.status).to be(200)
-      expect(response.body).not_to be_empty
-      expect(response.content_type).to eq(Mime::JSON)
+    context 'with a valid token' do
+      context 'with a valid json' do
+        it 'should return status 200' do
+          api_get 'garages.json', {}, @auth_token
+          expect(response.status).to be(200)
+          expect(response.body).not_to be_empty
+          expect(response.content_type).to eq(Mime::JSON)
+        end
+      end
+
+      context 'with an invalid json' do
+        it 'should return status 404' do
+          api_get 'alderaan.json', {}, @auth_token
+          expect(response.status).to be(404)
+          expect(response.body).not_to be_empty
+          expect(response.content_type).to eq(Mime::JSON)
+        end
+      end
     end
 
-    it 'should return status 404' do
-      api_get 'alderaan.json', {}, @auth_token
-      expect(response.status).to be(404)
-      expect(response.body).not_to be_empty
-      expect(response.content_type).to eq(Mime::JSON)
-    end
-
-    it 'should return status 401' do
-      api_get 'garages.json', {}, 'Authorization' => 'Token token=wrongtoken'
-      expect(response.status).to be(401)
+    context 'with an invalid token' do
+      it 'should return status 401' do
+        api_get 'garages.json', {}, 'Authorization' => 'Token token=wrongtoken'
+        expect(response.status).to be(401)
+      end
     end
 
     context 'with querystring' do
