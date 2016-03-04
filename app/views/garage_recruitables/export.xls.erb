@@ -18,6 +18,7 @@
         <Cell><Data ss:Type="String"><%= t('phone').humanize %></Data></Cell>
         <Cell><Data ss:Type="String"><%= t('mobile').humanize %></Data></Cell>
         <Cell><Data ss:Type="String"><%= t('tax_id').humanize.upcase %></Data></Cell>
+        <Cell><Data ss:Type="String">Token</Data></Cell>
       </Row>
     <% @garage_recruitables.each do |garage_recruitable| %>
       <Row>
@@ -32,6 +33,7 @@
         <Cell><Data ss:Type="String"><%= garage_recruitable.phone %></Data></Cell>
         <Cell><Data ss:Type="String"><%= garage_recruitable.mobile %></Data></Cell>
         <Cell><Data ss:Type="String"><%= garage_recruitable.tax_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.token%></Data></Cell>
       </Row>
     <% end %>
     </Table>
