@@ -66,5 +66,5 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
 end
 
 52.times do |i|
-  garage_recruitable = FactoryGirl.create(:recruitable)
+  garage_recruitable = FactoryGirl.create(:garage_recruitable)
 end

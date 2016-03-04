@@ -3,7 +3,7 @@ class GarageRecruitablesController < ApplicationController
   after_action :verify_authorized
 
   def index
-    garage_recruitables = GarageRecruitable.all.order(:name).page(params[:page])
+    garage_recruitables = GarageRecruitable.all.order(:status, :name).page(params[:page])
     garage_recruitables = filter(garage_recruitables, garage_recruitable_params) if params[:garage_recruitable]
     authorize garage_recruitables
     @garage_recruitables = GarageRecruitableDecorator.decorate_collection(garage_recruitables)

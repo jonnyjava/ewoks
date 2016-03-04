@@ -10,10 +10,6 @@ FactoryGirl.define do
     mobile              { Faker::PhoneNumber.cell_phone }
     tax_id              { "#{Faker::Lorem.characters(1).upcase}#{Faker::Code.isbn}" }
     province            { Faker::Address.city }
-    status              GarageRecruitable.statuses.keys.sample
-
-    factory :recruitable, class: GarageRecruitable do
-        status GarageRecruitable.statuses.keys.first
-    end
+    status              { GarageRecruitable.statuses.keys.sample }
   end
 end
