@@ -3,7 +3,7 @@ es:
   waiting_for_answer: 'Esperando respuesta'
   unreachable: 'Ilocalizable'
   dismissed: 'No le interesa'
-  export_to_excel: 'Exportar a excel'
+  export_to_excel: 'Exportar'
   filter_by: 'Filtrar por:'
   holidays: 'vacaciones'
   timetable: 'horarios'
