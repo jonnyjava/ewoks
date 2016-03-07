@@ -110,6 +110,7 @@
   daylong: 'todo o dia'
   Select vehicle_type: 'Seleccione o tipo de veículo'
   Select rim_type: 'Seleccione o tipo de jante'
+  garage_recruitable: "Garages alistables"
 
   simple_form:
     labels:

@@ -1,14 +1,7 @@
 require 'spec_helper'
 
 describe 'GarageRegistrations' do
-  before(:each) do
-    user = FactoryGirl.create(:api_user)
-    @auth_token = { 'Authorization' => token_header(user.auth_token) }
-  end
-
-  def token_header(token)
-    ActionController::HttpAuthentication::Token.encode_credentials(token)
-  end
+  api_user_token
 
   describe 'create' do
 

@@ -1,0 +1,37 @@
+.row
+  .col-sm-6
+    .map-info
+      .media
+        .media-body
+          ul.list-unstyled.list-info
+            li
+              span.icon.glyphicon.glyphicon-home
+              label = t('name').humanize
+              = @garage_recruitable.name
+            li
+              span.icon.glyphicon.glyphicon-map-marker
+              label = t('street').humanize
+              = @garage_recruitable.complete_address
+            li
+              span.icon.glyphicon.glyphicon-envelope
+              label = t('email').humanize
+              = @garage_recruitable.email
+            li
+              span.icon.glyphicon.glyphicon-earphone
+              label = t('phone').humanize
+              = @garage_recruitable.complete_contacts
+            li
+              span.icon.glyphicon.glyphicon-info-sign
+              label = t('tax_id').humanize
+              = @garage_recruitable.tax_id
+            li
+              span.icon.glyphicon.glyphicon-bell
+              label = t('status').humanize
+              span class="label #{status_label(@garage_recruitable.status)}" = t(@garage_recruitable.status)
+  .col-sm-6
+    .map-info
+      .media
+
+.row
+  .col-sm-4= link_to t('edit information').humanize, edit_garage_recruitable_path(@garage_recruitable), class: "btn btn-success btn-block btn-flat"
+  .col-sm-4= link_to t('list all garages').humanize, garage_recruitables_path, class: "btn btn-default btn-block btn-flat"

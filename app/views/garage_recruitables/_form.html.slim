@@ -1,0 +1,19 @@
+.row
+  = simple_form_for(@garage_recruitable) do |f|
+    = f.error_notification
+
+    .form-inputs
+      .col-sm-6 = f.input :name
+      .col-sm-6 = f.input :street
+      .col-sm-3 = f.input :status, as: :select, collection: translated_statuses, include_blank: false
+      .col-sm-3 = f.input :zip
+      .col-sm-3 = f.input :city
+      .col-sm-3 = f.input :province
+      .col-sm-3 = f.input :email
+      .col-sm-3 = f.input :phone
+      .col-sm-3 = f.input :mobile
+      .col-sm-3 = f.input :tax_id
+    .col-xs-12
+      .b-keypad
+        = link_to t('cancel').humanize, @garage_recruitable, class: "b-keypad__btn--default"
+        = f.button :submit, class: "b-keypad__btn--success"

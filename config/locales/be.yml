@@ -107,6 +107,7 @@ en:
   tourism: 'tourism'
   suv: 'suv'
   van: 'van'
+  garage_recruitable: "Garages alistables"
 
   simple_form:
     labels:

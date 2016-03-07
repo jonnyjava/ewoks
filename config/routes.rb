@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+
   root to: 'garages#index'
 
   namespace :api do
     namespace :v1 do
       resources :garages, only: [:index, :show]
       resources :garage_registrations, only: [:create, :update]
+      resources :garage_recruitables, only: [:show], param: :token
     end
   end
 
@@ -32,6 +34,9 @@ Rails.application.routes.draw do
 
     resources :properties
     resources :users
+    resources :garage_recruitables, except: :new do
+      get 'export', on: :collection
+    end
 
     devise_for :users, path: '', path_names: {
       sign_in: 'login',
@@ -40,11 +45,8 @@ Rails.application.routes.draw do
     }
 
     patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
-
     patch 'users/:id/regenerate_auth_token', to: 'users#regenerate_auth_token', as: 'regenerate_auth_token'
-
     delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
-
 
     match '/404' => 'errors#error_404', via: :all, as: 'error_404'
     match '/422' => 'errors#error_422', via: :all, as: 'error_422'

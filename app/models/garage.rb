@@ -86,7 +86,7 @@ class Garage < ActiveRecord::Base
   end
 
   def signup_verification_token
-    token = [email, status, created_at, 'endor is full of ewoks'].join
+    token = [email, status, created_at, ENV['AUTH_TOKENIZER']].join
     Digest::SHA1.hexdigest(token)
   end
 

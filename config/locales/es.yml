@@ -1,4 +1,10 @@
 es:
+  recruitable: 'Contactable'
+  waiting_for_answer: 'Esperando respuesta'
+  unreachable: 'Ilocalizable'
+  dismissed: 'No le interesa'
+  export_to_excel: 'Exportar'
+  filter_by: 'Filtrar por:'
   holidays: 'vacaciones'
   timetable: 'horarios'
   tyre fees: 'tarifas de neumaticos'
@@ -9,12 +15,18 @@ es:
   list all garages: 'ver todos los garages'
   garage:   'garage'
   address:  'dirección'
-  email:  'correo'
+  street:  'dirección'
+  zip: 'CP'
+  city: 'Ciudad'
+  province: 'Provincia'
+  mobile: 'Móvil'
+  tax_id: 'C.I.F'
+  email:  'Email'
   contact:  'contacto'
   website:  'sitio web'
   new garage: 'nuevo garage'
   edit garage: 'editar garage'
-  name: 'nombre'
+  name: 'Nombre'
   phone: 'teléfono'
   status: 'estado'
   actions: 'acciones'
@@ -106,6 +118,7 @@ es:
   suv: 'suv'
   van: 'furgoneta'
   daylong: 'Todo el dia'
+  garage_recruitable: "Garages por contactar"
 
   simple_form:
     labels:

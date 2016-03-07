@@ -1,0 +1,56 @@
+- content_for :content
+  .table-responsive
+    table.table.table-condensed.table-striped.table-bordered
+      thead
+        tr
+          th[colspan=2]
+            = form_tag(export_garage_recruitables_path(format: :xls), id: 'excel_form', name: 'excel_form', method: 'get', class: 'js_exportable') do
+              = button_tag(type: 'button', class:'b-keypad__btn--success bg-orange col-xs-12 js_excel_exporter')
+                i.fa.fa-download
+                = t("export_to_excel")
+          th = select_status('status', value_of_param_in?(params, 'status'), {class: 'form-control js_searchable js_selectable'})
+          th = filter_tag('name')
+          th[colspan=2] = filter_tag('zip', { maxlength: 5 })
+          th[colspan=2] = filter_tag('city')
+          th = filter_tag('email')
+          th
+            =form_tag(garage_recruitables_path, name: 'filter_by', method: 'get') do
+              = button_tag(type: 'button', class:'b-keypad__btn--success bg-orange col-xs-12 js_search')
+                i.fa.fa-search
+          th[colspan=2]
+        tr
+          th.b-crudbar
+            i[class="b-crudbar__btn--default fa fa-check-square js_check_toggler" data-all-selected="false"]
+          th = t('actions').humanize
+          th = t('status').humanize
+          th = t('name').humanize
+          th = t('street').humanize
+          th = t('zip').humanize
+          th = t('city').humanize
+          th = t('province').humanize
+          th = t('email').humanize
+          th = t('phone').humanize
+          th = t('mobile').humanize
+          th = t('tax_id').humanize.upcase
+        tbody
+        - @garage_recruitables.each do |garage_recruitable|
+          tr
+            td.b-crudbar
+              = check_box_tag('ids[]', garage_recruitable.id, false, id: "id_#{garage_recruitable.id}", class: 'js_select_all js_exportable')
+            td.b-crudbar
+              = link_to content_tag(:i, nil, class: "fa fa-eye"), garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default', target: 'blank'
+              = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_garage_recruitable_path(garage_recruitable), class: 'b-crudbar__btn--default', target: 'blank'
+            td
+              span class="label #{status_label(garage_recruitable.status)}" = t("#{garage_recruitable.status}")
+            td = link_to garage_recruitable.name, garage_recruitable_path(garage_recruitable)
+            td = garage_recruitable.street
+            td = garage_recruitable.zip
+            td = garage_recruitable.city
+            td = garage_recruitable.province
+            td = garage_recruitable.email
+            td = garage_recruitable.phone
+            td = garage_recruitable.mobile
+            td = garage_recruitable.tax_id
+  = paginate @garage_recruitables
+
+= render template: "layouts/box", locals: { title: t('garages list').humanize }

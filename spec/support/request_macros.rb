@@ -15,8 +15,9 @@ module RequestMacros
 
   def login_owner
     before(:each) do
-      user = FactoryGirl.create(:owner)
-      post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
+      garage = FactoryGirl.create(:garage)
+      garage.create_my_owner
+      post_via_redirect user_session_path, 'user[email]' => garage.user.email, 'user[password]' => garage.user.password
     end
   end
 
@@ -24,6 +25,13 @@ module RequestMacros
     before(:each) do
       user = FactoryGirl.create(:api_user)
       post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
+    end
+  end
+
+  def api_user_token
+    before(:each) do
+      user = FactoryGirl.create(:api_user)
+      @auth_token = { 'Authorization' => token_header(user.auth_token) }
     end
   end
 end

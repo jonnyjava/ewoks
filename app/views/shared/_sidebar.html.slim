@@ -37,6 +37,6 @@ aside.left-side.sidebar-offcanvas
           span = t('garage').humanize
 
       - if current_user.admin?
-        li class=(current_page?(properties_path) ? "active" : nil) = link_to properties_path
-          i.fa.fa-cog
-          span = t('properties').humanize
+        li class=(current_page?(garage_recruitables_path) ? "active" : nil) = link_to garage_recruitables_path
+          i.fa.fa-wrench
+          span = t('garage_recruitable').humanize

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('status').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('name').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('street').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('zip').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('city').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('province').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('email').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('phone').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('mobile').humanize %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t('tax_id').humanize.upcase %></Data></Cell>
+        <Cell><Data ss:Type="String">Token</Data></Cell>
+      </Row>
+    <% @garage_recruitables.each do |garage_recruitable| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= garage_recruitable.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t(garage_recruitable.status) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.street %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.zip %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.city %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.province %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.phone %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.mobile %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.tax_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= garage_recruitable.token%></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
