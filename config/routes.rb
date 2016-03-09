@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :garages, only: [:index, :show]
       resources :garage_registrations, only: [:create, :update]
-      resources :garage_recruitables, only: [:show], param: :token
+      resources :garage_recruitables, only: [:show, :update], param: :token
     end
   end
 

@@ -3,6 +3,7 @@ es:
   waiting_for_answer: 'Esperando respuesta'
   unreachable: 'Ilocalizable'
   dismissed: 'No le interesa'
+  already_registered: 'Este garage ya está registrado'
   export_to_excel: 'Exportar'
   filter_by: 'Filtrar por:'
   holidays: 'vacaciones'

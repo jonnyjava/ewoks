@@ -4,6 +4,7 @@ en:
   tyre fees: "tyre fees"
   information: "information"
   garage profile: "garage profile"
+  already_registered: 'this garage is already registered'
   delete image: 'delete image'
   edit information: 'edit information'
   list all garages: 'list all garages'
