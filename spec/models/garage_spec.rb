@@ -17,9 +17,11 @@ describe Garage do
   it { is_expected.to validate_uniqueness_of(:email) }
 
   describe 'callbacks' do
-    let(:garage) { FactoryGirl.create(:garage) }
-    it { Garage.any_instance.should_receive(:send_signup_confirmation).with(garage.email) }
-    xit { expect_any_instance_of(Garage).to receive(:send_signup_confirmation).with(garage.email) }
+    after(:each) do
+      FactoryGirl.create(:garage)
+    end
+    it { expect_any_instance_of(Garage).to receive(:send_signup_confirmation) }
+    it { expect_any_instance_of(Garage).to receive(:create_my_timetable) }
   end
 
   describe 'signup_verification_token' do
