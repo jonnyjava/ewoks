@@ -1,5 +1,5 @@
 class GarageRecruitable < ActiveRecord::Base
-  enum status: [ :recruitable, :waiting_for_answer, :unreachable, :dismissed ]
+  enum status: [ :recruitable, :waiting_for_answer, :unreachable, :dismissed, :recruited ]
 
   validates :name, :email, :tax_id, presence: true
   validates :tax_id, uniqueness: true
