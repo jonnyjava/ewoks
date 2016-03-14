@@ -24,11 +24,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    @logged_user.admin? || @logged_user.country_manager?
+    @logged_user.admin? || belongs_to_country_manager_country?
   end
 
   def show?
-    @logged_user.admin? || belongs_to_logged_user_country? || is_himself?
+    @logged_user.admin? || belongs_to_country_manager_country? || is_himself?
   end
 
   def new?
@@ -36,7 +36,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    @logged_user.admin? || belongs_to_logged_user_country? || is_himself?
+    @logged_user.admin? || belongs_to_country_manager_country? || is_himself?
   end
 
   def create?
@@ -44,7 +44,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    @logged_user.admin? || belongs_to_logged_user_country? || is_himself?
+    @logged_user.admin? || belongs_to_country_manager_country? || is_himself?
   end
 
   def destroy?
@@ -52,14 +52,23 @@ class UserPolicy < ApplicationPolicy
   end
 
   def regenerate_auth_token?
-    @logged_user.admin? || belongs_to_logged_user_country? || is_himself?
+    @logged_user.admin? || (@user.api? && is_himself?)
   end
 
-  def belongs_to_logged_user_country?
-    @logged_user.country_manager? and (@user.blank? || (@logged_user.country == @user.try(:country)))
-  end
+  private
+    def belongs_to_country_manager_country?
+      @logged_user.country_manager? && (is_himself? || is_owner?) && share_the_same_country?
+    end
 
-  def is_himself?
-    @logged_user == @user
-  end
+    def is_himself?
+      @logged_user == @user
+    end
+
+    def is_owner?
+      (@user.try(:role) && @user.owner?) || (@user.try(:all?) && @user.all?(&:owner?))
+    end
+
+    def share_the_same_country?
+      (@logged_user.try(:country) == @user.try(:country)) || (@user.try(:all?) && @user.all?{|s| s.country == @logged_user.country})
+    end
 end

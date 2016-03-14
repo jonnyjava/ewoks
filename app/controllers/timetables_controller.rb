@@ -3,6 +3,7 @@ class TimetablesController < ApplicationController
 
   before_action :set_garage
   before_action :set_timetable, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   def index
     @timetables = @garage.timetables

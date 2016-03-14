@@ -59,12 +59,12 @@ class GaragePolicy < ApplicationPolicy
   def destroy?
     @user.admin? || belongs_to_user_country?
   end
+  private
+    def belongs_to_user_country?
+      @user.country_manager? and (@garage.blank? || (@user.country == @garage.country))
+    end
 
-  def belongs_to_user_country?
-    @user.country_manager? and (@garage.blank? || (@user.country == @garage.country))
-  end
-
-  def belongs_to_user?
-    @garage.owner_id == @user.id
-  end
+    def belongs_to_user?
+      @garage.owner_id == @user.id
+    end
 end
