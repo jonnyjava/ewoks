@@ -11,21 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304104636) do
+ActiveRecord::Schema.define(version: 20160314112535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "garage_properties", force: :cascade do |t|
-    t.string   "value",       limit: 255
-    t.integer  "garage_id"
-    t.integer  "property_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "garage_properties", ["garage_id"], name: "index_garage_properties_on_garage_id", using: :btree
-  add_index "garage_properties", ["property_id"], name: "index_garage_properties_on_property_id", using: :btree
 
   create_table "garage_recruitables", force: :cascade do |t|
     t.string   "name"
@@ -79,13 +68,6 @@ ActiveRecord::Schema.define(version: 20160304104636) do
   end
 
   add_index "holidays", ["garage_id"], name: "index_holidays_on_garage_id", using: :btree
-
-  create_table "properties", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "type_of",    limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "timetables", force: :cascade do |t|
     t.integer  "garage_id"

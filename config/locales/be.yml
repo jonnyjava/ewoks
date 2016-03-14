@@ -34,11 +34,7 @@ en:
   Argentina: 'Argentina'
   France: 'Francia'
   edit user: 'edit user'
-  edit property: 'edit property'
   type: 'type'
-  new property: 'new property'
-  properties list: 'properties list'
-  new property: 'new property'
   123Mecanico: '123Mecanico'
   control panel: 'control panel'
   sign out: 'sign out'
@@ -47,7 +43,6 @@ en:
   search: 'search'
   garages: 'garages'
   users: 'users'
-  properties: 'properties'
   hello: 'hello'
   holiday edit: 'holiday edit'
   start date: 'start date'
@@ -151,9 +146,6 @@ en:
       user:
         create: "Add user"
         update: "Update user"
-      property:
-        create: 'Add property'
-        update: 'Update property'
       holiday:
         create: 'Add holiday'
         update: 'Update holiday'

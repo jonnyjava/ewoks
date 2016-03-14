@@ -3,13 +3,10 @@ class Garage < ActiveRecord::Base
   has_many :holidays
   has_one :timetable
   has_many :tyre_fees
-  has_many :garage_properties
-  has_many :properties, through: :garage_properties
 
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
-  has_attached_file :logo, storage: :s3, s3_credentials: Proc.new { |a| a.instance.s3_credentials }, url: ':s3_domain_url',
-  path: '/:class/:attachment/:id_partition/:style/:filename', default_url: 'avatar_default.jpg'
+  has_attached_file :logo
   validates_attachment_content_type :logo, content_type: %w(image/png image/jpeg)
 
   geocoded_by :address
@@ -127,11 +124,5 @@ class Garage < ActiveRecord::Base
     garages_opened = Garage.garages_without_holidays
     garage_with_holidays_opened = Garage.by_date(date)
     garage_with_holidays_opened | garages_opened
-  end
-
-  def s3_credentials
-    { bucket: ENV['AWS_BUCKET_NAME'],
-      access_key_id: ENV['AWS_SECRET_KEY'],
-      secret_access_key: ENV['AWS_ACCESS_KEY_ID'] }
   end
 end

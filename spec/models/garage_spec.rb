@@ -5,7 +5,6 @@ describe Garage do
   it { is_expected.to have_many(:holidays) }
   it { is_expected.to have_many(:tyre_fees) }
   it { is_expected.to have_one(:timetable) }
-  it { is_expected.to have_many(:properties).through(:garage_properties) }
   it { is_expected.to have_attached_file(:logo) }
 
   it { is_expected.to validate_presence_of(:street) }

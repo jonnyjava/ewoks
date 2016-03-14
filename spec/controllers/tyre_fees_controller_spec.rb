@@ -54,14 +54,12 @@ describe TyreFeesController do
 
     describe 'with invalid params' do
       it 'assigns a newly created but unsaved tyre_fee as @tyre_fee' do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TyreFee).to receive(:save).and_return(false)
         post :create, { garage_id: garage, tyre_fee: invalid_attributes }
         expect(assigns(:tyre_fee)).to be_a_new(TyreFee)
       end
 
       it 're-renders the new template' do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TyreFee).to receive(:save).and_return(false)
         post :create, { garage_id: garage, tyre_fee: invalid_attributes }
         expect(response).to render_template('new')
@@ -90,14 +88,12 @@ describe TyreFeesController do
 
     describe 'with invalid params' do
       it 'assigns the tyre_fee as @tyre_fee' do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TyreFee).to receive(:save).and_return(false)
         put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes }
         expect(assigns(:tyre_fee)).to eq(tyre_fee)
       end
 
       it 're-renders the edit template' do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TyreFee).to receive(:save).and_return(false)
         put :update, { garage_id: garage, id: tyre_fee.to_param, tyre_fee: invalid_attributes }
         expect(response).to render_template('edit')

@@ -5,7 +5,6 @@ module Geocoder
       private
 
       def read_fixture(file)
-        # specify the directory where you saved your json file
         File.read(File.join('spec', 'fixtures', 'geocoder', file)).strip.gsub(/\n\s*/, '')
       end
     end

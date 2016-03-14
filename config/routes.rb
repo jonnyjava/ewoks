@@ -29,10 +29,8 @@ Rails.application.routes.draw do
       resources :tyre_fees
       resources :holidays
       resources :timetables
-      resources :garage_properties, path: 'properties', as: 'properties'
     end
 
-    resources :properties
     resources :users
     resources :garage_recruitables, except: :new do
       get 'export', on: :collection

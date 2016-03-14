@@ -26,7 +26,6 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'pg'
 gem 'faker'
-gem 'aws-sdk'
 gem 'unicorn'
 gem 'rack-cors', require: 'rack/cors'
 
