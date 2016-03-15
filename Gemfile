@@ -52,3 +52,7 @@ group :development, :test do
   gem 'email_spec', '1.6.0'
   gem 'capybara', '2.4.1'
 end
+
+group :test do
+  gem "codeclimate-test-reporter", require: nil
+end

@@ -1,3 +1,7 @@
+[![Code Climate](https://codeclimate.com/github/jonnyjava/ewoks/badges/gpa.svg)](https://codeclimate.com/github/jonnyjava/ewoks)
+[![Test Coverage](https://codeclimate.com/github/jonnyjava/ewoks/badges/coverage.svg)](https://codeclimate.com/github/jonnyjava/ewoks/coverage)
+[![](https://codeship.com/projects/de30bb30-ccd8-0133-9a39-062757a4ef78/status?branch=master)](https://codeship.com/projects/de30bb30-ccd8-0133-9a39-062757a4ef78/status?branch=master)
+
 # API for garages geolocalization.
 ##### v1.0.4
 This project uses Rails 4.2.0 and Ruby 2.2.3
