@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Garage do
   it { is_expected.to belong_to(:user) }
-  it { is_expected.to have_many(:holidays) }
-  it { is_expected.to have_many(:tyre_fees) }
-  it { is_expected.to have_one(:timetable) }
+  it { is_expected.to have_many(:holidays).dependent(:destroy) }
+  it { is_expected.to have_many(:tyre_fees).dependent(:destroy) }
+  it { is_expected.to have_one(:timetable).dependent(:destroy) }
   it { is_expected.to have_attached_file(:logo) }
 
   it { is_expected.to validate_presence_of(:street) }

@@ -1,8 +1,8 @@
 class Garage < ActiveRecord::Base
   belongs_to :user, foreign_key: 'owner_id'
-  has_many :holidays
-  has_one :timetable
-  has_many :tyre_fees
+  has_many :holidays, dependent: :destroy
+  has_one :timetable, dependent: :destroy
+  has_many :tyre_fees, dependent: :destroy
 
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
