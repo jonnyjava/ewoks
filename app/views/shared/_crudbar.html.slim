@@ -6,6 +6,7 @@
       method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'
 
   - else
+    = link_to content_tag(:i, nil, class: "fa fa-eye"), send(entity.pathify(''), entity), class: 'b-crudbar__btn--default'
     = link_to content_tag(:i, nil, class: "fa fa-edit"), send(entity.pathify('edit'), entity), class: 'b-crudbar__btn--default'
 
     - if entity.try(:status) === 'enabled'
