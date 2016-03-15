@@ -1,23 +1,28 @@
 class TyreFeesController < ApplicationController
   before_action :set_tyre_fee, only: [:show, :edit, :update, :destroy]
   before_action :set_garage
+  after_action :verify_authorized
 
   def index
     redirect_to user_path(current_user) unless policy(@garage).show?
     tyre_fees = @garage.tyre_fees.page(params[:page])
+    authorize tyre_fees
     @tyre_fees = TyreFeeDecorator.decorate_collection(tyre_fees)
   end
 
   def new
     @tyre_fee = @garage.tyre_fees.build
+    authorize @tyre_fee
   end
 
   def edit
     @tyre_fee = TyreFee.find(params[:id])
+    authorize @tyre_fee
   end
 
   def create
     @tyre_fee = TyreFee.create(tyre_fee_params)
+    authorize @tyre_fee
     respond_to do |format|
       if @tyre_fee.save
         format.html { redirect_to garage_tyre_fees_url(@garage), notice: "Tyre fee was successfully created." }
@@ -28,6 +33,7 @@ class TyreFeesController < ApplicationController
   end
 
   def update
+    authorize @tyre_fee
     respond_to do |format|
       if @tyre_fee.update(tyre_fee_params)
         format.html { redirect_to garage_tyre_fees_url(@garage), notice: "Tyre fee was successfully updated." }
@@ -38,6 +44,7 @@ class TyreFeesController < ApplicationController
   end
 
   def destroy
+    authorize @tyre_fee
     @tyre_fee.destroy
     respond_to do |format|
       format.html { redirect_to garage_tyre_fees_url, notice: "Tyre fee was successfully destroyed." }

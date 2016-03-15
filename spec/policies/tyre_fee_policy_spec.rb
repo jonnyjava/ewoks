@@ -12,8 +12,8 @@ describe TyreFeePolicy do
   let(:someone_else_tyre_fees) { FactoryGirl.create(:tyre_fee, garage: another_garage) }
 
   shared_examples_for "someone fully authorized" do
-    it { is_expected.not_to allow_action(:index) }
-    it { is_expected.to allow_action(:show) }
+    it { is_expected.to allow_action(:index) }
+    it { is_expected.not_to allow_action(:show) }
     it { is_expected.to allow_action(:new) }
     it { is_expected.to allow_action(:create) }
     it { is_expected.to allow_action(:edit) }

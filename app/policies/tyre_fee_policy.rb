@@ -7,11 +7,11 @@ class TyreFeePolicy < ApplicationPolicy
   end
 
   def index?
-    false
+    @user.admin? || belong_to_country_manager_country? || belong_to_owner?
   end
 
   def show?
-    @user.admin? || belong_to_country_manager_country? || belong_to_owner?
+    false
   end
 
   private
