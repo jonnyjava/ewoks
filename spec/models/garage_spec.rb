@@ -25,8 +25,8 @@ describe Garage do
 
   describe 'signup_verification_token' do
     it 'should generate an unique token' do
-      garage1 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
-      garage2 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
+      garage1 = FactoryGirl.create(:garage, status: 'to_confirm')
+      garage2 = FactoryGirl.create(:garage, status: 'to_confirm')
       token1 = garage1.signup_verification_token
       token2 = garage2.signup_verification_token
       expect(token1).not_to eq(token2)
@@ -35,8 +35,8 @@ describe Garage do
 
   describe 'find_by_token' do
     it 'should return only one garage' do
-      garage1 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
-      garage2 = FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
+      garage1 = FactoryGirl.create(:garage, status: 'to_confirm')
+      garage2 = FactoryGirl.create(:garage, status: 'to_confirm')
       token = garage1.signup_verification_token
       result = Garage.find_by_signup_verification_token(token)
       expect(result).to eq(garage1)
@@ -44,11 +44,20 @@ describe Garage do
     end
   end
 
-  describe 'disable!' do
-    it 'should make the garage inactive' do
-      garage = FactoryGirl.create(:garage)
-      garage.inactive!
-      expect(garage.status).to be(Garage::INACTIVE)
+  describe 'toggle_status' do
+    context 'with an active garage' do
+      it 'should turn the garage inactive' do
+        garage = FactoryGirl.create(:garage)
+        garage.toggle_status
+        expect(garage.status).to eq('inactive')
+      end
+    end
+    context 'with a garage to_confirm' do
+      it 'should not turn the garage inactive' do
+        garage = FactoryGirl.create(:garage, status: 'to_confirm')
+        garage.toggle_status
+        expect(garage.status).to eq('to_confirm')
+      end
     end
   end
 
@@ -61,7 +70,7 @@ describe Garage do
   end
 
   describe 'create_my_timetable' do
-    it 'should create a new owner who owns the garage' do
+    it 'should create a new timetable for the garage' do
       garage = FactoryGirl.create(:garage)
       garage.create_my_timetable
       expect(garage.timetable).not_to be_nil

@@ -3,7 +3,7 @@ html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
   body
-    - if @user.garage.status == Garage::ACTIVE
+    - if @user.garage.active?
       h1= t('Your account has been activated')
 
       = link_to t('you can login here'), new_user_session_url

@@ -14,14 +14,10 @@ class Garage < ActiveRecord::Base
   after_save :notify_my_owner, if: :status_changed?
   after_create :send_signup_confirmation, :create_my_timetable
 
-  ACTIVE = 1
-  INACTIVE = 0
-  TO_BE_CONFIRMED = -1
+  enum status: [ :inactive, :to_confirm, :active ]
   SERVICES = ["diagnósticos", "cambio de batería", "neumáticos", "cambio de aceite", "chapa y lunas", "frenado", "iluminación", "audio y multimedia", "motor", "escapes", "trenes y suspensión", "aire acondicionado"]
   SERVICE_TYPE = Hash[SERVICES.map.with_index { |obj, i| [i, obj] }]
 
-  scope :active, -> { where(status: ACTIVE) }
-  scope :to_confirm, -> { where(status: TO_BE_CONFIRMED) }
   scope :by_country, ->(country) { where(country: country) if country }
   scope :by_city, ->(city) { where(city: city) if city }
   scope :by_zip, ->(zip) { where(zip: zip) if zip }
@@ -32,6 +28,7 @@ class Garage < ActiveRecord::Base
   scope :by_diameter, ->(diameter) { by_tyre_fee.merge(TyreFee.by_diameter(diameter)) if diameter }
   scope :by_price_in_a_range, ->(min_price, max_price) { by_tyre_fee.merge(TyreFee.by_price_in_a_range(min_price, max_price)) }
   scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
+  scope :by_status, ->(status) { where(status: statuses[status]) if status }
 
   def address
     [street, province, city, zip, country].compact.join(', ')
@@ -40,26 +37,6 @@ class Garage < ActiveRecord::Base
   def address_changed?
     attrs = %w(street province city zip country)
     attrs.any? { |a| send "#{a}_changed?" }
-  end
-
-  def inactive!
-    update_attribute(:status, INACTIVE)
-  end
-
-  def active!
-    update_attribute(:status, ACTIVE)
-  end
-
-  def active?
-    status == ACTIVE
-  end
-
-  def inactive?
-    status == INACTIVE
-  end
-
-  def to_be_confirmed?
-    status == TO_BE_CONFIRMED
   end
 
   def create_my_owner
@@ -73,9 +50,13 @@ class Garage < ActiveRecord::Base
     Timetable.create(garage: self)
   end
 
+  def toggle_status
+    active? ? inactive! : active! unless to_confirm?
+  end
+
   def notify_my_owner
     return unless user
-    UserMailer.send_changed_status_notification(user).deliver_now if user.garage.status_was >= 0
+    UserMailer.send_changed_status_notification(user).deliver_now if !user.garage.to_confirm?
   end
 
   def send_signup_confirmation
@@ -103,7 +84,7 @@ class Garage < ActiveRecord::Base
 
   def self.find_by_signup_verification_token(token)
     garage = nil
-    Garage.to_confirm.each do |g|
+    Garage.by_status('to_confirm').each do |g|
       next unless g.signup_verification_token == token
       garage = g
       break

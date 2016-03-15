@@ -45,7 +45,7 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   garage.phone = '666 666 666'
   garage.tax_id = '999888777666123'
   garage.country = country
-  garage.status = Garage::ACTIVE
+  garage.status = 'active'
   garage.owner_id = owner.id
   garage.save!
 

@@ -2,8 +2,8 @@ class GarageDecorator < ApplicationDecorator
   include Draper::ViewHelpers
 
   def status
-    return 'to_confirm' if object.to_be_confirmed?
-    object.status == Garage::ACTIVE ? 'enabled' : 'disabled'
+    return 'to_confirm' if object.to_confirm?
+    object.active? ? 'enabled' : 'disabled'
   end
 
   def notifications

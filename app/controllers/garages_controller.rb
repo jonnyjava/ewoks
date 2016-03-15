@@ -69,8 +69,7 @@ class GaragesController < ApplicationController
 
   def toggle_status
     authorize @garage
-    @garage.active? ? @garage.inactive! : @garage.active! unless @garage.to_be_confirmed?
-
+    @garage.toggle_status
     respond_to do |format|
       format.html { redirect_to garages_url }
     end

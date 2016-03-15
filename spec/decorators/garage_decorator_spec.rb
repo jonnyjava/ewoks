@@ -3,28 +3,17 @@ describe GarageDecorator do
   let(:holiday) { FactoryGirl.create(:holiday) }
   let(:tyre_fee) { FactoryGirl.create(:tyre_fee) }
   let(:timetable) { FactoryGirl.create(:timetable) }
-  let(:garage_active) { FactoryGirl.create(:garage, status: Garage::ACTIVE) }
-
-  let(:garage_disabled) do
-    FactoryGirl.create(:garage, status: Garage::INACTIVE)
-  end
-  let(:garage_to_confirm) do
-    FactoryGirl.create(:garage, status: Garage::TO_BE_CONFIRMED)
-  end
-  let(:garage_completed) do
-    FactoryGirl.create(:garage, holidays: [holiday],
-      tyre_fees: [tyre_fee], timetable: timetable)
-  end
-  let(:garage_incompleted) do
-    FactoryGirl.create(:garage)
-  end
+  let(:garage) { FactoryGirl.create(:garage) }
+  let(:garage_disabled) { FactoryGirl.create(:garage, status: 'inactive') }
+  let(:garage_to_confirm) { FactoryGirl.create(:garage, status: 'to_confirm') }
+  let(:garage_completed) { FactoryGirl.create(:garage, holidays: [holiday], tyre_fees: [tyre_fee], timetable: timetable) }
 
   it { expect(garage_to_confirm.decorate.status).to eq('to_confirm') }
-  it { expect(garage_active.decorate.status).to eq('enabled') }
+  it { expect(garage.decorate.status).to eq('enabled') }
   it { expect(garage_disabled.decorate.status).to eq('disabled') }
 
   it 'should detect which data of garage are incomplete' do
-    response = garage_incompleted.decorate.notifications
+    response = garage.decorate.notifications
     expect(response).to have_selector('li', count: 2)
   end
 
