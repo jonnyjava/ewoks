@@ -15,7 +15,6 @@ describe GarageRecruitablePolicy do
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }
     it { is_expected.to allow_action(:destroy) }
-    it { is_expected.to allow_action(:export) }
   end
 
   shared_examples_for "someone unauthorized" do
@@ -24,7 +23,6 @@ describe GarageRecruitablePolicy do
     it { is_expected.not_to allow_action(:create) }
     it { is_expected.not_to allow_action(:edit) }
     it { is_expected.not_to allow_action(:destroy) }
-    it { is_expected.not_to allow_action(:export) }
   end
 
   context "for an admin" do

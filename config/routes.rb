@@ -31,9 +31,15 @@ Rails.application.routes.draw do
       resources :timetables
     end
 
+    namespace :garages do
+      resources :toggle_status, only: :update
+    end
+
     resources :users
-    resources :garage_recruitables, except: :new do
-      get 'export', on: :collection
+    resources :garage_recruitables, except: :new
+
+    namespace :recruitables do
+      resources :export, only: :index
     end
 
     devise_for :users, path: '', path_names: {
@@ -42,7 +48,6 @@ Rails.application.routes.draw do
       sign_up: 'register'
     }
 
-    patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
     patch 'users/:id/regenerate_auth_token', to: 'users#regenerate_auth_token', as: 'regenerate_auth_token'
     delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
 

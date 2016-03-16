@@ -15,7 +15,6 @@ describe GaragePolicy do
     it { is_expected.to allow_action(:create) }
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }
-    it { is_expected.to allow_action(:toggle_status) }
     it { is_expected.to allow_action(:destroy_logo) }
     it { is_expected.to allow_action(:destroy) }
   end
@@ -27,7 +26,6 @@ describe GaragePolicy do
     it { is_expected.not_to allow_action(:create) }
     it { is_expected.not_to allow_action(:edit) }
     it { is_expected.not_to allow_action(:update) }
-    it { is_expected.not_to allow_action(:toggle_status) }
     it { is_expected.not_to allow_action(:destroy_logo) }
     it { is_expected.not_to allow_action(:destroy) }
   end
@@ -51,7 +49,6 @@ describe GaragePolicy do
       it { is_expected.not_to allow_action(:create) }
       it { is_expected.not_to allow_action(:edit) }
       it { is_expected.not_to allow_action(:update) }
-      it { is_expected.not_to allow_action(:toggle_status) }
       it { is_expected.not_to allow_action(:destroy_logo) }
       it { is_expected.not_to allow_action(:destroy) }
     end
@@ -64,7 +61,6 @@ describe GaragePolicy do
       it { is_expected.not_to allow_action(:index) }
       it { is_expected.to allow_action(:edit) }
       it { is_expected.to allow_action(:update) }
-      it { is_expected.not_to allow_action(:toggle_status) }
       it { is_expected.not_to allow_action(:new) }
       it { is_expected.not_to allow_action(:create) }
       it { is_expected.to allow_action(:destroy_logo) }
