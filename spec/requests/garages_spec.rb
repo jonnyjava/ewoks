@@ -6,7 +6,7 @@ describe "Garages" do
   describe "#index" do
     shared_examples_for "an authorized page" do
       it "returning status 200" do
-        garage = FactoryGirl.create(:garage)
+        FactoryGirl.create(:garage)
         get garages_path
         expect(response.status).to be(200)
       end
@@ -14,7 +14,7 @@ describe "Garages" do
 
     shared_examples_for "an unauthorized page" do
       it "returning status 302" do
-        garage = FactoryGirl.create(:spanish_garage)
+        FactoryGirl.create(:spanish_garage)
         get garages_path
         expect(response.status).to be(302)
       end
