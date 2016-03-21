@@ -55,11 +55,26 @@ module FiltrableByGarage
       @user.country_manager? && its_garage_country_is_country_manager_country?
     end
 
-    def its_garage_country_is_country_manager_country?
-      raise NotImplementedError
+    def all_belong_to_country_manager_country?
+      all_garages_country_eq_country_manager_country? || belong_to_country_manager_country?
+    end
+
+    def all_garages_country_eq_country_manager_country?
+      return false unless @authorizable.try(:all?)
+      return false unless @user.country_manager?
+      countries = @authorizable.map(&:garage).map(&:country).uniq
+      countries.size == 1 && countries.first == @user.country
     end
 
     def is_its_owner?
-      raise NotImplementedError
+      return true if @authorizable.blank?
+      return @authorizable.garage.owner_id == @user.id if @authorizable.try(:garage)
+      garages = @authorizable.pluck(:garage_id).uniq
+      (garages.size == 1) && (garages.first == @user.garage.id)
+    end
+
+    def its_garage_country_is_country_manager_country?
+      return true if @authorizable.blank?
+      @user.country == @authorizable.garage.country
     end
 end
