@@ -19,11 +19,11 @@ module FiltrableByGarage
   end
 
   def index?
-    true
+    false
   end
 
   def show?
-    true
+    false
   end
 
   def new?

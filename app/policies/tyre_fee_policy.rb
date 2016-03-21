@@ -10,10 +10,6 @@ class TyreFeePolicy < ApplicationPolicy
     @user.admin? || belong_to_country_manager_country? || belong_to_owner?
   end
 
-  def show?
-    false
-  end
-
   private
     def is_its_owner?
       return true if @tyre_fee.blank?

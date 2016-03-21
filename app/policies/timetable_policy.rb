@@ -6,14 +6,6 @@ class TimetablePolicy < ApplicationPolicy
     @timetable = timetable
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
   private
     def is_its_owner?
       @timetable.garage.owner_id == @user.id
