@@ -34,11 +34,7 @@
   Argentina: 'Argentyna'
   France: 'Francja'
   edit user: 'Edytuj dane użytkownika'
-  edit property: 'Zmień własność'
   type: 'Typ'
-  new property: 'Nowa własność'
-  properties list: 'Lista własności'
-  new property: 'Nowa własność'
   123Mecanico: '123Mecanico'
   control panel: 'Panel zarządzania'
   sign out: 'wyloguj'
@@ -47,7 +43,6 @@
   search: 'szukaj'
   garages: 'Garaże'
   users: 'Użytkownicy'
-  properties: 'Właściwości'
   hello: 'Witaj'
   holiday edit: 'Edytuj urlop'
   start date: 'początek'
@@ -137,9 +132,6 @@
       user:
         create: 'Dodaj użytkownika'
         update: 'Aktualizuj użytkownika'
-      property:
-        create: 'Dodaj własność'
-        update: 'Aktualizuj własność'
       holiday:
         create: 'Dodaj urlop'
         update: 'Aktualizuj urlop'

@@ -4,7 +4,7 @@
       thead
         tr
           th[colspan=2]
-            = form_tag(export_garage_recruitables_path(format: :xls), id: 'excel_form', name: 'excel_form', method: 'get', class: 'js_exportable') do
+            = form_tag(recruitables_export_index_path(format: :xls), id: 'excel_form', name: 'excel_form', method: 'get', class: 'js_exportable') do
               = button_tag(type: 'button', class:'b-keypad__btn--success bg-orange col-xs-12 js_excel_exporter')
                 i.fa.fa-download
                 = t("export_to_excel")

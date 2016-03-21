@@ -7,4 +7,7 @@ Documentation:
 Style/Encoding:
   Description: 'Use UTF-8 as the source file encoding.'
   Enabled: false
-
+Style/IfUnlessModifier:
+ MaxLineLength: 120
+Style/StringLiterals:
+  EnforcedStyle: single_quotes

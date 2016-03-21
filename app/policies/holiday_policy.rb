@@ -1,61 +1,39 @@
 class HolidayPolicy < ApplicationPolicy
+  include FiltrableByGarage
+
   def initialize(user, holiday)
     @user = user
     @holiday = holiday
   end
 
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      if user.admin?
-        scope.all
-      elsif user.country_manager?
-        scope.includes(:garage).where('garages.country = ?', user.country).references(:garage)
-      else
-        scope.where(garage_id: user.garage.id)
-      end
-    end
-  end
-
   def index?
-    @user.admin? || @user.country_manager? || @user.owner?
+    @user.admin? || all_belong_to_country_manager_country? || belong_to_owner?
   end
 
   def show?
-    @user.admin? || belongs_to_user_country? || belongs_to_user?
+    @user.admin? || belong_to_country_manager_country? || belong_to_owner?
   end
 
-  def new?
-    @user.admin? || belongs_to_user_country? || belongs_to_user?
-  end
+  private
+    def is_its_owner?
+      return true if @holiday.blank?
+      return @holiday.garage.owner_id == @user.id if @holiday.try(:garage)
+      garages = @holiday.pluck(:garage_id).uniq
+      (garages.size == 1) && (garages.first == @user.garage.id)
+    end
 
-  def edit?
-    @user.admin? || belongs_to_user_country? || belongs_to_user?
-  end
+    def its_garage_country_is_country_manager_country?
+      @user.country == @holiday.garage.country
+    end
 
-  def create?
-    @user.admin? || belongs_to_user_country? || belongs_to_user?
-  end
+    def all_belong_to_country_manager_country?
+      belong_to_country_manager_country? || all_garages_country_eq_country_manager_country?
+    end
 
-  def update?
-    @user.admin? || belongs_to_user_country? || belongs_to_user?
-  end
-
-  def destroy?
-    @user.admin? || belongs_to_user_country? || belongs_to_user?
-  end
-
-  def belongs_to_user_country?
-    @user.country_manager? and (@user.country == @holiday.garage.country)
-  end
-
-  def belongs_to_user?
-    @holiday.garage.owner_id == @user.id
-  end
+    def all_garages_country_eq_country_manager_country?
+      return false unless @holiday.try(:all?)
+      return false unless @user.country_manager?
+      countries = @holiday.map(&:garage).map(&:country).uniq
+      countries.size == 1 && countries.first == @user.country
+    end
 end

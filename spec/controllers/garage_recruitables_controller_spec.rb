@@ -32,15 +32,6 @@ describe GarageRecruitablesController do
     end
   end
 
-  describe "#export" do
-    it "should render the export page" do
-      ids = []
-      5.times { ids << FactoryGirl.create(:garage_recruitable).to_param }
-      get :export, {ids: ids, format: :xls}, valid_session
-      expect(response.content_type).to eq(Mime::XLS)
-    end
-  end
-
   describe "#create" do
     context "with valid params" do
       it "should create a new GarageRecruitable" do

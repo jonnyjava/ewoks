@@ -26,16 +26,20 @@ Rails.application.routes.draw do
     post '/wizard_create_fee/:garage_id', to: 'wizard#create_fee', as: 'wizard_create_fee'
 
     resources :garages do
-      resources :tyre_fees
+      resources :tyre_fees, except: :show
       resources :holidays
       resources :timetables
-      resources :garage_properties, path: 'properties', as: 'properties'
     end
 
-    resources :properties
+    namespace :garages do
+      resources :toggle_status, only: :update
+    end
+
     resources :users
-    resources :garage_recruitables, except: :new do
-      get 'export', on: :collection
+    resources :garage_recruitables, except: :new
+
+    namespace :recruitables do
+      resources :export, only: :index
     end
 
     devise_for :users, path: '', path_names: {
@@ -44,13 +48,12 @@ Rails.application.routes.draw do
       sign_up: 'register'
     }
 
-    patch 'garages/:id/toggle_status', to: 'garages#toggle_status', as: 'toggle_status'
     patch 'users/:id/regenerate_auth_token', to: 'users#regenerate_auth_token', as: 'regenerate_auth_token'
     delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
 
-    match '/404' => 'errors#error_404', via: :all, as: 'error_404'
-    match '/422' => 'errors#error_422', via: :all, as: 'error_422'
-    match '/500' => 'errors#error_500', via: :all, as: 'error_500'
+    match 'public/404' => 'errors#error_404', via: :all, as: 'error_404'
+    match 'public/422' => 'errors#error_422', via: :all, as: 'error_422'
+    match 'public/500' => 'errors#error_500', via: :all, as: 'error_500'
     match '*path', to: 'errors#error_404', via: :all
   end
 end

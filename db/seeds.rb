@@ -1,6 +1,8 @@
 country = 'Spain'
 
 admin = User.new
+admin.name = Faker::StarWars.planet.reverse.downcase.camelize
+admin.surname = "de los #{Faker::StarWars.specie}"
 admin.email = 'admin@123mecanico.es'
 admin.password  = 'Igotthepower'
 admin.password_confirmation  = 'Igotthepower'
@@ -9,6 +11,8 @@ admin.country = country
 admin.save!
 
 api = User.new
+api.name = Faker::StarWars.planet.reverse.downcase.camelize
+api.surname = "Mac #{Faker::StarWars.specie}"
 api.email = "spain_api@123mecanico.es"
 api.password  = 'Igotthetoken'
 api.password_confirmation  = 'Igotthetoken'
@@ -17,6 +21,8 @@ api.country = country
 api.save!
 
 country_manager = User.new
+country_manager.name = Faker::StarWars.planet.reverse.downcase.camelize
+country_manager.surname = "#{Faker::StarWars.specie}osky"
 country_manager.email = "spain_manager@123mecanico.es"
 country_manager.password  = 'Igotsomepower'
 country_manager.password_confirmation  = 'Igotsomepower'
@@ -45,9 +51,11 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   garage.phone = '666 666 666'
   garage.tax_id = '999888777666123'
   garage.country = country
-  garage.status = Garage::ACTIVE
+  garage.status = 'active'
   garage.owner_id = owner.id
   garage.save!
+
+  garage.user.update_attributes(name: Faker::Name.first_name, surname: Faker::Name.last_name)
 
   multiplier = 1
   TyreFee::VEHICLES.each do |vehicle|

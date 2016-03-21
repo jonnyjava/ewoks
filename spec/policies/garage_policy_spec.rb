@@ -6,32 +6,39 @@ describe GaragePolicy do
   let(:spanish_owner) { FactoryGirl.create(:user) }
   let(:spanish_garage) { FactoryGirl.create(:garage, country: 'Spain', owner_id: spanish_owner.id) }
   let(:another_garage) { FactoryGirl.create(:garage, country: 'Burundi') }
+  let(:api_user) { FactoryGirl.create(:api_user) }
 
-  context "for an admin" do
-    subject { GaragePolicy.new(admin, spanish_garage) }
+  shared_examples_for "someone fully authorized" do
     it { is_expected.to allow_action(:show) }
     it { is_expected.to allow_action(:index) }
     it { is_expected.to allow_action(:new) }
     it { is_expected.to allow_action(:create) }
     it { is_expected.to allow_action(:edit) }
     it { is_expected.to allow_action(:update) }
-    it { is_expected.to allow_action(:toggle_status) }
     it { is_expected.to allow_action(:destroy_logo) }
     it { is_expected.to allow_action(:destroy) }
+  end
+
+  shared_examples_for "someone totally unauthorized" do
+    it { is_expected.not_to allow_action(:show) }
+    it { is_expected.not_to allow_action(:index) }
+    it { is_expected.not_to allow_action(:new) }
+    it { is_expected.not_to allow_action(:create) }
+    it { is_expected.not_to allow_action(:edit) }
+    it { is_expected.not_to allow_action(:update) }
+    it { is_expected.not_to allow_action(:destroy_logo) }
+    it { is_expected.not_to allow_action(:destroy) }
+  end
+
+  context "for an admin" do
+    subject { GaragePolicy.new(admin, spanish_garage) }
+    it_behaves_like "someone fully authorized"
   end
 
   context "for a country_manager" do
     context "over a garage of his country" do
       subject { GaragePolicy.new(country_manager, spanish_garage) }
-      it { is_expected.to allow_action(:show) }
-      it { is_expected.to allow_action(:index) }
-      it { is_expected.to allow_action(:new) }
-      it { is_expected.to allow_action(:create) }
-      it { is_expected.to allow_action(:edit) }
-      it { is_expected.to allow_action(:update) }
-      it { is_expected.to allow_action(:toggle_status) }
-      it { is_expected.to allow_action(:destroy_logo) }
-      it { is_expected.to allow_action(:destroy) }
+      it_behaves_like "someone fully authorized"
     end
 
     context "over a garage of another country" do
@@ -42,7 +49,6 @@ describe GaragePolicy do
       it { is_expected.not_to allow_action(:create) }
       it { is_expected.not_to allow_action(:edit) }
       it { is_expected.not_to allow_action(:update) }
-      it { is_expected.not_to allow_action(:toggle_status) }
       it { is_expected.not_to allow_action(:destroy_logo) }
       it { is_expected.not_to allow_action(:destroy) }
     end
@@ -55,7 +61,6 @@ describe GaragePolicy do
       it { is_expected.not_to allow_action(:index) }
       it { is_expected.to allow_action(:edit) }
       it { is_expected.to allow_action(:update) }
-      it { is_expected.not_to allow_action(:toggle_status) }
       it { is_expected.not_to allow_action(:new) }
       it { is_expected.not_to allow_action(:create) }
       it { is_expected.to allow_action(:destroy_logo) }
@@ -64,15 +69,12 @@ describe GaragePolicy do
 
     context "over another garage " do
       subject { GaragePolicy.new(spanish_owner, another_garage) }
-      it { is_expected.not_to allow_action(:show) }
-      it { is_expected.not_to allow_action(:index) }
-      it { is_expected.not_to allow_action(:new) }
-      it { is_expected.not_to allow_action(:create) }
-      it { is_expected.not_to allow_action(:edit) }
-      it { is_expected.not_to allow_action(:update) }
-      it { is_expected.not_to allow_action(:toggle_status) }
-      it { is_expected.not_to allow_action(:destroy_logo) }
-      it { is_expected.not_to allow_action(:destroy) }
+      it_behaves_like "someone totally unauthorized"
     end
+  end
+
+  context "for an api_user" do
+    subject { GaragePolicy.new(api_user, spanish_garage) }
+    it_behaves_like "someone totally unauthorized"
   end
 end

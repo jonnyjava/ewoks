@@ -14,7 +14,7 @@ class PublicFormController < ApplicationController
 
     @garage = Garage.new(garage_params)
     @garage.country = fetch_country_from_locale(I18n.locale)
-    @garage.status = Garage::TO_BE_CONFIRMED
+    @garage.status = 'to_confirm'
     @timetable = Timetable.new(timetable_params)
     @holiday = Holiday.new(holiday_params)
     @extra_holidays = create_extra_holidays(holiday_rows)

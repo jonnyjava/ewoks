@@ -1,11 +1,8 @@
 class User < ActiveRecord::Base
   before_create :set_auth_token
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_one :garage, foreign_key: 'owner_id'
+  has_one :garage, foreign_key: 'owner_id', dependent: :destroy
   enum role: [:admin, :country_manager, :owner, :api]
 
   ADMIN = roles[:admin]

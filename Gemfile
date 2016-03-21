@@ -26,7 +26,6 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'pg'
 gem 'faker'
-gem 'aws-sdk'
 gem 'unicorn'
 gem 'rack-cors', require: 'rack/cors'
 
@@ -55,4 +54,5 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 end

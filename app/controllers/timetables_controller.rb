@@ -3,6 +3,7 @@ class TimetablesController < ApplicationController
 
   before_action :set_garage
   before_action :set_timetable, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   def index
     @timetables = @garage.timetables
@@ -27,10 +28,8 @@ class TimetablesController < ApplicationController
     respond_to do |format|
       if @timetable.save
         format.html { redirect_to edit_garage_timetable_url(@garage, @timetable), notice: "Timetable was successfully created." }
-        format.json { render :show, status: :created, location: @timetable }
       else
         format.html { render :new }
-        format.json { render json: @timetable.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,10 +41,8 @@ class TimetablesController < ApplicationController
     respond_to do |format|
       if @timetable.update(time_slots)
         format.html { redirect_to edit_garage_timetable_url(@garage, @timetable), notice: "Timetable was successfully updated." }
-        format.json { render :show, status: :ok, location: @timetable }
       else
         format.html { render :edit }
-        format.json { render json: @timetable.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +52,6 @@ class TimetablesController < ApplicationController
     @timetable.destroy
     respond_to do |format|
       format.html { redirect_to edit_garage_timetable_url(@garage, @garage.timetable), notice: "Timetable was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

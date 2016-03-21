@@ -1,5 +1,5 @@
 class GaragesController < ApplicationController
-  before_action :set_garage, only: [:show, :edit, :update, :destroy, :toggle_status, :destroy_logo]
+  before_action :set_garage, only: [:show, :edit, :update, :destroy, :destroy_logo]
   skip_before_filter :authenticate_user!, only: :signup_verification
   after_action :verify_authorized, except: :signup_verification
 
@@ -64,15 +64,6 @@ class GaragesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to garage_url @garage }
-    end
-  end
-
-  def toggle_status
-    authorize @garage
-    @garage.active? ? @garage.inactive! : @garage.active! unless @garage.to_be_confirmed?
-
-    respond_to do |format|
-      format.html { redirect_to garages_url }
     end
   end
 

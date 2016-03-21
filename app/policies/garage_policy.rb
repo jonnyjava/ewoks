@@ -44,10 +44,6 @@ class GaragePolicy < ApplicationPolicy
     @user.admin? || belongs_to_user_country?
   end
 
-  def toggle_status?
-    @user.admin? || belongs_to_user_country?
-  end
-
   def update?
     @user.admin? || belongs_to_user_country? || belongs_to_user?
   end
@@ -60,11 +56,12 @@ class GaragePolicy < ApplicationPolicy
     @user.admin? || belongs_to_user_country?
   end
 
-  def belongs_to_user_country?
-    @user.country_manager? and (@garage.blank? || (@user.country == @garage.country))
-  end
+  private
+    def belongs_to_user_country?
+      @user.country_manager? and (@garage.blank? || (@user.country == @garage.country))
+    end
 
-  def belongs_to_user?
-    @garage.owner_id == @user.id
-  end
+    def belongs_to_user?
+      @garage.owner_id == @user.id
+    end
 end

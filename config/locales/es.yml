@@ -47,11 +47,7 @@ es:
   Argentina: 'Argentina'
   France: 'Francia'
   edit user: 'editar usuario'
-  edit property: 'editar propiedad'
   type: 'tipo'
-  new property: 'nueva propiedad'
-  properties list: 'listado de propiedades'
-  new property: 'nueva propiedad'
   123Mecanico: '123Mecanico'
   control panel: 'panel de control'
   sign out: 'desconectar'
@@ -60,7 +56,6 @@ es:
   search: 'buscar'
   garages: 'garages'
   users: 'usuarios'
-  properties: 'propiedades'
   hello: 'hola'
   holiday edit: 'editar vacaciones'
   start date: 'fecha de inicio'
@@ -157,9 +152,6 @@ es:
       user:
         create: 'Añadir usuario'
         update: 'Actualizar usuario'
-      property:
-        create: 'Añadir propiedad'
-        update: 'Actualizar propiedad'
       holiday:
         create: 'Añadir vacaciones'
         update: 'Actualizar vacaciones'
