@@ -17,6 +17,24 @@ es:
   categorized_services: Servicios
   your services: Tus servicios
   Listing service_categories: Servicio por categoria
+  demands_list: Peticiones
+  pending_demands_list: Peticiones pendientes
+  quote_proposals_list: Presupuestos
+  quote_proposal_edit: Editción del presupuesto
+  demand: Petición
+  attached_docs: documentos ajuntos
+  ttc_price: Precio
+  expiration: Validez
+  proposal: Detalles
+  new_quote_proposal: Nuevo presupuesto
+  quote_proposal: Presupuesto
+  no_demands_yet: No tienes peticiones de presupuestos todavia
+  service_category: Categoria
+  service: Servicio
+  car_details: Vehículo
+  contact_info: Contacto
+  comments: Comentarios
+  demand_details: Otros detalles
   garage:   'garage'
   address:  'dirección'
   street:  'dirección'

@@ -46,6 +46,11 @@ aside.left-side.sidebar-offcanvas
           i.fa.fa-cogs
           span = t('your services').humanize
 
+      - if current_user.admin? || current_user.owner?
+        li class=(current_page?(demands_path) ? "active" : nil) = link_to demands_path
+          i.fa.fa-money
+          span = t('demands_list').humanize
+
       - if current_user.admin?
         li class=(current_page?(garage_recruitables_path) ? "active" : nil) = link_to garage_recruitables_path
           i.fa.fa-book

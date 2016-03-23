@@ -11,10 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322115419) do
+ActiveRecord::Schema.define(version: 20160326061436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "demands", force: :cascade do |t|
+    t.string   "city"
+    t.integer  "service_category_id"
+    t.integer  "service_id"
+    t.string   "vin_number"
+    t.string   "brand"
+    t.string   "model"
+    t.string   "year"
+    t.string   "engine"
+    t.string   "engine_letters"
+    t.string   "name_and_surnames"
+    t.string   "phone"
+    t.string   "email"
+    t.boolean  "wants_newsletter"
+    t.boolean  "accepts_privacy"
+    t.text     "comments"
+    t.text     "demand_details"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "demands", ["service_category_id"], name: "index_demands_on_service_category_id", using: :btree
+  add_index "demands", ["service_id"], name: "index_demands_on_service_id", using: :btree
+
+  create_table "demands_garages", id: false, force: :cascade do |t|
+    t.integer "garage_id", null: false
+    t.integer "demand_id", null: false
+  end
+
+  add_index "demands_garages", ["demand_id", "garage_id"], name: "index_demands_garages_on_demand_id_and_garage_id", using: :btree
+  add_index "demands_garages", ["garage_id", "demand_id"], name: "index_demands_garages_on_garage_id_and_demand_id", using: :btree
 
   create_table "garage_recruitables", force: :cascade do |t|
     t.string   "name"
@@ -55,7 +87,6 @@ ActiveRecord::Schema.define(version: 20160322115419) do
     t.datetime "logo_updated_at"
     t.integer  "status",                                                default: -1
     t.string   "province",          limit: 255
-    t.string   "service_ids"
   end
 
   create_table "garages_services", id: false, force: :cascade do |t|
@@ -164,5 +195,7 @@ ActiveRecord::Schema.define(version: 20160322115419) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "demands", "service_categories"
+  add_foreign_key "demands", "services"
   add_foreign_key "services", "service_categories"
 end

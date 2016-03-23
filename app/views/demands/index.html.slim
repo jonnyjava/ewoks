@@ -1,0 +1,38 @@
+- content_for :content
+  - if @demands.present?
+    .table-responsive
+      table.table.table-condensed.table-striped.table-bordered
+        thead
+          tr
+            th
+            th =t('city')
+            th =t('service_category')
+            th =t('service')
+            th =t('car_details')
+            th =t('contact_info')
+            th =t('comments')
+          tbody
+          - @demands.each do |demand|
+            tr
+              td.b-crudbar
+                = link_to content_tag(:i, nil, class: "fa fa-eye"), demand_path(demand), class: 'b-crudbar__btn--default', target: 'blank'
+              td = demand.city
+              td = demand.service_category.name
+              td = demand.service.name
+              td
+                p = demand.vin_number
+                p = demand.brand
+                p = demand.model
+                p = demand.year
+                p = "#{demand.engine} - #{demand.engine_letters}"
+              td
+                p = demand.name_and_surnames
+                p = demand.phone
+                p = demand.email
+              td = demand.comments
+  - else
+    =t('no_demands_yet')
+
+  = paginate @demands
+
+= render template: "layouts/box", locals: { title: t('pending_demands_list').humanize }

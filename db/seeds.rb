@@ -1,8 +1,8 @@
 country = 'Spain'
 
 admin = User.new
-admin.name = Faker::StarWars.planet.reverse.downcase.camelize
-admin.surname = "de los #{Faker::StarWars.specie}"
+admin.name = "Lord Dark Poldo II"
+admin.surname = "de Poldis"
 admin.email = 'admin@123mecanico.es'
 admin.password  = 'Igotthepower'
 admin.password_confirmation  = 'Igotthepower'
@@ -46,8 +46,11 @@ service_category_names << ["Aire acondicionado",["Maintenimiento aire acondicion
 service_category_names << ["Otros servicios",["Otros servicios"]]
 
 service_category_names.each do |category|
-  sc = ServiceCategory.create(name: category[0])
-  category[1].each { |service| Service.create(name:service, service_category: sc)}
+  service_category = ServiceCategory.create(name: category[0])
+  category[1].each do |service|
+    service = Service.create(name:service, service_category: service_category)
+    FactoryGirl.create(:demand, service_category: service_category, service: service)
+  end
 end
 
 addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"Carrer de Salvador Giner, 12"}
@@ -94,7 +97,6 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   end
 end
 
-52.times do |i|
-  garage_recruitable = FactoryGirl.create(:garage_recruitable)
+30.times do |i|
+  FactoryGirl.create(:garage_recruitable)
 end
-

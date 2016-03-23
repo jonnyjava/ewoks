@@ -68,7 +68,7 @@
     label {
       font-size: 1.1em;
       color: #666;
-      width: 5em;
+      width: 10em;
     }
   }
 }
@@ -95,4 +95,8 @@
 }
 .logo img{
   width: 100%;
+}
+
+td {
+  vertical-align: top;
 }

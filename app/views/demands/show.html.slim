@@ -1,0 +1,79 @@
+.row
+  .col-sm-6.map-info.media.media-body
+    ul.list-unstyled.list-info
+      li
+        span.icon.glyphicon.glyphicon-map-marker
+        label = t('city').humanize
+        = @demand.city
+      li
+        span.icon.glyphicon.glyphicon-list
+        label =t('service category')
+        = @demand.service_category.name
+      li
+        span.icon.glyphicon.glyphicon-list-alt
+        label =t('service')
+        = @demand.service.name
+      li
+        span.icon.glyphicon.glyphicon-user
+        label =t('name and surnames')
+        = @demand.name_and_surnames
+      li
+        span.icon.glyphicon.glyphicon-earphone
+        label =t('phone')
+        = @demand.phone
+      li
+        span.icon.glyphicon.glyphicon-envelope
+        label =t('email')
+        = @demand.email
+      li
+        span.icon.glyphicon.glyphicon-ok
+        label =t('wants newsletter')
+        = @demand.wants_newsletter
+      li
+        span.icon.glyphicon.glyphicon-ok
+        label =t('accepts privacy')
+        = @demand.accepts_privacy
+  .col-sm-6.map-info.media.media-body
+    ul.list-unstyled.list-info
+      li
+        span.icon.glyphicon.glyphicon-barcode
+        label =t('vin number')
+        = @demand.vin_number
+      li
+        span.icon.glyphicon.glyphicon-info-sign
+        label =t('brand')
+        = @demand.brand
+      li
+        span.icon.glyphicon.glyphicon-info-sign
+        label =t('model')
+        = @demand.model
+      li
+        span.icon.glyphicon.glyphicon-info-sign
+        label =t('year')
+        = @demand.year
+      li
+        span.icon.glyphicon.glyphicon-info-sign
+        label =t('engine')
+        = @demand.engine
+      li
+        span.icon.glyphicon.glyphicon-info-sign
+        label =t('engine letters')
+        = @demand.engine_letters
+.row
+  .col-sm-12.map-info.media.media-body
+    ul.list-unstyled.list-info
+      li
+        span.icon.glyphicon.glyphicon-pencil
+        label =t('comments')
+        = @demand.comments
+
+.row
+  .col-sm-12.map-info.media.media-body
+    ul.list-unstyled.list-info
+      li
+        span.icon.glyphicon.glyphicon-edit
+        label =t('demand details')
+        = @demand.demand_details
+
+.row
+  .col-sm-12= link_to t('pending_demands_list').humanize, demands_path, class: "btn btn-default btn-block btn-flat"

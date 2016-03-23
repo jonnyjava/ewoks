@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
     "#{name} #{surname}"
   end
 
+  def demands
+    garage.demands.page
+  end
+
   private
 
   def set_auth_token

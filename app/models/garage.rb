@@ -4,6 +4,7 @@ class Garage < ActiveRecord::Base
   has_one :timetable, dependent: :destroy
   has_many :tyre_fees, dependent: :destroy
   has_and_belongs_to_many :services
+  has_and_belongs_to_many :demands
   before_destroy { services.clear }
 
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
@@ -17,8 +18,6 @@ class Garage < ActiveRecord::Base
   after_create :send_signup_confirmation, :create_my_timetable
 
   enum status: [ :inactive, :to_confirm, :active ]
-  SERVICES = ["diagnósticos", "cambio de batería", "neumáticos", "cambio de aceite", "chapa y lunas", "frenado", "iluminación", "audio y multimedia", "motor", "escapes", "trenes y suspensión", "aire acondicionado"]
-  SERVICE_TYPE = Hash[SERVICES.map.with_index { |obj, i| [i, obj] }]
 
   scope :by_country, ->(country) { where(country: country) if country }
   scope :by_city, ->(city) { where(city: city) if city }
@@ -40,6 +39,10 @@ class Garage < ActiveRecord::Base
   def address_changed?
     attrs = %w(street province city zip country)
     attrs.any? { |a| send "#{a}_changed?" }
+  end
+
+  def assign_services(assignable_services)
+    services << assignable_services
   end
 
   def create_my_owner
@@ -103,5 +106,9 @@ class Garage < ActiveRecord::Base
     garages_opened = Garage.garages_without_holidays
     garage_with_holidays_opened = Garage.by_date(date)
     garage_with_holidays_opened | garages_opened
+  end
+
+  def self.assignable_garages(demand)
+    by_service(demand.service_id).find_by_radius_from_location(demand.city)
   end
 end

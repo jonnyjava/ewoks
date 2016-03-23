@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :demands, only: [:create]
       resources :garages, only: [:index, :show]
       resources :garage_registrations, only: [:create, :update]
       resources :garage_recruitables, only: [:show, :update], param: :token
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
 
     resources :service_categories, only: :index
     resources :services, only: :index
+    resources :demands, only: [:index, :show]
 
     resources :garages do
       resources :tyre_fees, except: :show
