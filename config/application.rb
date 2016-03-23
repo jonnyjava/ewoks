@@ -37,5 +37,16 @@ module Ewoks
     config.i18n.available_locales = ['it', 'pl', 'pt', 'fr', 'es', 'be', 'en']
 
     config.exceptions_app = routes
+
+    config.generators do |g|
+      g.orm             :active_record
+      g.template_engine :slim
+      g.test_framework  :rspec
+      g.stylesheets     false
+      g.javascripts     false
+      g.helper          false
+      g.decorator       false
+      g.jbuilder        false
+    end
   end
 end
