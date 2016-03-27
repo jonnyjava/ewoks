@@ -8,11 +8,11 @@
       li
         span.icon.glyphicon.glyphicon-list
         label =t('service category')
-        = @demand.service_category.name
+        = @demand.service_category_name
       li
         span.icon.glyphicon.glyphicon-list-alt
         label =t('service')
-        = @demand.service.name
+        = @demand.service_name
       li
         span.icon.glyphicon.glyphicon-user
         label =t('name and surnames')
@@ -41,24 +41,12 @@
         = @demand.vin_number
       li
         span.icon.glyphicon.glyphicon-info-sign
-        label =t('brand')
-        = @demand.brand
+        label =t('car_details')
+        = @demand.car_details
       li
         span.icon.glyphicon.glyphicon-info-sign
-        label =t('model')
-        = @demand.model
-      li
-        span.icon.glyphicon.glyphicon-info-sign
-        label =t('year')
-        = @demand.year
-      li
-        span.icon.glyphicon.glyphicon-info-sign
-        label =t('engine')
-        = @demand.engine
-      li
-        span.icon.glyphicon.glyphicon-info-sign
-        label =t('engine letters')
-        = @demand.engine_letters
+        label =t('engine_details')
+        = @demand.engine_details
 .row
   .col-sm-12.map-info.media.media-body
     ul.list-unstyled.list-info
@@ -76,4 +64,5 @@
         = @demand.demand_details
 
 .row
-  .col-sm-12= link_to t('pending_demands_list').humanize, demands_path, class: "btn btn-default btn-block btn-flat"
+  .col-sm-4= link_to t('edit information').humanize, edit_demand_path(@demand), class: "btn btn-success btn-block btn-flat"
+  .col-sm-4= link_to t('pending_demands_list').humanize, demands_path, class: "btn btn-default btn-block btn-flat"

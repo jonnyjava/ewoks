@@ -1,0 +1,12 @@
+.row.b-keypad
+  .col-xs-2
+    .hidden=f.input document.to_sym, as: 'file', input_html: { data: {child: document}, class: 'js_quote_upload' }
+    .js_doc_uploader.b-keypad__btn--success.bg-light-orange[data-parent=document]
+      = "#{t('browse')}    "
+      i.fa.fa-upload
+  .col-xs-10
+    .input-group
+      - filename = quote_proposal.send("#{document.to_s}_file_name".to_sym)
+      input.form-control[id="#{document}_filename" type='text' value="#{filename}" disabled="true"]
+      span.input-group-addon.add-on
+        i.fa.fa-file

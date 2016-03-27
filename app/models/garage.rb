@@ -3,8 +3,10 @@ class Garage < ActiveRecord::Base
   has_many :holidays, dependent: :destroy
   has_one :timetable, dependent: :destroy
   has_many :tyre_fees, dependent: :destroy
+  has_many :quote_proposals, dependent: :destroy
   has_and_belongs_to_many :services
-  has_and_belongs_to_many :demands
+  has_many :demands_garage
+  has_many :demands, through: :demands_garage
   before_destroy { services.clear }
 
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
@@ -72,6 +74,10 @@ class Garage < ActiveRecord::Base
   def signup_verification_token
     token = [email, status, created_at, ENV['AUTH_TOKENIZER']].join
     Digest::SHA1.hexdigest(token)
+  end
+
+  def unanswered_demands
+    demands.includes(:demands_garage).where('demands_garages.quote_proposal_id is null')
   end
 
   def self.by_default(zip, city)

@@ -1,12 +1,20 @@
 class Demand < ActiveRecord::Base
   belongs_to :service_category
   belongs_to :service
-  has_and_belongs_to_many :garages
+  has_many :demands_garage
+  has_many :garages, through: :demands_garage
+  has_many :quote_proposals, dependent: :destroy
   validates :city, :name_and_surnames, :phone, :email, presence: true
 
   after_create :assign
 
   def assign
     garages << Garage.assignable_garages(self)
+  end
+
+  def get_garage_association_id(garage)
+    association = demands_garage.where(garage: garage).first
+    return unless association.present?
+    association.id
   end
 end

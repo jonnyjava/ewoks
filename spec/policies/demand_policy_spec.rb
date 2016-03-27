@@ -16,10 +16,13 @@ describe DemandPolicy do
 
   context "for an admin" do
     subject { DemandPolicy.new(admin, demand) }
-    it_behaves_like "someone not authorized"
+    it { is_expected.not_to allow_action(:new) }
+    it { is_expected.to allow_action(:edit) }
+    it { is_expected.to allow_action(:update) }
     it { is_expected.to allow_action(:index) }
     it { is_expected.to allow_action(:show) }
     it { is_expected.not_to allow_action(:create) }
+    it { is_expected.to allow_action(:destroy) }
   end
 
   context "for a country_manager" do

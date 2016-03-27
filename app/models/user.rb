@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     garage.demands.page
   end
 
+  def unanswered_demands
+    garage.unanswered_demands.page
+  end
+
   private
 
   def set_auth_token

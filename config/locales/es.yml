@@ -17,10 +17,15 @@ es:
   categorized_services: Servicios
   your services: Tus servicios
   Listing service_categories: Servicio por categoria
-  demands_list: Peticiones
-  pending_demands_list: Peticiones pendientes
+  demands_list: Solicitudes
+  new_demand_assigned_to_you: 'Hay una nueva solicitud para ti'
+  demand_proposal_edit: 'Editar solicitud'
+  pending_demands_list: Solicitudes pendientes
   quote_proposals_list: Presupuestos
-  quote_proposal_edit: Editción del presupuesto
+  bact_to_quote_proposals_list: Volver al listado de presupuestos
+  quote_proposal_edit: Edición del presupuesto
+  quote_proposal_delete: Eliminar presupuesto
+  your_quote_for: Tu presupuesto
   demand: Petición
   attached_docs: documentos ajuntos
   ttc_price: Precio
@@ -28,7 +33,8 @@ es:
   proposal: Detalles
   new_quote_proposal: Nuevo presupuesto
   quote_proposal: Presupuesto
-  no_demands_yet: No tienes peticiones de presupuestos todavia
+  no_demands: No tienes solicitudes de presupuestos pendientes
+  no_quotes: No tienes presupuestos enviados
   service_category: Categoria
   service: Servicio
   car_details: Vehículo
@@ -85,7 +91,8 @@ es:
   holidays list: 'listado de vacaciones'
   new holiday: 'nuevas vacaciones'
   edit tyre fees: 'editar tarifa de neumaticos'
-  price: 'precio'
+  price: 'Precio'
+  valid_price: "Precio (solamente digitos y ',' para los decimales)"
   vehicle type: 'tipo de vehículo'
   minimal diameter: 'diametro mínimo'
   maximal diameter: 'diametro máximo'
@@ -136,12 +143,19 @@ es:
   van: 'furgoneta'
   daylong: 'Todo el dia'
   garage_recruitable: "Garages por contactar"
+  browse: 'Adjuntar documento'
+  go_to_the_quote: Ver presupuesto
+  go_to_the_demand: 'Ver solicitud'
 
   simple_form:
     labels:
       defaults:
         name: 'Nombre'
         surname : 'Apellido'
+        name_and_surnames: 'Nombre y apellidos'
+        wants_newsletter: 'Quiere recibir la newsletter'
+        comments: 'Comentarios'
+        demand_details: Otros detalles
         password: 'Contraseña'
         email: 'Correo electrónico'
         street: 'Dirección'
@@ -164,6 +178,11 @@ es:
         rim_type: 'Tipo de llanta'
         current_password: 'Contraseña anterior'
         password_confirmation: 'Repetir contraseña'
+  date:
+    order:
+      - :day
+      - :month
+      - :year
 
   helpers:
     submit:
@@ -182,3 +201,11 @@ es:
       timetable:
         create: 'Añadir horario'
         update: 'Actualizar horario'
+
+  activerecord:
+    errors:
+      models:
+        quote_proposal:
+          attributes:
+            ttc_price:
+              blank: 'no puede estar vacío'

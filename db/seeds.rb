@@ -80,6 +80,9 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
 
   garage.user.update_attributes(name: Faker::Name.first_name, surname: Faker::Name.last_name)
   garage.services << Service.all
+  garage.demands << Demand.all
+
+  10.times { |i| FactoryGirl.create(:quote_proposal, demands_garage: garage.demands_garage[i]) }
 
   multiplier = 1
   TyreFee::VEHICLES.each do |vehicle|

@@ -1,0 +1,48 @@
+- content_for :content
+  - if @quote_proposals.present?
+    .table-responsive
+      table.table.table-condensed.table-striped.table-bordered
+        thead
+          tr
+            - if current_user.admin? || current_user.owner?
+              th = t('actions').humanize
+            th =t('status').humanize
+            - if current_user.admin?
+              th.col-md-1 =t('garage').humanize
+            th =t('demand').humanize
+            th.col-md-2 =t('attached_docs').humanize
+            th =t('ttc_price').humanize
+            th =t('expiration').humanize
+            th.col-md-2 =t('proposal').humanize
+
+        tbody
+          - @quote_proposals.each do |quote_proposal|
+            tr
+              - if current_user.admin? || current_user.owner?
+                td.b-crudbar
+                  = link_to content_tag(:i, nil, class: "fa fa-eye"), quote_proposal, class: 'b-crudbar__btn--default', target: 'blank'
+                  = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_quote_proposal_path(quote_proposal), class: 'b-crudbar__btn--default', target: 'blank'
+                  - if quote_proposal.deliverable?
+                    = link_to content_tag(:i, nil, class: "fa fa-envelope"), quotables_deliver_path(quote_proposal), data: {confirm: 'Are you sure?'}, method: :put, class: 'b-crudbar__btn--default'
+                  = link_to content_tag(:i, nil, class: "fa fa-trash-o"), quote_proposal, method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'
+              td
+                span class="label #{status_label(quote_proposal.status)}" = t(quote_proposal.status)
+              - if current_user.admin?
+                td = link_to quote_proposal.garage.name, quote_proposal.garage, target: 'blank'
+              td = link_to quote_proposal.demand.id, quote_proposal.demand, target: 'blank'
+              td = quote_proposal.doc_list
+              td = quote_proposal.price
+              td = quote_proposal.expiration
+              td
+                a data-toggle="collapse" href="#proposal_#{quote_proposal.id}"
+                  em
+                    small = quote_proposal.shortened_text
+                    i.fa.fa-ellipsis-h
+                div[id="proposal_#{quote_proposal.id}", class="collapse"]
+                  = quote_proposal.proposal
+  - else
+    =t('no_quotes')
+
+  = paginate @quote_proposals
+
+= render template: "layouts/box", locals: { title: t('quote_proposals_list').humanize }

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :garages, only: [:index, :show]
       resources :garage_registrations, only: [:create, :update]
       resources :garage_recruitables, only: [:show, :update], param: :token
+      resources :quote_proposals, only: [:show, :update], param: :token
     end
   end
   scope '(:locale)', locale: /it|pl|pt|fr|es|be|en/ do
@@ -27,7 +28,15 @@ Rails.application.routes.draw do
 
     resources :service_categories, only: :index
     resources :services, only: :index
-    resources :demands, only: [:index, :show]
+    resources :demands, except: [:new, :create]
+    resources :quote_proposals, except: :new do
+      collection do
+        get 'new/:demands_garage_id', to: "quote_proposals#new", as: 'new'
+      end
+    end
+    namespace :quotables do
+      resources :deliver, only: :update
+    end
 
     resources :garages do
       resources :tyre_fees, except: :show

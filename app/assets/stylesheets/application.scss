@@ -27,8 +27,25 @@
   margin-right: .5em;
   top: -2px;
 }
+
 .b-crudbar .icheckbox_minimal {
   margin: 5px;
+}
+.b-crudbar__btn--default:hover{
+  color: #E67500;
+}
+
+.b-file {
+  margin: 0.125rem;
+  text-align: left;
+
+  &:hover{
+    color: #E67500;
+  }
+}
+
+td .b-file {
+  width: 100%;
 }
 
 .garage-map {
@@ -73,6 +90,24 @@
   }
 }
 
+.list-info{
+  .icon {
+    margin-right: .5em;
+    color: #E67500;
+  }
+  li {
+    margin-bottom: .5em;
+    border-bottom: 1px solid #f4f4f4;
+    margin-left: .5em;
+
+    label {
+      font-size: 1.1em;
+      color: #666;
+      width: 10em;
+    }
+  }
+}
+
 .change_password {
   margin-top: 2em;
   margin-bottom: 1em;
@@ -99,4 +134,12 @@
 
 td {
   vertical-align: top;
+}
+em i.fa{
+  position: relative;
+  bottom: -0.4rem;
+  left: 0.125rem;
+}
+textarea.form-control {
+    min-height: 6em;
 }

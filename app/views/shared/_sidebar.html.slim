@@ -51,6 +51,12 @@ aside.left-side.sidebar-offcanvas
           i.fa.fa-money
           span = t('demands_list').humanize
 
+      - if current_user.admin? || current_user.owner?
+        li class=(current_page?(quote_proposals_path) ? "active" : nil) = link_to quote_proposals_path
+          i.fa.fa-euro
+          span = t('quote_proposals_list').humanize
+
+
       - if current_user.admin?
         li class=(current_page?(garage_recruitables_path) ? "active" : nil) = link_to garage_recruitables_path
           i.fa.fa-book

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Demand do
   it { is_expected.to belong_to(:service_category) }
   it { is_expected.to belong_to(:service) }
+  it { is_expected.to have_many(:quote_proposals).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:city) }
   it { is_expected.to validate_presence_of(:name_and_surnames) }
   it { is_expected.to validate_presence_of(:phone) }

@@ -14,7 +14,7 @@ class DemandPolicy < ApplicationPolicy
 
     def resolve
       if user.owner?
-        @user.demands
+        @user.unanswered_demands
       else
         scope.all
       end
@@ -34,7 +34,7 @@ class DemandPolicy < ApplicationPolicy
   end
 
   def edit?
-    false
+    @user.admin?
   end
 
   def create?
@@ -42,10 +42,10 @@ class DemandPolicy < ApplicationPolicy
   end
 
   def update?
-    false
+    @user.admin?
   end
 
   def destroy?
-    false
+    @user.admin?
   end
 end
