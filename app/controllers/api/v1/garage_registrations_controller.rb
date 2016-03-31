@@ -18,7 +18,9 @@ module API
 
       def update
         @garage = Garage.find_by_id(garage_update_params[:id])
-        if @garage.update_service_ids(garage_update_params[:service_ids])
+        services = Service.where(id: garage_update_params[:service_ids])
+        if services.present?
+          @garage.services << services
           @garage
         else
           render json: {errors: @garage.errors}

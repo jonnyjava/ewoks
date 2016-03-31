@@ -30,6 +30,26 @@ country_manager.role = User::COUNTRY_MANAGER
 country_manager.country = country
 country_manager.save!
 
+service_category_names = []
+service_category_names << ["Diagnósticos",["Avería en el motor","Frenos","Bateria","Electricidad","Suspensión","Dirección","Control de emisiones","Pre-ITV","Otro diagnóstico"]]
+service_category_names << ["Cambio de batería",["Sustitución de la batería"]]
+service_category_names << ["Neumáticos",["Montaje","Reparación pinchazo","Permutación"]]
+service_category_names << ["Cambio de aceite",["Revisión completa", "Cambio de aceite", "Liquido refrigerante"]]
+service_category_names << ["Chapa y lunas",["Escobillas", "Luna", "Retrovisor", "Parachoques", "Reparacion de luna", "Reparacion de un golpe"]]
+service_category_names << ["Frenado",["Pastillas de freno", "Discos de freno", "Discos y Pastillas"]]
+service_category_names << ["Iluminación",["Cambio de elevalunas eléctrico", "Cambio de cierre centralizado", "Cambio de faro", "Cambio de lámpara"]]
+service_category_names << ["Audio y multimedia",["Montaje amplificador", "Montaje autoradio", "Montaje altavoces", "Montaje equipo multimedia"]]
+service_category_names << ["Motor",["Correa de distribucion", "Kit de distribución", "Bomba inyectora", "Inyectores", "Alternador", "Bomba de dirección", "Bomba de agua", "Embrague", "Radiador refrigerante", "Termostato", "Bujías"]]
+service_category_names << ["Escapes",["Cambio de catalizador", "Cambio de escape"]]
+service_category_names << ["Trenes y suspensión",["Equilibrado de ruedas", "Alineación paralelo", "Amortiguadores", "Rótulas de suspensión", "Copelas de suspensión", "Rodamientos", "Bomba de dirección", "Rótulas de dirección", "Vástago de dirección", "Fuelles de dirección", "Cremallera de dirección", "Cambio de trasmisión"]]
+service_category_names << ["Aire acondicionado",["Maintenimiento aire acondicionado", "Cambio de filtro habitáculo", "Cambio de compresor", "Cambio de condensador", "Cambio evaporador", "Cambio de termostato"]]
+service_category_names << ["Otros servicios",["Otros servicios"]]
+
+service_category_names.each do |category|
+  sc = ServiceCategory.create(name: category[0])
+  category[1].each { |service| Service.create(name:service, service_category: sc)}
+end
+
 addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"Carrer de Salvador Giner, 12"}
 
 3.times do |i|
@@ -56,6 +76,7 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   garage.save!
 
   garage.user.update_attributes(name: Faker::Name.first_name, surname: Faker::Name.last_name)
+  garage.services << Service.all
 
   multiplier = 1
   TyreFee::VEHICLES.each do |vehicle|
@@ -76,3 +97,4 @@ end
 52.times do |i|
   garage_recruitable = FactoryGirl.create(:garage_recruitable)
 end
+

@@ -52,7 +52,8 @@ describe 'GarageRegistrations' do
 
     describe 'JSON response' do
       it 'should contain the garage id' do
-        service_ids = [1,2,3,4]
+        services = FactoryGirl.create_list(:service, 5)
+        service_ids = services.map(&:id)
         patch api_v1_garage_registration_url(garage.id, format: :json), {id: garage.id, service_ids: service_ids }, @auth_token
         expect(garage_id(response)).to_not be_nil
       end

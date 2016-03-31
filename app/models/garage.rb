@@ -3,6 +3,8 @@ class Garage < ActiveRecord::Base
   has_many :holidays, dependent: :destroy
   has_one :timetable, dependent: :destroy
   has_many :tyre_fees, dependent: :destroy
+  has_and_belongs_to_many :services
+  before_destroy { services.clear }
 
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
@@ -29,6 +31,7 @@ class Garage < ActiveRecord::Base
   scope :by_price_in_a_range, ->(min_price, max_price) { by_tyre_fee.merge(TyreFee.by_price_in_a_range(min_price, max_price)) }
   scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
   scope :by_status, ->(status) { where(status: statuses[status]) if status }
+  scope :by_service, ->(service_id) { Garage.includes(:services).where( services: { id: service_id } ) }
 
   def address
     [street, province, city, zip, country].compact.join(', ')
@@ -66,11 +69,6 @@ class Garage < ActiveRecord::Base
   def signup_verification_token
     token = [email, status, created_at, ENV['AUTH_TOKENIZER']].join
     Digest::SHA1.hexdigest(token)
-  end
-
-  def update_service_ids(service_ids)
-    return unless service_ids
-    update_attribute(:service_ids, service_ids.join(','))
   end
 
   def self.by_default(zip, city)

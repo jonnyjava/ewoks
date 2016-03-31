@@ -1,0 +1,16 @@
+h1=t('Listing service_categories')
+
+table
+  thead
+    tr
+      th
+
+  tbody
+    - @service_categories.each do |service_category|
+      tr
+        td
+          = service_category.name
+          ul
+            - service_category.services.each do |service|
+              li= service.name
+

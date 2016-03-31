@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314112535) do
+ActiveRecord::Schema.define(version: 20160322115419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(version: 20160314112535) do
     t.string   "service_ids"
   end
 
+  create_table "garages_services", id: false, force: :cascade do |t|
+    t.integer "garage_id",  null: false
+    t.integer "service_id", null: false
+  end
+
+  add_index "garages_services", ["garage_id", "service_id"], name: "index_garages_services_on_garage_id_and_service_id", using: :btree
+  add_index "garages_services", ["service_id", "garage_id"], name: "index_garages_services_on_service_id_and_garage_id", using: :btree
+
   create_table "holidays", force: :cascade do |t|
     t.date     "start_date"
     t.date     "end_date"
@@ -68,6 +76,21 @@ ActiveRecord::Schema.define(version: 20160314112535) do
   end
 
   add_index "holidays", ["garage_id"], name: "index_holidays_on_garage_id", using: :btree
+
+  create_table "service_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "service_category_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "services", ["service_category_id"], name: "index_services_on_service_category_id", using: :btree
 
   create_table "timetables", force: :cascade do |t|
     t.integer  "garage_id"
@@ -141,4 +164,5 @@ ActiveRecord::Schema.define(version: 20160314112535) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "services", "service_categories"
 end

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: 'garages#index'
 
+  get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
+
   namespace :api do
     namespace :v1 do
       resources :garages, only: [:index, :show]
@@ -9,9 +11,6 @@ Rails.application.routes.draw do
       resources :garage_recruitables, only: [:show, :update], param: :token
     end
   end
-
-  get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
-
   scope '(:locale)', locale: /it|pl|pt|fr|es|be|en/ do
     get '/success', to: 'public_form#success', as: 'success'
     get '/public_form', to: 'public_form#public_form', as: 'public_form'
@@ -25,19 +24,21 @@ Rails.application.routes.draw do
     get '/wizard_fee/:garage_id', to: 'wizard#fee', as: 'wizard_fee'
     post '/wizard_create_fee/:garage_id', to: 'wizard#create_fee', as: 'wizard_create_fee'
 
+    resources :service_categories, only: :index
+    resources :services, only: :index
+
     resources :garages do
       resources :tyre_fees, except: :show
       resources :holidays
       resources :timetables
     end
-
     namespace :garages do
       resources :toggle_status, only: :update
     end
 
     resources :users
-    resources :garage_recruitables, except: :new
 
+    resources :garage_recruitables, except: :new
     namespace :recruitables do
       resources :export, only: :index
     end
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
       sign_out: 'logout',
       sign_up: 'register'
     }
+
 
     patch 'users/:id/regenerate_auth_token', to: 'users#regenerate_auth_token', as: 'regenerate_auth_token'
     delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'
