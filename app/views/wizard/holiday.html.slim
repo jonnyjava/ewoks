@@ -14,4 +14,3 @@
       = f.button :submit, class: "b-keypad__btn--success", value: 'next'
       = link_to t('skip'), wizard_fee_url(@garage, locale: I18n.locale), class: 'b-keypad__btn--success'
 = render template: "layouts/box", locals: { title: t('holidays').humanize }
-= render 'holidays/shared/scripts'
