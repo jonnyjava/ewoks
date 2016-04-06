@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "Service", type: :request do
+  let!(:service) { FactoryGirl.create(:service) }
+
   describe "#index" do
     before(:each) do
       FactoryGirl.create(:service)
@@ -44,7 +46,6 @@ describe "Service", type: :request do
   describe "#show" do
     login_admin
     it 'should route to a 404' do
-      service = FactoryGirl.create(:service)
       get services_path(service)
       expect(response.status).to be(404)
     end

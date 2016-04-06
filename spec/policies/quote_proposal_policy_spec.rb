@@ -51,6 +51,7 @@ describe QuoteProposalPolicy do
     context "over someone else quote_proposals" do
       subject { QuoteProposalPolicy.new(owner, another_quote_proposal) }
       it_behaves_like "someone not authorized"
+      it { is_expected.not_to allow_action(:update) }
     end
   end
 

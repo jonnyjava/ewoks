@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :quote_proposals, only: [:show, :update], param: :token
     end
   end
+
   scope '(:locale)', locale: /it|pl|pt|fr|es|be|en/ do
     get '/success', to: 'public_form#success', as: 'success'
     get '/public_form', to: 'public_form#public_form', as: 'public_form'
@@ -59,7 +60,6 @@ Rails.application.routes.draw do
       sign_out: 'logout',
       sign_up: 'register'
     }
-
 
     patch 'users/:id/regenerate_auth_token', to: 'users#regenerate_auth_token', as: 'regenerate_auth_token'
     delete 'garages/:id/destroy_logo', to: 'garages#destroy_logo', as: 'destroy_logo'

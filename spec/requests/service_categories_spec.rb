@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe "ServiceCategories", type: :request do
-  describe "#index" do
-    before(:each) do
-      FactoryGirl.create(:service_category)
-    end
+  let!(:service_category) { FactoryGirl.create(:service_category) }
 
+  describe "#index" do
     shared_examples_for "an authorized page" do
       it "returning status 200" do
         get service_categories_path
@@ -44,7 +42,6 @@ describe "ServiceCategories", type: :request do
   describe "#show" do
     login_admin
     it 'should route to a 404' do
-      service_category = FactoryGirl.create(:service_category)
       get service_categories_path(service_category)
       expect(response.status).to be(404)
     end

@@ -43,7 +43,6 @@ describe QuoteProposalsController do
       end
 
       context "with invalid params" do
-
         it "re-renders the 'edit' template" do
           put :update, {id: quote_proposal.to_param, quote_proposal: {"ttc_price"=>nil}}
           expect(response).to render_template("edit")

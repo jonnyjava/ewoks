@@ -1,7 +1,6 @@
-require 'sendinblue'
-
 class QuoteProposalMailer < ActionMailer::Base
   include MailerHelper
+
   default from: EMAIL_ADMIN
 
   def send_quote_to_contact(quote_proposal)
@@ -9,17 +8,14 @@ class QuoteProposalMailer < ActionMailer::Base
     @demand = quote_proposal.demand.decorate
     set_locale(@quote_proposal.garage)
     @subject = "#{t('go_to_the_quote')} #{@quote_proposal.identifier}"
-    send_via_sendiblue || send_via_gmail
+    send_mail(@quote_proposal)
   end
 
   private
 
-  def send_via_sendiblue
-    return false unless Rails.env.production?
-    data = build_data_for_sendinblue_mailer(@quote_proposal)
-    sendinblue_mailer = Sendinblue::Mailin.new(ENV["SENDINBLUE_API_URL"], ENV["SENDINBLUE_API_TOKEN"])
-    result = sendinblue_mailer.send_transactional_template(data)
-    return (result['code'] == 'success')
+  def send_mail(quote_proposal)
+    content = build_data_for_sendinblue_mailer(quote_proposal)
+    SendinblueWrapper.new(content).send_via_sendiblue() || send_via_gmail
   end
 
   def build_data_for_sendinblue_mailer(quote_proposal)

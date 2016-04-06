@@ -1,6 +1,7 @@
 class QuoteProposalsController < ApplicationController
   before_action :set_quote_proposal, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
+  before_action :normalize_price, only: :update
 
   def index
     quote_proposals = policy_scope(QuoteProposal.all.order([status: :asc, updated_at: :desc]).page(params[:page]))
@@ -33,8 +34,7 @@ class QuoteProposalsController < ApplicationController
 
   def update
     authorize @quote_proposal
-    update_params = set_price(quote_proposal_params)
-    if @quote_proposal.update(update_params)
+    if @quote_proposal.update(quote_proposal_params)
       redirect_to @quote_proposal
     else
       render :edit
@@ -60,9 +60,8 @@ class QuoteProposalsController < ApplicationController
       params.permit(:demands_garage_id)
     end
 
-    def set_price(params)
-      return params unless params[:ttc_price]
-      params[:ttc_price] = params[:ttc_price].gsub(',','.')
-      params
+    def normalize_price
+      return unless params[:quote_proposal][:ttc_price]
+      params[:quote_proposal][:ttc_price] = params[:quote_proposal][:ttc_price].gsub(',','.')
     end
 end

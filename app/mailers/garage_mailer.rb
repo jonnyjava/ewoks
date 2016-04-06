@@ -3,6 +3,7 @@ class GarageMailer < ActionMailer::Base
   default from: EMAIL_ADMIN
 
   def notify_demand(garage, demand)
+    return if @@seeding
     @user = garage.user.decorate
     @demand = demand
     set_locale(garage)

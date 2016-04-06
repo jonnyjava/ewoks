@@ -6,7 +6,7 @@ describe 'DemandRegistrations' do
   describe 'create' do
     let(:demand_params) { { demand: FactoryGirl.attributes_for(:demand).merge(format: :json) } }
 
-    context "with an invalid token" do
+    context 'with an invalid token' do
       it 'should return status 401' do
         post api_v1_demands_url, demand_params, 'Authorization' => 'Token token=wrongtoken'
         expect(response.status).to be(401)
@@ -21,15 +21,15 @@ describe 'DemandRegistrations' do
     end
 
     describe 'JSON response' do
-      context "with a valid input" do
+      context 'with a valid input' do
         it 'should create a new demand' do
           demands_count = Demand.count
           post api_v1_demands_url, demand_params, @auth_token
-          expect(Demand.count).to eq(demands_count+1)
+          expect(Demand.count).to eq(demands_count + 1)
           expect(response.body).to be_blank
         end
       end
-      context "with an invalid input" do
+      context 'with an invalid input' do
         it 'should return validation errors' do
           demand_params[:demand][:city] = nil
           demand_params[:demand][:name_and_surnames] = nil
@@ -47,6 +47,7 @@ describe 'DemandRegistrations' do
     end
 
   private
+
     def errors(response)
       json(response.body)[:errors]
     end

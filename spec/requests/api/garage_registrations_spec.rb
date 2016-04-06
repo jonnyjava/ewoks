@@ -59,8 +59,10 @@ describe 'GarageRegistrations' do
       end
     end
 
-    it 'should assign to the garage all the services belonging to each service_category' do
-      service_categories.each { |service_category| FactoryGirl.create_list(:service, 5, service_category: service_category) }
+    it 'should assign to the garage all the services of each service_category' do
+      service_categories.each do |service_category|
+        FactoryGirl.create_list(:service, 5, service_category: service_category)
+      end
       posted_params = { id: garage.id, service_categories_ids: service_categories.map(&:id) }
       patch api_v1_garage_registration_url(garage.id, format: :json), posted_params, @auth_token
       garage.reload

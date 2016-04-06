@@ -31,7 +31,6 @@ class DemandsController < ApplicationController
     redirect_to demands_path
   end
 
-
   private
     def set_demand
       @demand = Demand.find(params[:id]).decorate
@@ -41,5 +40,3 @@ class DemandsController < ApplicationController
       params.require(:demand).permit(:city, :service_category_id, :service_id, :vin_number, :brand, :model, :year, :engine, :engine_letters, :name_and_surnames, :phone, :email, :wants_newsletter, :accepts_privacy, :comments, :demand_details)
     end
 end
-
-

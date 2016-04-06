@@ -24,14 +24,15 @@
 
 // Little fixes
 .simple_form .icheckbox_minimal {
-  margin-right: .5em;
+  margin-right: 0.5em;
   top: -2px;
 }
 
 .b-crudbar .icheckbox_minimal {
   margin: 5px;
 }
-.b-crudbar__btn--default:hover{
+
+.b-crudbar__btn--default:hover {
   color: #E67500;
 }
 
@@ -39,13 +40,17 @@
   margin: 0.125rem;
   text-align: left;
 
-  &:hover{
+  &:hover {
     color: #E67500;
   }
 }
 
-td .b-file {
+td {
+  vertical-align: top;
+
+ .b-file {
   width: 100%;
+  }
 }
 
 .garage-map {
@@ -73,14 +78,14 @@ td .b-file {
   }
 
   .icon {
-    margin-right: .5em;
+    margin-right: 0.5em;
     color: #E67500;
   }
 
   li {
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
     border-bottom: 1px solid #f4f4f4;
-    margin-left: .5em;
+    margin-left: 0.5em;
 
     label {
       font-size: 1.1em;
@@ -90,21 +95,22 @@ td .b-file {
   }
 }
 
-.list-info{
+.list-info {
   .icon {
-    margin-right: .5em;
+    margin-right: 0.5em;
     color: #E67500;
   }
-  li {
-    margin-bottom: .5em;
-    border-bottom: 1px solid #f4f4f4;
-    margin-left: .5em;
 
-    label {
-      font-size: 1.1em;
-      color: #666;
-      width: 10em;
-    }
+  li {
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #f4f4f4;
+    margin-left: 0.5em;
+  }
+
+  label {
+    color: #666;
+    font-size: 1.1em;
+    width: 10em;
   }
 }
 
@@ -128,18 +134,17 @@ td .b-file {
   margin-bottom: 1em;
   margin-top: 1em;
 }
-.logo img{
+
+.logo img {
   width: 100%;
 }
 
-td {
-  vertical-align: top;
-}
-em i.fa{
-  position: relative;
+.three_dots {
   bottom: -0.4rem;
   left: 0.125rem;
+  position: relative;
 }
-textarea.form-control {
-    min-height: 6em;
+
+textarea {
+  min-height: 6em;
 }

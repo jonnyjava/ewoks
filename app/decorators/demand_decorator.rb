@@ -1,7 +1,11 @@
 class DemandDecorator < ApplicationDecorator
 
-  def shortened_comment
+  def collapsed_text
     object.comments.first(18)
+  end
+
+  def collapsable_text
+    comments
   end
 
   def service_category_name

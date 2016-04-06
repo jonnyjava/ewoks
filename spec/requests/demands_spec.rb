@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "Demands" do
+  let!(:demand) { FactoryGirl.create(:demand) }
   describe "#index" do
     shared_examples_for "someone authorized" do
       it "returning status 200" do
-        FactoryGirl.create(:demand)
         get demands_path
         expect(response.status).to be(200)
       end
@@ -12,7 +12,6 @@ describe "Demands" do
 
     shared_examples_for "someone unauthorized" do
       it "returning status 302" do
-        FactoryGirl.create(:demand)
         get demands_path
         expect(response.status).to be(302)
       end
@@ -42,7 +41,6 @@ describe "Demands" do
   describe "#show" do
     shared_examples_for "someone authorized" do
       it "returning status 200" do
-        demand = FactoryGirl.create(:demand)
         get demand_path(demand)
         expect(response.status).to be(200)
       end
@@ -50,7 +48,6 @@ describe "Demands" do
 
     shared_examples_for "someone unauthorized" do
       it "returning status 302" do
-        demand = FactoryGirl.create(:demand)
         get demand_path(demand)
         expect(response.status).to be(302)
       end

@@ -39,5 +39,4 @@ describe ServiceCategoryPolicy do
     it_behaves_like "not authorized on anything except index"
     it { is_expected.not_to allow_action(:index) }
   end
-
 end

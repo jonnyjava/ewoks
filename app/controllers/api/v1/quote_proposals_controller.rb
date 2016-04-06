@@ -14,7 +14,7 @@ module API
       def update
         head :unprocessable_entity and return unless @quote_proposal
 
-        status = quote_proposal_update_params[:status]
+        status = quote_proposal_params[:status]
         head :unprocessable_entity and return unless @quote_proposal.can_accept?(status)
 
         if @quote_proposal.update(status: status)
@@ -42,10 +42,6 @@ module API
       end
 
       def quote_proposal_params
-        params.permit(:token, :status)
-      end
-
-      def quote_proposal_update_params
         params.permit(:token, :status)
       end
     end

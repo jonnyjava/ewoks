@@ -34,13 +34,7 @@
                 p = demand.name_and_surnames
                 p = demand.phone
                 p = demand.email
-              td
-                a data-toggle="collapse" href="#comment_#{demand.id}"
-                  em
-                    small = demand.shortened_comment
-                    i.fa.fa-ellipsis-h
-                div[id="comment_#{demand.id}", class="collapse"]
-                  = demand.comments
+              td = render 'shared/collapsable_text', object: demand
   - else
     =t('no_demands')
 

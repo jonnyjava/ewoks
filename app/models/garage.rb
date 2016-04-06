@@ -85,6 +85,7 @@ class Garage < ActiveRecord::Base
   end
 
   def self.find_by_radius_from_location(location, radius = 10)
+    return all if @@seeding
     coords = Geocoder.coordinates(location)
     Garage.near(coords, radius, units: :km)
   end

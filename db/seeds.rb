@@ -1,3 +1,4 @@
+@@seeding = true
 country = 'Spain'
 
 admin = User.new

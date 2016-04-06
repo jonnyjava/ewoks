@@ -44,7 +44,7 @@ class QuoteProposalPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.admin? || @user.owner? || @user.api?
+    @user.admin? || authorized_owner? || @user.api?
   end
 
   def destroy?

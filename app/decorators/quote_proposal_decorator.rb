@@ -1,7 +1,11 @@
 class QuoteProposalDecorator < ApplicationDecorator
 
-  def shortened_text
+  def collapsed_text
     object.proposal.first(18)
+  end
+
+  def collapsable_text
+    proposal
   end
 
   def doc_list
@@ -9,6 +13,14 @@ class QuoteProposalDecorator < ApplicationDecorator
       h.concat link_to_doc(:doc1) if object.doc1.present?
       h.concat link_to_doc(:doc2) if object.doc2.present?
       h.concat link_to_doc(:doc3) if object.doc3.present?
+    end
+  end
+
+  def doc_to_json
+    json.doc1 do
+      json.id 'doc1'
+      json.file_name @quote_proposal.doc1_file_name
+      json.file_url @quote_proposal.doc1.url
     end
   end
 
