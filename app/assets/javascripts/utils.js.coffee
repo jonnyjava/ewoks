@@ -31,6 +31,11 @@ $ ->
       $("#timetable_" + day + "_afternoon_close").val("").prop "disabled", !checked
     return
 
+  $(".js-datepicker").datepicker
+    defaultDate: "+1w",
+    changeMonth: true,
+    dateFormat: "yy-mm-dd"
+
   $(".js-datepicker-start").datepicker
     defaultDate: "+1w",
     changeMonth: true,

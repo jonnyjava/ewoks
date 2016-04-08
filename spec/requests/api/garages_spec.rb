@@ -53,6 +53,23 @@ describe 'Garages' do
         check_response(response)
       end
 
+      it 'should filter by service_id' do
+        spanish_garage
+        service = FactoryGirl.create(:service)
+        spanish_garage.services << service
+
+        another_spanish_garage = FactoryGirl.create(:spanish_garage)
+        FactoryGirl.create(:spanish_fee, garage: another_spanish_garage)
+
+        api_get "garages.json?service_id=#{service.id}", {}, @auth_token
+        expect(response.status).to be(200)
+
+        ids = json(response.body).map { |garage| garage[:id] }
+        expect(ids.count).to be(1)
+        expect(ids).to include(spanish_garage.id)
+        expect(ids).not_to include(another_spanish_garage.id)
+      end
+
       context 'containing tyre_fee params ' do
 
         it 'should filter by price' do

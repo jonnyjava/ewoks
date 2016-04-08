@@ -87,15 +87,5 @@ describe 'GarageRecruitables' do
         end
       end
     end
-
   end
-
-  private
-    def garage_id(response)
-      json(response.body)[:id]
-    end
-
-    def errors(response)
-      json(response.body)[:errors]
-    end
 end

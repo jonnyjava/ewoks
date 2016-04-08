@@ -1,0 +1,36 @@
+- content_for :content
+  .row
+    .col-sm-12
+      ul.list-unstyled.list-info
+        - if current_user.admin?
+          li
+            i.icon.fa.fa-home
+            label = t('name').humanize
+            = @quote_proposal.garage.name
+        li
+          i.icon.fa.fa-list-alt
+          label = t('demand').humanize
+          = @quote_proposal.demand.id
+        li
+          i.icon.fa.fa-file
+          label = t('attached_docs').humanize
+          = @quote_proposal.doc_list
+        li
+          i.icon.fa.fa-eur
+          label = t('ttc_price').humanize
+          = @quote_proposal.price
+        li
+          i.icon.fa.fa-calendar
+          label = t('expiration').humanize
+          = @quote_proposal.expiration
+        li
+          i.icon.fa.fa-info-circle
+          label = t('proposal').humanize
+          = @quote_proposal.proposal
+
+  .row.b-keypad
+    .col-sm-4= link_to t('quote_proposal_edit').humanize, edit_quote_proposal_path(@quote_proposal), class: "btn btn-warning btn-block btn-flat bg-light-orange"
+    .col-sm-4= link_to t('bact_to_quote_proposals_list').humanize, quote_proposals_path, class: "btn btn-default btn-block btn-flat"
+    .col-sm-4= link_to t('quote_proposal_delete').humanize, @quote_proposal, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger btn-block btn-flat"
+
+= render template: "layouts/box", locals: { title: "#{t('quote_proposal').humanize} n: #{@quote_proposal.identifier}" }

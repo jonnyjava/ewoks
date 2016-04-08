@@ -1,0 +1,3 @@
+- content_for :content
+  - render 'form'
+= render template: "layouts/box", locals: { title: "#{t('quote_proposal_edit').humanize}: #{@quote_proposal.identifier}" }

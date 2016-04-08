@@ -136,6 +136,11 @@ en:
         Thursday: 'Thursday'
         Friday: 'Friday'
         Saturday: 'Saturday'
+  date:
+    order:
+      - :day
+      - :month
+      - :year
 
   helpers:
     submit:
@@ -154,3 +159,7 @@ en:
       timetable:
         create: 'Add timetable'
         update: 'Update timetable'
+
+  new_demand_assigned_to_you: 'Hay una nueva solicitud para ti'
+  go_to_the_demand: 'Ver solicitud'
+  

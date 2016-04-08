@@ -30,6 +30,7 @@ gem 'unicorn'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'sendinblue', '~> 2.3'
+gem "factory_girl_rails", "~> 4.0"
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -45,7 +46,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails'
   gem 'shoulda-matchers', '2.8'
   gem 'email_spec', '1.6.0'

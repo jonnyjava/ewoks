@@ -6,6 +6,7 @@ module API
       protect_from_forgery except: [:create, :update]
       skip_before_filter :authenticate_user!
       before_action :authenticate
+      before_action :set_garage, only: :update
 
       def create
         @garage_registration = GarageRegistration.new(garage_registration_params)
@@ -17,12 +18,8 @@ module API
       end
 
       def update
-        @garage = Garage.find_by_id(garage_update_params[:id])
-        if @garage.update_service_ids(garage_update_params[:service_ids])
-          @garage
-        else
-          render json: {errors: @garage.errors}
-        end
+        @garage.assign_services(assignable_services)
+        @garage
       end
 
       private
@@ -32,7 +29,15 @@ module API
       end
 
       def garage_update_params
-        params.permit(:id, service_ids: [])
+        params.permit(:id, service_categories_ids: [])
+      end
+
+      def set_garage
+        @garage = Garage.find_by_id(garage_update_params[:id])
+      end
+
+      def assignable_services
+        Service.by_category(garage_update_params[:service_categories_ids])
       end
     end
   end
