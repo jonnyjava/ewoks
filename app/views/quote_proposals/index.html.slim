@@ -1,4 +1,7 @@
 - content_for :content
+  - if current_user.admin? || current_user.owner?
+     =render 'filters', filtered_quotes: @filtered_quotes if @filtered_quotes
+     
   - if @quote_proposals.present?
     .table-responsive
       table.table.table-condensed.table-striped.table-bordered

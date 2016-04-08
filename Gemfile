@@ -28,7 +28,7 @@ gem 'pg'
 gem 'faker'
 gem 'unicorn'
 gem 'rack-cors', require: 'rack/cors'
-
+gem 'ransack'
 gem 'sendinblue', '~> 2.3'
 gem "factory_girl_rails", "~> 4.0"
 

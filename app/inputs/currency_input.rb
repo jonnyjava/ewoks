@@ -9,7 +9,11 @@ class CurrencyInput < SimpleForm::Inputs::Base
   end
 
   def input_html_options
-    super.merge({class: 'form-control', title: input_title, pattern: input_pattern, value: input_value})
+    super.merge(class: 'form-control',
+                title: input_title,
+                pattern: input_pattern,
+                value: input_value,
+                placeholder: I18n.translate(attribute_name))
   end
 
   def input_title
