@@ -5,6 +5,7 @@ describe Garage do
   it { is_expected.to have_many(:holidays).dependent(:destroy) }
   it { is_expected.to have_many(:tyre_fees).dependent(:destroy) }
   it { is_expected.to have_one(:timetable).dependent(:destroy) }
+  it { is_expected.to have_many(:quote_proposals).dependent(:destroy) }
   it { is_expected.to have_attached_file(:logo) }
 
   it { is_expected.to validate_presence_of(:street) }
@@ -268,6 +269,21 @@ describe Garage do
         expect(result.count).to be(2)
         expect(result.map(&:id)).not_to include(another_garage.id)
       end
+    end
+  end
+
+  describe 'unanswered_demands'do
+    it 'should return only demands without quote_proposal' do
+      garage = FactoryGirl.create(:garage)
+      demand1 = FactoryGirl.create(:demand)
+      demand2 = FactoryGirl.create(:demand)
+      demand_garage1 = FactoryGirl.create(:demands_garage, garage: garage, demand: demand1)
+      demand_garage2 = FactoryGirl.create(:demands_garage, garage: garage, demand: demand2)
+      FactoryGirl.create(:quote_proposal, demands_garage: demand_garage1)
+
+      unanswered_demands = garage.unanswered_demands
+      expect(unanswered_demands.size).to eq(1)
+      expect(unanswered_demands.first).to eq(demand2)
     end
   end
 end

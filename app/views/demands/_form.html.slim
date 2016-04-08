@@ -1,0 +1,15 @@
+= simple_form_for(@demand) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name_and_surnames
+    = f.input :phone
+    = f.input :email
+    = f.input :wants_newsletter, as: :boolean
+    = f.input :comments
+    = f.input :demand_details
+
+  .col-xs-12.b-keypad
+    = link_to t('cancel').humanize, @demand, class: "b-keypad__btn--default"
+    = f.button :submit, class: "b-keypad__btn--success"
+

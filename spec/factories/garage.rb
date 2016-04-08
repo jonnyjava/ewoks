@@ -14,6 +14,7 @@ FactoryGirl.define do
     latitude  Faker::Address.latitude
     longitude Faker::Address.longitude
     sequence(:email) { |n| "#{Faker::Internet.safe_email}_#{n}" }
+    user      { FactoryGirl.create(:user) }
 
     factory :turin_garage, class: Garage do
       zip     '10141'

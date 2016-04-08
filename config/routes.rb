@@ -2,15 +2,17 @@ Rails.application.routes.draw do
 
   root to: 'garages#index'
 
+  get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
+
   namespace :api do
     namespace :v1 do
+      resources :demands, only: [:create]
       resources :garages, only: [:index, :show]
       resources :garage_registrations, only: [:create, :update]
       resources :garage_recruitables, only: [:show, :update], param: :token
+      resources :quote_proposals, only: [:show, :update], param: :token
     end
   end
-
-  get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
 
   scope '(:locale)', locale: /it|pl|pt|fr|es|be|en/ do
     get '/success', to: 'public_form#success', as: 'success'
@@ -25,19 +27,30 @@ Rails.application.routes.draw do
     get '/wizard_fee/:garage_id', to: 'wizard#fee', as: 'wizard_fee'
     post '/wizard_create_fee/:garage_id', to: 'wizard#create_fee', as: 'wizard_create_fee'
 
+    resources :service_categories, only: :index
+    resources :services, only: :index
+    resources :demands, except: [:new, :create]
+    resources :quote_proposals, except: :new do
+      collection do
+        get 'new/:demands_garage_id', to: "quote_proposals#new", as: 'new'
+      end
+    end
+    namespace :quotables do
+      resources :deliver, only: :update
+    end
+
     resources :garages do
       resources :tyre_fees, except: :show
       resources :holidays
       resources :timetables
     end
-
     namespace :garages do
       resources :toggle_status, only: :update
     end
 
     resources :users
-    resources :garage_recruitables, except: :new
 
+    resources :garage_recruitables, except: :new
     namespace :recruitables do
       resources :export, only: :index
     end

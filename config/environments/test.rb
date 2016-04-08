@@ -1,4 +1,5 @@
 Rails.application.configure do
+  Faker::Config.locale = 'es'
   # Settings specified here will take precedence over those in config/application.rb.
 
   #Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs.

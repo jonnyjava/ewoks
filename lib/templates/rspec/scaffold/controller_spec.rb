@@ -1,12 +1,12 @@
 require "spec_helper"
-<% module_namespacing do -%>
+<% module_namespacing do %>
 describe <%= controller_class_name %>Controller do
   login_admin
   let(:valid_attributes) { FactoryGirl.attributes_for(:<%= file_name %>) }
   let(:invalid_attributes) { { 'wrong_param' => 'wrong' } }
   let(:valid_session) { {} }
 
-<% unless options[:singleton] -%>
+<% unless options[:singleton] %>
   describe "GET #index" do
     it "assigns all <%= table_name.pluralize %> as @<%= table_name.pluralize %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
@@ -15,7 +15,7 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-<% end -%>
+<% end %>
   describe "GET #show" do
     it "assigns the requested <%= ns_file_name %> as @<%= ns_file_name %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
@@ -127,6 +127,5 @@ describe <%= controller_class_name %>Controller do
       expect(response).to redirect_to(<%= index_helper %>_url)
     end
   end
-
 end
-<% end -%>
+<% end %>

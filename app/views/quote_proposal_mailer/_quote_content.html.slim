@@ -1,0 +1,29 @@
+table style="width:100%;"
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td &nbsp;
+    td style="width:50%;font-size:14px; font-weight:normal;"
+      = "Hola #{@demand.name_and_surnames},"
+      br
+      = "Un mecanico cerca de tu ciudad (#{@demand.city}) ha realizado un presupuesto por tu solicitud de servicio: "
+      b ="#{@demand.service_category_name}/#{@demand.service_name}."
+    td &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td &nbsp;
+    td style="width:50%; background-color:#e67500;border:1px solid #008d4c; text-align:center; cursor:pointer; text-decoration:none;"
+      a href="http://123mecanico.es/tu-presupuesto?token=#{quote_proposal.mail_token}" target="_blank" style="font-size:1.25em; font-weight:bolder; color:#FFFFFF !important; line-height:3em;vertical-align:middle; background-color:#E67500; cursor:pointer; text-decoration:none;"
+       = t('go_to_the_quote')
+    td &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td colspan="3" &nbsp;

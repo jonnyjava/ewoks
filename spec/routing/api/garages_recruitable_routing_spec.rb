@@ -7,7 +7,7 @@ describe API::V1::GarageRecruitablesController do
   end
 
   describe "versioning" do
-      it 'routes version' do
+    it 'routes version' do
       assert_generates 'api/v1/garage_recruitables/1', { controller: 'api/v1/garage_recruitables', action: 'show', token: '1' }
     end
   end
