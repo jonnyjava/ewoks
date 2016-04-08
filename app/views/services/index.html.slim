@@ -1,0 +1,13 @@
+h1 Listing services
+
+table
+  thead
+    tr
+      th Name
+      th Service category
+
+  tbody
+    - @services.each do |service|
+      tr
+        td = service.name
+        td = service.service_category.name

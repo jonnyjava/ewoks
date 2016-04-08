@@ -24,19 +24,40 @@ aside.left-side.sidebar-offcanvas
 
       - unless current_user.owner?
         li class=(current_page?(garages_path) ? "active" : nil) = link_to garages_path
-          i.fa.fa-home
+          i.fa.fa-wrench
           span = t('garages').humanize
 
         li class=(current_page?(users_path) ? "active" : nil) = link_to users_path
-          i.fa.fa-user
+          i.fa.fa-users
           span = t('users').humanize
 
       - if current_user.owner?
         li class=(current_page?(garages_path) ? "active" : nil) = link_to garage_path(current_user.try(:garage))
-          i.fa.fa-home
+          i.fa.fa-wrench
           span = t('garage').humanize
 
       - if current_user.admin?
+        li class=(current_page?(service_categories_path) ? "active" : nil) = link_to service_categories_path
+          i.fa.fa-cogs
+          span = t('categorized_services').humanize
+
+      - if current_user.owner?
+        li class=(current_page?(services_path) ? "active" : nil) = link_to services_path
+          i.fa.fa-cogs
+          span = t('your services').humanize
+
+      - if current_user.admin? || current_user.owner?
+        li class=(current_page?(demands_path) ? "active" : nil) = link_to demands_path
+          i.fa.fa-money
+          span = t('demands_list').humanize
+
+      - if current_user.admin? || current_user.owner?
+        li class=(current_page?(quote_proposals_path) ? "active" : nil) = link_to quote_proposals_path
+          i.fa.fa-euro
+          span = t('quote_proposals_list').humanize
+
+
+      - if current_user.admin?
         li class=(current_page?(garage_recruitables_path) ? "active" : nil) = link_to garage_recruitables_path
-          i.fa.fa-wrench
+          i.fa.fa-book
           span = t('garage_recruitable').humanize

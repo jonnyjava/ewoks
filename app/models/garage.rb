@@ -3,6 +3,11 @@ class Garage < ActiveRecord::Base
   has_many :holidays, dependent: :destroy
   has_one :timetable, dependent: :destroy
   has_many :tyre_fees, dependent: :destroy
+  has_many :quote_proposals, dependent: :destroy
+  has_and_belongs_to_many :services
+  has_many :demands_garage
+  has_many :demands, through: :demands_garage
+  before_destroy { services.clear }
 
   validates :name, :street, :zip, :country, :phone, :tax_id, presence: true
   validates :email, uniqueness: true
@@ -15,8 +20,6 @@ class Garage < ActiveRecord::Base
   after_create :send_signup_confirmation, :create_my_timetable
 
   enum status: [ :inactive, :to_confirm, :active ]
-  SERVICES = ["diagnósticos", "cambio de batería", "neumáticos", "cambio de aceite", "chapa y lunas", "frenado", "iluminación", "audio y multimedia", "motor", "escapes", "trenes y suspensión", "aire acondicionado"]
-  SERVICE_TYPE = Hash[SERVICES.map.with_index { |obj, i| [i, obj] }]
 
   scope :by_country, ->(country) { where(country: country) if country }
   scope :by_city, ->(city) { where(city: city) if city }
@@ -29,6 +32,7 @@ class Garage < ActiveRecord::Base
   scope :by_price_in_a_range, ->(min_price, max_price) { by_tyre_fee.merge(TyreFee.by_price_in_a_range(min_price, max_price)) }
   scope :by_date, ->(date) { joins(:holidays).merge(Holiday.not_in_holiday(date)) if date }
   scope :by_status, ->(status) { where(status: statuses[status]) if status }
+  scope :by_service, ->(service_id) { Garage.includes(:services).where( services: { id: service_id } ) }
 
   def address
     [street, province, city, zip, country].compact.join(', ')
@@ -37,6 +41,10 @@ class Garage < ActiveRecord::Base
   def address_changed?
     attrs = %w(street province city zip country)
     attrs.any? { |a| send "#{a}_changed?" }
+  end
+
+  def assign_services(assignable_services)
+    services << assignable_services
   end
 
   def create_my_owner
@@ -68,9 +76,8 @@ class Garage < ActiveRecord::Base
     Digest::SHA1.hexdigest(token)
   end
 
-  def update_service_ids(service_ids)
-    return unless service_ids
-    update_attribute(:service_ids, service_ids.join(','))
+  def unanswered_demands
+    demands.includes(:demands_garage).where('demands_garages.quote_proposal_id is null')
   end
 
   def self.by_default(zip, city)
@@ -78,6 +85,7 @@ class Garage < ActiveRecord::Base
   end
 
   def self.find_by_radius_from_location(location, radius = 10)
+    return all if @@seeding
     coords = Geocoder.coordinates(location)
     Garage.near(coords, radius, units: :km)
   end
@@ -105,5 +113,9 @@ class Garage < ActiveRecord::Base
     garages_opened = Garage.garages_without_holidays
     garage_with_holidays_opened = Garage.by_date(date)
     garage_with_holidays_opened | garages_opened
+  end
+
+  def self.assignable_garages(demand)
+    by_service(demand.service_id).find_by_radius_from_location(demand.city)
   end
 end

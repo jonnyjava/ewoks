@@ -1,0 +1,20 @@
+= simple_form_for(@quote_proposal) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :demands_garage_id, as: :hidden
+  .row
+    .col-xs-12= f.input :proposal
+  .row
+    .col-xs-6
+      = f.input :ttc_price, as: :currency
+    .col-xs-6
+      = f.input :expiration, as: :calendar
+
+  =render 'file_uploader', f: f, document: 'doc1', quote_proposal: @quote_proposal
+  =render 'file_uploader', f: f, document: 'doc2', quote_proposal: @quote_proposal
+  =render 'file_uploader', f: f, document: 'doc3', quote_proposal: @quote_proposal
+  .row
+    .col-xs-12.b-keypad
+      = link_to t('cancel').humanize, @quote_proposal, class: "b-keypad__btn--default"
+      = f.button :submit, class: "b-keypad__btn--success bg-light-orange"
