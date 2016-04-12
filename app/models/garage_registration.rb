@@ -36,6 +36,7 @@ class GarageRegistration
       ActiveRecord::Base.transaction do
         user.save!
         garage.user = user
+        garage.status = 'to_confirm'
         garage.save!
       end
     end
