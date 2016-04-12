@@ -3,8 +3,9 @@ class GarageRecruitablesController < ApplicationController
   after_action :verify_authorized
 
   def index
-    garage_recruitables = GarageRecruitable.all.order(:status, :name).page(params[:page])
-    garage_recruitables = filter(garage_recruitables, garage_recruitable_params) if params[:garage_recruitable]
+    @filtered_recruitables = GarageRecruitable.search(params[:q])
+    @filtered_recruitables.sorts = ['status asc', 'name asc'] if @filtered_recruitables.sorts.empty?
+    garage_recruitables = @filtered_recruitables.result.page(params[:page])
     authorize garage_recruitables
     @garage_recruitables = GarageRecruitableDecorator.decorate_collection(garage_recruitables)
   end
@@ -49,12 +50,6 @@ class GarageRecruitablesController < ApplicationController
   end
 
   private
-
-    def filter(collection, filtering_params)
-      filtering_params.each { |name, value| collection = collection.send('filter_by', name, value ) }
-      collection.by_status(filtering_params[:status])
-    end
-
     def set_garage_recruitable
       @garage_recruitable = GarageRecruitable.find(params[:id]).decorate
     end

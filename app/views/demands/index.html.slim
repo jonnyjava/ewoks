@@ -1,14 +1,17 @@
 - content_for :content
+  - if current_user.admin? || current_user.owner?
+    =render 'filters', filtered_demands: @filtered_demands if @filtered_demands
+
   - if @demands.present?
     .table-responsive
       table.table.table-condensed.table-striped.table-bordered
         thead
           tr
             - if current_user.admin? || current_user.owner?
-              th.col-md-2 = t('actions').humanize
-            th =t('city')
-            th =t('service_category')
-            th =t('service')
+              th.col-md-1 = t('actions').humanize
+            th.col-md-1 =t('city')
+            th.col-md-1 =t('service_category')
+            th.col-md-1 =t('service')
             th.col-md-2 =t('car_details')
             th.col-md-2 =t('contact_info')
             th.col-md-2 =t('comments')

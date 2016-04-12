@@ -3,7 +3,8 @@ class DemandsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    demands = policy_scope(Demand.all.page(params[:page]))
+    @filtered_demands = Demand.search(params[:q])
+    demands = policy_scope(@filtered_demands.result(distinct: true).page(params[:page]))
     authorize demands
     @demands = DemandDecorator.decorate_collection(demands)
   end

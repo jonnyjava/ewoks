@@ -32,6 +32,10 @@ class QuoteProposalDecorator < ApplicationDecorator
     "#{object.created_at.strftime("%Y%M%d")}-#{object.demand.id}-#{object.garage.id}-#{object.id}"
   end
 
+  def self.translated_statuses
+    QuoteProposal.statuses.map { |k, v| [I18n.translate(k), v] }
+  end
+
   private
     def link_to_doc(doc)
       h.link_to(object.send(doc).url, class: 'b-crudbar__btn--default b-file', target: '_blank') do
