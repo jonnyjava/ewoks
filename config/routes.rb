@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'garages#index'
 
-  get 'garages/signup_verification/:token', to: 'garages#signup_verification', as: 'signup_verification'
+  get 'garages/signup_verification/', to: 'garages#signup_verification', as: 'signup_verification'
 
   namespace :api do
     namespace :v1 do
