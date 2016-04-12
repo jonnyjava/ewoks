@@ -3,6 +3,7 @@ es:
   waiting_for_answer: 'Esperando respuesta'
   unreachable: 'Ilocalizable'
   dismissed: 'No le interesa'
+  recruited: 'Registrado'
   already_registered: 'Este garage ya está registrado'
   export_to_excel: 'Exportar'
   filter_by: 'Filtrar por:'
@@ -146,6 +147,19 @@ es:
   browse: 'Adjuntar documento'
   go_to_the_quote: Ver presupuesto
   go_to_the_demand: 'Ver solicitud'
+  expiration_lteq: 'Validez hasta'
+  expiration_gteq: 'Validez desde'
+  ttc_price_gteq: 'Precio > de'
+  ttc_price_lteq: 'Precio < de'
+  city_contains: 'El nombre de la ciudad contiene'
+  garage_name_contains: 'El nombre del garage contiene'
+  user_contains: 'El nombre del usuario contiene'
+  email_contains: 'El email contiene'
+  active: 'Activa'
+  expired: 'Caducada'
+  accepted: 'Aceptada'
+  refused: 'Rechazada'
+  banned: 'Baneada'
 
   simple_form:
     labels:
@@ -178,6 +192,7 @@ es:
         rim_type: 'Tipo de llanta'
         current_password: 'Contraseña anterior'
         password_confirmation: 'Repetir contraseña'
+
   date:
     order:
       - :day

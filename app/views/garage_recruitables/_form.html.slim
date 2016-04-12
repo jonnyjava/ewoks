@@ -5,7 +5,7 @@
     .form-inputs
       .col-sm-6 = f.input :name
       .col-sm-6 = f.input :street
-      .col-sm-3 = f.input :status, as: :select, collection: translated_statuses, include_blank: false
+      .col-sm-3 = f.input :status, as: :select, collection: GarageRecruitableDecorator.translated_statuses, include_blank: false
       .col-sm-3 = f.input :zip
       .col-sm-3 = f.input :city
       .col-sm-3 = f.input :province

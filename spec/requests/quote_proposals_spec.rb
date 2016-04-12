@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "QuoteProposals" do
-  let(:quote_proposal) { FactoryGirl.create(:quote_proposal) }
+  let!(:quote_proposal) { FactoryGirl.create(:quote_proposal) }
 
   describe "#index" do
     shared_examples_for "someone authorized" do

@@ -4,7 +4,9 @@ class QuoteProposalsController < ApplicationController
   before_action :normalize_price, only: :update
 
   def index
-    quote_proposals = policy_scope(QuoteProposal.all.order([status: :asc, updated_at: :desc]).page(params[:page]))
+    @filtered_quotes = QuoteProposal.joins(:garage).search(params[:q])
+    @filtered_quotes.sorts = ['status asc', 'updated_at desc'] if @filtered_quotes.sorts.empty?
+    quote_proposals = policy_scope(@filtered_quotes.result.page(params[:page]))
     authorize quote_proposals
     @quote_proposals = QuoteProposalDecorator.decorate_collection(quote_proposals)
   end
