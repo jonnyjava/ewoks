@@ -7,7 +7,6 @@ describe "demands/index", type: :view do
     paginated_demands = Kaminari.paginate_array(demands).page(1)
     decorated_demands = DemandDecorator.decorate_collection(paginated_demands)
     assign(:demands, decorated_demands)
-
   end
 
   it "renders a list of demands" do

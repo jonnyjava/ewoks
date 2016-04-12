@@ -135,6 +135,7 @@ td {
   margin-top: 1em;
 }
 
+
 .logo img {
   width: 100%;
 }
@@ -147,4 +148,10 @@ td {
 
 textarea {
   min-height: 6em;
+}
+
+.table-filters {
+  div.form-group {
+    margin-bottom: 0 !important;
+  }
 }

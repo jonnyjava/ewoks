@@ -31,4 +31,12 @@ class DemandDecorator < ApplicationDecorator
   def car_complete_info
     "#{car_details} - #{engine_details}"
   end
+
+  def self.categories
+    h.options_from_collection_for_select(ServiceCategory.all, 'id', 'name')
+  end
+
+  def self.services
+    h.options_from_collection_for_select(Service.all, 'id', 'name')
+  end
 end
