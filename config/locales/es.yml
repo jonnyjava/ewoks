@@ -162,6 +162,7 @@ es:
   refused: 'Rechazada'
   banned: 'Baneada'
   you_have_notifications: 'Tienes %{count} notificaciones pendientes!'
+  you_have_pending_demands: 'Hay %{number} nuevas solicitudes para ti!'
 
   simple_form:
     labels:
