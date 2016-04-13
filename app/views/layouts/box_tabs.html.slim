@@ -10,11 +10,6 @@
         i.icon.ion-clock
         span = t('timetable').humanize
 
-    li.b-navtabs__tab class=(current_page?(garage_tyre_fees_path(@garage)) ? 'active' : '')
-      a href="#{garage_tyre_fees_path(@garage)}"
-        i.icon.ion-pricetags
-        span = t('tyre fees').humanize
-
     li.b-navtabs__tab class=(current_page?(garage_path(@garage)) ? 'active' : '')
       a href="#{garage_path(@garage)}"
         i.icon.ion-information-circled

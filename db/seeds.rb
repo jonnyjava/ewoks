@@ -84,21 +84,6 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   garage.demands << Demand.all
 
   10.times { |i| FactoryGirl.create(:quote_proposal, demands_garage: garage.demands_garage[i]) }
-
-  multiplier = 1
-  TyreFee::VEHICLES.each do |vehicle|
-    TyreFee::RIMS.each do |rim|
-      tyre_fee = garage.tyre_fees.build
-      tyre_fee.name = "TyreFee for #{vehicle} with #{rim} rims"
-      tyre_fee.price = 5 * multiplier
-      tyre_fee.rim_type = TyreFee::RIM_TYPE.key(rim)
-      tyre_fee.diameter_min = 10
-      tyre_fee.diameter_max = 30
-      tyre_fee.vehicle_type = TyreFee::VEHICLE_TYPE.key(vehicle)
-      tyre_fee.save!
-      multiplier += 1
-    end
-  end
 end
 
 30.times do |i|

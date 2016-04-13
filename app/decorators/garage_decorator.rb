@@ -9,7 +9,6 @@ class GarageDecorator < ApplicationDecorator
   def notifications
     items = []
 
-    add_missing_tyre_fee_notification(items) unless object.tyre_fees.present?
     add_missing_holidays_notification(items) unless object.holidays.present?
     add_missing_timetable_notification(items) unless object.timetable.present?
 
@@ -19,14 +18,6 @@ class GarageDecorator < ApplicationDecorator
   end
 
   private
-
-  def add_missing_tyre_fee_notification(items)
-    items << h.link_to("/garages/#{object.id}/tyre_fees") do
-      h.concat h.content_tag(:i, nil, class: 'ion ion-pricetags danger')
-      h.concat h.t('Add rates tires')
-    end
-    items
-  end
 
   def add_missing_holidays_notification(items)
     items << h.link_to("/garages/#{object.id}/holidays") do
