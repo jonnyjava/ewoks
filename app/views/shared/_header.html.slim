@@ -20,10 +20,11 @@ header.header
             - if @notifications
               ul class="dropdown-menu"
                 li class="header"
-                  = "You have #{@notifications.scan(/<li>/).length} notifications"
+                  = t('you_have_notifications', count: @notifications.scan(/<li>/).length)
                 li = @notifications
                 li class="footer"
-                  a href="#" ...
+                  a href="#"
+                    i.fa.fa-ellipsis-h.three_dots
 
         li.dropdown.user.user-menu
           a href="#" class="dropdown-toggle" data-toggle="dropdown"

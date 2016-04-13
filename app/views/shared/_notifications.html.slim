@@ -2,3 +2,6 @@
   .callout.callout-danger
     h4 = t('Your garage is not activated yet!')
     p = t('welcome_message')
+    p
+      = t('contact_your_administrator')
+      = mail_to EMAIL_ADMIN
