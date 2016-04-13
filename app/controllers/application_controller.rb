@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :set_locale
-  before_action :set_notifications
+  before_action :set_notifications, :get_pending_demands
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -38,5 +38,10 @@ class ApplicationController < ActionController::Base
   def set_notifications
     return unless current_user && current_user.owner?
     @notifications = current_user.garage.decorate.notifications
+  end
+
+  def get_pending_demands
+    return unless current_user && current_user.owner?
+    @pending_demands = current_user.garage.unanswered_demands
   end
 end
