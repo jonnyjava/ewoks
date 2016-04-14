@@ -129,6 +129,7 @@ es:
   Define the opening hours: 'Definir el horario de apertura'
   Your garage is not activated yet!: '¡Su garage todavia no está activado!'
   welcome_message: 'Bienvenido, para terminar el proceso de activación, es necesario rellenar la ficha de garage totalmente. Las notificaciones de la barra superior le indicarán que falta exactamente aún por completar.'
+  contact_your_administrator: 'Si crees que esto pueda ser un error, contacte con nuestro administrador: '
   Day: 'Día'
   morning_open: 'Apertura mañana'
   morning_close: 'Cierre mañana'
@@ -160,6 +161,7 @@ es:
   accepted: 'Aceptada'
   refused: 'Rechazada'
   banned: 'Baneada'
+  you_have_notifications: 'Tienes %{count} notificaciones pendientes!'
 
   simple_form:
     labels:
