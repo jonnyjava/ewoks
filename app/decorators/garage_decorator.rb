@@ -35,5 +35,4 @@ class GarageDecorator < ApplicationDecorator
     end
     items
   end
-
 end
