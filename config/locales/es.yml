@@ -1,6 +1,6 @@
 es:
   recruitable: 'Contactable'
-  waiting_for_answer: 'Esperando respuesta'
+  waiting_for_answer: 'Esperando'
   unreachable: 'Ilocalizable'
   dismissed: 'No le interesa'
   recruited: 'Registrado'
