@@ -26,6 +26,9 @@ header.header
                   a href="#"
                     i.fa.fa-ellipsis-h.three_dots
 
+        - if current_user.owner? && @pending_demands
+          =render 'shared/header_icon_with_counter', notifications: @pending_demands, name: 'demands', icon: 'money'
+
         li.dropdown.user.user-menu
           a href="#" class="dropdown-toggle" data-toggle="dropdown"
             i.glyphicon.glyphicon-user
