@@ -16,7 +16,7 @@ class UserPolicy < ApplicationPolicy
       if logged_user.admin?
         scope.all
       elsif logged_user.country_manager?
-        scope.where(country: logged_user.country, role: User::OWNER)
+        scope.where(country: logged_user.country, role: User.roles[:owner])
       else
         logged_user
       end

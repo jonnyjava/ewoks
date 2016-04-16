@@ -7,16 +7,31 @@ class QuoteProposal < ActiveRecord::Base
   has_attached_file :doc3
 
   validates :ttc_price, presence: true
-  validates_attachment_content_type :doc1, content_type: 'application/pdf'
-  validates_attachment_content_type :doc2, content_type: 'application/pdf'
-  validates_attachment_content_type :doc3, content_type: 'application/pdf'
+  validates_attachment_content_type :doc1, content_type: ['application/pdf', 'image/jpeg', 'image/png']
+  validates_attachment_content_type :doc2, content_type: ['application/pdf', 'image/jpeg', 'image/png']
+  validates_attachment_content_type :doc3, content_type: ['application/pdf', 'image/jpeg', 'image/png']
 
   before_create :set_my_garage, :set_my_demand
   after_create :update_association_with_myself, :set_token
   before_destroy :delete_myself_from_association
 
-  enum status: [:active, :expired, :accepted, :refused, :banned]
+  enum status: [:ready, :opened, :expired, :accepted, :refused, :banned]
   enum deliverable_status: [:to_deliver, :delivered]
+
+  def self.attachment_params
+    {
+      storage: :ftp,
+      path: "#{ENV['FTP_FOLDER']}/:garage/:id/:filename",
+      url: "#{ENV['FTP_PUBLIC_URL']}/:garage/:id/:filename",
+      ftp_servers: [FTP_SERVER],
+      ftp_ignore_failing_connections: true,
+      ftp_keep_empty_directories: true
+    }
+  end
+
+  has_attached_file :doc1, attachment_params
+  has_attached_file :doc2, attachment_params
+  has_attached_file :doc3, attachment_params
 
   def set_my_garage
     self.garage = self.demands_garage.garage
@@ -35,7 +50,7 @@ class QuoteProposal < ActiveRecord::Base
   end
 
   def deliverable?
-    to_deliver? && (active? || expired?)
+    to_deliver? && (ready? || expired?)
   end
 
   def send_to_contact
@@ -50,5 +65,9 @@ class QuoteProposal < ActiveRecord::Base
     tokenizable = [self.decorate.identifier, status, updated_at, ENV['QUOTE_TOKENIZER']].join
     token = Digest::SHA1.hexdigest(tokenizable)
     self.update_attribute(:mail_token, token)
+  end
+
+  Paperclip.interpolates :garage do |attachment, style|
+    attachment.instance.garage.created_at.strftime('%Y%m%d%H%M%S')
   end
 end

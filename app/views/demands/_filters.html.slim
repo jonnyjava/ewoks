@@ -3,11 +3,13 @@
     table.table.table-condensed.table-striped.table-bordered
       thead
         tr
-          th.col-md-1
+          th.col-md-2
             = f.button :submit, class: "b-keypad__btn--success bg-light-orange col-xs-12 "
               i.fa.fa-search
           th.col-md-2= f.search_field :city_cont, placeholder: t('city_contains'), class: 'form-control'
           th.col-md-2= f.select :service_category_id_eq, DemandDecorator.categories, {include_blank: t('service_category')}, {class: 'form-control'}
           th.col-md-2= f.select :service_id_eq, DemandDecorator.services, {include_blank: t('service')}, {class: 'form-control'}
-          th.col-md-2= f.search_field :name_and_surnames_cont, placeholder: t('user_contains'), class: 'form-control'
-          th.col-md-2= f.search_field :email_cont, placeholder: t('email_contains'), class: 'form-control'
+          - if current_user.admin?
+            th.col-md-2= f.search_field :name_and_surnames_cont, placeholder: t('user_contains'), class: 'form-control'
+            th.col-md-2= f.search_field :email_cont, placeholder: t('email_contains'), class: 'form-control'
+          th= render 'shared/reset_form_squared_button'

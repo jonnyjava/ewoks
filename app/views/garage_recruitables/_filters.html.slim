@@ -2,22 +2,27 @@
   table.table.table-condensed.table-striped.table-bordered
     thead
       tr
-        th.col-md-1
+        th.col-xs-1
           = form_tag(recruitables_export_index_path(format: :xls), id: 'excel_form', name: 'excel_form', method: 'get', class: 'js_exportable') do
             = button_tag(type: 'button', class:'b-keypad__btn--success bg-orange col-xs-12 js_excel_exporter')
               i.fa.fa-download
               = t("export_to_excel")
-        = search_form_for filtered_recruitables do |f|
-          th.col-md-1 = f.select :status_eq, GarageRecruitableDecorator.translated_statuses, {include_blank: t('status')}, {class: 'form-control'}
-          th.col-md-1 = f.search_field :name_cont, placeholder: t('name'), class: 'form-control'
-          th.col-md-1 = f.search_field :zip_cont, placeholder: t('zip'), class: 'form-control'
-          th.col-md-1 = f.search_field :street_cont, placeholder: t('street'), class: 'form-control'
-          th.col-md-1 = f.search_field :city_cont, placeholder: t('city'), class: 'form-control'
-          th.col-md-1 = f.search_field :province_cont, placeholder: t('province'), class: 'form-control'
-          th.col-md-1 = f.search_field :email_cont, placeholder: t('email'), class: 'form-control'
-          th.col-md-1 = f.search_field :phone_cont, placeholder: t('phone'), class: 'form-control'
-          th.col-md-1 = f.search_field :mobile_cont, placeholder: t('mobile'), class: 'form-control'
-          th.col-md-1 = f.search_field :tax_id_cont, placeholder: t('tax_id'), class: 'form-control'
-          th.col-md-1
-            = f.button :submit, class: "b-keypad__btn--success bg-light-orange col-xs-12 "
-              i.fa.fa-search
+        th
+          = search_form_for filtered_recruitables do |f|
+            table
+              thead
+                tr
+                  th.col-md-1.no-horizontal-gutter = f.select :status_eq, GarageRecruitableDecorator.translated_statuses, {include_blank: t('status')}, {class: 'form-control js_deselectable'}
+                  th = f.search_field :name_cont, placeholder: t('name'), class: 'form-control js_cleanable'
+                  th = f.search_field :zip_cont, placeholder: t('zip'), class: 'form-control js_cleanable'
+                  th = f.search_field :street_cont, placeholder: t('street'), class: 'form-control js_cleanable'
+                  th = f.search_field :city_cont, placeholder: t('city'), class: 'form-control js_cleanable'
+                  th = f.search_field :province_cont, placeholder: t('province'), class: 'form-control js_cleanable'
+                  th = f.search_field :email_cont, placeholder: t('email'), class: 'form-control js_cleanable'
+                  th = f.search_field :phone_cont, placeholder: t('phone'), class: 'form-control js_cleanable'
+                  th = f.search_field :mobile_cont, placeholder: t('mobile'), class: 'form-control js_cleanable'
+                  th = f.search_field :tax_id_cont, placeholder: t('tax_id'), class: 'form-control js_cleanable'
+                  th.no-horizontal-gutter = render 'shared/reset_form_squared_button'
+                  th.col-md-1.no-horizontal-gutter
+                    = f.button :submit, class: "b-keypad__btn--success bg-light-orange"
+                      i.fa.fa-search

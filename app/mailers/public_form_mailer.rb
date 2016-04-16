@@ -4,28 +4,33 @@ class PublicFormMailer < ActionMailer::Base
 
   def signup_confirmation(garage)
     @garage = garage
+    @subject = t('Welcome')
     set_locale(garage)
-    send_mail(@garage)
+    send_mail
   end
 
   private
 
-  def send_mail(garage)
-    content = build_data_for_sendinblue_mailer(garage)
-    SendinblueWrapper.new(content).send_via_sendiblue() || send_via_gmail
+  def send_mail
+    content = build_data_for_sendinblue_mailer
+    SendinblueWrapper.new(content).send_via_sendiblue || send_via_gmail
   end
 
-  def build_data_for_sendinblue_mailer(garage)
-    to = garage.email
-    bcc = EMAIL_ADMIN
-    username = garage.name
-    subject = t('Welcome')
+  def build_data_for_sendinblue_mailer
     content = render partial: 'signup_link'
-    data = { "id" => 4, "to" => to, "bcc"=> bcc, "attr" => {"USERNAME" => username, "SUBJECT" => subject, "CONTENT" => content} }
+    { 'id' => 4,
+      'to' => @garage.email,
+      'bcc'=> EMAIL_ADMIN,
+      'attr' => {
+        'USERNAME' => @garage.name,
+        'SUBJECT' => @subject,
+        'CONTENT' => content
+      }
+    }
   end
 
   def send_via_gmail
-    mail(to: @garage.email, bcc: EMAIL_ADMIN, subject: t('Welcome'))
+    mail(to: @garage.email, bcc: EMAIL_ADMIN, subject: @subject)
   end
 end
 

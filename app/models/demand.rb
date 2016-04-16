@@ -9,7 +9,9 @@ class Demand < ActiveRecord::Base
   after_create :assign
 
   def assign
-    garages << Garage.assignable_garages(self)
+    assignable_garages = Garage.assignable_garages(self)
+    garages << assignable_garages
+    DemandMailer.no_assignables_alert(self).deliver_now if assignable_garages.empty?
   end
 
   def get_garage_association_id(garage)

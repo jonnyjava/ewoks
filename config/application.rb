@@ -35,9 +35,15 @@ module Ewoks
       Devise::PasswordsController.layout "devise"
     end
 
+    config.i18n.default_locale = :es
+    config.i18n.fallbacks = true
     config.i18n.available_locales = ['it', 'pl', 'pt', 'fr', 'es', 'be', 'en']
 
     config.exceptions_app = routes
+
+    config.to_prepare do
+      Devise::Mailer.layout 'devise_email'
+    end
 
     config.generators do |g|
       g.orm             :active_record

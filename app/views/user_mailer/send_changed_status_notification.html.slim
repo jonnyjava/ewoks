@@ -1,13 +1,10 @@
-doctype html
-html
-  head
-    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-  body
-    - if @user.garage.active?
-      h1= t('Your account has been activated')
-
-      = link_to t('you can login here'), new_user_session_url
-
-    - else
-      h1= t('Your account has been deactivated')
-      p= t('Contact your country manager')
+- @resource = @user
+- content_for :content
+  - if @user.garage.active?
+    h1= t('Your account has been activated')
+    = link_to t('you can login here'), new_user_session_url
+  - else
+    h1= t('Your account has been deactivated')
+  p =t('contact_your_administrator')
+  br
+= render template: "layouts/devise_email"

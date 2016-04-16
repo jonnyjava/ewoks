@@ -31,6 +31,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'ransack'
 gem 'sendinblue', '~> 2.3'
 gem "factory_girl_rails", "~> 4.0"
+gem "paperclip-storage-ftp"
 
 group :development do
   gem 'web-console', '~> 2.0'

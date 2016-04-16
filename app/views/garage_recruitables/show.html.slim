@@ -5,6 +5,10 @@
         .media-body
           ul.list-unstyled.list-info
             li
+              i.icon.fa.fa-bullseye
+              label = t('status').humanize
+              span class="label #{status_label(@garage_recruitable)}" =t(@garage_recruitable.status)
+            li
               span.icon.glyphicon.glyphicon-home
               label = t('name').humanize
               = @garage_recruitable.name
@@ -24,10 +28,6 @@
               span.icon.glyphicon.glyphicon-info-sign
               label = t('tax_id').humanize
               = @garage_recruitable.tax_id
-            li
-              span.icon.glyphicon.glyphicon-bell
-              label = t('status').humanize
-              span class="label #{status_label(@garage_recruitable.status)}" = t(@garage_recruitable.status)
   .col-sm-6
     .map-info
       .media

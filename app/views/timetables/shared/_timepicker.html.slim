@@ -1,0 +1,2 @@
+.col-sm-2
+  = f.select "#{day.downcase[0, 3]}_#{horary}".to_sym, times, {include_blank: false}, {class: 'form-control'}

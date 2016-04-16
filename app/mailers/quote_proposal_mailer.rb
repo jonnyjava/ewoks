@@ -8,28 +8,27 @@ class QuoteProposalMailer < ActionMailer::Base
     @demand = quote_proposal.demand.decorate
     set_locale(@quote_proposal.garage)
     @subject = "#{t('go_to_the_quote')} #{@quote_proposal.identifier}"
-    send_mail(@quote_proposal)
+    send_mail
   end
 
   private
 
-  def send_mail(quote_proposal)
-    content = build_data_for_sendinblue_mailer(quote_proposal)
-    SendinblueWrapper.new(content).send_via_sendiblue() || send_via_gmail
+  def send_mail
+    content = build_data_for_sendinblue_mailer
+    SendinblueWrapper.new(content).send_via_sendiblue || send_via_gmail
   end
 
-  def build_data_for_sendinblue_mailer(quote_proposal)
-    to = quote_proposal.demand.email
-    bcc = EMAIL_ADMIN
-    username = quote_proposal.demand.name_and_surnames
-    subject = @subject
-    data = { "id" => 5, "to" => to, "bcc"=> bcc, "attr" => {
-        "USERNAME" => username,
-        "SUBJECT" => subject,
-        "QUOTE_TOKEN" => @quote_proposal.mail_token,
-        "CITY" => @demand.city,
-        "SERVICE_CATEGORY_NAME" => @demand.service_category_name,
-        "SERVICE_NAME" => @demand.service_name
+  def build_data_for_sendinblue_mailer
+    { 'id' => 5,
+      'to' => @quote_proposal.demand.email,
+      'bcc'=> EMAIL_ADMIN,
+      'attr' => {
+        'USERNAME' => @quote_proposal.demand.name_and_surnames,
+        'SUBJECT' => @subject,
+        'QUOTE_TOKEN' => @quote_proposal.mail_token,
+        'CITY' => @demand.city,
+        'SERVICE_CATEGORY_NAME' => @demand.service_category_name,
+        'SERVICE_NAME' => @demand.service_name
       }
     }
   end

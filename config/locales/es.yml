@@ -5,7 +5,7 @@ es:
   dismissed: 'No le interesa'
   recruited: 'Registrado'
   already_registered: 'Este garage ya está registrado'
-  export_to_excel: 'Exportar'
+  export_to_excel: 'Excel'
   filter_by: 'Filtrar por:'
   holidays: 'vacaciones'
   timetable: 'horarios'
@@ -84,7 +84,6 @@ es:
   search: 'buscar'
   garages: 'garages'
   users: 'usuarios'
-  hello: 'hola'
   holiday edit: 'editar vacaciones'
   start date: 'fecha de inicio'
   end date: 'fecha de fin'
@@ -125,7 +124,8 @@ es:
   Specifies the fee options: 'Especifica las opciones de la tarifa '
   If you leave a field blank, it is like select all: 'Si dejas en blanco algún campo, es como seleccionarlos todos'
   Add rates tires: 'Añadir tarifas de neumaticos'
-  Indicate vacation days: 'Indicar los dias de vacaciones'
+  set_your_holidays: 'Indica los dias de vacaciones'
+  set_your_services: 'Indica que servicios presta tu taller'
   Define the opening hours: 'Definir el horario de apertura'
   Your garage is not activated yet!: '¡Su garage todavia no está activado!'
   welcome_message: 'Bienvenido, para terminar el proceso de activación, es necesario rellenar la ficha de garage totalmente. Las notificaciones de la barra superior le indicarán que falta exactamente aún por completar.'
@@ -156,15 +156,29 @@ es:
   garage_name_contains: 'El nombre del garage contiene'
   user_contains: 'El nombre del usuario contiene'
   email_contains: 'El email contiene'
-  active: 'Activa'
+  active: 'Activo'
+  ready: 'Por enviar'
   expired: 'Caducada'
   accepted: 'Aceptada'
   refused: 'Rechazada'
   banned: 'Baneada'
+  opened: 'Recibida y abierta'
   you_have_notifications: 'Tienes %{count} notificaciones pendientes!'
   you_have_pending_demands: 'Hay %{number} nuevas solicitudes para ti!'
+  only_pdf_and_images: 'Solamente. PDF, JPG, JPEG y PNG'
+  asked_reset_password: 'Alguien ha pedido resetear tu clave de acceso. Puedes hacerlo desde este link.'
+  change_my_password: 'Cambiar mi password'
+  ignore_this_if_unrequested: 'Ignora este mail si no has pedido resetear tu password'
+  your_password_wont_change: 'Tu password no cambiará si no accedes a través de este link'
+  hello: 'Hola!'
+  say_hello: 'Hola!'
+  you_are_receiving_this_email_because_you_are_registered: 'has recibido esta email porquè te has registrado a través del formulario de'
+  unassignable_demand: 'Petición inassignable'
+  this_demand_gas_no_garages: "La petición %{demand_id} no tiene garages assignables"
 
   simple_form:
+    error_notification:
+      quote_proposal: Datos incompletos o invalidos!
     labels:
       defaults:
         name: 'Nombre'
@@ -227,3 +241,13 @@ es:
           attributes:
             ttc_price:
               blank: 'no puede estar vacío'
+            doc1_content_type:
+              invalid: 'Este formato de archivo no está permitido'
+            doc2_content_type:
+              invalid: 'Este formato de archivo no está permitido'
+            doc3_content_type:
+              invalid: 'Este formato de archivo no está permitido'
+      user:
+        attributes:
+          password:
+            too_short: 'password demasiado corta, minimo 8 caracteres'

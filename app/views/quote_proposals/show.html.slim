@@ -2,6 +2,10 @@
   .row
     .col-sm-12
       ul.list-unstyled.list-info
+        li
+          i.icon.fa.fa-bullseye
+          label = t('status').humanize
+          span class="label #{status_label(@quote_proposal)}" =t(@quote_proposal.status)
         - if current_user.admin?
           li
             i.icon.fa.fa-home

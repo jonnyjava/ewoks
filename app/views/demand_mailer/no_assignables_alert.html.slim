@@ -1,0 +1,76 @@
+table style="width:100%;"
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td &nbsp;
+    td style="width:100%;font-size:14px;font-weight:normal;"
+      h4 = t('this_demand_gas_no_garages', demand_id: @demand.id)
+    td &nbsp;
+  tr
+    td colspan="3"
+  tr
+    td colspan="3"
+      ul
+        li
+          b city:
+          = "  #{@demand.city}"
+        li
+          b service_category_id:
+          = "  #{@demand.service_category_id}"
+        li
+          b service_id:
+          = "  #{@demand.service_id}"
+        li
+          b vin_number:
+          = "  #{@demand.vin_number}"
+        li
+          b brand:
+          = "  #{@demand.brand}"
+        li
+          b model:
+          = "  #{@demand.model}"
+        li
+          b year:
+          = "  #{@demand.year}"
+        li
+          b engine:
+          = "  #{@demand.engine}"
+        li
+          b engine_letters:
+          = "  #{@demand.engine_letters}"
+        li
+          b name_and_surnames:
+          = "  #{@demand.name_and_surnames}"
+        li
+          b phone:
+          = "  #{@demand.phone}"
+        li
+          b email:
+          = "  #{@demand.email}"
+        li
+          b wants_newsletter:
+          = "  #{@demand.wants_newsletter}"
+        li
+          b accepts_privacy:
+          = "  #{@demand.accepts_privacy}"
+        li
+          b comments:
+          = "  #{@demand.comments}"
+        li
+          b demand_details:
+          = "  #{@demand.demand_details}"
+
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td &nbsp;
+    td style="width:100%; background-color:#e67500;border:1px solid #008d4c; text-align:center; cursor:pointer; text-decoration:none;"
+      a href="#{demand_url(id: @demand.id)}" target="_blank" style="font-size:1.25em; font-weight:bolder; color:#FFFFFF !important; line-height:3em;vertical-align:middle; background-color:#E67500; cursor:pointer; text-decoration:none;"
+       = t('go_to_the_demand')
+    td &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td colspan="3" &nbsp;
+  tr
+    td colspan="3" &nbsp;

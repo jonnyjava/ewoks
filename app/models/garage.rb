@@ -1,5 +1,5 @@
 class Garage < ActiveRecord::Base
-  belongs_to :user, foreign_key: 'owner_id'
+  belongs_to :user, foreign_key: 'owner_id', dependent: :destroy
   has_many :holidays, dependent: :destroy
   has_one :timetable, dependent: :destroy
   has_many :tyre_fees, dependent: :destroy
@@ -19,7 +19,7 @@ class Garage < ActiveRecord::Base
   after_save :notify_my_owner, if: :status_changed?
   after_create :send_signup_confirmation, :create_my_timetable
 
-  enum status: [ :inactive, :to_confirm, :active ]
+  enum status: [:active, :to_confirm, :inactive, :banned]
 
   scope :by_country, ->(country) { where(country: country) if country }
   scope :by_city, ->(city) { where(city: city) if city }
@@ -84,10 +84,10 @@ class Garage < ActiveRecord::Base
     by_city(city).by_zip(zip).by_tyre_fee
   end
 
-  def self.find_by_radius_from_location(location, radius = 10)
+  def self.find_by_radius_from_location(location, radius = 10, limit = 5)
     return all if @@seeding
     coords = Geocoder.coordinates(location)
-    Garage.near(coords, radius, units: :km)
+    Garage.near(coords, radius, units: :km, order: '').limit(limit)
   end
 
   def self.find_by_signup_verification_token(token)

@@ -5,16 +5,11 @@ class User < ActiveRecord::Base
   has_one :garage, foreign_key: 'owner_id', dependent: :destroy
   enum role: [:admin, :country_manager, :owner, :api]
 
-  ADMIN = roles[:admin]
-  COUNTRY_MANAGER = roles[:country_manager]
-  OWNER = roles[:owner]
-  API = roles[:api]
-
   after_initialize :set_default_role, if: :new_record?
   after_initialize :set_default_country, if: :new_record?
 
   def set_default_role
-    self.role ||= :owner
+    self.role ||= 'owner'
   end
 
   def set_default_country
