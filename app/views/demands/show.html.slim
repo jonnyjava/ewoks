@@ -14,28 +14,6 @@
         label =t('service')
         = @demand.service_name
       li
-        span.icon.glyphicon.glyphicon-user
-        label =t('name and surnames')
-        = @demand.name_and_surnames
-      li
-        span.icon.glyphicon.glyphicon-earphone
-        label =t('phone')
-        = @demand.phone
-      li
-        span.icon.glyphicon.glyphicon-envelope
-        label =t('email')
-        = @demand.email
-      li
-        span.icon.glyphicon.glyphicon-ok
-        label =t('wants newsletter')
-        = @demand.wants_newsletter
-      li
-        span.icon.glyphicon.glyphicon-ok
-        label =t('accepts privacy')
-        = @demand.accepts_privacy
-  .col-sm-6.map-info.media.media-body
-    ul.list-unstyled.list-info
-      li
         span.icon.glyphicon.glyphicon-barcode
         label =t('vin number')
         = @demand.vin_number
@@ -47,6 +25,29 @@
         span.icon.glyphicon.glyphicon-info-sign
         label =t('engine_details')
         = @demand.engine_details
+  - if current_user.admin?
+    .col-sm-6.map-info.media.media-body
+      ul.list-unstyled.list-info
+        li
+          span.icon.glyphicon.glyphicon-user
+          label =t('name and surnames')
+          = @demand.name_and_surnames
+        li
+          span.icon.glyphicon.glyphicon-earphone
+          label =t('phone')
+          = @demand.phone
+        li
+          span.icon.glyphicon.glyphicon-envelope
+          label =t('email')
+          = @demand.email
+        li
+          span.icon.glyphicon.glyphicon-ok
+          label =t('wants newsletter')
+          = @demand.wants_newsletter
+        li
+          span.icon.glyphicon.glyphicon-ok
+          label =t('accepts privacy')
+          = @demand.accepts_privacy
 .row
   .col-sm-12.map-info.media.media-body
     ul.list-unstyled.list-info
@@ -64,5 +65,6 @@
         = @demand.demand_details
 
 .row
-  .col-sm-4= link_to t('edit information').humanize, edit_demand_path(@demand), class: "btn btn-success btn-block btn-flat"
+  - if current_user.admin?
+    .col-sm-4= link_to t('edit information').humanize, edit_demand_path(@demand), class: "btn btn-success btn-block btn-flat"
   .col-sm-4= link_to t('pending_demands_list').humanize, demands_path, class: "btn btn-default btn-block btn-flat"

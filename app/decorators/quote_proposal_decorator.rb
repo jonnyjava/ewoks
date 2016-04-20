@@ -25,11 +25,11 @@ class QuoteProposalDecorator < ApplicationDecorator
   end
 
   def price
-    h.number_to_currency(object.ttc_price, unit: "€", separator:",", delimiter: ".", format: "%n%u")
+    h.number_to_currency(object.ttc_price, unit: '€', separator:',', delimiter: '.', format: '%n%u')
   end
 
   def identifier
-    "#{object.created_at.strftime("%Y%M%d")}-#{object.demand.id}-#{object.garage.id}-#{object.id}"
+    "#{object.created_at.strftime('%Y%m%d')}-#{object.demand.id}-#{object.garage.id}-#{object.id}"
   end
 
   def self.translated_statuses

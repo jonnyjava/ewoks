@@ -9,34 +9,13 @@
     = t('afternoon_open')
   .col-sm-2
     = t('afternoon_close')
-  .col-sm-3
-    = t('Is it closed?')
 
 - Date::DAYNAMES.each do |day|
   .row
     .col-sm-1
-      label = I18n.t(day)
-
-    - field_params = { day: day, f: f, horary: 'morning_open', disabled: timetable.closed(day) }
-    = render 'timetables/shared/time_field', field_params
-
-    - field_params = { day: day, f: f, horary: 'morning_close', disabled: timetable.closes_at_noon(day) }
-    = render 'timetables/shared/time_field', field_params
-
-    - field_params = { day: day, f: f, horary: 'afternoon_open', disabled: timetable.closes_at_noon(day) }
-    = render 'timetables/shared/time_field', field_params
-
-    - field_params = { day: day, f: f, horary: 'afternoon_close', disabled: timetable.closed(day) }
-    = render 'timetables/shared/time_field', field_params
-
-    .col-sm-3
-      .checkbox.js_break
-        label
-          - does_break = timetable.closes_at_noon(day)
-          - closed = timetable.closed(day)
-
-          input id="#{day.downcase[0, 3]}_noon" name="#{day.downcase[0, 3]}_noon" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(!does_break) class="at_noon" disabled=(closed)
-          = t('At noon')
-        label
-          input id="#{day.downcase[0, 3]}_long" name="#{day.downcase[0, 3]}_long" data-day="#{day.downcase[0, 3]}" type='checkbox' value='1' checked=(closed) class="daylong"
-          = t('daylong')
+      label= I18n.t(day)
+    = render 'timetables/shared/timepicker', day: day, f: f, horary: 'morning_open', times: morning_times
+    = render 'timetables/shared/timepicker', day: day, f: f, horary: 'morning_close', times: morning_times
+    = render 'timetables/shared/timepicker', day: day, f: f, horary: 'afternoon_open', times: afternoon_times
+    = render 'timetables/shared/timepicker', day: day, f: f, horary: 'afternoon_close', times: afternoon_times
+  br

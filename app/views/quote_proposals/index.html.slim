@@ -1,7 +1,7 @@
 - content_for :content
   - if current_user.admin? || current_user.owner?
-     =render 'filters', filtered_quotes: @filtered_quotes if @filtered_quotes
-     
+    = render 'filters', filtered_quotes: @filtered_quotes if @filtered_quotes
+
   - if @quote_proposals.present?
     .table-responsive
       table.table.table-condensed.table-striped.table-bordered
@@ -29,7 +29,7 @@
                     = link_to content_tag(:i, nil, class: "fa fa-envelope"), quotables_deliver_path(quote_proposal), data: {confirm: 'Are you sure?'}, method: :put, class: 'b-crudbar__btn--default'
                   = link_to content_tag(:i, nil, class: "fa fa-trash-o"), quote_proposal, method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'
               td
-                span class="label #{status_label(quote_proposal.status)}" = t(quote_proposal.status)
+                span class="label #{status_label(quote_proposal)}" = t(quote_proposal.status)
               - if current_user.admin?
                 td = link_to quote_proposal.garage.name, quote_proposal.garage, target: 'blank'
               td = link_to quote_proposal.demand.id, quote_proposal.demand, target: 'blank'

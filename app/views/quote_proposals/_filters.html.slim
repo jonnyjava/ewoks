@@ -3,12 +3,13 @@
     table.table.table-condensed.table-striped.table-bordered
       thead
         tr
-          th.col-md-1
+          th.col-xs-1
             = f.button :submit, class: "b-keypad__btn--success bg-light-orange col-xs-12 "
               i.fa.fa-search
-          th.col-md-1 = f.select :status_eq, QuoteProposalDecorator.translated_statuses, {include_blank: t('status')}, {class: 'form-control'}
-          th.col-md-2= f.search_field :garage_name_cont, placeholder: t('garage_name_contains'), class: 'form-control'
-          th.col-md-1.table-filters = f.input :ttc_price_gteq, label:false, as: :currency
-          th.col-md-1.table-filters = f.input :ttc_price_lteq, label:false, as: :currency
-          th.col-md-1.table-filters = f.input :expiration_gteq, label:false, as: :calendar
-          th.col-md-1.table-filters = f.input :expiration_lteq, label:false, as: :calendar
+          th.col-xs-1 = f.select :status_eq, QuoteProposalDecorator.translated_statuses, {include_blank: t('status')}, {class: 'form-control'}
+          th.col-xs-2= f.search_field :garage_name_cont, placeholder: t('garage_name_contains'), class: 'form-control'
+          th.col-xs-2.table-filters = f.input :ttc_price_gteq, label:false, as: :currency
+          th.col-xs-2.table-filters = f.input :ttc_price_lteq, label:false, as: :currency
+          th.col-xs-2.table-filters = f.input :expiration_gteq, label:false, as: :calendar
+          th.col-xs-2.table-filters = f.input :expiration_lteq, label:false, as: :calendar
+          th.col-xs-1= render 'shared/reset_form_squared_button'

@@ -4,7 +4,7 @@ describe 'QuoteProposals' do
   api_user_token
 
   describe 'show' do
-    let(:quote) { FactoryGirl.create(:quote_proposal).decorate }
+    let(:quote) { FactoryGirl.create(:quote_proposal_with_attachments).decorate }
 
     context "with an invalid authorization_token" do
       it 'should return status 401' do

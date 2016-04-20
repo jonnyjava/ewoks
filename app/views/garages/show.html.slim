@@ -15,6 +15,10 @@
           .media-body
             ul.list-unstyled.list-info
               li
+                i.icon.fa.fa-bullseye
+                label = t('status').humanize
+                span class="label #{status_label(@garage)}" =t(@garage.status)
+              li
                 span.icon.glyphicon.glyphicon-home
                 label = t('garage').humanize
                 = "#{@garage.name}, #{@garage.tax_id}"

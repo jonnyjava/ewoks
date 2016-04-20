@@ -10,3 +10,6 @@
       input.form-control[id="#{document}_filename" type='text' value="#{filename}" disabled="true"]
       span.input-group-addon.add-on
         i.fa.fa-file
+    small
+      b= f.error document.to_s
+      = t('only_pdf_and_images')

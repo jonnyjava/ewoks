@@ -1,9 +1,0 @@
-.col-sm-2
-  - field = "#{day.downcase[0, 3]}_#{horary}"
-  - scheduled_at_string = f.object.send(field) && f.object.send(field).strftime("%H:%M")
-
-  .bootstrap-timepicker
-    = f.input field.to_sym, label: false, wrapper: :vertical_input_group do
-      = f.input_field field.to_sym, as: :string, value: scheduled_at_string, class: 'form-control timepicker', label: false, disabled: disabled
-      span.input-group-addon
-        i.fa.fa-clock-o

@@ -59,7 +59,7 @@ describe UserPolicy do
   context 'for a country_manager' do
     it 'the scope contains users of the same country of country_manager' do
       country = country_manager.country
-      owners_of_the_same_country = User.where(country: country, role: User::OWNER)
+      owners_of_the_same_country = User.where(country: country, role: User.roles[:owner])
       expect(Pundit.policy_scope(country_manager, User).all).to match_array owners_of_the_same_country
     end
 

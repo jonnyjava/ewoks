@@ -8,19 +8,19 @@ FactoryGirl.define do
     country   'Spain'
 
     factory :admin, class: User do
-      role User::ADMIN
+      role 'admin'
     end
 
     factory :country_manager, class: User do
-      role User::COUNTRY_MANAGER
+      role 'country_manager'
     end
 
     factory :owner, class: User do
-      role User::OWNER
+      role 'owner'
     end
 
     factory :api_user, class: User do
-      role User::API
+      role 'api'
     end
   end
 end

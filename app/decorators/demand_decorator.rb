@@ -21,7 +21,7 @@ class DemandDecorator < ApplicationDecorator
   end
 
   def car_details
-    "#{object.brand} #{object.model} (#{object.year})"
+    "#{object.brand} #{object.model} (#{object.year})".gsub(/\(\)/,'').strip
   end
 
   def engine_details

@@ -13,7 +13,8 @@
             th.col-md-1 =t('service_category')
             th.col-md-1 =t('service')
             th.col-md-2 =t('car_details')
-            th.col-md-2 =t('contact_info')
+            - if current_user.admin?
+              th.col-md-2 =t('contact_info')
             th.col-md-2 =t('comments')
           tbody
           - @demands.each do |demand|
@@ -33,10 +34,11 @@
                 p = demand.vin_number
                 p = demand.car_details
                 p = demand.engine_details
-              td
-                p = demand.name_and_surnames
-                p = demand.phone
-                p = demand.email
+              - if current_user.admin?
+                td
+                  p = demand.name_and_surnames
+                  p = demand.phone
+                  p = demand.email
               td = render 'shared/collapsable_text', object: demand
   - else
     =t('no_demands')

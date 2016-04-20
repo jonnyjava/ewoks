@@ -17,7 +17,7 @@
             td = garage.address
             td = garage.phone
             td
-              span class="label label-#{garage.object.active? ? 'success' : 'danger'}" = t("#{garage.status}")
+              span class="label #{status_label(garage)}" =t(garage.status)
             td = render 'shared/crudbar', entity: garage
 
   = paginate @garages

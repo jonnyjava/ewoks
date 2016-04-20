@@ -3,8 +3,8 @@ table style="width:100%;"
     td colspan="3" &nbsp;
   tr
     td &nbsp;
-    td style="width:50%;font-size:14px;font-weight:normal;"
-      = "Hola #{user.complete_name},"
+    td style="width:100%;font-size:14px;font-weight:normal;"
+      = "Hola #{user.decorate.complete_name},"
       br
       = "Un usuario cerca de ti ha realizado una solicitud de servicio"
     td &nbsp;
@@ -16,7 +16,7 @@ table style="width:100%;"
     td colspan="3" &nbsp;
   tr
     td &nbsp;
-    td style="width:50%; background-color:#e67500;border:1px solid #008d4c; text-align:center; cursor:pointer; text-decoration:none;"
+    td style="width:100%; background-color:#e67500;border:1px solid #008d4c; text-align:center; cursor:pointer; text-decoration:none;"
       a href="#{demand_url(id: demand.id)}" target="_blank" style="font-size:1.25em; font-weight:bolder; color:#FFFFFF !important; line-height:3em;vertical-align:middle; background-color:#E67500; cursor:pointer; text-decoration:none;"
        = t('go_to_the_demand')
     td &nbsp;

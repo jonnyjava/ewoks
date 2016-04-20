@@ -7,7 +7,7 @@ admin.surname = "de Poldis"
 admin.email = 'admin@123mecanico.es'
 admin.password  = 'Igotthepower'
 admin.password_confirmation  = 'Igotthepower'
-admin.role = User::ADMIN
+admin.role = 'admin'
 admin.country = country
 admin.save!
 
@@ -17,7 +17,7 @@ api.surname = "Mac #{Faker::StarWars.specie}"
 api.email = "spain_api@123mecanico.es"
 api.password  = 'Igotthetoken'
 api.password_confirmation  = 'Igotthetoken'
-api.role = User::API
+api.role = 'api'
 api.country = country
 api.save!
 
@@ -27,7 +27,7 @@ country_manager.surname = "#{Faker::StarWars.specie}osky"
 country_manager.email = "spain_manager@123mecanico.es"
 country_manager.password  = 'Igotsomepower'
 country_manager.password_confirmation  = 'Igotsomepower'
-country_manager.role = User::COUNTRY_MANAGER
+country_manager.role = 'country_manager'
 country_manager.country = country
 country_manager.save!
 
@@ -61,7 +61,7 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   owner.email = "garage_#{i}@123mecanico.es"
   owner.password  = 'Igotnopower'
   owner.password_confirmation  = 'Igotnopower'
-  owner.role = User::OWNER
+  owner.role = 'owner'
   owner.country = country
   owner.save!
 
@@ -83,9 +83,9 @@ addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"C
   garage.services << Service.all
   garage.demands << Demand.all
 
-  10.times { |i| FactoryGirl.create(:quote_proposal, demands_garage: garage.demands_garage[i]) }
+  10.times { |j| FactoryGirl.create(:quote_proposal_with_attachments, demands_garage: garage.demands_garage[j]) }
 end
 
-30.times do |i|
+30.times do
   FactoryGirl.create(:garage_recruitable)
 end
