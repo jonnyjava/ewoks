@@ -1,4 +1,4 @@
 - content_for :content
-  - @resource = @quote_proposal.demand.name_and_surnames
+  - @resource = @quote_proposal.demand
   = render 'quote_content', quote_proposal: @quote_proposal
 = render template: "layouts/devise_email"

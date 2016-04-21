@@ -1,5 +1,9 @@
 class DemandDecorator < ApplicationDecorator
 
+  def complete_name
+    object.name_and_surnames
+  end
+
   def collapsed_text
     object.comments.first(18)
   end
