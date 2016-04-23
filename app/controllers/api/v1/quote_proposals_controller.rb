@@ -9,6 +9,8 @@ module API
 
       def show
         head :unprocessable_entity and return unless @quote_proposal
+        @quote_proposal.opened! if @quote_proposal.ready?
+        @quote_proposal
       end
 
       def update
