@@ -23,11 +23,13 @@
             tr
               - if current_user.admin? || current_user.owner?
                 td.b-crudbar
-                  = link_to content_tag(:i, nil, class: "fa fa-eye"), quote_proposal, class: 'b-crudbar__btn--default', target: 'blank'
-                  = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_quote_proposal_path(quote_proposal), class: 'b-crudbar__btn--default', target: 'blank'
+                  - css_class = 'b-crudbar__btn--default'
+                  - data = {confirm: t('are_you_sure')}
+                  = link_to content_tag(:i, nil, class: "fa fa-eye"), quote_proposal, class: css_class, target: 'blank'
+                  = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_quote_proposal_path(quote_proposal), class: css_class, target: 'blank'
                   - if quote_proposal.deliverable?
-                    = link_to content_tag(:i, nil, class: "fa fa-envelope"), quotables_deliver_path(quote_proposal), data: {confirm: 'Are you sure?'}, method: :put, class: 'b-crudbar__btn--default'
-                  = link_to content_tag(:i, nil, class: "fa fa-trash-o"), quote_proposal, method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'
+                    = link_to content_tag(:i, nil, class: "fa fa-envelope"), quotables_deliver_path(quote_proposal), data: data, method: :put, class: css_class
+                  = link_to content_tag(:i, nil, class: "fa fa-trash-o"), quote_proposal, method: :delete, data: data, class: 'b-crudbar__btn--danger'
               td
                 span class="label #{status_label(quote_proposal)}" = t(quote_proposal.status)
               - if current_user.admin?

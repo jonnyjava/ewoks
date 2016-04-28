@@ -15,7 +15,7 @@ class QuoteProposal < ActiveRecord::Base
   after_create :update_association_with_myself, :set_token
   before_destroy :delete_myself_from_association
 
-  enum status: [:ready, :opened, :expired, :accepted, :refused, :banned]
+  enum status: [:ready, :sent, :opened, :expired, :accepted, :refused, :banned]
   enum deliverable_status: [:to_deliver, :delivered]
 
   def self.attachment_params
@@ -50,11 +50,11 @@ class QuoteProposal < ActiveRecord::Base
   end
 
   def deliverable?
-    to_deliver? && (ready? || expired?)
+    (ready? || expired?)
   end
 
   def send_to_contact
-    QuoteProposalMailer.send_quote_to_contact(self.decorate).deliver_now if to_deliver?
+    QuoteProposalMailer.send_quote_to_contact(decorate).deliver_now if deliverable?
   end
 
   def can_accept?(status)

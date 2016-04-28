@@ -65,6 +65,7 @@
         = @demand.demand_details
 
 .row
+  .col-sm-4= link_to t('prepare_quote_proposal').humanize, new_quote_path(@demand, current_user), class: "btn btn-success btn-block btn-flat bg-light-orange"
   - if current_user.admin?
     .col-sm-4= link_to t('edit information').humanize, edit_demand_path(@demand), class: "btn btn-success btn-block btn-flat"
   .col-sm-4= link_to t('pending_demands_list').humanize, demands_path, class: "btn btn-default btn-block btn-flat"

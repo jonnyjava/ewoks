@@ -1,4 +1,5 @@
 es:
+  are_you_sure: Estás seguro?
   recruitable: 'Contactable'
   waiting_for_answer: 'Esperando'
   unreachable: 'Ilocalizable'
@@ -24,6 +25,7 @@ es:
   pending_demands_list: Solicitudes pendientes
   quote_proposals_list: Presupuestos
   bact_to_quote_proposals_list: Volver al listado de presupuestos
+  prepare_quote_proposal: Preparar presupuesto
   quote_proposal_edit: Edición del presupuesto
   quote_proposal_delete: Eliminar presupuesto
   your_quote_for: Tu presupuesto
@@ -162,6 +164,7 @@ es:
   email_contains: 'El email contiene'
   active: 'Activo'
   ready: 'Por enviar'
+  sent: 'Enviada'
   expired: 'Caducada'
   accepted: 'Aceptada'
   refused: 'Rechazada'
@@ -169,6 +172,7 @@ es:
   opened: 'Recibida y abierta'
   you_have_notifications: 'Tienes %{count} notificaciones pendientes!'
   you_have_pending_demands: 'Hay %{number} nuevas solicitudes para ti!'
+  you_have_no_pending_demands: 'No hay nuevas solicitudes'
   only_pdf_and_images: 'Solamente. PDF, JPG, JPEG y PNG'
   asked_reset_password: 'Alguien ha pedido resetear tu clave de acceso. Puedes hacerlo desde este link.'
   change_my_password: 'Cambiar mi password'
