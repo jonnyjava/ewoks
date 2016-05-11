@@ -75,7 +75,11 @@ class WizardController < ApplicationController
   end
 
   def set_garage
-    @garage = Garage.find(params[:garage_id])
+    @garage = Garage.find(secure_garage_id)
+  end
+
+  def secure_garage_id
+    params[:garage_id].to_i
   end
 
   def notice_message(class_name)

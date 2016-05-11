@@ -79,7 +79,11 @@ class GaragesController < ApplicationController
 
   private
     def set_garage
-      @garage = Garage.find(params[:id])
+      @garage = Garage.find(secure_id)
+    end
+
+    def secure_id
+      params[:id].to_i
     end
 
     def garage_params

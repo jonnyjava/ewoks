@@ -33,7 +33,11 @@ module API
       end
 
       def set_garage
-        @garage = Garage.find_by_id(garage_update_params[:id])
+        @garage = Garage.find_by_id(secure_id)
+      end
+
+      def secure_id
+        garage_update_params[:id].to_i
       end
 
       def assignable_services
