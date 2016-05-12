@@ -51,7 +51,11 @@ class QuoteProposalsController < ApplicationController
 
   private
     def set_quote_proposal
-      @quote_proposal = QuoteProposal.find(params[:id]).decorate
+      @quote_proposal = QuoteProposal.find(secure_id).decorate
+    end
+
+    def secure_id
+      params[:id].to_i
     end
 
     def quote_proposal_params

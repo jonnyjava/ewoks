@@ -3,7 +3,7 @@ class GarageRecruitablesController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @filtered_recruitables = GarageRecruitable.search(params[:q])
+    @filtered_recruitables = GarageRecruitable.ransack(params[:q])
     @filtered_recruitables.sorts = ['status asc', 'name asc'] if @filtered_recruitables.sorts.empty?
     garage_recruitables = @filtered_recruitables.result.page(params[:page])
     authorize garage_recruitables
@@ -51,7 +51,11 @@ class GarageRecruitablesController < ApplicationController
 
   private
     def set_garage_recruitable
-      @garage_recruitable = GarageRecruitable.find(params[:id]).decorate
+      @garage_recruitable = GarageRecruitable.find(secure_id).decorate
+    end
+
+    def secure_id
+      params[:id].to_i
     end
 
     def garage_recruitable_params

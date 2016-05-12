@@ -34,7 +34,7 @@ module API
       end
 
       def show
-        @garage = Garage.find(garage_params[:id])
+        @garage = Garage.find(secure_id)
         @holidays = @garage.holidays.all
       end
 
@@ -50,6 +50,10 @@ module API
 
       def garage_params
         params.permit(:id, :city, :country, :zip, :radius, :price, :price_min, :price_max, :rim, :vehicle, :diameter, :service_id)
+      end
+
+      def secure_id
+        garage_params[:id].to_i
       end
     end
   end

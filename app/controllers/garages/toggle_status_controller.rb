@@ -13,11 +13,15 @@ module Garages
 
     private
       def set_garage
-        @garage = Garage.find(garage_params[:id])
+        @garage = Garage.find(secure_id)
       end
 
       def garage_params
         params.permit(:id)
+      end
+
+      def secure_id
+        garage_params[:id].to_i
       end
   end
 end

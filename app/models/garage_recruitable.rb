@@ -6,11 +6,10 @@ class GarageRecruitable < ActiveRecord::Base
 
   after_create :set_token
 
-  scope :filter_by, ->(param, value) { where("lower(#{param}) LIKE ?", "%#{value.downcase}%") if method_defined?(param) && value && is_string?(param) }
   scope :by_status, ->(status) { where(status: statuses[status]) if status }
 
   def recruiting_token
-    token = [email, tax_id, ENV['RECRUITABLE_TOKENIZER'], name].join
+    token = [email, scrapped_id, ENV['RECRUITABLE_TOKENIZER'], name].join
     Digest::SHA1.hexdigest(token)
   end
 

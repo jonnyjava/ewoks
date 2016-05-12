@@ -16,7 +16,6 @@ class TyreFeesController < ApplicationController
   end
 
   def edit
-    @tyre_fee = TyreFee.find(params[:id])
     authorize @tyre_fee
   end
 
@@ -54,11 +53,19 @@ class TyreFeesController < ApplicationController
   private
 
   def set_tyre_fee
-    @tyre_fee = TyreFee.find(params[:id])
+    @tyre_fee = TyreFee.find(secure_id)
   end
 
   def set_garage
-    @garage = Garage.find(params[:garage_id])
+    @garage = Garage.find(secure_garage_id)
+  end
+
+  def secure_id
+    params[:id].to_i
+  end
+
+  def secure_garage_id
+    params[:garage_id].to_i
   end
 
   def tyre_fee_params

@@ -11,7 +11,11 @@ module Quotables
     end
 
     def set_quote_proposal
-      @quote_proposal = QuoteProposal.find(params[:id])
+      @quote_proposal = QuoteProposal.find(secure_id)
+    end
+
+    def secure_id
+      params[:id].to_i
     end
   end
 end

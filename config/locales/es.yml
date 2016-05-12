@@ -49,6 +49,7 @@ es:
   city: 'Ciudad'
   province: 'Provincia'
   mobile: 'Móvil'
+  web_origin: 'Origen'
   tax_id: 'C.I.F'
   email:  'Email'
   contact:  'contacto'

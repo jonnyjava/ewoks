@@ -56,11 +56,19 @@ class HolidaysController < ApplicationController
 
   private
     def set_holiday
-      @holiday = @garage.holidays.find(params[:id])
+      @holiday = @garage.holidays.find(secure_id)
     end
 
     def set_garage
-      @garage = Garage.find(params[:garage_id])
+      @garage = Garage.find(secure_garage_id)
+    end
+
+    def secure_id
+      params[:id].to_i
+    end
+
+    def secure_garage_id
+      params[:garage_id].to_i
     end
 
     def holiday_params

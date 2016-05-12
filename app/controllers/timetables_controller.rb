@@ -57,12 +57,20 @@ class TimetablesController < ApplicationController
 
   private
 
-  def set_garage
-    @garage = Garage.find(params[:garage_id])
+  def set_timetable
+    @timetable = Timetable.find(secure_id)
   end
 
-  def set_timetable
-    @timetable = Timetable.find(params[:id])
+  def set_garage
+    @garage = Garage.find(secure_garage_id)
+  end
+
+  def secure_id
+    params[:id].to_i
+  end
+
+  def secure_garage_id
+    params[:garage_id].to_i
   end
 
   def nullify_time_slots
