@@ -8,21 +8,6 @@ describe GarageRecruitable do
 
   describe "scopes" do
     let(:recruitable) { FactoryGirl.create(:garage_recruitable) }
-    attributes = %w(name zip city email)
-    attributes.each do |attribute|
-      it "should filter by #{attribute}" do
-        attribute_value = recruitable.send(attribute)
-        @filtered_garages = GarageRecruitable.filter_by(attribute, attribute_value[rand(attribute_value.size)])
-        expect(@filtered_garages.count).to be(1)
-        expect(@filtered_garages.first.send(attribute)).to be_eql(attribute_value)
-      end
-    end
-
-    it 'should ignore non string attributes in filter_by scope' do
-      FactoryGirl.create(:garage_recruitable)
-      @filtered_garages = GarageRecruitable.filter_by('status', recruitable.status)
-      expect(@filtered_garages.count).to be(GarageRecruitable.count)
-    end
 
     it 'should filter by status' do
       status = recruitable.status

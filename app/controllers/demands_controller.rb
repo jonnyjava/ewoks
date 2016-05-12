@@ -34,7 +34,11 @@ class DemandsController < ApplicationController
 
   private
     def set_demand
-      @demand = Demand.find(params[:id]).decorate
+      @demand = Demand.find(secure_id).decorate
+    end
+
+    def secure_id
+      params[:id].to_i
     end
 
     def demand_params

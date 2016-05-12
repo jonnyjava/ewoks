@@ -1,16 +1,16 @@
-h2 Change your password
+.header.bg-light-orange =t('change_your_password')
 
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
+  .body.bg-gray
+    = f.error_notification
 
-  = f.input :reset_password_token, as: :hidden
-  = f.full_error :reset_password_token
+    = f.input :reset_password_token, as: :hidden
+    = f.full_error :reset_password_token
 
-  .form-inputs
-    = f.input :password, label: "New password", required: true, autofocus: true, as: :password
-    = f.input :password_confirmation, label: "Confirm your new password", required: true, as: :password
+    .form-group
+      = f.input :password, label: t('new_password'), required: true, autofocus: true, as: :password
+      = f.input :password_confirmation, label: t('confirm_bew_password'), required: true, as: :password
 
-  .form-actions
-    = f.button :submit, "Change my password"
-
-= render "devise/shared/links"
+  .footer
+    = f.button :submit, t('change_your_password'), class: "btn bg-olive btn-block bg-light-orange"
+    = render "devise/shared/links"

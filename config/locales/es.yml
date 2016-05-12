@@ -49,6 +49,7 @@ es:
   city: 'Ciudad'
   province: 'Provincia'
   mobile: 'Móvil'
+  web_origin: 'Origen'
   tax_id: 'C.I.F'
   email:  'Email'
   contact:  'contacto'
@@ -107,7 +108,10 @@ es:
   Thursday: 'Jueves'
   Friday: 'Viernes'
   Saturday: 'Sábado'
-  change password: 'cambiar la contraseña'
+  change_your_password: 'Cambia tu contraseña'
+  change_mi_password: 'Cambiar mi contraseña'
+  new_password: Nueva password
+  confirm_bew_password: Confirmar nueva password
   Your login for 123Mecanico: 'Su nombre de usuario para 123mecanico'
   Your account has been activated: 'Su cuenta ha sido activada'
   Your account has been changed: 'Su cuenta ha sido actualizada'
@@ -175,6 +179,14 @@ es:
   you_are_receiving_this_email_because_you_are_registered: 'has recibido esta email porquè te has registrado a través del formulario de'
   unassignable_demand: 'Petición inassignable'
   this_demand_gas_no_garages: "La petición %{demand_id} no tiene garages assignables"
+  forgot_password: 'Has olvidado tu contraseña?'
+  send_me_reset_instruccions: 'Resetear mi password'
+  no_confirmation_instructions: 'No has recibido la confirmación de inscripción?'
+  no_unlock_instructions: 'No has recibido las instrucciones para desbloquear tu cuenta?'
+  login_with: 'Loguearse con %{provider}'
+  back_to_login: 'volver a la pagina de login'
+  sign_me_in: 'ENTRAR'
+  remember_me: 'Recuerdame'
 
   simple_form:
     error_notification:

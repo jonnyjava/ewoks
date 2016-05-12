@@ -17,8 +17,7 @@
           th = t('province').humanize
           th = t('email').humanize
           th = t('phone').humanize
-          th = t('mobile').humanize
-          th = t('tax_id').humanize.upcase
+          th = t('web_origin').humanize
         tbody
         - @garage_recruitables.each do |garage_recruitable|
           tr
@@ -30,14 +29,13 @@
             td
               span class="label #{status_label(garage_recruitable)}"= t("#{garage_recruitable.status}")
             td = link_to garage_recruitable.name, garage_recruitable_path(garage_recruitable)
-            td = garage_recruitable.street
+            td = "#{garage_recruitable.street}#{garage_recruitable.address}"
             td = garage_recruitable.zip
             td = garage_recruitable.city
             td = garage_recruitable.province
             td = garage_recruitable.email
             td = garage_recruitable.phone
-            td = garage_recruitable.mobile
-            td = garage_recruitable.tax_id
+            td = garage_recruitable.scrapped_type
   = paginate @garage_recruitables
 
 = render template: "layouts/box", locals: { title: t('garages list').humanize }

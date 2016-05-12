@@ -69,7 +69,7 @@ class GaragesController < ApplicationController
 
   def signup_verification
     if @garage = Garage.find_by_signup_verification_token(params[:token])
-      @garage.inactive!
+      @garage.active!
       @garage.create_my_owner unless @garage.user
       render :welcome_page, layout: "devise"
     else
@@ -79,7 +79,11 @@ class GaragesController < ApplicationController
 
   private
     def set_garage
-      @garage = Garage.find(params[:id])
+      @garage = Garage.find(secure_id)
+    end
+
+    def secure_id
+      params[:id].to_i
     end
 
     def garage_params

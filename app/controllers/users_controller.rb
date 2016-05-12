@@ -76,7 +76,11 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(secure_id)
+  end
+
+  def secure_id
+    params[:id].to_i
   end
 
   def user_params

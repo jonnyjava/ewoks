@@ -1,7 +1,4 @@
-doctype html
-html
-  head
-    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-  body
-    h1 =t('Welcome')
-    =render 'signup_link'
+- content_for :content
+  h1 =t('Welcome')
+  =render 'signup_link'
+= render template: "layouts/devise_email"
