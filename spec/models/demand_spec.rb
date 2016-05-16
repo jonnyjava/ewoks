@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Demand do
   it { is_expected.to belong_to(:service_category) }
   it { is_expected.to belong_to(:service) }

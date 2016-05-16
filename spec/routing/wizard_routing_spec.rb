@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe WizardController do
   describe 'routing' do
     it { expect(get: '/wizard').to route_to('wizard#wizard') }

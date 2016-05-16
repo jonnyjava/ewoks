@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Garages::ToggleStatusController do
   login_admin
   let(:garage) { FactoryGirl.create(:garage) }

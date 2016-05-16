@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Demands" do
   let!(:demand) { FactoryGirl.create(:demand) }
   describe "#index" do

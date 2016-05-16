@@ -1,7 +1,3 @@
-require 'spec_helper'
-require "set"
-
-
 describe "Garages" do
   describe "#index" do
     shared_examples_for "an authorized page" do

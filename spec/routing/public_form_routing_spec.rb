@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe PublicFormController do
   describe 'routing' do
     it { expect(get: '/public_form').to route_to('public_form#public_form') }

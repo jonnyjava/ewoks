@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe PublicFormMailer do
     describe 'garage after_create' do
     it 'should send an email to the owner' do

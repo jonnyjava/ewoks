@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe GaragesController do
   login_admin
   let(:valid_attributes) { FactoryGirl.attributes_for(:garage) }

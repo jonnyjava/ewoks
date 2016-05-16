@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "demands/index", type: :view do
   before(:each) do
     view.stub(:current_user) { FactoryGirl.create(:owner) }

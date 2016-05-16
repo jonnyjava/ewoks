@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Users" do
   let(:spanish_user) { FactoryGirl.create(:user) }
   let(:foreigner_user) { FactoryGirl.create(:user, country: 'Macondo') }

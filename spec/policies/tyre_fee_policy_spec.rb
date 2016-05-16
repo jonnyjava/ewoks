@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe TyreFeePolicy do
   let(:admin) { FactoryGirl.create(:admin) }
   let(:country_manager) { FactoryGirl.create(:country_manager) }

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Holidays" do
   login_admin
   let!(:garage) { FactoryGirl.create(:garage_with_timetable) }

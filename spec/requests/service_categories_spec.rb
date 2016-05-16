@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "ServiceCategories", type: :request do
   let!(:service_category) { FactoryGirl.create(:service_category) }
 

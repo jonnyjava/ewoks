@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe TimetablesController do
   login_admin
 

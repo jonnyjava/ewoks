@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe GarageRecruitablesController do
   login_admin
 

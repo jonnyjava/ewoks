@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "QuoteProposals" do
   let!(:quote_proposal) { FactoryGirl.create(:quote_proposal) }
 

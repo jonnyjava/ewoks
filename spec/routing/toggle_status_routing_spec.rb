@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Garages::ToggleStatusController do
   describe 'routing' do
     it { expect(put: '/garages/toggle_status/1').to route_to('garages/toggle_status#update', id: '1') }

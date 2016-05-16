@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe QuoteProposal do
   let(:demand_garage) { FactoryGirl.create(:demands_garage) }
   let!(:quote_proposal) { FactoryGirl.create(:quote_proposal, demands_garage: demand_garage) }
