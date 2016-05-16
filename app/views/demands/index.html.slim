@@ -24,7 +24,7 @@
                   = link_to content_tag(:i, nil, class: "fa fa-eye"), demand_path(demand), class: 'b-crudbar__btn--default', target: 'blank'
                   - if current_user.admin?
                     = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_demand_path(demand), class: 'b-crudbar__btn--default', target: 'blank'
-                    = link_to content_tag(:i, nil, class: "fa fa-trash-o"), demand, method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'
+                    = link_to content_tag(:i, nil, class: "fa fa-trash-o"), demand, method: :delete, data: {confirm: t('are_you_sure')}, class: 'b-crudbar__btn--danger'
                   - if current_user.owner?
                     = link_to content_tag(:i, nil, class: "fa fa-eur"), new_quote_path(demand, current_user), class: 'b-crudbar__btn--default', target: 'blank'
               td = demand.city

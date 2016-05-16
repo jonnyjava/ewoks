@@ -6,7 +6,7 @@ module Quotables
     def update
       authorize @quote_proposal
       @quote_proposal.send_to_contact
-      @quote_proposal.delivered!
+      @quote_proposal.sent!
       redirect_to quote_proposals_path
     end
 

@@ -1,4 +1,4 @@
-.header Forgot your password?
+.header.bg-light-orange =t('forgot_password')
 
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
 
@@ -9,5 +9,5 @@
       = f.input :email, required: true, autofocus: true, label: false, placeholder: "Email", as: :email
 
   .footer
-    = f.button :submit, "Send me reset password instructions", class: "btn bg-olive btn-block"
+    = f.button :submit, t('send_me_reset_instruccions'), class: "btn bg-olive btn-block bg-light-orange"
     = render "devise/shared/links"

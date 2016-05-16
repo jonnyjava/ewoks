@@ -2,16 +2,21 @@
 li class="dropdown notifications-menu"
   a href="#" class="dropdown-toggle" data-toggle="dropdown"
     i class="fa fa-#{icon}"
-    span.label.label-warning= number
+    - if number > 0
+      span.label.label-warning= number
   ul class="dropdown-menu"
     li class="header"
-      = t("you_have_pending_#{name}", number: number)
-    li
-      ul.menu
-        - notifications.each do |object|
-          li= link_to object
-            i class="fa fa-#{icon} bg-light-orange"
-            = object.decorate.service_with_category
+      - if number > 0
+        = t("you_have_pending_#{name}", number: number)
+      - else
+        = t("you_have_no_pending_#{name}")
+    - if number > 0
+      li
+        ul.menu
+          - notifications.each do |object|
+            li= link_to object
+              i class="fa fa-#{icon} bg-light-orange"
+              = object.decorate.service_with_category
     li class="footer"
       a href="#"
         i.fa.fa-ellipsis-h.three_dots
