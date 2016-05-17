@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe TyreFeesController do
   login_admin
 

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "<%= class_name.pluralize %>" do
   describe "#index" do
     shared_examples_for "someone authorized" do

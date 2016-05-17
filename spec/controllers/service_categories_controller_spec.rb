@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ServiceCategoriesController do
   login_admin
   let(:valid_attributes) { FactoryGirl.attributes_for(:service_category) }

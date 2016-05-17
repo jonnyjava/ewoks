@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe 'quote_proposals/edit', type: :view do
   before(:each) do
     @quote_proposal = assign(:quote_proposal, FactoryGirl.create(:quote_proposal).decorate)

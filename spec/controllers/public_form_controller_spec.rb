@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe PublicFormController do
 
   describe 'GET public_form' do

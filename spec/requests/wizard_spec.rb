@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Wizard' do
   let(:garage) { FactoryGirl.create(:garage_with_timetable) }
   let(:locale) { COUNTRIES_WITH_LOCALE.keys.sample }

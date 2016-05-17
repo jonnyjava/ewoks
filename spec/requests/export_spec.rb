@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe "Recruitables::Export", type: :request do
   describe "#index" do
     shared_examples_for "an authorized page" do

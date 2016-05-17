@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Service", type: :request do
   let!(:service) { FactoryGirl.create(:service) }
 

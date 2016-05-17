@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe GarageRegistration do
 
   context "with a valid input" do

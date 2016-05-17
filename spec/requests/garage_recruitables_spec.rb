@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe "GarageRecruitables", type: :request do
   describe "#show" do
     shared_examples_for "an authorized show" do

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'quote_proposals/show' do
   before(:each) do
     view.stub(:current_user) { FactoryGirl.create(:admin) }

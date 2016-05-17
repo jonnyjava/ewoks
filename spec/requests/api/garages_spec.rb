@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Garages' do
   api_user_token
 

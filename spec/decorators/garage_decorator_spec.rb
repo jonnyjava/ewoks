@@ -1,4 +1,3 @@
-require 'spec_helper'
 describe GarageDecorator do
   let(:holiday) { FactoryGirl.create(:holiday) }
   let(:tyre_fee) { FactoryGirl.create(:tyre_fee) }

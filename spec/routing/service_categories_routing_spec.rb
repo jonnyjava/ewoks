@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe ServiceCategoriesController, type: :routing do
   describe "routing" do
     it { expect(get: "/service_categories").to route_to("service_categories#index") }

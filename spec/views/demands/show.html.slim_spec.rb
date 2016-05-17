@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'demands/show', type: :view do
   before(:each) do
     user = assign(:user, FactoryGirl.create(:owner))

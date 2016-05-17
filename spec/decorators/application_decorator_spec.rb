@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ApplicationDecorator do
   let(:garage) { FactoryGirl.create(:garage) }
   let(:holiday) { FactoryGirl.create(:holiday) }

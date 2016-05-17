@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Quotables::DeliverController do
   login_admin
   describe "PUT #update" do

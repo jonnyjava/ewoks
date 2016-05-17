@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'DemandRegistrations' do
   api_user_token
 

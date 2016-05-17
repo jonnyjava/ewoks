@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe GaragesController do
   describe 'routing' do
     it { expect(get: '/garages').to route_to('garages#index') }

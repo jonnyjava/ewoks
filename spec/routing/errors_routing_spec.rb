@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ErrorsController do
   describe 'routing to unknown' do
     it 'should route to error_404' do

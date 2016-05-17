@@ -32,6 +32,7 @@ gem 'ransack'
 gem 'sendinblue', '~> 2.3'
 gem "factory_girl_rails", "~> 4.0"
 gem "paperclip-storage-ftp"
+gem "brakeman", require: false
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -44,16 +45,18 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-unicorn-nginx', '~> 3.1.0'
   gem "rails-erd"
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'shoulda-matchers', '2.8'
+  gem 'shoulda-matchers', require: false
   gem 'email_spec', '1.6.0'
-  gem 'capybara', '2.4.1'
+  gem 'capybara'
 end
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+  gem 'fuubar'
 end

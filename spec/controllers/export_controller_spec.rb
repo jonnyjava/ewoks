@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Recruitables::ExportController do
   login_admin
   describe "#index" do

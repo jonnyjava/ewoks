@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe DemandsGarage do
   it { is_expected.to belong_to(:demand) }
   it { is_expected.to belong_to(:garage) }
