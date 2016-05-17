@@ -1,16 +1,19 @@
 h1=t('Listing service_categories')
 
-table
-  thead
-    tr
-      th
-
-  tbody
-    - @service_categories.each do |service_category|
-      tr
-        td
-          = service_category.name
-          ul
-            - service_category.services.each do |service|
-              li= service.name
-
+- @service_categories.each_with_index do |service_category, index|
+  - if (index%3)==0
+    div.row
+  .col-md-4
+    .box.box-warning.box-solid
+      .box-header.with-border
+        h3.box-title = service_category.name
+        .box-tools.pull-right
+          button.btn.bg-orange.btn-flat data-widget="collapse" type="button"
+            i.fa.fa-minus
+      .box-body
+        - service_category.services.each do |service|
+          .attachment-block.clearfix.margin
+            .attachment-pushed
+              = link_to content_tag(:i, nil, class: "fa fa-edit"), edit_service_path(service), class: 'b-crudbar__btn--default'
+              b.attachment-heading.text-orange = "#{service.name}: "
+              .attachment-text = service.service_definitions.map(&:name).join(', ')

@@ -17,6 +17,13 @@ es:
   edit information: 'editar información'
   list all garages: 'ver todos los garages'
   categorized_services: Servicios
+  services_definitions: Etiquetas para servicios
+  edit_service: Editar servicios
+  delete_definition_association: 'Seguro que quieres quitar esta etiqueta?'
+  listing_service_definitions: 'Todas las etiquetas'
+  new_service_definition: 'Nueva definición'
+  definitions_to_assign: 'Por asignar'
+  definitions_assigned: 'Asignadas'
   your services: Tus servicios
   Listing service_categories: Servicio por categoria
   demands_list: Solicitudes

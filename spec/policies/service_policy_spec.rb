@@ -16,8 +16,13 @@ describe ServicePolicy do
 
   context "for an admin" do
     subject { ServicePolicy.new(admin, service) }
-    it_behaves_like "not authorized on anything except index"
+    it { is_expected.not_to allow_action(:show) }
+    it { is_expected.not_to allow_action(:new) }
+    it { is_expected.not_to allow_action(:create) }
+    it { is_expected.not_to allow_action(:destroy) }
     it { is_expected.not_to allow_action(:index) }
+    it { is_expected.to allow_action(:edit) }
+    it { is_expected.to allow_action(:update) }
   end
 
   context "for a country_manager" do

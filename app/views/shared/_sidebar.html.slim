@@ -41,6 +41,10 @@ aside.left-side.sidebar-offcanvas
           i.fa.fa-cogs
           span = t('categorized_services').humanize
 
+        li class=(current_page?(service_definitions_path) ? "active" : nil) = link_to service_definitions_path
+          i.fa.fa-tag
+          span = t('services_definitions').humanize
+
       - if current_user.owner?
         li class=(current_page?(services_path) ? "active" : nil) = link_to services_path
           i.fa.fa-cogs

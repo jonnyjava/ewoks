@@ -1,6 +1,7 @@
 describe 'services/index' do
   before(:each) do
-    view.stub(:current_user) { FactoryGirl.create(:admin) }
+    admin = assign(:current_user, FactoryGirl.create(:admin))
+    sign_in admin
     assign(:services, [FactoryGirl.create(:service)])
   end
 

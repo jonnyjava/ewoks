@@ -1,0 +1,14 @@
+= simple_form_for(service_definition) do |f|
+  = f.error_notification
+  .row
+    .col-xs-4
+      = f.input :name
+    .col-xs-4
+      = f.input :service do
+        = f.select :service_id, @services.map{ |service| [service.name, service.id, { name: service.name }] }, {}, { class: 'form-control' }
+    .col-xs-4.b-keypad
+      button.b-crudbar__btn--default type="submit"
+        i.fa.fa-floppy-o
+      - if !service_definition.new_record?
+        = link_to content_tag(:i, nil, class: "fa fa-trash-o"), service_definition,
+          method: :delete, data: {confirm: 'Are you sure?'}, class: 'b-crudbar__btn--danger'

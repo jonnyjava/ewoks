@@ -1,0 +1,3 @@
+- content_for :content
+  - render 'form', service: @service
+= render template: "layouts/box", locals: { title: t('edit_service').humanize }
