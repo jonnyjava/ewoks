@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517140202) do
+ActiveRecord::Schema.define(version: 20160604121019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160517140202) do
     t.string   "timetable"
     t.string   "website"
     t.string   "zipcode_with_city"
+    t.text     "service_list"
   end
 
   create_table "garages", force: :cascade do |t|
