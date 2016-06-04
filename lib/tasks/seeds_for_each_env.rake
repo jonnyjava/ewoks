@@ -15,7 +15,15 @@ namespace :seeds_for_each_env do
     country_manager.country = country
     country_manager.save!
 
-    Service.all.each{ |service| FactoryGirl.create(:demand, service_category: service.service_category, service: service) }
+    service_list = []
+    ServiceDefinition.destroy_all
+
+    Service.all.each do |service|
+      FactoryGirl.create(:demand, service_category: service.service_category, service: service)
+      s1 = FactoryGirl.create(:service_definition, service: service)
+      s2 = FactoryGirl.create(:service_definition, service: service)
+      service_list << "#{s1.name} - #{s2.name}"
+    end
 
     Garage.destroy_all
     addresses={0=>"Carrer de Santa Teresa, 3", 1=>"Plaça de Sant Agustí, 5", 2=>"Carrer de Salvador Giner, 12"}
@@ -50,8 +58,8 @@ namespace :seeds_for_each_env do
     end
 
     GarageRecruitable.destroy_all
-    30.times do
-      FactoryGirl.create(:garage_recruitable)
+    Service.all.count.to_i.times do |i|
+      FactoryGirl.create(:garage_recruitable, service_list: service_list[i])
     end
   end
 
