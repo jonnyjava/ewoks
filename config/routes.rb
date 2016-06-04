@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :garage_registrations, only: [:create, :update]
       resources :garage_recruitables, only: [:show, :update], param: :token
       resources :quote_proposals, only: [:show, :update], param: :token
+      resources :services, only: :index
     end
   end
 
