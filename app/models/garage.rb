@@ -35,6 +35,7 @@ class Garage < ActiveRecord::Base
   scope :by_service, ->(service_id) { Garage.includes(:services).where( services: { id: service_id } ) }
 
   def address
+    return if @@seeding
     [street, province, city, zip, country].compact.join(', ')
   end
 

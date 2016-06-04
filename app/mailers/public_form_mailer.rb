@@ -3,6 +3,7 @@ class PublicFormMailer < ActionMailer::Base
   default from: EMAIL_ADMIN
 
   def signup_confirmation(garage)
+    return if @@seeding
     @garage = garage
     @subject = t('Welcome')
     set_locale(garage)
