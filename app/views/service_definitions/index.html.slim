@@ -1,0 +1,25 @@
+.nav-tabs-custom
+  ul.b-navtabs--right
+    li.b-navtabs__tab class=(params[:assigned] ? '' : 'active')
+      a href="#{service_definitions_path}"
+        i.fa.fa-tag
+        span = t('definitions_to_assign').humanize
+
+    li.b-navtabs__tab class=(params[:assigned] ? 'active' : '')
+      a href="#{service_definitions_path(assigned: true)}"
+        i.fa.fa-tags
+        span = t('definitions_assigned').humanize
+
+    li.pull-left.b-navtabs__header
+      = t('listing_service_definitions').humanize
+
+  .tab-content
+    .tab-pane.active
+
+    - @service_definitions.each do |service_definition|
+      = render 'form', service_definition: service_definition
+
+    = paginate @service_definitions
+
+.b-keypad
+  = link_to t('new_service_definition').humanize, new_service_definition_path, class: "b-keypad__btn--success"

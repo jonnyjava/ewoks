@@ -1,6 +1,6 @@
 describe "demands/edit" do
   before(:each) do
-    view.stub(:current_user) { FactoryGirl.create(:admin) }
+    assign(:current_user, FactoryGirl.create(:admin))
     @demand = assign(:demand, FactoryGirl.create(:demand))
   end
 

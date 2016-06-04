@@ -17,7 +17,7 @@ class ServicePolicy < ApplicationPolicy
   end
 
   def edit?
-    false
+    @user.admin?
   end
 
   def create?
@@ -25,7 +25,7 @@ class ServicePolicy < ApplicationPolicy
   end
 
   def update?
-    false
+    @user.admin?
   end
 
   def destroy?

@@ -1,0 +1,16 @@
+= simple_form_for(service) do |f|
+  = f.error_notification
+  .row
+    .col-xs-3
+      = f.input :name
+    .col-xs-6.b-keypad
+      button.b-crudbar__btn--default type="submit"
+        i.fa.fa-floppy-o
+
+.row
+  - service.service_definitions.each do |service_definition|
+    = simple_form_for service_definition, html: { class: 'pull-left' } do |f|
+      = f.input :service_id, as: :hidden, input_html: {value: nil}
+      button.b-keypad__btn--success.bg-light-orange type="submit"
+        = service_definition.name
+        i.fa.fa-times

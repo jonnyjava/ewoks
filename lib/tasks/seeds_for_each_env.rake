@@ -58,7 +58,7 @@ namespace :seeds_for_each_env do
   #rake seeds_for_each_env:seeds_for_prod__garages
   desc "inserts real garages"
   task seeds_for_prod__garages: :environment do
-    sql = File.open("#{Rails.root}/db/good_for_postgres.sql").read
+    sql = File.open("#{Rails.root}/db/sql_scripts/garages.sql").read
     sql.split(';').each do |sql_statement|
       ActiveRecord::Base.connection.execute(sql_statement)
     end
@@ -69,5 +69,14 @@ namespace :seeds_for_each_env do
     ActiveRecord::Base.connection.execute cities_normalizations
     ActiveRecord::Base.connection.execute delete_useless
     GarageRecruitable.fill_empty_token
+  end
+
+  #rake seeds_for_each_env:seed_for_services_definitions
+  desc 'insert real services'
+  task seed_for_services_definitions: :environment do
+    sql = File.open("#{Rails.root}/db/sql_scripts/service_definitions.sql").read
+    sql.split(';').each do |sql_statement|
+      ActiveRecord::Base.connection.execute(sql_statement)
+    end
   end
 end

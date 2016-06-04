@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: 'garages#index'
 
   get 'garages/signup_verification/', to: 'garages#signup_verification', as: 'signup_verification'
@@ -28,7 +27,8 @@ Rails.application.routes.draw do
     post '/wizard_create_fee/:garage_id', to: 'wizard#create_fee', as: 'wizard_create_fee'
 
     resources :service_categories, only: :index
-    resources :services, only: :index
+    resources :services, only: [:index, :edit, :update]
+    resources :service_definitions, except: [:show, :edit]
     resources :demands, except: [:new, :create]
     resources :quote_proposals, except: :new do
       collection do

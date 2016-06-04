@@ -12,7 +12,7 @@ This project uses Rails 4.2.0 and Ruby 2.2.3
   - Flow
 - How to use the API
   - Examples
-- Changelog
+- Populate the system
 
 ---
 
@@ -95,7 +95,12 @@ Of course it works for a unique garage too.
 
 ---
 
-## Changelog
+## Populate the system
 
-- v1.0.4 The story starts here
+There are some rake tasks calling sql scripts to fill the DB with fake or real datas:
 
+ - `rake seeds_for_each_env:seeds_for_test`
+
+ - `rake seeds_for_each_env:seeds_for_prod__garages`
+
+ - `rake seeds_for_each_env:seed_for_services_definitions`
