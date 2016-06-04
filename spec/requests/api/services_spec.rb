@@ -48,7 +48,6 @@ describe 'Services' do
           expect(service_response[:name]).to eq(service_name)
         end
 
-
         it 'contains the definition name' do
           definition = categorized_services_with_definitions.first
 
@@ -58,7 +57,6 @@ describe 'Services' do
 
           expect(definition_response).to eq(definition.name)
         end
-
       end
 
       context 'with an invalid json' do
