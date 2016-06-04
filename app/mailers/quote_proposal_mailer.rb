@@ -4,6 +4,7 @@ class QuoteProposalMailer < ActionMailer::Base
   default from: EMAIL_ADMIN
 
   def send_quote_to_contact(quote_proposal)
+    return if @@seeding
     @quote_proposal = quote_proposal
     @demand = quote_proposal.demand.decorate
     set_locale(@quote_proposal.garage)
