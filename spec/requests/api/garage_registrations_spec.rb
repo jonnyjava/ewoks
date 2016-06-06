@@ -40,28 +40,26 @@ describe 'GarageRegistrations' do
 
   describe 'update' do
     let(:garage) { FactoryGirl.create(:garage) }
-    let(:service_categories) { FactoryGirl.create_list(:service_category, 5) }
+    let(:services) { FactoryGirl.create_list(:service, 5) }
 
     context "with a valid token" do
       it 'should return status 200' do
-        patch api_v1_garage_registration_url(garage.id, format: :json), {}, @auth_token
+        posted_params = { id: garage.id, service_ids: services.map(&:id) }
+        patch api_v1_garage_registration_url(garage.id, format: :json), posted_params, @auth_token
         check_authorization(response)
       end
     end
 
     describe 'JSON response' do
       it 'should contain the garage id' do
-        posted_params = { id: garage.id, service_categories_ids: [] }
+        posted_params = { id: garage.id, service_ids: services.map(&:id) }
         patch api_v1_garage_registration_url(garage.id, format: :json), posted_params, @auth_token
         expect(garage_id(response)).to_not be_nil
       end
     end
 
-    it 'should assign to the garage all the services of each service_category' do
-      service_categories.each do |service_category|
-        FactoryGirl.create_list(:service, 5, service_category: service_category)
-      end
-      posted_params = { id: garage.id, service_categories_ids: service_categories.map(&:id) }
+    it 'should assign to the garage all the services sent' do
+      posted_params = { id: garage.id, service_ids: services.map(&:id) }
       patch api_v1_garage_registration_url(garage.id, format: :json), posted_params, @auth_token
       garage.reload
       expect(garage.services.map(&:id)).to eq(Service.all.pluck(:id))
