@@ -29,7 +29,7 @@ module API
       end
 
       def garage_update_params
-        params.permit(:id, service_categories_ids: [])
+        params.permit(:id, service_ids: [])
       end
 
       def set_garage
@@ -41,7 +41,7 @@ module API
       end
 
       def assignable_services
-        Service.by_category(garage_update_params[:service_categories_ids])
+        Service.where(id: garage_update_params[:service_ids])
       end
     end
   end

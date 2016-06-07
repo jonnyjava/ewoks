@@ -28,6 +28,14 @@
               span.icon.glyphicon.glyphicon-info-sign
               label = t('tax_id').humanize
               = @garage_recruitable.tax_id
+            li
+              i.icon.fa.fa-key
+              label = t('tax_id').humanize
+              = @garage_recruitable.token
+            li
+              i.icon.fa.fa-cogs
+              label = t('tax_id').humanize
+              = @garage_recruitable.service_list
   .col-sm-6
     .map-info
       .media
