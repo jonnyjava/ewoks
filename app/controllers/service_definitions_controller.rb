@@ -1,10 +1,10 @@
 class ServiceDefinitionsController < ApplicationController
   before_action :set_service_definition, only: [:show, :edit, :update, :destroy]
+  before_action :load_services, only: [:index, :new]
   after_action :verify_authorized
 
   def index
     @service_definitions = ServiceDefinition.send(filter).order(:name).page(params[:page])
-    @services = Service.order(:name)
     authorize @service_definitions
   end
 
@@ -43,15 +43,20 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   private
-    def set_service_definition
-      @service_definition = ServiceDefinition.find(params[:id])
-    end
 
-    def service_definition_params
-      params.require(:service_definition).permit(:name, :service_id)
-    end
+  def set_service_definition
+    @service_definition = ServiceDefinition.find(params[:id])
+  end
 
-    def filter
-      params[:assigned].present? ? 'assigned' : 'not_assigned'
-    end
+  def load_services
+    @services = Service.order(:name)
+  end
+
+  def service_definition_params
+    params.require(:service_definition).permit(:name, :service_id)
+  end
+
+  def filter
+    params[:assigned].present? ? 'assigned' : 'not_assigned'
+  end
 end
