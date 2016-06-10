@@ -7,7 +7,7 @@ json.array!(@service_categories) do |service_category|
     json.services service_category.services do |service|
       json.id service.id
       json.name service.name
-      json.service_definitions service.service_definitions.map(&:name)
+      json.service_definitions service.service_definitions.map(&:name).join(', ')
     end
   end
 end

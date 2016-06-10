@@ -22,7 +22,7 @@ describe 'Services' do
           ids = json(response.body).map { |service_category| service_category[:id] }
           first_category_response = json(response.body).first[:service_category]
           first_service_response = first_category_response[:services].first
-          first_definition_response = first_service_response[:service_definitions].first
+          first_definition_response = first_service_response[:service_definitions].split(', ').first
 
           expect(ids.count).to be(2)
           expect(first_category_response[:name]).to eq(first_category_name)
@@ -53,7 +53,7 @@ describe 'Services' do
 
           api_get 'services.json', {}, @auth_token
           service_response = json(response.body).first[:service_category][:services].first
-          definition_response = service_response[:service_definitions].first
+          definition_response = service_response[:service_definitions].split(', ').first
 
           expect(definition_response).to eq(definition.name)
         end
