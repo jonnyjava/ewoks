@@ -160,6 +160,7 @@ GEM
     minitest (5.8.4)
     multi_json (1.11.2)
     multi_xml (0.5.5)
+    mysql2 (0.3.21)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.2)
@@ -175,7 +176,6 @@ GEM
       mimemagic (= 0.3.0)
     paperclip-storage-ftp (1.2.7)
       paperclip
-    pg (0.18.4)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
     pundit (1.1.0)
@@ -356,10 +356,10 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   kaminari (~> 0.16.1)
+  mysql2 (>= 0.3.13, < 0.4.0)
   newrelic_rpm
   paperclip
   paperclip-storage-ftp
-  pg
   pundit
   quiet_assets
   rack-cors
